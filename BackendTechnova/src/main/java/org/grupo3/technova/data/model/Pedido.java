@@ -15,7 +15,7 @@ public class Pedido {
     private EnumPedidoEstado pedido_estado;
     private List<Producto> productos = new ArrayList<>();
 
-//Constructor con id_pedido para leer un pedido
+    //Constructor con id_pedido para leer un pedido
     public Pedido(Long id_pedido, Long id_usuario, LocalDateTime fecha, double total_pedido, EnumPedidoEstado pedido_estado, List<Producto> productos) {
         this.id_pedido = id_pedido;
         this.id_usuario = id_usuario;
@@ -24,7 +24,8 @@ public class Pedido {
         this.pedido_estado = pedido_estado;
         this.productos = productos;
     }
-//Constructor sin id_pedido para crear un pedido
+
+    //Constructor sin id_pedido para crear un pedido
     public Pedido(Long id_usuario, LocalDateTime fecha, double total_pedido, EnumPedidoEstado pedido_estado, List<Producto> productos) {
         this.id_usuario = id_usuario;
         this.fecha = fecha;
