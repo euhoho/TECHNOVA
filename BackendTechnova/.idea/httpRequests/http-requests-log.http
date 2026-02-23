@@ -1,0 +1,224 @@
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 194
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+ {"id_producto": 11,
+    "sku": "Pruebas",
+    "nombre": "Prueba",
+    "descripcion": "Prueba",
+    "precio": 999.99,
+    "stock": 100,
+    "categoria": "Perifericos",
+    "imagen": "Prueba"
+  }
+
+<> 2026-02-23T114033.500.json
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 194
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+ {"id_producto": 11,
+    "sku": "Pruebas",
+    "nombre": "Prueba",
+    "descripcion": "Prueba",
+    "precio": 999.99,
+    "stock": 100,
+    "categoria": "Perifericos",
+    "imagen": "Prueba"
+  }
+
+<> 2026-02-23T113955.500.json
+
+###
+
+GET http://localhost:8080/api/productos
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-23T113920.200.json
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 191
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+ {"id_producto": 11,
+    "sku": "Prue",
+    "nombre": "Prueba",
+    "descripcion": "Prueba",
+    "precio": 999.99,
+    "stock": 100,
+    "categoria": "Perifericos",
+    "imagen": "Prueba"
+  }
+
+<> 2026-02-23T113718.500.json
+
+###
+
+GET http://localhost:8080/api/productos
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-23T113002.200.json
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 191
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+ {"id_producto": 11,
+    "sku": "Prue",
+    "nombre": "Prueba",
+    "descripcion": "Prueba",
+    "precio": 999.99,
+    "stock": 100,
+    "categoria": "Perifericos",
+    "imagen": "Prueba"
+  }
+
+###
+
+GET http://localhost:8080/api/productos
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-23T112909.200.json
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 192
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+ {"id_producto": 11,
+    "sku": "Prueb",
+    "nombre": "Prueba",
+    "descripcion": "Prueba",
+    "precio": 999.99,
+    "stock": 100,
+    "categoria": "Perifericos",
+    "imagen": "Prueba"
+  }
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 193
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+ {"id_producto": 11,
+    "sku": "Prueba",
+    "nombre": "Prueba",
+    "descripcion": "Prueba",
+    "precio": 999.99,
+    "stock": 100,
+    "categoria": "Perifericos",
+    "imagen": "Prueba"
+  }
+
+<> 2026-02-23T112723.500.json
+
+###
+
+GET http://localhost:8080/api/productos
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-23T111529.200.json
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 193
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+ {"id_producto": 11,
+    "sku": "Prueba",
+    "nombre": "Prueba",
+    "descripcion": "Prueba",
+    "precio": 999.99,
+    "stock": 100,
+    "categoria": "Perifericos",
+    "imagen": "Prueba"
+  }
+
+###
+
+GET http://localhost:8080/api/productos
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-23T111315.200.json
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2026-02-23T111002.400.json
+
+###
+
+GET http://localhost:8080/api/productos/Perifericos
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-23T110832.200.json
+
+###
+
+GET http://localhost:8080/api/productos
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-23T104805.200.json
+
+###
+
+GET http://localhost:8080/api/productos
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-23T104453.500.json
+
+###
+
