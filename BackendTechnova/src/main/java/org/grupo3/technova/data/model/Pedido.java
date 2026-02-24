@@ -13,25 +13,25 @@ public class Pedido {
     private LocalDateTime fecha;
     private double total_pedido;
     private EnumPedidoEstado pedido_estado;
-    private List<Producto> productos = new ArrayList<>();
+    private List<LineaPedido> lineaPedidos = new ArrayList<>();
 
     //Constructor con id_pedido para leer un pedido
-    public Pedido(Long id_pedido, Long id_usuario, LocalDateTime fecha, double total_pedido, EnumPedidoEstado pedido_estado, List<Producto> productos) {
+    public Pedido(Long id_pedido, Long id_usuario, LocalDateTime fecha, double total_pedido, EnumPedidoEstado pedido_estado, List<LineaPedido> lineaPedidos) {
         this.id_pedido = id_pedido;
         this.id_usuario = id_usuario;
         this.fecha = fecha;
         this.total_pedido = total_pedido;
         this.pedido_estado = pedido_estado;
-        this.productos = productos;
+        this.lineaPedidos = lineaPedidos;
     }
 
     //Constructor sin id_pedido para crear un pedido
-    public Pedido(Long id_usuario, LocalDateTime fecha, double total_pedido, EnumPedidoEstado pedido_estado, List<Producto> productos) {
+    public Pedido(Long id_usuario, LocalDateTime fecha, double total_pedido, EnumPedidoEstado pedido_estado, List<LineaPedido> lineaPedidos) {
         this.id_usuario = id_usuario;
         this.fecha = fecha;
         this.total_pedido = total_pedido;
         this.pedido_estado = pedido_estado;
-        this.productos = productos;
+        this.lineaPedidos = lineaPedidos;
     }
 
     public Long getId_pedido() {
@@ -74,11 +74,11 @@ public class Pedido {
         this.pedido_estado = pedido_estado;
     }
 
-    public List<Producto> getProductos() {
-        return productos;
+    public List<LineaPedido> getLineaPedidos() {
+        return lineaPedidos;
     }
 
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
+    public void setLineaPedidos(List<LineaPedido> lineaPedidos) {
+        this.lineaPedidos = lineaPedidos;
     }
 }
