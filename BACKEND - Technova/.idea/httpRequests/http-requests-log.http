@@ -1,0 +1,356 @@
+GET http://localhost:8080/api/productos
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-26T102222.200.json
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 177
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id_producto": 0,
+  "sku": "Vegeta",
+  "nombre": "Vegeta",
+  "descripcion": "Vegeta",
+  "precio": 777.77,
+  "stock": 30,
+  "categoria": "COMPONENTES",
+  "imagen": "Vegeta"
+}
+
+###
+
+GET http://localhost:8080/api/productos/COMPONENTES
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-26T102110.200.json
+
+###
+
+GET http://localhost:8080/api/productos
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-26T102028.200.json
+
+###
+
+GET http://localhost:8080/api/productos
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 147
+
+{
+  "id_producto": 0,
+  "sku": "",
+  "nombre": "",
+  "descripcion": "",
+  "precio": 0,
+  "stock": 0,
+  "categoria": "COMPONENTES",
+  "imagen": ""
+}
+
+<> 2026-02-26T102007.200.json
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 151
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id_producto": 0,
+  "sku": "hola",
+  "nombre": "",
+  "descripcion": "",
+  "precio": 0,
+  "stock": 0,
+  "categoria": "COMPONENTES",
+  "imagen": ""
+}
+
+<> 2026-02-24T134316.500.json
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 151
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id_producto": 0,
+  "sku": "hola",
+  "nombre": "",
+  "descripcion": "",
+  "precio": 0,
+  "stock": 0,
+  "categoria": "COMPONENTES",
+  "imagen": ""
+}
+
+###
+
+GET http://localhost:8080/api/productos
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 147
+
+{
+  "id_producto": 0,
+  "sku": "",
+  "nombre": "",
+  "descripcion": "",
+  "precio": 0,
+  "stock": 0,
+  "categoria": "COMPONENTES",
+  "imagen": ""
+}
+
+<> 2026-02-24T134250.200.json
+
+###
+
+GET http://localhost:8080/api/productos
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 147
+
+{
+  "id_producto": 0,
+  "sku": "",
+  "nombre": "",
+  "descripcion": "",
+  "precio": 0,
+  "stock": 0,
+  "categoria": "COMPONENTES",
+  "imagen": ""
+}
+
+<> 2026-02-24T124151.200.json
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 147
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id_producto": 0,
+  "sku": "",
+  "nombre": "",
+  "descripcion": "",
+  "precio": 0,
+  "stock": 0,
+  "categoria": "COMPONENTES",
+  "imagen": ""
+}
+
+###
+
+GET http://localhost:8080/api/productos/COMPONENTES
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-24T124037.200.json
+
+###
+
+GET http://localhost:8080/api/productos
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 147
+
+{
+  "id_producto": 0,
+  "sku": "",
+  "nombre": "",
+  "descripcion": "",
+  "precio": 0,
+  "stock": 0,
+  "categoria": "COMPONENTES",
+  "imagen": ""
+}
+
+<> 2026-02-24T123958.200.json
+
+###
+
+GET http://localhost:8080/api/productos
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 147
+
+{
+  "id_producto": 0,
+  "sku": "",
+  "nombre": "",
+  "descripcion": "",
+  "precio": 0,
+  "stock": 0,
+  "categoria": "COMPONENTES",
+  "imagen": ""
+}
+
+<> 2026-02-24T120752.200.json
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 207
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id_producto": 0,
+  "sku": "noMuybueno",
+  "nombre": "EstoesUnaPrueba",
+  "descripcion": "Estoesunaprueba",
+  "precio": 87.23,
+  "stock": 80,
+  "categoria": "COMPONENTES",
+  "imagen": "Estoesunaprueba"
+}
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 208
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id_producto": 0,
+  "sku": "UnoMuybueno",
+  "nombre": "EstoesUnaPrueba",
+  "descripcion": "Estoesunaprueba",
+  "precio": 87.23,
+  "stock": 80,
+  "categoria": "COMPONENTES",
+  "imagen": "Estoesunaprueba"
+}
+
+<> 2026-02-24T120715.500.json
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 208
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id_producto": 0,
+  "sku": "unoMuybueno",
+  "nombre": "EstoesUnaPrueba",
+  "descripcion": "Estoesunaprueba",
+  "precio": 87.23,
+  "stock": 80,
+  "categoria": "COMPONENTES",
+  "imagen": "Estoesunaprueba"
+}
+
+<> 2026-02-24T120433.500.json
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 208
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id_producto": 0,
+  "sku": "unoMuybueno",
+  "nombre": "EstoesUnaPrueba",
+  "descripcion": "Estoesunaprueba",
+  "precio": 87.23,
+  "stock": 80,
+  "categoria": "COMPONENTES",
+  "imagen": "Estoesunaprueba"
+}
+
+<> 2026-02-24T120424.500.json
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 208
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id_producto": 0,
+  "sku": "unoMuybueno",
+  "nombre": "EstoesUnaPrueba",
+  "descripcion": "Estoesunaprueba",
+  "precio": 87.23,
+  "stock": 80,
+  "categoria": "COMPONENTES",
+  "imagen": "Estoesunaprueba"
+}
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 208
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id_producto": 0,
+  "sku": "unoMuybueno",
+  "nombre": "EstoesUnaPrueba",
+  "descripcion": "Estoesunaprueba",
+  "precio": 87.23,
+  "stock": 80,
+  "categoria": "COMPONENTES",
+  "imagen": "Estoesunaprueba"
+}
+
+<> 2026-02-24T120200.500.json
+
+###
+
