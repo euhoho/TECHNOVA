@@ -89,7 +89,7 @@ CREATE PROCEDURE sp_lineapedido_listar_usuario(in p_email varchar(100) ,in p_pas
 BEGIN 
 SELECT * 
 FROM pedido JOIN usuario ON pedido.id_usuario = usuario.id_usuario
-where  p_email = email and p_password = password;
+where email =  p_email and p_password = password;
 END $$
 DELIMITER ;
 CALL sp_lineapedido_listar_usuario('javiervs@gmail.com','uyuyuyuy124.S');
@@ -101,7 +101,7 @@ CREATE PROCEDURE sp_usuario(in p_email varchar(100) ,in p_password varchar(255))
 BEGIN 
 SELECT *
 FROM usuario
-where p_email= email and p_password= password;
+where email=  p_email and p_password= password;
 END $$
 DELIMITER ;
 call sp_usuario ('javiervs@gmail.com','uyuyuyuy124.S');
@@ -130,15 +130,15 @@ DECLARE EXIT HANDLER FOR SQLEXCEPTION
 select precio into p_precio from producto
 where id_producto = p_id_producto;
 set p_total_pedido = p_precio * p_cantidad;
+if (select stock from producto where id_producto = p_id_producto) < p_cantidad then   SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error creando pedido';
+else
 
 INSERT INTO pedido (id_usuario, total_pedido,pedido_estado)VALUES (p_id_usuario, p_total_pedido,'CONFIRMADO');
 set p_id_pedido = last_insert_id();
-    
+
 insert into linea_pedido(id_pedido,id_producto,cantidad,precio_unitario_momento) values (p_id_pedido,p_id_producto,p_cantidad,p_precio);
-insert into movimiento_inventario(id_producto,tipo_movimiento,cantidad,motivo) values(p_id_producto,'SALIDA',p_cantidad,'Pedido');
-if (select stock from producto where id_producto = p_id_producto) < p_cantidad then   SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error creando pedido';
-else
 update producto set stock = stock - p_cantidad where id_producto = p_id_producto; 
+insert into movimiento_inventario(id_producto,tipo_movimiento,cantidad,motivo) values(p_id_producto,'SALIDA',p_cantidad,'Pedido');
 commit;
 end if;
 END $$
@@ -166,11 +166,13 @@ begin
 DECLARE EXIT HANDLER FOR SQLEXCEPTION	
     BEGIN
         ROLLBACK;
+          SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'SKU duplicado';
     END;
     start transaction;
-     if (select count(*) from producto where p_sku = sku) <0 then SIGNAL SQLSTATE '45000' 
-        SET MESSAGE_TEXT = 'Error: El código SKU ya está registrado en Technova';
-        rollback;
+     if (select count(*) from producto where p_sku = sku) > 0 then 
+     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'SKU duplicado';
+
  else 
 insert into producto (sku, nombre, descripcion, precio, stock, categoria, imagen)
 values(p_sku, p_nombre, p_descripcion, p_precio, p_stock, p_categoria, p_imagen);
@@ -195,19 +197,22 @@ in p_id_producto int,
 DECLARE EXIT HANDLER FOR SQLEXCEPTION	
     BEGIN
         ROLLBACK;
+         SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Stock insuficiente';
     END;
     start transaction;
- insert into movimiento_inventario(id_producto, tipo_movimiento, cantidad, motivo)
- values (p_id_producto,p_tipo_movimiento,p_cantidad,p_motivo);
-
 	if p_tipo_movimiento ='ENTRADA' then update producto set stock = stock + p_cantidad where id_producto = p_id_producto;
-	commit;
-    else rollback;
+    elseif p_tipo_movimiento ='SALIDA'  then
+    IF (select stock from producto where id_producto = p_id_producto)<p_cantidad then SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Stock insuficiente';
     end if;
-	if p_tipo_movimiento ='SALIDA'  then update producto set stock = stock - p_cantidad where id_producto = p_id_producto and stock>0;
-    commit;
-    else rollback;
-end if;
+ update producto set stock = stock-p_cantidad where id_producto = p_id_producto;
+    ELSE
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Tipo movimiento invalido';
+    end if;
+     insert into movimiento_inventario(id_producto, tipo_movimiento, cantidad, motivo) values (p_id_producto,p_tipo_movimiento,p_cantidad,p_motivo);
+commit;
 end $$
 delimiter ;
 call sp_movimiento_inventario(5, 'ENTRADA', 20, 'ALTA DE STOCK');
@@ -235,4 +240,3 @@ select * from movimiento_inventario where id_producto = sp_id_producto;
 end $$
 delimiter ;
 call sp_movimiento_inventario_listar_id_producto(3);
-
