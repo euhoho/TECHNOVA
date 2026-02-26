@@ -1,4 +1,5 @@
 		USE db_technova;
+        select @@autocommit;
 -- ======================== LISTAR USUARIOS ================================== --
 DELIMITER $$
 DROP PROCEDURE IF EXISTS sp_usuarios_listar $$
@@ -112,37 +113,41 @@ DELIMITER $$
 
 CREATE PROCEDURE sp_crear_pedido(
     IN p_id_usuario INT,
-    -- IN p_total_pedido DECIMAL(10,2),
-    -- IN p_id_pedido INT,
     IN p_id_producto INT,
     In p_cantidad INT
-    -- IN p_precio_unitario_momento DECIMAL(10,2)
 )
 BEGIN 	
 declare p_precio decimal(10,2) ;
 declare p_id_pedido int;
 declare p_total_pedido decimal(10,2) ;
-
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+         SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Error creando pedido';
+    END;
+    start transaction;
 select precio into p_precio from producto
-where p_id_producto = id_producto;
+where id_producto = p_id_producto;
 set p_total_pedido = p_precio * p_cantidad;
 
-    INSERT INTO pedido (id_usuario, total_pedido)
-    VALUES (p_id_usuario, p_total_pedido);
+INSERT INTO pedido (id_usuario, total_pedido,pedido_estado)VALUES (p_id_usuario, p_total_pedido,'CONFIRMADO');
+set p_id_pedido = last_insert_id();
     
-    set p_id_pedido = last_insert_id();
-    
-    
-    insert into linea_pedido(id_pedido,id_producto,cantidad,precio_unitario_momento) values (p_id_pedido,p_id_producto,p_cantidad,p_precio);
-update producto set stock = stock - p_cantidad
-where p_id_producto = id_producto;
+insert into linea_pedido(id_pedido,id_producto,cantidad,precio_unitario_momento) values (p_id_pedido,p_id_producto,p_cantidad,p_precio);
+insert into movimiento_inventario(id_producto,tipo_movimiento,cantidad,motivo) values(p_id_producto,'SALIDA',p_cantidad,'Pedido');
+if (select stock from producto where id_producto = p_id_producto) < p_cantidad then   SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error creando pedido';
+else
+update producto set stock = stock - p_cantidad where id_producto = p_id_producto; 
+commit;
+end if;
 END $$
-
 DELIMITER ;
-CALL sp_crear_pedido(7, 5, 30);
+CALL sp_crear_pedido(7, 5, 1);
 select * from pedido;
 select * from linea_pedido;
-select * from producto;
+select * from producto where id_producto =5;
+select * from movimiento_inventario;
 
 
 -- ================================== Crear Producto ================================================ --
@@ -158,11 +163,25 @@ in p_categoria varchar(100),
 in p_imagen VARCHAR(255)
 )
 begin 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION	
+    BEGIN
+        ROLLBACK;
+    END;
+    start transaction;
+     if (select count(*) from producto where p_sku = sku) <0 then SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'Error: El código SKU ya está registrado en Technova';
+        rollback;
+ else 
 insert into producto (sku, nombre, descripcion, precio, stock, categoria, imagen)
- values(p_sku, p_nombre, p_descripcion, p_precio, p_stock, p_categoria, p_imagen);
+values(p_sku, p_nombre, p_descripcion, p_precio, p_stock, p_categoria, p_imagen);
+commit;
+ end if;
  end $$
  Delimiter ;
  call sp_crear_producto('hola','porque','lees',9999.99,20,'PERIFERICOS','esto???');
+ delete from producto where id_producto = 29;
+ select * from producto;
+ commit;
 -- ============== Crear procedures 1.-mov inv crear/guardar mov inv  ===================== --
 
 Drop procedure if exists sp_movimiento_inventario;
@@ -173,16 +192,25 @@ in p_id_producto int,
  in p_cantidad INT ,
  in p_motivo varchar(255))
  begin 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION	
+    BEGIN
+        ROLLBACK;
+    END;
+    start transaction;
  insert into movimiento_inventario(id_producto, tipo_movimiento, cantidad, motivo)
  values (p_id_producto,p_tipo_movimiento,p_cantidad,p_motivo);
 
 	if p_tipo_movimiento ='ENTRADA' then update producto set stock = stock + p_cantidad where id_producto = p_id_producto;
+	commit;
+    else rollback;
     end if;
-	if p_tipo_movimiento ='SALIDA'  then update producto set stock = stock - p_cantidad where id_producto = p_id_producto;
+	if p_tipo_movimiento ='SALIDA'  then update producto set stock = stock - p_cantidad where id_producto = p_id_producto and stock>0;
+    commit;
+    else rollback;
 end if;
 end $$
 delimiter ;
-call sp_movimiento_inventario(5, 'SALIDA', 20, 'ALTA DE STOCK');
+call sp_movimiento_inventario(5, 'ENTRADA', 20, 'ALTA DE STOCK');
 select * from producto;
 select * from movimiento_inventario;
 
@@ -206,5 +234,5 @@ begin
 select * from movimiento_inventario where id_producto = sp_id_producto;
 end $$
 delimiter ;
-call sp_movimiento_inventario_listar_id_producto(5);
+call sp_movimiento_inventario_listar_id_producto(3);
 
