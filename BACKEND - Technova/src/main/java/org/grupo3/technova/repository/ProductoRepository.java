@@ -13,12 +13,15 @@ import static org.grupo3.technova.data.model.Producto.SKU;
 @Repository
 public class ProductoRepository {
 
+
+
+
     private final DataSource dataSource;
     public ProductoRepository(DataSource dataSource) {
         this.dataSource = dataSource;
 
     }
-    public  List<Producto> findAll(){
+    public  List<Producto> listar(){
         List<Producto> productos = new ArrayList<>();
         // Requisito Entregable 3: los endpoints GET deben usar procedimientos almacenados
         // definidos en procedures_technova.sql (sin SELECT embebido en el código).
@@ -77,7 +80,7 @@ public class ProductoRepository {
 
     public void save(Producto producto){
 
-        String sql = "INSERT INTO producto (sku, nombre, descripcion, precio, stock, categoria, imagen) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "CALL sp_crear_producto(?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection con = dataSource.getConnection();
         PreparedStatement ps = con.prepareStatement(sql)) {

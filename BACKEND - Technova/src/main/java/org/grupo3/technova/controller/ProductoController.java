@@ -3,7 +3,7 @@ package org.grupo3.technova.controller;
 import org.grupo3.technova.data.enums.EnumCategoria;
 import org.grupo3.technova.data.model.Producto;
 import org.grupo3.technova.repository.ProductoRepository;
-import org.grupo3.technova.services.ProductoService;
+
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -11,20 +11,20 @@ import java.util.List;
 @RequestMapping("/api/productos")
 public class ProductoController {
 
-    private final ProductoService productoService;
+    private final ProductoRepository productoRepository;
 
-    public ProductoController(ProductoService productoService) {
-        this.productoService = productoService;
+    public ProductoController(ProductoRepository ProductoRepository) {
+        this.productoRepository = ProductoRepository;
     }
     @GetMapping
     public List<Producto> listar(){
-        return productoService.listar();
+        return productoRepository.listar();
     }
 
     @GetMapping("/{categoria}")
-    public List<Producto> listarPorCategoria(@PathVariable EnumCategoria categoria){ return productoService.findByCategoria(categoria);}
+    public List<Producto> listarPorCategoria(@PathVariable EnumCategoria categoria){ return productoRepository.findByCategoria(categoria);}
     @PostMapping
     public void crear(@RequestBody Producto producto){
-        productoService.save(producto);
+        productoRepository.save(producto);
     }
 }
