@@ -86,14 +86,14 @@ public class PedidoRepositoryImpl implements PedidoRepository {
         }
 
         // Por ahora: solo cabecera (mínimo viable). Si luego metes líneas/stock, se hace con transacción.
-        String call = "{CALL sp_crear_pedido(?,?,?,?)}";
+        String call = "{CALL sp_crear_pedido(?,?,?)}";
 
         try (Connection con = dataSource.getConnection();
              CallableStatement cs = con.prepareCall(call)) {
 
             cs.setLong(1, idUsuario);
-            cs.setDouble(2, total);
-            cs.setString(3, EnumPedidoEstado.CONFIRMADO.name());
+            cs.setString(2,);
+            cs.setLong(3, );
             cs.registerOutParameter(4, Types.BIGINT);
 
             cs.execute();
