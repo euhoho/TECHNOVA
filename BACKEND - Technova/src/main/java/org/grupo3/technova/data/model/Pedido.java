@@ -34,6 +34,9 @@ public class Pedido {
         this.lineaPedidos = lineaPedidos;
     }
 
+    public Pedido() {
+    }
+
     public Long getId_pedido() {
         return id_pedido;
     }
