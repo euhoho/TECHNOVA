@@ -3,7 +3,11 @@ package org.grupo3.technova.data.dto.request;
 import org.grupo3.technova.data.model.Pedido;
 
 import java.util.List;
-
+/**
+ DTO utilizado para enviar los datos necesarios al crear un pedido.
+ Contiene información del usuario que realiza el pedido, los detalles del pedido
+ y la lista de líneas de pedido (productos con cantidad y precio unitario).
+       **/
 public class PedidoRequest {
         private UsuarioRequest usuario;
         private Pedido pedido;

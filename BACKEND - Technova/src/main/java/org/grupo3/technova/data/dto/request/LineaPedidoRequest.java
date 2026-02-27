@@ -1,5 +1,9 @@
 package org.grupo3.technova.data.dto.request;
 
+/**
+ DTO utilizado para enviar los datos de una línea de pedido al crear un pedido.
+ Contiene la información necesaria para registrar cada producto dentro de un pedido.
+ */
 public class LineaPedidoRequest {
     private Long idProducto;
     private int cantidad;

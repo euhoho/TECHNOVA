@@ -8,7 +8,8 @@ import org.grupo3.technova.data.model.Producto;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
+// Repositorio para manejar operaciones de pedido en la base de datos.
+//Se define los metodso para crear, listar pedidos de la BD
 public interface PedidoRepository {
     List<Pedido> listarPedidos();
 

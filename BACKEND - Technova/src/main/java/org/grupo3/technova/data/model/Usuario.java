@@ -1,7 +1,7 @@
 package org.grupo3.technova.data.model;
 
 import org.grupo3.technova.data.enums.EnumRol;
-
+// se declara los campos que existieran en nuestra tabla Usuario de la BD
 public class Usuario {
 
     private Long id_usuario;
@@ -10,7 +10,7 @@ public class Usuario {
     private EnumRol rol;
 
     public Usuario() {}
-
+// se hace un constructor de usuario
     public Usuario(Long id_usuario, String email, String password, EnumRol rol) {
         this.id_usuario = id_usuario;
         this.email = email;

@@ -33,7 +33,7 @@ public class Pedido {
         this.pedido_estado = pedido_estado;
         this.lineaPedidos = lineaPedidos;
     }
-
+    // realizamos el get y post de cada campo
     public Pedido() {
     }
 

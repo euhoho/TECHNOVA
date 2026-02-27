@@ -1,7 +1,10 @@
 package org.grupo3.technova.data.dto.request;
 
 import org.grupo3.technova.data.enums.EnumTipoMovimiento;
-
+/**
+ DTO utilizado para enviar los datos de un movimiento de inventario.
+ Representa una operación sobre un producto en la base de datos (entrada o salida).
+ */
 public class MovimientoInventarioRequest {
 
     private Long id_producto;

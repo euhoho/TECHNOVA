@@ -5,7 +5,8 @@ import org.grupo3.technova.data.enums.EnumCategoria;
 
 import javax.sql.DataSource;
 import java.util.List;
-
+// Repositorio para manejar operaciones de producto en la base de datos.
+//Se define los metodos para crear, listar productos de la BD
 public interface ProductoRepository {
 
     DataSource getDataSource();

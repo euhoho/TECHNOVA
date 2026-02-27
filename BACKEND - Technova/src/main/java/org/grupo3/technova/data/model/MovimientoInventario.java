@@ -3,8 +3,9 @@ package org.grupo3.technova.data.model;
 import org.grupo3.technova.data.enums.EnumTipoMovimiento;
 
 import java.sql.Date;
-
+// se declara los campos que existieran en nuestra tabla MovimientoInventario de la BD
 public class MovimientoInventario {
+    // Constantes que representan los nombres de las columnas de la tabla MovimientoInventario en la base de datos.
     public static final String ID_MOVIMIENTO = "id_movimiento";
     public static final String TIPO_MOVIMIENTO = "tipo_movimiento";
     public static final String FECHA_MOVIMIENTO = "fecha_movimiento";
@@ -18,7 +19,7 @@ public class MovimientoInventario {
     private String motivo_movimiento;
 
     public MovimientoInventario() {}
-
+//hacemos los constructores
     public MovimientoInventario(Long id_movimiento, Producto id_producto, EnumTipoMovimiento tipo_movimiento, Date fecha_movimiento, Integer cantidad_movimiento, String motivo_movimiento) {
         this.id_movimiento = id_movimiento;
         this.id_producto = id_producto;
@@ -27,6 +28,7 @@ public class MovimientoInventario {
         this.cantidad_movimiento = cantidad_movimiento;
         this.motivo_movimiento = motivo_movimiento;
     }
+    // realizamos el get y post de cada campo
 
     public Long getId_movimiento() {
         return id_movimiento;

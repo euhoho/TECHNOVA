@@ -1,6 +1,7 @@
 package org.grupo3.technova.data.model;
-
+// se declara los campos que existieran en nuestra tabla Linea pedido de la BD
 public class LineaPedido {
+    // Constantes que representan los nombres de las columnas de la tabla linea pedido en la base de datos.
     public static final String ID_LINEA_PEDIDO = "id_linea_pedido";
     public static final String ID_PEDIDO = "id_pedido";
     public static final String ID_PRODUCTO = "id_producto";
@@ -14,7 +15,7 @@ public class LineaPedido {
     private double precio_unitario_momento;
 
     public LineaPedido() {}
-
+//Constructor de linea pedido
     public LineaPedido(int id_linea_pedido, int id_pedido, int id_producto, int cantidad, double precio_unitario__momento) {
         this.id_linea_pedido = id_linea_pedido;
         this.id_pedido = id_pedido;
@@ -22,7 +23,7 @@ public class LineaPedido {
         this.cantidad = cantidad;
         this.precio_unitario_momento = precio_unitario__momento;
     }
-
+    // realizamos el get y set de cada campo
     public int getId_linea_pedido() { return id_linea_pedido; }
     public void setId_linea_pedido(int id_linea_pedido) { this.id_linea_pedido = id_linea_pedido; }
 
