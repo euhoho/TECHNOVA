@@ -186,57 +186,98 @@ commit;
  commit;
 -- ============== Crear procedures 1.-mov inv crear/guardar mov inv  ===================== --
 
-Drop procedure if exists sp_movimiento_inventario;
-delimiter $$
-create procedure sp_movimiento_inventario(
-in p_id_producto int,
- in p_tipo_movimiento varchar(100),
- in p_cantidad INT ,
- in p_motivo varchar(255))
- begin 
-DECLARE EXIT HANDLER FOR SQLEXCEPTION	
-    BEGIN
-        ROLLBACK;
-         SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Stock insuficiente';
-    END;
-    start transaction;
-	if p_tipo_movimiento ='ENTRADA' then update producto set stock = stock + p_cantidad where id_producto = p_id_producto;
-    elseif p_tipo_movimiento ='SALIDA'  then
-    IF (select stock from producto where id_producto = p_id_producto)<p_cantidad then SIGNAL SQLSTATE '45000'
-    SET MESSAGE_TEXT = 'Stock insuficiente';
-    end if;
- update producto set stock = stock-p_cantidad where id_producto = p_id_producto;
-    ELSE
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Tipo movimiento invalido';
-    end if;
-     insert into movimiento_inventario(id_producto, tipo_movimiento, cantidad, motivo) values (p_id_producto,p_tipo_movimiento,p_cantidad,p_motivo);
-commit;
-end $$
-delimiter ;
-call sp_movimiento_inventario(5, 'ENTRADA', 20, 'ALTA DE STOCK');
+DROP PROCEDURE IF EXISTS sp_movimiento_inventario;
+DELIMITER $$
+
+CREATE PROCEDURE sp_movimiento_inventario(
+    IN p_id_producto INT,
+    IN p_tipo_movimiento VARCHAR(20),
+    IN p_cantidad INT,
+    IN p_motivo VARCHAR(255)
+)
+BEGIN
+    INSERT INTO movimiento_inventario(
+        id_producto,
+        tipo_movimiento,
+        cantidad_movimiento,
+        motivo_movimiento
+    )
+    VALUES (
+        p_id_producto,
+        p_tipo_movimiento,
+        p_cantidad,
+        p_motivo
+    );
+
+    IF p_tipo_movimiento = 'ENTRADA' THEN
+        UPDATE producto 
+        SET stock = stock + p_cantidad 
+        WHERE id_producto = p_id_producto;
+    END IF;
+
+    IF p_tipo_movimiento = 'SALIDA' THEN
+        UPDATE producto 
+        SET stock = stock - p_cantidad 
+        WHERE id_producto = p_id_producto;
+    END IF;
+END $$
+
+DELIMITER ;
+call sp_movimiento_inventario(5, 'SALIDA', 20, 'ALTA DE STOCK');
 select * from producto;
 select * from movimiento_inventario;
 
 -- ===   2.-Listar mov inv    === --
 
-Drop procedure if exists sp_movimiento_inventario_listar;
-delimiter $$
-create procedure sp_movimiento_inventario_listar()
-begin 
-select * from movimiento_inventario;
-end $$
-delimiter ;
-call sp_movimiento_inventario_listar;
+DROP PROCEDURE IF EXISTS sp_movimiento_inventario_listar;
+DELIMITER $$
+
+CREATE PROCEDURE sp_movimiento_inventario_listar()
+BEGIN
+    SELECT m.id_movimiento,
+           m.id_producto,
+           m.tipo_movimiento,
+           m.fecha_movimiento,
+           m.cantidad_movimiento,
+           m.motivo_movimiento,
+           p.sku,
+           p.nombre,
+           p.descripcion,
+           p.precio,
+           p.stock,
+           p.categoria,
+           p.imagen
+    FROM movimiento_inventario m
+    JOIN producto p ON m.id_producto = p.id_producto;
+END $$
+
+DELIMITER ;
+CALL sp_movimiento_inventario_listar();
 
 -- === 3.-Filtrar mov iv por id producto === --
 
-Drop procedure if exists sp_movimiento_inventario_listar_id_producto;
-delimiter $$
-create procedure sp_movimiento_inventario_listar_id_producto(in sp_id_producto int)
-begin 
-select * from movimiento_inventario where id_producto = sp_id_producto;
-end $$
-delimiter ;
-call sp_movimiento_inventario_listar_id_producto(3);
+DROP PROCEDURE IF EXISTS sp_movimiento_inventario_listar_id_producto;
+DELIMITER $$
+
+CREATE PROCEDURE sp_movimiento_inventario_listar_id_producto(IN p_id_producto INT)
+BEGIN
+    SELECT m.id_movimiento,
+           m.id_producto,
+           m.tipo_movimiento,
+           m.fecha_movimiento,
+           m.cantidad_movimiento,
+           m.motivo_movimiento,
+           p.sku,
+           p.nombre,
+           p.descripcion,
+           p.precio,
+           p.stock,
+           p.categoria,
+           p.imagen
+    FROM movimiento_inventario m
+    JOIN producto p ON m.id_producto = p.id_producto
+    WHERE m.id_producto = p_id_producto;
+END $$
+
+DELIMITER ;
+CALL sp_movimiento_inventario_listar_id_producto (2);
