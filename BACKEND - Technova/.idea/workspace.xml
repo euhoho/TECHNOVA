@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f2e3907b-1e0c-442f-af99-06cc955bccd4" name="Changes" comment="">
+    <list default="true" id="ddbbb43a-9f73-442e-8485-78cb4f3f3b42" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/LineaPedidoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/LineaPedidoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/LineaPedidoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/LineaPedidoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/LineaPedidoRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/LineaPedidoRepositoryImpl.java" afterDir="false" />
     </list>
+    <list id="afabca47-1a0b-4dde-9252-06d4aa3c85c7" name="aplicattion properties" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,82 +26,119 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Rayan-t-t"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Rayan-t-t&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/euhoho/TECHNOVA.git",
-    "accountId": "533dab9c-284d-44ec-a184-6042f75dbbee"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/euhoho/TECHNOVA.git&quot;,
+    &quot;accountId&quot;: &quot;533dab9c-284d-44ec-a184-6042f75dbbee&quot;
   }
-}]]></component>
-  <component name="HttpClientOnboardingState"><![CDATA[{
-  "isOnboardingCommentShown": true
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
-  <component name="ProjectId" id="3AFmGZgKslbcP15n2wzubIwYyjc" />
+}</component>
+  <component name="HttpClientOnboardingState">{
+  &quot;isOnboardingCommentShown&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="3A71XbiYuZSugCyBarcOlJYI4u1" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "HTTP Request.generated-requests | #84.executor": "Run",
-    "HTTP Request.generated-requests | #85.executor": "Run",
-    "HTTP Request.generated-requests | #86.executor": "Run",
-    "HTTP Request.generated-requests | #87.executor": "Run",
+    "HTTP Request.generated-requests | #101.executor": "Run",
+    "HTTP Request.generated-requests | #102.executor": "Run",
+    "HTTP Request.generated-requests | #69.executor": "Run",
+    "HTTP Request.generated-requests | #70.executor": "Run",
+    "HTTP Request.generated-requests | #71.executor": "Run",
+    "HTTP Request.generated-requests | #72.executor": "Run",
+    "HTTP Request.generated-requests | #73.executor": "Run",
+    "HTTP Request.generated-requests | #74.executor": "Run",
+    "HTTP Request.generated-requests | #75.executor": "Run",
+    "HTTP Request.generated-requests | #76.executor": "Run",
+    "HTTP Request.generated-requests | #77.executor": "Run",
+    "HTTP Request.generated-requests | #78.executor": "Run",
+    "HTTP Request.generated-requests | #89.executor": "Run",
+    "HTTP Request.generated-requests | #90.executor": "Run",
+    "HTTP Request.generated-requests | #91.executor": "Run",
+    "HTTP Request.generated-requests | #93.executor": "Run",
+    "HTTP Request.generated-requests | #94.executor": "Run",
+    "HTTP Request.generated-requests | #96.executor": "Run",
+    "HTTP Request.generated-requests | #98.executor": "Run",
+    "HTTP Request.generated-requests | #99.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.BackendTechnovaApplication.executor": "Run",
-    "git-widget-placeholder": "Producto",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/devil ahora si/OneDrive/Escritorio/TECHNOVA/BACKEND - Technova",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm"
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\devil ahora si\OneDrive\Escritorio\TECHNOVA\BACKEND - Technova\src\main\resources" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="configurationStatuses">
       <map>
         <entry key="HttpClient.HttpRequestRunConfigurationType">
           <value>
             <map>
-              <entry key="generated-requests | #84" value="STOPPED" />
-              <entry key="generated-requests | #85" value="STOPPED" />
-              <entry key="generated-requests | #86" value="STOPPED" />
-              <entry key="generated-requests | #87" value="STOPPED" />
+              <entry key="generated-requests | #104" value="STOPPED" />
             </map>
           </value>
         </entry>
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="HTTP Request.generated-requests | #85">
-    <configuration name="generated-requests | #84" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#84" index="84" runType="Run single request">
+  <component name="RunManager" selected="Spring Boot.BackendTechnovaApplication">
+    <configuration name="generated-requests | #104" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#104" index="104" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="generated-requests | #85" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#85" index="85" runType="Run single request">
+    <configuration name="generated-requests | #105" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#105" index="105" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="generated-requests | #86" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#86" index="86" runType="Run single request">
+    <configuration name="generated-requests | #106" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#106" index="106" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="generated-requests | #87" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#87" index="87" runType="Run single request">
+    <configuration name="generated-requests | #107" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#107" index="107" runType="Run single request">
       <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #108" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#108" index="108" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="BackendTechnovaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="BackendTechnova" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.grupo3.technova.BackendTechnovaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.generated-requests | #85" />
-        <item itemvalue="HTTP Request.generated-requests | #87" />
-        <item itemvalue="HTTP Request.generated-requests | #86" />
-        <item itemvalue="HTTP Request.generated-requests | #84" />
+        <item itemvalue="HTTP Request.generated-requests | #108" />
+        <item itemvalue="HTTP Request.generated-requests | #107" />
+        <item itemvalue="HTTP Request.generated-requests | #106" />
+        <item itemvalue="HTTP Request.generated-requests | #105" />
+        <item itemvalue="HTTP Request.generated-requests | #104" />
       </list>
     </recent_temporary>
   </component>
@@ -111,27 +152,43 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7d4f886d-1a4a-418d-8ec6-e8717749314c" name="Changes" comment="" />
-      <created>1772196603203</created>
+      <changelist id="ddbbb43a-9f73-442e-8485-78cb4f3f3b42" name="Changes" comment="" />
+      <changelist id="afabca47-1a0b-4dde-9252-06d4aa3c85c7" name="aplicattion properties" comment="" />
+      <created>1771928837611</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1772196603203</updated>
-      <workItem from="1772196605974" duration="1759000" />
+      <updated>1771928837611</updated>
+      <workItem from="1771928839559" duration="289000" />
+      <workItem from="1771929155056" duration="1080000" />
+      <workItem from="1771930264870" duration="4608000" />
+      <workItem from="1772097320008" duration="1154000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/MovimientoInventarioRequest.java</url>
-          <line>28</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Prodcuto_branch" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
