@@ -205,8 +205,8 @@ DECLARE EXIT HANDLER FOR SQLEXCEPTION
     INSERT INTO movimiento_inventario(
         id_producto,
         tipo_movimiento,
-        cantidad,
-        motivo
+        cantidad_movimiento,
+        motivo_movimiento
     )
     VALUES (
         p_id_producto,

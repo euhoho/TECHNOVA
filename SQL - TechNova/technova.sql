@@ -2,6 +2,7 @@
 
 DROP DATABASE IF EXISTS db_technova;
 CREATE DATABASE db_technova;
+Set autocommit = 0;
 USE db_technova;
 
 CREATE TABLE usuario (
@@ -44,9 +45,9 @@ CREATE TABLE movimiento_inventario (
 id_movimiento INT auto_increment primary key,
 id_producto int not null,
 tipo_movimiento enum ('ENTRADA','SALIDA') not null, -- Entrada agregar, Salida quitar al stock
-fecha datetime not null default current_timestamp,
-cantidad int not null check (cantidad> 0), -- el check sirve para registar siempre una cantidad positiva
-motivo varchar(255),
+fecha_movimiento datetime not null default current_timestamp,
+cantidad_movimiento int not null check (cantidad> 0), -- el check sirve para registar siempre una cantidad positiva
+motivo_movimiento varchar(255),
 foreign key (id_producto) references producto(id_producto));
 
 -- INSERTS --
