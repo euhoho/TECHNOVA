@@ -195,7 +195,13 @@ CREATE PROCEDURE sp_movimiento_inventario(
     IN p_cantidad INT,
     IN p_motivo VARCHAR(255)
 )
-BEGIN
+begin
+DECLARE EXIT HANDLER FOR SQLEXCEPTION	
+    BEGIN
+		SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Stock insuficiente para este movimiento';
+    END ;
+ start transaction;
     INSERT INTO movimiento_inventario(
         id_producto,
         tipo_movimiento,
@@ -208,22 +214,26 @@ BEGIN
         p_cantidad,
         p_motivo
     );
-
-    IF p_tipo_movimiento = 'ENTRADA' THEN
-        UPDATE producto 
-        SET stock = stock + p_cantidad 
-        WHERE id_producto = p_id_producto;
-    END IF;
-
-    IF p_tipo_movimiento = 'SALIDA' THEN
+    if p_tipo_movimiento = 'SALIDA' THEN
+		IF (SELECT stock FROM producto WHERE id_producto = p_id_producto) < p_cantidad THEN
+			SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = 'Stock insuficiente para este movimiento';
+        ELSE
         UPDATE producto 
         SET stock = stock - p_cantidad 
         WHERE id_producto = p_id_producto;
-    END IF;
+        END IF;
+	end if;
+        
+	IF p_tipo_movimiento = 'ENTRADA' THEN
+        UPDATE producto 
+        SET stock = stock + p_cantidad 
+        WHERE id_producto = p_id_producto;
+	end if; 
+commit;
 END $$
-
 DELIMITER ;
-call sp_movimiento_inventario(5, 'SALIDA', 20, 'ALTA DE STOCK');
+call sp_movimiento_inventario(5, 'SALIDA', 20, 'VENTA');
 select * from producto;
 select * from movimiento_inventario;
 
