@@ -1,4 +1,5 @@
 		USE db_technova;
+        select @@autocommit;
 -- ======================== LISTAR USUARIOS ================================== --
 DELIMITER $$
 DROP PROCEDURE IF EXISTS sp_usuarios_listar $$
@@ -88,7 +89,7 @@ CREATE PROCEDURE sp_lineapedido_listar_usuario(in p_email varchar(100) ,in p_pas
 BEGIN 
 SELECT * 
 FROM pedido JOIN usuario ON pedido.id_usuario = usuario.id_usuario
-where  p_email = email and p_password = password;
+where email =  p_email and p_password = password;
 END $$
 DELIMITER ;
 CALL sp_lineapedido_listar_usuario('javiervs@gmail.com','uyuyuyuy124.S');
@@ -100,7 +101,7 @@ CREATE PROCEDURE sp_usuario(in p_email varchar(100) ,in p_password varchar(255))
 BEGIN 
 SELECT *
 FROM usuario
-where p_email= email and p_password= password;
+where email=  p_email and p_password= password;
 END $$
 DELIMITER ;
 call sp_usuario ('javiervs@gmail.com','uyuyuyuy124.S');
@@ -112,37 +113,41 @@ DELIMITER $$
 
 CREATE PROCEDURE sp_crear_pedido(
     IN p_id_usuario INT,
-    -- IN p_total_pedido DECIMAL(10,2),
-    -- IN p_id_pedido INT,
     IN p_id_producto INT,
     In p_cantidad INT
-    -- IN p_precio_unitario_momento DECIMAL(10,2)
 )
 BEGIN 	
 declare p_precio decimal(10,2) ;
 declare p_id_pedido int;
 declare p_total_pedido decimal(10,2) ;
-
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+         SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Error creando pedido';
+    END;
+    start transaction;
 select precio into p_precio from producto
-where p_id_producto = id_producto;
+where id_producto = p_id_producto;
 set p_total_pedido = p_precio * p_cantidad;
+if (select stock from producto where id_producto = p_id_producto) < p_cantidad then   SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error creando pedido';
+else
 
-    INSERT INTO pedido (id_usuario, total_pedido)
-    VALUES (p_id_usuario, p_total_pedido);
-    
-    set p_id_pedido = last_insert_id();
-    
-    
-    insert into linea_pedido(id_pedido,id_producto,cantidad,precio_unitario_momento) values (p_id_pedido,p_id_producto,p_cantidad,p_precio);
-update producto set stock = stock - p_cantidad
-where p_id_producto = id_producto;
+INSERT INTO pedido (id_usuario, total_pedido,pedido_estado)VALUES (p_id_usuario, p_total_pedido,'CONFIRMADO');
+set p_id_pedido = last_insert_id();
+
+insert into linea_pedido(id_pedido,id_producto,cantidad,precio_unitario_momento) values (p_id_pedido,p_id_producto,p_cantidad,p_precio);
+update producto set stock = stock - p_cantidad where id_producto = p_id_producto; 
+insert into movimiento_inventario(id_producto,tipo_movimiento,cantidad,motivo) values(p_id_producto,'SALIDA',p_cantidad,'Pedido');
+commit;
+end if;
 END $$
-
 DELIMITER ;
-CALL sp_crear_pedido(7, 5, 30);
+CALL sp_crear_pedido(7, 5, 1);
 select * from pedido;
 select * from linea_pedido;
-select * from producto;
+select * from producto where id_producto =5;
+select * from movimiento_inventario;
 
 
 -- ================================== Crear Producto ================================================ --
@@ -158,53 +163,131 @@ in p_categoria varchar(100),
 in p_imagen VARCHAR(255)
 )
 begin 
+DECLARE EXIT HANDLER FOR SQLEXCEPTION	
+    BEGIN
+        ROLLBACK;
+          SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'SKU duplicado';
+    END;
+    start transaction;
+     if (select count(*) from producto where p_sku = sku) > 0 then 
+     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'SKU duplicado';
+
+ else 
 insert into producto (sku, nombre, descripcion, precio, stock, categoria, imagen)
- values(p_sku, p_nombre, p_descripcion, p_precio, p_stock, p_categoria, p_imagen);
+values(p_sku, p_nombre, p_descripcion, p_precio, p_stock, p_categoria, p_imagen);
+commit;
+ end if;
  end $$
  Delimiter ;
  call sp_crear_producto('hola','porque','lees',9999.99,20,'PERIFERICOS','esto???');
+ delete from producto where id_producto = 29;
+ select * from producto;
+ commit;
 -- ============== Crear procedures 1.-mov inv crear/guardar mov inv  ===================== --
 
-Drop procedure if exists sp_movimiento_inventario;
-delimiter $$
-create procedure sp_movimiento_inventario(
-in p_id_producto int,
- in p_tipo_movimiento varchar(100),
- in p_cantidad INT ,
- in p_motivo varchar(255))
- begin 
- insert into movimiento_inventario(id_producto, tipo_movimiento, cantidad, motivo)
- values (p_id_producto,p_tipo_movimiento,p_cantidad,p_motivo);
+DROP PROCEDURE IF EXISTS sp_movimiento_inventario;
+DELIMITER $$
 
-	if p_tipo_movimiento ='ENTRADA' then update producto set stock = stock + p_cantidad where id_producto = p_id_producto;
-    end if;
-	if p_tipo_movimiento ='SALIDA'  then update producto set stock = stock - p_cantidad where id_producto = p_id_producto;
-end if;
-end $$
-delimiter ;
-call sp_movimiento_inventario(5, 'SALIDA', 20, 'ALTA DE STOCK');
+CREATE PROCEDURE sp_movimiento_inventario(
+    IN p_id_producto INT,
+    IN p_tipo_movimiento VARCHAR(20),
+    IN p_cantidad INT,
+    IN p_motivo VARCHAR(255)
+)
+begin
+DECLARE EXIT HANDLER FOR SQLEXCEPTION	
+    BEGIN
+		SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Stock insuficiente para este movimiento';
+    END ;
+ start transaction;
+    INSERT INTO movimiento_inventario(
+        id_producto,
+        tipo_movimiento,
+        cantidad_movimiento,
+        motivo_movimiento
+    )
+    VALUES (
+        p_id_producto,
+        p_tipo_movimiento,
+        p_cantidad,
+        p_motivo
+    );
+    if p_tipo_movimiento = 'SALIDA' THEN
+		IF (SELECT stock FROM producto WHERE id_producto = p_id_producto) < p_cantidad THEN
+			SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = 'Stock insuficiente para este movimiento';
+        ELSE
+        UPDATE producto 
+        SET stock = stock - p_cantidad 
+        WHERE id_producto = p_id_producto;
+        END IF;
+	end if;
+        
+	IF p_tipo_movimiento = 'ENTRADA' THEN
+        UPDATE producto 
+        SET stock = stock + p_cantidad 
+        WHERE id_producto = p_id_producto;
+	end if; 
+commit;
+END $$
+DELIMITER ;
+call sp_movimiento_inventario(5, 'SALIDA', 20, 'VENTA');
 select * from producto;
 select * from movimiento_inventario;
 
 -- ===   2.-Listar mov inv    === --
 
-Drop procedure if exists sp_movimiento_inventario_listar;
-delimiter $$
-create procedure sp_movimiento_inventario_listar()
-begin 
-select * from movimiento_inventario;
-end $$
-delimiter ;
-call sp_movimiento_inventario_listar;
+DROP PROCEDURE IF EXISTS sp_movimiento_inventario_listar;
+DELIMITER $$
+
+CREATE PROCEDURE sp_movimiento_inventario_listar()
+BEGIN
+    SELECT m.id_movimiento,
+           m.id_producto,
+           m.tipo_movimiento,
+           m.fecha_movimiento,
+           m.cantidad_movimiento,
+           m.motivo_movimiento,
+           p.sku,
+           p.nombre,
+           p.descripcion,
+           p.precio,
+           p.stock,
+           p.categoria,
+           p.imagen
+    FROM movimiento_inventario m
+    JOIN producto p ON m.id_producto = p.id_producto;
+END $$
+
+DELIMITER ;
+CALL sp_movimiento_inventario_listar();
 
 -- === 3.-Filtrar mov iv por id producto === --
 
-Drop procedure if exists sp_movimiento_inventario_listar_id_producto;
-delimiter $$
-create procedure sp_movimiento_inventario_listar_id_producto(in sp_id_producto int)
-begin 
-select * from movimiento_inventario where id_producto = sp_id_producto;
-end $$
-delimiter ;
-call sp_movimiento_inventario_listar_id_producto(5);
+DROP PROCEDURE IF EXISTS sp_movimiento_inventario_listar_id_producto;
+DELIMITER $$
 
+CREATE PROCEDURE sp_movimiento_inventario_listar_id_producto(IN p_id_producto INT)
+BEGIN
+    SELECT m.id_movimiento,
+           m.id_producto,
+           m.tipo_movimiento,
+           m.fecha_movimiento,
+           m.cantidad_movimiento,
+           m.motivo_movimiento,
+           p.sku,
+           p.nombre,
+           p.descripcion,
+           p.precio,
+           p.stock,
+           p.categoria,
+           p.imagen
+    FROM movimiento_inventario m
+    JOIN producto p ON m.id_producto = p.id_producto
+    WHERE m.id_producto = p_id_producto;
+END $$
+
+DELIMITER ;
+CALL sp_movimiento_inventario_listar_id_producto (2);

@@ -1,4 +1,13 @@
 package org.grupo3.technova.repository.impl;
 
-public class UsuarioRepositoryImpl {
+import org.grupo3.technova.repository.UsuarioRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class UsuarioRepositoryImpl implements UsuarioRepository {
+    @Override
+    public Long findIdByEmailAndPassword(String email, String password) {
+        // Stub temporal para que compile
+        return null;
+    }
 }
