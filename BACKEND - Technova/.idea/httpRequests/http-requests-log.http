@@ -1,3 +1,156 @@
+GET http://localhost:8080/api/movimientoinventario
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-27T095730.200.json
+
+###
+
+POST http://localhost:8080/api/movimientoinventario
+Content-Type: application/json
+Content-Length: 124
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id_producto": 4,
+  "tipo_movimiento": "ENTRADA",
+  "cantidad_movimiento": 1,
+  "motivo_movimiento": "artículo nuevo"
+}
+
+###
+
+POST http://localhost:8080/api/movimientoinventario
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2026-02-27T095012.400.json
+
+###
+
+GET http://localhost:8080/api/movimientoinventario/1
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-27T093044.200.json
+
+###
+
+GET http://localhost:8080/api/movimientoinventario/producto/7
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-27T093020.200.json
+
+###
+
+GET http://localhost:8080/api/movimientoinventario
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 158
+
+{
+  "id_movimiento": 0,
+  "id_producto": {},
+  "tipo_movimiento": "ENTRADA",
+  "fecha_movimiento": {},
+  "cantidad_movimiento": 0,
+  "motivo_movimiento": ""
+}
+
+<> 2026-02-27T091825.200.json
+
+###
+
+POST http://localhost:8080/api/movimientoinventario
+Content-Type: application/json
+Content-Length: 170
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id_movimiento": 3,
+  "id_producto": 4,
+  "tipo_movimiento": "ENTRADA",
+  "fecha_movimiento": {},
+  "cantidad_movimiento": 1,
+  "motivo_movimiento": "ALTA EN STOCK"
+}
+
+<> 2026-02-27T091429.400.json
+
+###
+
+POST http://localhost:8080/api/movimientoinventario
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 0
+
+<> 2026-02-27T091317.400.json
+
+###
+
+GET http://localhost:8080/api/movimientoinventario/2
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-27T090937.200.json
+
+###
+
+GET http://localhost:8080/api/movimientoinventario/producto/2
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-27T090804.500.json
+
+###
+
+GET http://localhost:8080/api/movimientoinventario/2
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-27T090711.200.json
+
+###
+
+GET http://localhost:8080/api/movimientoinventario
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 158
+
+{
+  "id_movimiento": 0,
+  "id_producto": {},
+  "tipo_movimiento": "ENTRADA",
+  "fecha_movimiento": {},
+  "cantidad_movimiento": 0,
+  "motivo_movimiento": ""
+}
+
+<> 2026-02-27T090647.200.json
+
+###
+
 GET http://localhost:8080/api/productos
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
 Accept-Encoding: br, deflate, gzip, x-gzip
