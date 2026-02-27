@@ -1,5 +1,5 @@
 		USE db_technova;
-        select @@autocommit;
+				
 -- ======================== LISTAR USUARIOS ================================== --
 DELIMITER $$
 DROP PROCEDURE IF EXISTS sp_usuarios_listar $$
@@ -108,7 +108,7 @@ call sp_usuario ('javiervs@gmail.com','uyuyuyuy124.S');
 
 -- ===========================  CREAR PEDIDOS ================================================= --
 
-DROP PROCEDURE IF EXISTS sp_crear_pedido;
+/*DROP PROCEDURE IF EXISTS sp_crear_pedido;
 DELIMITER $$
 
 CREATE PROCEDURE sp_crear_pedido(
@@ -147,7 +147,26 @@ CALL sp_crear_pedido(7, 5, 1);
 select * from pedido;
 select * from linea_pedido;
 select * from producto where id_producto =5;
-select * from movimiento_inventario;
+select * from movimiento_inventario;*/
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS sp_crear_pedido;
+
+CREATE PROCEDURE sp_crear_pedido(
+    IN p_id_usuario int,
+    IN p_total DECIMAL(10,2),
+    OUT p_id_pedido int
+)
+BEGIN
+    -- Inserta en la tabla pedido (id_pedido auto_increment)
+    INSERT INTO pedido (id_usuario, total_pedido, pedido_estado, fecha)
+    VALUES (p_id_usuario, p_total, 'CONFIRMADO', NOW());
+
+    -- Devuelve el id generado
+    SET p_id_pedido = LAST_INSERT_ID();
+END $$
+
+DELIMITER ;
 
 
 -- ================================== Crear Producto ================================================ --

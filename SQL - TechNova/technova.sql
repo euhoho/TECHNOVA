@@ -115,3 +115,7 @@ INSERT INTO linea_pedido (id_pedido, id_producto, cantidad, precio_unitario_mome
 INSERT INTO movimiento_inventario (id_producto, tipo_movimiento, cantidad, motivo) VALUES
 (7, 'ENTRADA', 20, 'ALTA DE STOCK'),
 (2, 'SALIDA', 1, 'ARTÍCULO DEFECTUOSO');
+
+
+
+

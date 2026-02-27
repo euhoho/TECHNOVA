@@ -7,15 +7,7 @@
     <list default="true" id="ddbbb43a-9f73-442e-8485-78cb4f3f3b42" name="Changes" comment="FEAT: CREACIÓN DE LINEA PEDIDO">
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/UsuarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/LoginRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/UsuarioRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/UsuarioRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/response/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/response/LoginResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/UsuarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/UsuarioRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/PedidoRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/PedidoRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/ProductoRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/ProductoRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/UsuarioRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/UsuarioRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SQL - TechNova/TechnovaProcedimientos.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../SQL - TechNova/TechnovaProcedimientos.sql" afterDir="false" />
     </list>
     <list id="afabca47-1a0b-4dde-9252-06d4aa3c85c7" name="aplicattion properties" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -77,6 +69,7 @@
     "HTTP Request.generated-requests | #89.executor": "Run",
     "HTTP Request.generated-requests | #90.executor": "Run",
     "HTTP Request.generated-requests | #91.executor": "Run",
+    "HTTP Request.generated-requests | #92.executor": "Run",
     "HTTP Request.generated-requests | #93.executor": "Run",
     "HTTP Request.generated-requests | #94.executor": "Run",
     "HTTP Request.generated-requests | #96.executor": "Run",
@@ -113,11 +106,9 @@
         <entry key="HttpClient.HttpRequestRunConfigurationType">
           <value>
             <map>
-              <entry key="generated-requests | #104" value="STOPPED" />
-              <entry key="generated-requests | #111" value="STOPPED" />
-              <entry key="generated-requests | #112" value="STOPPED" />
-              <entry key="generated-requests | #113" value="STOPPED" />
-              <entry key="generated-requests | #114" value="STOPPED" />
+              <entry key="generated-requests | #90" value="STOPPED" />
+              <entry key="generated-requests | #92" value="STOPPED" />
+              <entry key="generated-requests | #93" value="STOPPED" />
             </map>
           </value>
         </entry>
@@ -125,19 +116,19 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.BackendTechnovaApplication">
-    <configuration name="generated-requests | #108" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#108" index="108" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="generated-requests | #111" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#111" index="111" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="generated-requests | #112" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#112" index="112" runType="Run single request">
-      <method v="2" />
-    </configuration>
     <configuration name="generated-requests | #113" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#113" index="113" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="generated-requests | #114" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#114" index="114" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #90" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#90" index="90" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #92" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#92" index="92" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #93" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#93" index="93" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="BackendTechnovaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
@@ -149,11 +140,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.generated-requests | #93" />
+        <item itemvalue="HTTP Request.generated-requests | #92" />
+        <item itemvalue="HTTP Request.generated-requests | #90" />
         <item itemvalue="HTTP Request.generated-requests | #114" />
         <item itemvalue="HTTP Request.generated-requests | #113" />
-        <item itemvalue="HTTP Request.generated-requests | #112" />
-        <item itemvalue="HTTP Request.generated-requests | #111" />
-        <item itemvalue="HTTP Request.generated-requests | #108" />
       </list>
     </recent_temporary>
   </component>
