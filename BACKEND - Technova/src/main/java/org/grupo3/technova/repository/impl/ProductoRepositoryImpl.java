@@ -9,8 +9,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.grupo3.technova.data.model.Producto.SKU;
-
 @Repository
 public class ProductoRepositoryImpl implements ProductoRepository {
 
@@ -34,7 +32,7 @@ public class ProductoRepositoryImpl implements ProductoRepository {
             while (rs.next()){
                 Producto p = new Producto(
                         rs.getLong(Producto.ID_PRODUCTO),
-                        rs.getString(SKU),
+                        rs.getString(Producto.SKU),
                         rs.getString(Producto.NOMBRE),
                         rs.getString(Producto.DESCRIPCION),
                         rs.getDouble(Producto.PRECIO),
@@ -63,7 +61,7 @@ public class ProductoRepositoryImpl implements ProductoRepository {
             while (rs.next()) {
                 Producto p = new Producto(
                         rs.getLong(Producto.ID_PRODUCTO),
-                        rs.getString(SKU),
+                        rs.getString(Producto.SKU),
                         rs.getString(Producto.NOMBRE),
                         rs.getString(Producto.DESCRIPCION),
                         rs.getDouble(Producto.PRECIO),

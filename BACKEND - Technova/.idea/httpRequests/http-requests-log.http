@@ -1,3 +1,49 @@
+POST http://localhost:8080/api/usuarios/login
+Content-Type: application/json
+Content-Length: 71
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "shaghyasghari@technova.es",
+  "password": "bccvcc98!D7"
+}
+
+<> 2026-02-27T181933.200.json
+
+###
+
+GET http://localhost:8080/api/usuarios
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-27T181729.404.json
+
+###
+
+GET http://localhost:8080/api/usuarios
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-27T181614.404.json
+
+###
+
+GET http://localhost:8080/api/usuarios
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-27T181553.404.json
+
+###
+
 GET http://localhost:8080/api/productos
 Content-Type: application/json
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1

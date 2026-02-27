@@ -6,6 +6,8 @@ import org.grupo3.technova.data.enums.EnumPedidoEstado;
 import org.grupo3.technova.data.model.Pedido;
 import org.grupo3.technova.repository.PedidoRepository;
 import org.grupo3.technova.repository.UsuarioRepository;
+import org.grupo3.technova.data.model.Usuario;
+
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -69,8 +71,16 @@ public class PedidoRepositoryImpl implements PedidoRepository {
             throw new IllegalArgumentException("El pedido debe tener al menos una línea");
 
         //Validamos credenciales
-        Long idUsuario = usuarioRepository.findIdByEmailAndPassword(pedidoRequest.getUsuario().getEmail(), pedidoRequest.getUsuario().getPassword());
-        if (idUsuario == null) throw new SecurityException("Credenciales inválidas");
+        Usuario usuario = usuarioRepository.login(
+                pedidoRequest.getUsuario().getEmail(),
+                pedidoRequest.getUsuario().getPassword()
+        );
+
+        if (usuario == null) {
+            throw new SecurityException("Credenciales inválidas");
+        }
+
+        Long idUsuario = usuario.getId_usuario();
 
         String call = "{CALL sp_crear_pedido(?,?,?)}";
 
