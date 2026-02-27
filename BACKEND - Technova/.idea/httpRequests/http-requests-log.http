@@ -1,62 +1,83 @@
-GET http://localhost:8080/api/lineaspedido/producto/5
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2026-02-27T121215.200.json
-
-###
-
-GET http://localhost:8080/api/lineaspedido/producto/2
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2026-02-27T121210.200.json
-
-###
-
-GET http://localhost:8080/api/lineaspedido/producto/1
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2026-02-27T121202.200.json
-
-###
-
-GET http://localhost:8080/api/lineaspedido/pedido/2
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2026-02-27T121100.200.json
-
-###
-
-GET http://localhost:8080/api/lineaspedido/4
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2026-02-27T121043.200.json
-
-###
-
-GET http://localhost:8080/api/lineaspedido
+GET http://localhost:8080/api/productos
 Content-Type: application/json
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
-content-length: 61
+content-length: 147
 
 {
-  "idProducto": 0,
-  "cantidad": 0,
-  "precioUnitario": 0
+  "id_producto": 0,
+  "sku": "",
+  "nombre": "",
+  "descripcion": "",
+  "precio": 0,
+  "stock": 0,
+  "categoria": "COMPONENTES",
+  "imagen": ""
 }
 
-<> 2026-02-27T121017.200.json
+<> 2026-02-27T141301.200.json
+
+###
+
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+Content-Length: 173
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id_producto": 0,
+  "sku": "WILLY",
+  "nombre": "WILLY",
+  "descripcion": "WILLY",
+  "precio": 300.00,
+  "stock": 60,
+  "categoria": "COMPONENTES",
+  "imagen": "WILLY"
+}
+
+###
+
+GET http://localhost:8080/api/productos/COMPONENTES
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-27T141149.200.json
+
+###
+
+GET http://localhost:8080/api/productos
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 147
+
+{
+  "id_producto": 0,
+  "sku": "",
+  "nombre": "",
+  "descripcion": "",
+  "precio": 0,
+  "stock": 0,
+  "categoria": "COMPONENTES",
+  "imagen": ""
+}
+
+<> 2026-02-27T141124.200.json
+
+###
+
+GET http://localhost:8080/api/productos
+Content-Type: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-02-27T141102.200.json
 
 ###
 
