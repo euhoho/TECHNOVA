@@ -6,6 +6,7 @@ import org.grupo3.technova.data.model.MovimientoInventario;
 import org.grupo3.technova.data.model.Producto;
 import org.grupo3.technova.repository.MovimientoInventarioRepository;
 import org.springframework.stereotype.Repository;
+import org.grupo3.technova.data.dto.request.MovimientoInventarioRequest;
 
 import javax.sql.DataSource;
 import java.sql.CallableStatement;
@@ -30,23 +31,23 @@ public class MovimientoInventarioImpl implements MovimientoInventarioRepository 
     }
 
     @Override
-    public void save(MovimientoInventario movimiento) {
-        String sql = "{CALL sp_movimiento_inventario(?, ?, ?, ?, ?)}";
+    public void save(MovimientoInventarioRequest movimiento) {
+        String sql = "{CALL sp_movimiento_inventario(?, ?, ?, ?)}";
 
-        try (Connection con = getDataSource().getConnection();
+        try (Connection con = dataSource.getConnection();
              CallableStatement cs = con.prepareCall(sql)) {
-            cs.setLong(1, movimiento.getId_producto().getId_producto());
+
+            cs.setLong(1, movimiento.getId_producto());
             cs.setString(2, movimiento.getTipo_movimiento().name());
-            cs.setDate(3, movimiento.getFecha_movimiento());
-            cs.setInt(4, movimiento.getCantidad_movimiento());
-            cs.setString(5, movimiento.getMotivo_movimiento());
+            cs.setInt(3, movimiento.getCantidad_movimiento());
+            cs.setString(4, movimiento.getMotivo_movimiento());
 
             cs.execute();
+
         } catch (SQLException e) {
-            throw new RuntimeException("Error guardando movimiento", e);
+            throw new RuntimeException("Error guardando movimiento de inventario", e);
         }
     }
-
     @Override
     public List<MovimientoInventario> findAll() {
         List<MovimientoInventario> movimientos = new ArrayList<>();
