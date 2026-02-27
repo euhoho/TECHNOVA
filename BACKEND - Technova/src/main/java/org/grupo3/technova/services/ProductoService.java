@@ -1,4 +1,4 @@
-package org.grupo3.technova.services;
+/*package org.grupo3.technova.services;
 import org.grupo3.technova.data.enums.EnumCategoria;
 import org.grupo3.technova.repository.ProductoRepository;
 import org.grupo3.technova.data.model.Producto;
@@ -25,7 +25,7 @@ public class ProductoService {
     public void save(Producto producto) {
       /*  if (producto.getPrecio().equals(999.99)) {
             throw new IllegalArgumentException("Precio no puede ser igual(Por alguna razon)");
-        }*/
+        }
         productoRepository.save(producto);
     }
-}
+}*/
