@@ -15,4 +15,5 @@ public interface UsuarioRepository {
     List<Usuario> findAll();
 
     List<Pedido> obtenerPedidosDeUsuario(Long idUsuario);
+    Usuario Save(Usuario usuario);
 }

@@ -5,32 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddbbb43a-9f73-442e-8485-78cb4f3f3b42" name="Changes" comment="FEAT: CREACIÓN DE LINEA PEDIDO">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/LineaPedidoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/LineaPedidoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/MovimientoInventarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/MovimientoInventarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/ProductoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/UsuarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/LineaPedidoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/LineaPedidoRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/UsuarioRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/UsuarioRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/Pedido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/Pedido.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/UsuarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/UsuarioRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/UsuarioRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/UsuarioRepositoryImpl.java" afterDir="false" />
+    </list>
+    <list id="afabca47-1a0b-4dde-9252-06d4aa3c85c7" name="aplicattion properties" comment="" />
+    <list id="5676eb22-a9ea-4ea5-8e07-63942807fad0" name="Changes by euhoho" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/config/DBConnectionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/config/DBConnectionChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/PedidoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/PedidoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/ProductoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/LoginRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/MovimientoInventarioRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/MovimientoInventarioRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/PedidoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/PedidoRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/ProductoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/ProductoRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/response/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/response/LoginResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/enums/EnumCategoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/enums/EnumCategoria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/enums/EnumPedidoEstado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/enums/EnumPedidoEstado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/enums/EnumRol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/enums/EnumRol.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/enums/EnumTipoMovimiento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/enums/EnumTipoMovimiento.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/LineaPedido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/LineaPedido.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/MovimientoInventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/MovimientoInventario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/Pedido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/Pedido.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/Producto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/Usuario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/LineaPedidoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/LineaPedidoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/MovimientoInventarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/MovimientoInventarioRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/PedidoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/PedidoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/ProductoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/ProductoRepository.java" afterDir="false" />
     </list>
-    <list id="afabca47-1a0b-4dde-9252-06d4aa3c85c7" name="aplicattion properties" comment="" />
+    <list id="c00b9372-c000-4b92-999f-1fcf43964373" name="Changes by sakurabish" comment="">
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -93,7 +94,9 @@
     "HTTP Request.generated-requests | #92.executor": "Run",
     "HTTP Request.generated-requests | #93.executor": "Run",
     "HTTP Request.generated-requests | #94.executor": "Run",
+    "HTTP Request.generated-requests | #95.executor": "Run",
     "HTTP Request.generated-requests | #96.executor": "Run",
+    "HTTP Request.generated-requests | #97.executor": "Run",
     "HTTP Request.generated-requests | #98.executor": "Run",
     "HTTP Request.generated-requests | #99.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
@@ -105,7 +108,9 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.BackendTechnovaApplication.executor": "Run",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/devil ahora si/OneDrive/Escritorio/TECHNOVA/BACKEND - Technova",
     "node.js.detected.package.eslint": "true",
@@ -113,7 +118,14 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql_aurora"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -121,37 +133,7 @@
       <recent name="C:\Users\devil ahora si\OneDrive\Escritorio\TECHNOVA\BACKEND - Technova\src\main\resources" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="configurationStatuses">
-      <map>
-        <entry key="HttpClient.HttpRequestRunConfigurationType">
-          <value>
-            <map>
-              <entry key="generated-requests | #90" value="STOPPED" />
-              <entry key="generated-requests | #92" value="STOPPED" />
-              <entry key="generated-requests | #93" value="STOPPED" />
-            </map>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="RunManager" selected="Spring Boot.BackendTechnovaApplication">
-    <configuration name="generated-requests | #113" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#113" index="113" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="generated-requests | #114" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#114" index="114" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="generated-requests | #90" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#90" index="90" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="generated-requests | #92" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#92" index="92" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="generated-requests | #93" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#93" index="93" runType="Run single request">
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="BackendTechnovaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="BackendTechnova" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.grupo3.technova.BackendTechnovaApplication" />
@@ -159,15 +141,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="HTTP Request.generated-requests | #93" />
-        <item itemvalue="HTTP Request.generated-requests | #92" />
-        <item itemvalue="HTTP Request.generated-requests | #90" />
-        <item itemvalue="HTTP Request.generated-requests | #114" />
-        <item itemvalue="HTTP Request.generated-requests | #113" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -189,6 +162,12 @@
       <workItem from="1771929155056" duration="1080000" />
       <workItem from="1771930264870" duration="4608000" />
       <workItem from="1772097320008" duration="1154000" />
+      <workItem from="1772442132950" duration="7967000" />
+      <workItem from="1772454833371" duration="89000" />
+      <workItem from="1772531557692" duration="9846000" />
+      <workItem from="1772541697192" duration="353000" />
+      <workItem from="1772542094094" duration="444000" />
+      <workItem from="1772542576513" duration="403000" />
     </task>
     <servers />
   </component>
@@ -206,7 +185,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="Prodcuto_branch" />
+                        <option value="HEAD" />
                       </list>
                     </value>
                   </entry>
@@ -217,5 +196,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
