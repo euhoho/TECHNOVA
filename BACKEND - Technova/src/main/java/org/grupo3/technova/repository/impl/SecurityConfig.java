@@ -14,3 +14,4 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
+//SecurityConfig esta puesta aqui de forma temporal se debe cambiar de sitio para mantener un orden

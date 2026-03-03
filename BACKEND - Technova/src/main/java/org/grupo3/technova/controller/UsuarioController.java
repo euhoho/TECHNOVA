@@ -3,7 +3,10 @@ package org.grupo3.technova.controller;
 import org.grupo3.technova.data.dto.request.LoginRequest;
 import org.grupo3.technova.data.dto.response.LoginResponse;
 import org.grupo3.technova.data.model.Usuario;
+import org.grupo3.technova.repository.UsuarioRepository;
 import org.grupo3.technova.repository.impl.UsuarioRepositoryImpl;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -28,7 +31,7 @@ public class UsuarioController {
      @param request DTO con credenciales de login (email y password)
      @return LoginResponse con usuario y pedidos si la autenticación es correcta; null si falla
      */
-    @PostMapping("/login")
+    @PostMapping(   "/login")
     public LoginResponse login(@RequestBody LoginRequest request) {
 
         Usuario usuario = usuarioRepository.login(
@@ -41,11 +44,11 @@ public class UsuarioController {
         }
 
         return new LoginResponse(
-                usuario,
-                usuarioRepository.obtenerPedidosDeUsuario(usuario.getId_usuario())
+                usuario
+               ,usuarioRepository.obtenerPedidosDeUsuario(usuario.getId_usuario())
         );
     }
-    @PostMapping("/Sing_up")
+    @PostMapping("/sing_up")
     public ResponseEntity<String> registrarUsuario(@RequestBody Usuario usuario) {
         try {
             // Llamamos al método que hashea la contraseña y guarda en BD

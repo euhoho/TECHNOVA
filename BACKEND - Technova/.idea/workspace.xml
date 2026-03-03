@@ -5,27 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddbbb43a-9f73-442e-8485-78cb4f3f3b42" name="Changes" comment="FEAT: CREACIÓN DE LINEA PEDIDO">
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/UsuarioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/UsuarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/UsuarioRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/UsuarioRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/UsuarioRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SQL - TechNova/TechnovaProcedimientos.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../SQL - TechNova/TechnovaProcedimientos.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SQL - TechNova/technova.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../SQL - TechNova/technova.sql" afterDir="false" />
     </list>
     <list id="afabca47-1a0b-4dde-9252-06d4aa3c85c7" name="aplicattion properties" comment="" />
-    <list id="5676eb22-a9ea-4ea5-8e07-63942807fad0" name="Changes by euhoho" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/config/DBConnectionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/config/DBConnectionChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/PedidoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/PedidoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/ProductoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/LoginRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/PedidoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/PedidoRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/ProductoRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/dto/request/ProductoRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/LineaPedido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/LineaPedido.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/MovimientoInventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/MovimientoInventario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/Producto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/data/model/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/LineaPedidoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/LineaPedidoRepository.java" afterDir="false" />
-    </list>
-    <list id="c00b9372-c000-4b92-999f-1fcf43964373" name="Changes by sakurabish" comment="">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-    </list>
+    <list id="5676eb22-a9ea-4ea5-8e07-63942807fad0" name="Changes by euhoho" comment="" />
+    <list id="c00b9372-c000-4b92-999f-1fcf43964373" name="Changes by sakurabish" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,7 +41,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/euhoho/TECHNOVA.git&quot;,
-    &quot;accountId&quot;: &quot;533dab9c-284d-44ec-a184-6042f75dbbee&quot;
+    &quot;accountId&quot;: &quot;3554224f-e557-48bd-a4a6-886fed430322&quot;
   }
 }</component>
   <component name="HttpClientOnboardingState">{
@@ -64,70 +55,97 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;HTTP Request.generated-requests | #101.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #102.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #111.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #112.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #113.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #114.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #69.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #70.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #71.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #72.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #73.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #74.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #75.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #76.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #77.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #78.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #89.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #90.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #91.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #92.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #93.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #94.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #95.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #96.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #97.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #98.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #99.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Spring Boot.BackendTechnovaApplication.executor&quot;: &quot;Run&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/devil ahora si/OneDrive/Escritorio/TECHNOVA/BACKEND - Technova&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "HTTP Request.generated-requests | #101.executor": "Run",
+    "HTTP Request.generated-requests | #102.executor": "Run",
+    "HTTP Request.generated-requests | #11.executor": "Run",
+    "HTTP Request.generated-requests | #111.executor": "Run",
+    "HTTP Request.generated-requests | #112.executor": "Run",
+    "HTTP Request.generated-requests | #113.executor": "Run",
+    "HTTP Request.generated-requests | #114.executor": "Run",
+    "HTTP Request.generated-requests | #12.executor": "Run",
+    "HTTP Request.generated-requests | #13.executor": "Run",
+    "HTTP Request.generated-requests | #69.executor": "Run",
+    "HTTP Request.generated-requests | #70.executor": "Run",
+    "HTTP Request.generated-requests | #71.executor": "Run",
+    "HTTP Request.generated-requests | #72.executor": "Run",
+    "HTTP Request.generated-requests | #73.executor": "Run",
+    "HTTP Request.generated-requests | #74.executor": "Run",
+    "HTTP Request.generated-requests | #75.executor": "Run",
+    "HTTP Request.generated-requests | #76.executor": "Run",
+    "HTTP Request.generated-requests | #77.executor": "Run",
+    "HTTP Request.generated-requests | #78.executor": "Run",
+    "HTTP Request.generated-requests | #89.executor": "Run",
+    "HTTP Request.generated-requests | #90.executor": "Run",
+    "HTTP Request.generated-requests | #91.executor": "Run",
+    "HTTP Request.generated-requests | #92.executor": "Run",
+    "HTTP Request.generated-requests | #93.executor": "Run",
+    "HTTP Request.generated-requests | #94.executor": "Run",
+    "HTTP Request.generated-requests | #95.executor": "Run",
+    "HTTP Request.generated-requests | #96.executor": "Run",
+    "HTTP Request.generated-requests | #97.executor": "Run",
+    "HTTP Request.generated-requests | #98.executor": "Run",
+    "HTTP Request.generated-requests | #99.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.BackendTechnovaApplication.executor": "Run",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/devil ahora si/OneDrive/Escritorio/TECHNOVA/BACKEND - Technova",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql_aurora&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql_aurora"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\devil ahora si\OneDrive\Escritorio\TECHNOVA\BACKEND - Technova\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunDashboard">
+    <option name="configurationStatuses">
+      <map>
+        <entry key="HttpClient.HttpRequestRunConfigurationType">
+          <value>
+            <map>
+              <entry key="generated-requests | #11" value="STOPPED" />
+              <entry key="generated-requests | #12" value="STOPPED" />
+              <entry key="generated-requests | #13" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.BackendTechnovaApplication">
+    <configuration name="generated-requests | #11" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#11" index="11" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #12" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#12" index="12" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #13" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#13" index="13" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="BackendTechnovaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="BackendTechnova" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.grupo3.technova.BackendTechnovaApplication" />
@@ -135,12 +153,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.generated-requests | #12" />
+        <item itemvalue="HTTP Request.generated-requests | #13" />
+        <item itemvalue="HTTP Request.generated-requests | #11" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
-        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
+        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
       </set>
     </attachedChunks>
   </component>
@@ -163,6 +188,8 @@
       <workItem from="1772542094094" duration="444000" />
       <workItem from="1772542576513" duration="536000" />
       <workItem from="1772543159396" duration="345000" />
+      <workItem from="1772561225562" duration="521000" />
+      <workItem from="1772561753857" duration="5014000" />
     </task>
     <task id="LOCAL-00001" summary="FEAT: CREACIÓN DE LINEA PEDIDO">
       <option name="closed" value="true" />

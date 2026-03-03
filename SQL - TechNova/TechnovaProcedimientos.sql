@@ -96,58 +96,19 @@ CALL sp_lineapedido_listar_usuario('javiervs@gmail.com','uyuyuyuy124.S');
 
 -- ========================= LISTAR USUARIO ============================================== --
 DELIMITER $$
+
 DROP PROCEDURE IF EXISTS sp_usuario $$
-CREATE PROCEDURE sp_usuario(in p_email varchar(100) ,in p_password varchar(255))
+
+CREATE PROCEDURE sp_usuario(IN p_email VARCHAR(100))
 BEGIN 
-SELECT *
-FROM usuario
-where email=  p_email and p_password= password;
+    SELECT *
+    FROM usuario
+    WHERE email = p_email;
 END $$
+
 DELIMITER ;
 call sp_usuario ('javiervs@gmail.com','uyuyuyuy124.S');
-
 -- ===========================  CREAR PEDIDOS ================================================= --
-
-/*DROP PROCEDURE IF EXISTS sp_crear_pedido;
-DELIMITER $$
-
-CREATE PROCEDURE sp_crear_pedido(
-    IN p_id_usuario INT,
-    IN p_id_producto INT,
-    In p_cantidad INT
-)
-BEGIN 	
-declare p_precio decimal(10,2) ;
-declare p_id_pedido int;
-declare p_total_pedido decimal(10,2) ;
-DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN
-        ROLLBACK;
-         SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Error creando pedido';
-    END;
-    start transaction;
-select precio into p_precio from producto
-where id_producto = p_id_producto;
-set p_total_pedido = p_precio * p_cantidad;
-if (select stock from producto where id_producto = p_id_producto) < p_cantidad then   SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error creando pedido';
-else
-
-INSERT INTO pedido (id_usuario, total_pedido,pedido_estado)VALUES (p_id_usuario, p_total_pedido,'CONFIRMADO');
-set p_id_pedido = last_insert_id();
-
-insert into linea_pedido(id_pedido,id_producto,cantidad,precio_unitario_momento) values (p_id_pedido,p_id_producto,p_cantidad,p_precio);
-update producto set stock = stock - p_cantidad where id_producto = p_id_producto; 
-insert into movimiento_inventario(id_producto,tipo_movimiento,cantidad,motivo) values(p_id_producto,'SALIDA',p_cantidad,'Pedido');
-commit;
-end if;
-END $$
-DELIMITER ;
-CALL sp_crear_pedido(7, 5, 1);
-select * from pedido;
-select * from linea_pedido;
-select * from producto where id_producto =5;
-select * from movimiento_inventario;*/
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS sp_crear_pedido;
@@ -283,30 +244,83 @@ END $$
 DELIMITER ;
 CALL sp_movimiento_inventario_listar();
 
--- === 3.-Filtrar mov iv por id producto === --
-
-DROP PROCEDURE IF EXISTS sp_movimiento_inventario_listar_id_producto;
+-- crear linea pedido --
+DROP PROCEDURE IF EXISTS sp_crear_linea_pedido;
 DELIMITER $$
 
-CREATE PROCEDURE sp_movimiento_inventario_listar_id_producto(IN p_id_producto INT)
+CREATE PROCEDURE sp_crear_linea_pedido(
+    IN p_id_producto INT,
+    IN p_cantidad INT,
+    IN p_precio_unitario_momento DECIMAL(10,2)
+)
 BEGIN
-    SELECT m.id_movimiento,
-           m.id_producto,
-           m.tipo_movimiento,
-           m.fecha_movimiento,
-           m.cantidad_movimiento,
-           m.motivo_movimiento,
-           p.sku,
-           p.nombre,
-           p.descripcion,
-           p.precio,
-           p.stock,
-           p.categoria,
-           p.imagen
-    FROM movimiento_inventario m
-    JOIN producto p ON m.id_producto = p.id_producto
-    WHERE m.id_producto = p_id_producto;
+
+    DECLARE v_stock INT;
+
+    START TRANSACTION;
+
+
+    SELECT stock 
+    INTO v_stock
+    FROM producto
+    WHERE id_producto = p_id_producto
+    FOR UPDATE;
+
+    IF v_stock IS NULL THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Producto no existe';
+    END IF;
+
+    IF v_stock < p_cantidad THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Stock insuficiente para este movimiento';
+    END IF;
+
+    -- Insertamos línea
+    INSERT INTO linea_pedido (
+        id_producto,
+        cantidad,
+        precio_unitario_momento
+    )
+    VALUES (
+        p_id_producto,
+        p_cantidad,
+        p_precio_unitario_momento
+    );
+
+    -- Actualizamos stock
+    UPDATE producto
+    SET stock = stock - p_cantidad
+    WHERE id_producto = p_id_producto;
+
+    COMMIT;
+
 END $$
 
 DELIMITER ;
-CALL sp_movimiento_inventario_listar_id_producto (2);
+select * from linea_pedido;
+call sp_crear_linea_pedido(1,2,10.4);
+
+
+
+-- ======================= Crear Usuario ============== --
+DROP PROCEDURE IF EXISTS sp_crear_usuario;
+DELIMITER $$
+create procedure sp_crear_usuario(in p_email varchar(100) ,in p_password varchar(255))
+begin
+insert into usuario (email, password,rol) values(p_email,p_password,'CLIENTE');
+end $$
+DELIMITER ;
+call sp_crear_usuario('oyequemas@gmail.com','gola');
+select * from usuario;
+
+-- ============= listar pedidos por usuario ============ --
+
+drop procedure if exists sp_pedidos_usuario;
+DELIMITER $$
+create procedure sp_pedidos_usuario(in p_id_usuario int)
+begin
+select id_pedido,id_usuario,fecha,total_pedido,pedido_estado from pedido where id_usuario = p_id_usuario;
+end $$
+DELIMITER ;
+

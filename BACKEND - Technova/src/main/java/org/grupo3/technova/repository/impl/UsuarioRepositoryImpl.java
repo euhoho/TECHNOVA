@@ -30,7 +30,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
         return dataSource;
     }
     @Override
-    public Usuario Save(Usuario usuario){
+    public Usuario save(Usuario usuario){
 String sql ="{CALL sp_crear_usuario(?,?)}";
 
         try (Connection con = dataSource.getConnection();
@@ -50,7 +50,7 @@ String sql ="{CALL sp_crear_usuario(?,?)}";
     public Usuario login(String email, String passwordPlano) {
         //Se hace en la bd el hash automaticamente, entonces en java no hace falta hacr nada, si encuentra el usuario todo ok.
         //O en java se hace el hash antes de interactuar con la bd.
-        String sql = "{CALL sp_usuario(?, ?)}"; // email, password(hash), rol
+        String sql = "{CALL sp_usuario(?)}"; // email, password(hash), rol
 
         try (Connection con = dataSource.getConnection();
              CallableStatement cs = con.prepareCall(sql)) {
