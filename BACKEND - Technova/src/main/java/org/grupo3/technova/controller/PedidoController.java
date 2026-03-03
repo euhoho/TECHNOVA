@@ -1,79 +1,137 @@
 package org.grupo3.technova.controller;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import org.grupo3.technova.data.dto.request.PedidoRequest;
 import org.grupo3.technova.data.enums.EnumPedidoEstado;
 import org.grupo3.technova.data.model.Pedido;
 import org.grupo3.technova.repository.PedidoRepository;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
-//Indica que esta clase es un controlador REST.
+/**
+ * Controlador REST para Pedidos.
+ *
+ * GET  /api/pedidos              → lista todos los pedidos
+ * GET  /api/pedidos?pedidoEstado=X&fechaInicio=...&fechaFin=...  → filtra
+ * POST /api/pedidos              → crea un nuevo pedido con sus líneas
+ */
 @RestController
-//Todas las rutas de este controller empezarán por /api/pedidos
 @RequestMapping("/api/pedidos")
 public class PedidoController {
-    // Repositorio que contiene la lógica de acceso a base de datos
+
     private final PedidoRepository pedidoRepository;
 
     public PedidoController(PedidoRepository pedidoRepository) {
         this.pedidoRepository = pedidoRepository;
     }
 
+    /**
+     * POST /api/pedidos
+     * Recibe el carrito de la compra y crea el pedido + líneas en BD.
+     * Se puede pasar ?descontarStock=true para descontar el stock (opcional).
+     */
     @PostMapping
-    public ResponseEntity<?> crearPedido(
+    public ResponseEntity<String> crearPedido(
             @RequestBody PedidoRequest request,
-            @RequestParam(defaultValue = "false") boolean descontarStock
-    ) {
+            @RequestParam(defaultValue = "false") boolean descontarStock) {
         try {
             Long idPedido = pedidoRepository.crearPedido(request, descontarStock);
-            // Devolvemos HTTP 201 (Created) con id del pedido creado
-            return ResponseEntity.status(201).body(Map.of("status", "ok", "idPedido", idPedido));
+
+            JsonObject respuesta = new JsonObject();
+            respuesta.addProperty("status",   "ok");
+            respuesta.addProperty("idPedido", idPedido);
+
+            return ResponseEntity
+                    .status(201)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(respuesta.toString());
 
         } catch (SecurityException e) {
-            // Si las credenciales no son válidas → 401 Unauthorized
-            return ResponseEntity.status(401).body(e.getMessage());
+            // Credenciales incorrectas del usuario que hace el pedido → 401
+            JsonObject error = new JsonObject();
+            error.addProperty("status",  "error");
+            error.addProperty("mensaje", e.getMessage());
+            return ResponseEntity
+                    .status(401)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(error.toString());
 
         } catch (IllegalArgumentException e) {
-            // Errores de validación → 400 Bad Request
-            return ResponseEntity.status(400).body(e.getMessage());
+            // Datos inválidos del pedido → 400 Bad Request
+            JsonObject error = new JsonObject();
+            error.addProperty("status",  "error");
+            error.addProperty("mensaje", e.getMessage());
+            return ResponseEntity
+                    .status(400)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(error.toString());
 
         } catch (Exception e) {
-            // Cualquier error inesperado → 500 Internal Server Error
-            return ResponseEntity.status(500).body("Error guardando el pedido: " + e.getMessage());
+            JsonObject error = new JsonObject();
+            error.addProperty("status",  "error");
+            error.addProperty("mensaje", "Error guardando el pedido: " + e.getMessage());
+            return ResponseEntity
+                    .status(500)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(error.toString());
         }
     }
 
+    /**
+     * GET /api/pedidos
+     * Sin parámetros → devuelve todos los pedidos.
+     * Con parámetros → filtra por estado y rango de fechas.
+     */
     @GetMapping
-    public ResponseEntity<?> listar(
+    public ResponseEntity<String> listar(
             @RequestParam(required = false) EnumPedidoEstado pedidoEstado,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fechaInicio,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fechaFin) {
         try {
-            // Caso 1: sin filtros.
-            if (pedidoEstado == null && fechaInicio == null && fechaFin == null) {
-                List<Pedido> pedidos = pedidoRepository.listarPedidos();
-                return ResponseEntity.ok(pedidos);
-            }
-            // Caso 2: filtros.
-            if (pedidoEstado == null || fechaInicio == null || fechaFin == null) {
-                return ResponseEntity.badRequest().body(
-                        "Para filtrar debes enviar pedidoEstado, fechaInicio y fechaFin"
-                );
-            }
-            // Llamamos al repository que ejecuta el procedure con filtros
-            List<Pedido> pedidos = pedidoRepository.listarPedidosPorEstadoYFecha(pedidoEstado, fechaInicio, fechaFin);
-            return ResponseEntity.ok(pedidos);
+            List<Pedido> pedidos;
 
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(400).body(e.getMessage());
+            if (pedidoEstado == null && fechaInicio == null && fechaFin == null) {
+                // Sin filtros: lista todos
+                pedidos = pedidoRepository.listarPedidos();
+            } else if (pedidoEstado == null || fechaInicio == null || fechaFin == null) {
+                // Faltan parámetros de filtro → 400
+                JsonObject error = new JsonObject();
+                error.addProperty("status",  "error");
+                error.addProperty("mensaje", "Para filtrar debes enviar pedidoEstado, fechaInicio y fechaFin");
+                return ResponseEntity
+                        .status(400)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(error.toString());
+            } else {
+                // Con todos los filtros
+                pedidos = pedidoRepository.listarPedidosPorEstadoYFecha(pedidoEstado, fechaInicio, fechaFin);
+            }
+
+            // Construimos el JsonArray usando toJsonObject() de cada Pedido
+            JsonArray array = new JsonArray();
+            for (Pedido p : pedidos) {
+                array.add(p.toJsonObject());
+            }
+
+            return ResponseEntity
+                    .status(200)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(array.toString());
 
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error listando pedidos: " + e.getMessage());
+            JsonObject error = new JsonObject();
+            error.addProperty("status",  "error");
+            error.addProperty("mensaje", "Error listando pedidos: " + e.getMessage());
+            return ResponseEntity
+                    .status(500)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(error.toString());
         }
     }
 }

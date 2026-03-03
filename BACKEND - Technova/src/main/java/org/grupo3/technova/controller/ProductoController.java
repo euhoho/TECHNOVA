@@ -1,14 +1,23 @@
 package org.grupo3.technova.controller;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import org.grupo3.technova.data.enums.EnumCategoria;
 import org.grupo3.technova.data.model.Producto;
 import org.grupo3.technova.repository.ProductoRepository;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 /**
- Controlador REST para gestionar productos.
- Permite listar todos los productos, filtrar por categoría y crear nuevos productos.
+ * Controlador REST para el catálogo de Productos.
+ * GET /api/productos         → lista todos los productos
+ * GET /api/productos/{cat}   → filtra por categoría
+ * POST /api/productos        → crea un nuevo producto
+ *
+ * Todas las respuestas se devuelven en formato JSON usando GSON.
  */
 @RestController
 @RequestMapping("/api/productos")
@@ -21,30 +30,101 @@ public class ProductoController {
     }
 
     /**
-     Obtiene la lista de todos los productos.
-     @return Lista completa de productos.
+     * GET /api/productos
+     * Devuelve el array completo de productos (llama al stored procedure sp_productos_listar).
      */
     @GetMapping
-    public List<Producto> listar() {
-        return productoRepository.listar();
+    public ResponseEntity<String> listar() {
+        try {
+            List<Producto> productos = productoRepository.listar();
+
+            // Construimos el JsonArray con GSON usando el método toJsonObject() de cada producto
+            JsonArray array = new JsonArray();
+            for (Producto p : productos) {
+                array.add(p.toJsonObject());
+            }
+
+            return ResponseEntity
+                    .status(200)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(array.toString());
+
+        } catch (Exception e) {
+            JsonObject error = new JsonObject();
+            error.addProperty("error", "Error listando productos: " + e.getMessage());
+            return ResponseEntity
+                    .status(500)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(error.toString());
+        }
     }
 
     /**
-     Obtiene la lista de productos filtrados por categoría.
-     @param categoria Categoría de los productos a filtrar.
-     @return Lista de productos que pertenecen a la categoría indicada.
+     * GET /api/productos/{categoria}
+     * Devuelve los productos de una categoría concreta (llama a sp_productos_por_categoria).
+     * Ejemplo: GET /api/productos/MONITORES
      */
     @GetMapping("/{categoria}")
-    public List<Producto> listarPorCategoria(@PathVariable EnumCategoria categoria) {
-        return productoRepository.findByCategoria(categoria);
+    public ResponseEntity<String> listarPorCategoria(@PathVariable String categoria) {
+        try {
+            // Convertimos el String a enum para validarlo
+            EnumCategoria enumCategoria = EnumCategoria.valueOf(categoria.toUpperCase());
+            List<Producto> productos = productoRepository.findByCategoria(enumCategoria);
+
+            JsonArray array = new JsonArray();
+            for (Producto p : productos) {
+                array.add(p.toJsonObject());
+            }
+
+            return ResponseEntity
+                    .status(200)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(array.toString());
+
+        } catch (IllegalArgumentException e) {
+            // Categoría no válida
+            JsonObject error = new JsonObject();
+            error.addProperty("error", "Categoría no válida: " + categoria);
+            return ResponseEntity
+                    .status(400)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(error.toString());
+
+        } catch (Exception e) {
+            JsonObject error = new JsonObject();
+            error.addProperty("error", "Error filtrando productos: " + e.getMessage());
+            return ResponseEntity
+                    .status(500)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(error.toString());
+        }
     }
 
     /**
-     Crea un nuevo producto en la base de datos.
-     @param producto Objeto Producto con todos los datos a guardar.
+     * POST /api/productos
+     * Crea un nuevo producto en la base de datos.
      */
     @PostMapping
-    public void crear(@RequestBody Producto producto) {
-        productoRepository.save(producto);
+    public ResponseEntity<String> crear(@RequestBody Producto producto) {
+        try {
+            productoRepository.save(producto);
+
+            JsonObject respuesta = new JsonObject();
+            respuesta.addProperty("status", "ok");
+            respuesta.addProperty("mensaje", "Producto creado correctamente");
+
+            return ResponseEntity
+                    .status(201)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(respuesta.toString());
+
+        } catch (Exception e) {
+            JsonObject error = new JsonObject();
+            error.addProperty("error", "Error creando producto: " + e.getMessage());
+            return ResponseEntity
+                    .status(500)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(error.toString());
+        }
     }
 }

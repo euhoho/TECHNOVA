@@ -44,8 +44,16 @@ public class UsuarioController {
                 usuario,
                 usuarioRepository.obtenerPedidosDeUsuario(usuario.getId_usuario())
         );
-
-
-
+    }
+    @PostMapping("/Sing_up")
+    public ResponseEntity<String> registrarUsuario(@RequestBody Usuario usuario) {
+        try {
+            // Llamamos al método que hashea la contraseña y guarda en BD
+            usuarioRepository.save(usuario);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Usuario creado con éxito");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al registrar: " + e.getMessage());
+        }
     }
 }

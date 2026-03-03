@@ -19,7 +19,7 @@ public class MovimientoInventario {
     private String motivo_movimiento;
 
     public MovimientoInventario() {}
-//hacemos los constructores
+    //hacemos los constructores
     public MovimientoInventario(Long id_movimiento, Producto id_producto, EnumTipoMovimiento tipo_movimiento, Date fecha_movimiento, Integer cantidad_movimiento, String motivo_movimiento) {
         this.id_movimiento = id_movimiento;
         this.id_producto = id_producto;

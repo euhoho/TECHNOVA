@@ -2,9 +2,9 @@ package org.grupo3.technova.data.dto.request;
 
 import org.grupo3.technova.data.enums.EnumCategoria;
 /**
-  DTO utilizado para enviar los datos necesarios al crear o actualizar un producto.
-  Contiene toda la información relevante del producto, como SKU, nombre, descripción, precio,
-  stock, categoría y ruta de imagen.
+ DTO utilizado para enviar los datos necesarios al crear o actualizar un producto.
+ Contiene toda la información relevante del producto, como SKU, nombre, descripción, precio,
+ stock, categoría y ruta de imagen.
  */
 public class ProductoRequest {
     private String sku;
