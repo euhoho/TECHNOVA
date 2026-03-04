@@ -69,6 +69,7 @@ public class LineaPedidoController {
      @param request DTO con los datos de la línea a crear.
      */
     @PostMapping
+    //Posible solucion agregar un header para que el usuario no inice sesion cada vez
     public void crearLinea(@RequestBody LineaPedidoRequest request) {
         lineaPedidoRepository.save(request);
     }

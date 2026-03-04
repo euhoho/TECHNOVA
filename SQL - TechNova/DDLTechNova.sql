@@ -50,20 +50,20 @@ foreign key (id_producto) references producto(id_producto));
 -- INSERTS --
 
 INSERT INTO usuario (email, password, rol) VALUES 
-('anagarcia@technova.es', SHA2('12345a!!FDDV', 256), 'OFICINA'),
-('saragonzalez@technova.es', SHA2('asdjfj21!CC', 256), 'OFICINA'),
+('anagarcia@technova.es', '12345a!!FDDV', 'OFICINA'),
+('saragonzalez@technova.es', 'asdjfj21!CC', 'OFICINA'),
 
-('alvaromartin@technova.es', SHA2('vfjjdll?Vj1', 256), 'ADMINISTRADOR'),
-('shaghyasghari@technova.es', SHA2('bccvcc98!D7', 256), 'ADMINISTRADOR'),
-('davidfraile@technova.es', SHA2('mdkdjsjk3?R742', 256), 'ADMINISTRADOR'),
-('rayantorres@technova.es', SHA2('lfjgjbjd1!F3', 256), 'ADMINISTRADOR'),
+('alvaromartin@technova.es', 'vfjjdll?Vj1', 'ADMINISTRADOR'),
+('shaghyasghari@technova.es', 'bccvcc98!D7', 'ADMINISTRADOR'),
+('davidfraile@technova.es', 'mdkdjsjk3?R742',  'ADMINISTRADOR'),
+('rayantorres@technova.es', 'lfjgjbjd1!F3', 'ADMINISTRADOR'),
 
-('javiervs@gmail.com', SHA2('uyuyuyuy124.S',256), 'CLIENTE'),
-('lorenzop@gmail.com', SHA2('iuinkuhn987!A', 256), 'CLIENTE'),
-('danie23@gmail.com', SHA2('lnhhbhhA!34', 256), 'CLIENTE'),
-('antoniosf@gmail.com', SHA2('lnhsdkAhA!34', 256), 'CLIENTE'),
-('maria837a@gmail.com', SHA2('mcsjfwDS!55', 256), 'CLIENTE'),
-('anitaflores69@gmail.com', SHA2('dvjjdje%D2', 256), 'CLIENTE');
+('javiervs@gmail.com', 'uyuyuyuy124.S', 'CLIENTE'),
+('lorenzop@gmail.com', 'iuinkuhn987!A', 'CLIENTE'),
+('danie23@gmail.com', 'lnhhbhhA!34', 'CLIENTE'),
+('antoniosf@gmail.com', 'lnhsdkAhA!34', 'CLIENTE'),
+('maria837a@gmail.com','mcsjfwDS!55', 'CLIENTE'),
+('anitaflores69@gmail.com', 'dvjjdje%D2', 'CLIENTE');
 
 
 INSERT INTO producto (sku, nombre, descripcion, precio, stock, categoria, imagen) VALUES

@@ -57,7 +57,7 @@ public class MovimientoInventarioController {
      Crea un nuevo movimiento de inventario.
      @param request DTO con los datos del movimiento a registrar.
      */
-    @PostMapping("/movimientoInventario/añadir")
+    @PostMapping("/ad")
     public void guardar(@RequestBody MovimientoInventarioRequest request) {
         movimientoRepository.save(request);
     }
