@@ -51,7 +51,7 @@ public class UsuarioController {
                ,usuarioRepository.obtenerPedidosDeUsuario(usuario.getId_usuario())
         );
     }
-    @PostMapping("/sign up")
+    @PostMapping("/sign-up")
     public ResponseEntity<String> registrarUsuario(@RequestBody Usuario usuario) {
         try {
             // Llamamos al método que hashea la contraseña y guarda en BD
@@ -62,6 +62,8 @@ public class UsuarioController {
                     .body("Error al registrar: " + e.getMessage());
         }
     }
+
+    // usar únicamente cuando se haya reicinciado la base de datos y necesitemos hashear aquellas contraseñas de los usuarios ya existentes.
     @GetMapping("/migrar-passwords")
     public String migrar() {
         usuarioRepository.migrarContrasenas();
