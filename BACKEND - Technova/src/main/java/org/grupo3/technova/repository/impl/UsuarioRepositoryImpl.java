@@ -31,7 +31,8 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     }
     @Override
     public Usuario save(Usuario usuario){
-String sql ="{CALL sp_crear_usuario(?,?)}";
+
+            String sql ="{CALL sp_crear_usuario(?,?)}";
 
         try (Connection con = dataSource.getConnection();
              CallableStatement cs = con.prepareCall(sql)){
@@ -135,5 +136,32 @@ String sql ="{CALL sp_crear_usuario(?,?)}";
         }
 
         return usuarios;
+    }
+
+    public void migrarContrasenas() {
+        // 1. Obtenemos todos los usuarios (que tienen clave en texto plano)
+        List<Usuario> usuarios = findAll();
+
+        String sqlUpdate = "UPDATE usuario SET password = ? WHERE id_usuario = ?";
+
+        try (Connection con = dataSource.getConnection();
+             PreparedStatement ps = con.prepareStatement(sqlUpdate)) {
+
+            for (Usuario u : usuarios) {
+                // Solo hasheamos si no parece un hash de BCrypt ya (evita doble hasheo)
+                if (!u.getPassword().startsWith("$2a$")) {
+                    String nuevoHash = passwordEncoder.encode(u.getPassword());
+
+                    ps.setString(1, nuevoHash);
+                    ps.setLong(2, u.getId_usuario());
+                    ps.addBatch(); // Usamos batch para que sea más rápido
+                }
+            }
+            ps.executeBatch();
+            System.out.println(" Migración completada: Todas las contraseñas ahora son BCrypt.");
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error durante la migración de contraseñas", e);
+        }
     }
 }

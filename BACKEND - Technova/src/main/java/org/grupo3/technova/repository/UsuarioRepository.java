@@ -10,7 +10,7 @@ public interface UsuarioRepository {
 
     DataSource getDataSource();
 
-    Usuario login(String email, String password);
+    Usuario login(String email, String passwordPlano);
 
     List<Usuario> findAll();
 

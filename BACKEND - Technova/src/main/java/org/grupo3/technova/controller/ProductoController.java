@@ -3,12 +3,19 @@ package org.grupo3.technova.controller;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.grupo3.technova.data.enums.EnumCategoria;
+import org.grupo3.technova.data.enums.EnumRol;
 import org.grupo3.technova.data.model.Producto;
+import org.grupo3.technova.data.model.Usuario;
 import org.grupo3.technova.repository.ProductoRepository;
+import org.grupo3.technova.repository.UsuarioRepository;
+import org.grupo3.technova.repository.impl.UsuarioRepositoryImpl;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
 import java.util.List;
 
 /**
@@ -24,9 +31,15 @@ import java.util.List;
 public class ProductoController {
 
     private final ProductoRepository productoRepository;
+    private final UsuarioRepositoryImpl usuarioRepositoryImpl;
+    private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public ProductoController(ProductoRepository productoRepository) {
+    public ProductoController(ProductoRepository productoRepository, UsuarioRepositoryImpl usuarioRepositoryImpl, UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
         this.productoRepository = productoRepository;
+        this.usuarioRepositoryImpl = usuarioRepositoryImpl;
+        this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
@@ -104,19 +117,25 @@ public class ProductoController {
      * POST /api/productos
      * Crea un nuevo producto en la base de datos.
      */
-    @PostMapping
-    public ResponseEntity<String> crear(@RequestBody Producto producto) {
+
+
+    @PostMapping("/crear-producto")
+    public ResponseEntity<String> crear(@RequestBody Producto producto, @RequestHeader (value = "email", required = false)String email, @RequestHeader (value = "password", required = false) String password) {
+        Usuario usuario = usuarioRepository.login(email, password);
+
+        if (usuario == null || usuario.getRol() != EnumRol.ADMINISTRADOR) {
+            JsonObject error = new JsonObject();
+            error.addProperty("error", "Acceso denegado");
+            error.addProperty("mensaje", "Acceso restringido. Solo los ADMINISTRADORES pueden acceder");
+
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(error.toString());
+        }
         try {
             productoRepository.save(producto);
 
-            JsonObject respuesta = new JsonObject();
-            respuesta.addProperty("status", "ok");
-            respuesta.addProperty("mensaje", "Producto creado correctamente");
-
-            return ResponseEntity
-                    .status(201)
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .body(respuesta.toString());
 
         } catch (Exception e) {
             JsonObject error = new JsonObject();
@@ -125,6 +144,13 @@ public class ProductoController {
                     .status(500)
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(error.toString());
-        }
+            }
+
+        JsonObject respuesta = new JsonObject();
+        respuesta.addProperty("status", "ok");
+        respuesta.addProperty("mensaje", "Producto creado correctamente");
+        return ResponseEntity
+                .status(201).contentType(MediaType.APPLICATION_JSON).body(respuesta.toString());
     }
+
 }

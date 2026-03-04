@@ -31,7 +31,7 @@ public class UsuarioController {
      @param request DTO con credenciales de login (email y password)
      @return LoginResponse con usuario y pedidos si la autenticación es correcta; null si falla
      */
-    @PostMapping(   "/login")
+    @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest request) {
 
         Usuario usuario = usuarioRepository.login(
@@ -58,5 +58,11 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error al registrar: " + e.getMessage());
         }
+    }
+
+    @GetMapping("/migrar-passwords")
+    public String migrar() {
+        usuarioRepository.migrarContrasenas();
+        return "Proceso de hasheo finalizado correctamente";
     }
 }

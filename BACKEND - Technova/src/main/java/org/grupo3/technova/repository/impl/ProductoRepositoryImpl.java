@@ -1,6 +1,7 @@
 package org.grupo3.technova.repository.impl;
 import org.grupo3.technova.data.enums.EnumCategoria;
 import org.grupo3.technova.data.model.Producto;
+import org.grupo3.technova.data.model.Usuario;
 import org.grupo3.technova.repository.ProductoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -78,7 +79,17 @@ public class ProductoRepositoryImpl implements ProductoRepository {
     }
 
     @Override
-        public void save(Producto producto) {
+
+    public void save(Producto producto) {
+       // if(!usuario.getRol().equals("ADMINISTRADOR")) {
+            //    throw new RuntimeException("Acceso denegado. Solo los administradores pueden crear productos.");
+          //  }
+
+            // Validaciones y guardar producto...
+       if(producto.getSku().isEmpty() || producto.getNombre().isEmpty() || producto.getDescripcion().isEmpty() || producto.getCategoria().name().isEmpty() || producto.getImagen().isEmpty())
+        {
+            throw new RuntimeException("Error. Parámetros vacíos");
+        }
 
         String sql = "CALL sp_crear_producto(?, ?, ?, ?, ?, ?, ?)";
 
@@ -99,5 +110,6 @@ public class ProductoRepositoryImpl implements ProductoRepository {
             throw new RuntimeException(e);
         }
     }}
+
 
 
