@@ -95,24 +95,32 @@ DELIMITER ;
 CALL sp_lineapedido_listar_usuario('javiervs@gmail.com','uyuyuyuy124.S');
 
 -- ========================= LISTAR USUARIO ============================================== --
+/*
 DELIMITER $$
-
 DROP PROCEDURE IF EXISTS sp_usuario $$
+CREATE PROCEDURE sp_usuario(in p_email varchar(100) ,in p_password varchar(255))
+BEGIN 
+SELECT *
+FROM usuario
+where email=  p_email and p_password= password;
+END $$
+DELIMITER ;
+*/
+DROP PROCEDURE IF EXISTS sp_usuario;
 
+DELIMITER $$
 CREATE PROCEDURE sp_usuario(IN p_email VARCHAR(100))
 BEGIN 
-    SELECT *
-    FROM usuario
+    SELECT id_usuario, email, password, rol 
+    FROM usuario 
     WHERE email = p_email;
 END $$
-
 DELIMITER ;
 call sp_usuario ('javiervs@gmail.com','uyuyuyuy124.S');
 -- ===========================  CREAR PEDIDOS ================================================= --
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS sp_crear_pedido;
-
 CREATE PROCEDURE sp_crear_pedido(
     IN p_id_usuario int,
     IN p_total DECIMAL(10,2),
@@ -244,6 +252,35 @@ END $$
 DELIMITER ;
 CALL sp_movimiento_inventario_listar();
 
+-- === 3.-Filtrar mov iv por id producto === --
+
+DROP PROCEDURE IF EXISTS sp_movimiento_inventario_listar_id_producto;
+DELIMITER $$
+
+CREATE PROCEDURE sp_movimiento_inventario_listar_id_producto(IN p_id_producto INT)
+BEGIN
+    SELECT m.id_movimiento,
+           m.id_producto,
+           m.tipo_movimiento,
+           m.fecha_movimiento,
+           m.cantidad_movimiento,
+           m.motivo_movimiento,
+           p.sku,
+           p.nombre,
+           p.descripcion,
+           p.precio,
+           p.stock,
+           p.categoria,
+           p.imagen
+    FROM movimiento_inventario m
+    JOIN producto p ON m.id_producto = p.id_producto
+    WHERE m.id_producto = p_id_producto;
+END $$
+
+DELIMITER ;
+CALL sp_movimiento_inventario_listar_id_producto (2);
+
+
 -- crear linea pedido --
 DROP PROCEDURE IF EXISTS sp_crear_linea_pedido;
 DELIMITER $$
@@ -259,7 +296,7 @@ BEGIN
 
     START TRANSACTION;
 
-
+    -- Bloqueamos la fila para evitar condiciones de carrera
     SELECT stock 
     INTO v_stock
     FROM producto
@@ -309,18 +346,18 @@ DELIMITER $$
 create procedure sp_crear_usuario(in p_email varchar(100) ,in p_password varchar(255))
 begin
 insert into usuario (email, password,rol) values(p_email,p_password,'CLIENTE');
+commit;
 end $$
 DELIMITER ;
 call sp_crear_usuario('oyequemas@gmail.com','gola');
 select * from usuario;
-
--- ============= listar pedidos por usuario ============ --
-
+-- =============== pedido usuario =========== --
 drop procedure if exists sp_pedidos_usuario;
 DELIMITER $$
-create procedure sp_pedidos_usuario(in p_id_usuario int)
-begin
-select id_pedido,id_usuario,fecha,total_pedido,pedido_estado from pedido where id_usuario = p_id_usuario;
-end $$
+CREATE PROCEDURE sp_pedidos_usuario(IN p_id_usuario INT)
+BEGIN
+    SELECT id_pedido, id_usuario, fecha, total_pedido, pedido_estado 
+    FROM pedido 
+    WHERE id_usuario = p_id_usuario;
+END $$
 DELIMITER ;
-

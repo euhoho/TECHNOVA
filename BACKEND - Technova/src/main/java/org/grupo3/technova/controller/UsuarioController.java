@@ -31,7 +31,10 @@ public class UsuarioController {
      @param request DTO con credenciales de login (email y password)
      @return LoginResponse con usuario y pedidos si la autenticación es correcta; null si falla
      */
-    @PostMapping("/login")
+    @PostMapping(   "/login")
+    /**
+     * Realiza  el login y despues te lista todos tus pedidos
+     */
     public LoginResponse login(@RequestBody LoginRequest request) {
 
         Usuario usuario = usuarioRepository.login(
@@ -59,7 +62,6 @@ public class UsuarioController {
                     .body("Error al registrar: " + e.getMessage());
         }
     }
-
     @GetMapping("/migrar-passwords")
     public String migrar() {
         usuarioRepository.migrarContrasenas();
