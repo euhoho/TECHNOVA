@@ -7,14 +7,14 @@
     <list default="true" id="ddbbb43a-9f73-442e-8485-78cb4f3f3b42" name="Changes" comment="FEAT: CREACIÓN DE LINEA PEDIDO">
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/UsuarioController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/UsuarioRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/UsuarioRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/services/ProductoService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SQL - TechNova/TechnovaProcedimientos.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../SQL - TechNova/TechnovaProcedimientos.sql" afterDir="false" />
     </list>
     <list id="afabca47-1a0b-4dde-9252-06d4aa3c85c7" name="aplicattion properties" comment="" />
+    <list id="5e976f67-7376-463b-9ad8-e63cfb5c3809" name="Changes by david" comment="" />
     <list id="5676eb22-a9ea-4ea5-8e07-63942807fad0" name="Changes by euhoho" comment="" />
-    <list id="c00b9372-c000-4b92-999f-1fcf43964373" name="Changes by sakurabish" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/controller/UsuarioController.java" afterDir="false" />
-    </list>
+    <list id="c00b9372-c000-4b92-999f-1fcf43964373" name="Changes by sakurabish" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,6 +55,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "HTTP Request.generated-requests | #100.executor": "Run",
     "HTTP Request.generated-requests | #101.executor": "Run",
     "HTTP Request.generated-requests | #102.executor": "Run",
     "HTTP Request.generated-requests | #11.executor": "Run",
@@ -128,9 +129,10 @@
         <entry key="HttpClient.HttpRequestRunConfigurationType">
           <value>
             <map>
-              <entry key="generated-requests | #11" value="STOPPED" />
+              <entry key="generated-requests | #100" value="STOPPED" />
+              <entry key="generated-requests | #101" value="STOPPED" />
+              <entry key="generated-requests | #102" value="STOPPED" />
               <entry key="generated-requests | #12" value="STOPPED" />
-              <entry key="generated-requests | #13" value="STOPPED" />
               <entry key="generated-requests | #99" value="STOPPED" />
             </map>
           </value>
@@ -139,13 +141,16 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.BackendTechnovaApplication">
-    <configuration name="generated-requests | #11" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#11" index="11" runType="Run single request">
+    <configuration name="generated-requests | #100" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#100" index="100" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #101" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#101" index="101" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #102" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#102" index="102" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="generated-requests | #12" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#12" index="12" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="generated-requests | #13" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#13" index="13" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="generated-requests | #99" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#99" index="99" runType="Run single request">
@@ -160,10 +165,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.generated-requests | #102" />
+        <item itemvalue="HTTP Request.generated-requests | #101" />
+        <item itemvalue="HTTP Request.generated-requests | #100" />
         <item itemvalue="HTTP Request.generated-requests | #99" />
         <item itemvalue="HTTP Request.generated-requests | #12" />
-        <item itemvalue="HTTP Request.generated-requests | #13" />
-        <item itemvalue="HTTP Request.generated-requests | #11" />
       </list>
     </recent_temporary>
   </component>
