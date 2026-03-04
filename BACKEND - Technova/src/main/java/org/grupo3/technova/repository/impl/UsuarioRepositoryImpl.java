@@ -41,7 +41,7 @@ String sql ="{CALL sp_crear_usuario(?,?)}";
             cs.setString(2, encodedPassword);
             cs.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Error saving new user to database", e);
+            throw new RuntimeException("Error Guardando el usuario en la base de datos", e);
         }
         return usuario;
     }

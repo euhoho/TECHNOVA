@@ -1,3 +1,83 @@
+POST http://localhost:8080/api/usuarios/sing_up
+Content-Type: application/json
+Content-Length: 53
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "hola@gmail.com",
+  "password": "hola"
+}
+
+<> 2026-03-04T090059.201.txt
+
+###
+
+POST http://localhost:8080/api/usuarios/sing_up
+Content-Type: application/json
+Content-Length: 53
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "hola@gmail.com",
+  "password": "hola"
+}
+
+<> 2026-03-04T085821.500.txt
+
+###
+
+POST http://localhost:8080/api/usuarios/sing_up
+Content-Type: application/json
+Content-Length: 53
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "Algo@gmail.com",
+  "password": "hola"
+}
+
+<> 2026-03-04T085759.500.txt
+
+###
+
+POST http://localhost:8080/api/usuarios/sing_up
+Content-Type: application/json
+Content-Length: 53
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "Algo@gmail.com",
+  "password": "hola"
+}
+
+<> 2026-03-04T085654.500.txt
+
+###
+
+POST http://localhost:8080/api/usuarios/sing_up
+Content-Type: application/json
+Content-Length: 53
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "Algo@gmail.com",
+  "password": "hola"
+}
+
+<> 2026-03-04T085623.500.txt
+
+###
+
 POST http://localhost:8080/api/usuarios/login
 Content-Type: application/json
 Content-Length: 66
@@ -682,73 +762,6 @@ Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
 
 <> 2026-02-27T090804.500.json
-
-###
-
-GET http://localhost:8080/api/movimientoinventario/2
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2026-02-27T090711.200.json
-
-###
-
-GET http://localhost:8080/api/movimientoinventario
-Content-Type: application/json
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.2
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-content-length: 158
-
-{
-  "id_movimiento": 0,
-  "id_producto": {},
-  "tipo_movimiento": "ENTRADA",
-  "fecha_movimiento": {},
-  "cantidad_movimiento": 0,
-  "motivo_movimiento": ""
-}
-
-<> 2026-02-27T090647.200.json
-
-###
-
-GET http://localhost:8080/api/productos
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2026-02-26T102222.200.json
-
-###
-
-POST http://localhost:8080/api/productos
-Content-Type: application/json
-Content-Length: 177
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "id_producto": 0,
-  "sku": "Vegeta",
-  "nombre": "Vegeta",
-  "descripcion": "Vegeta",
-  "precio": 777.77,
-  "stock": 30,
-  "categoria": "COMPONENTES",
-  "imagen": "Vegeta"
-}
-
-###
-
-GET http://localhost:8080/api/productos/COMPONENTES
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2026-02-26T102110.200.json
 
 ###
 

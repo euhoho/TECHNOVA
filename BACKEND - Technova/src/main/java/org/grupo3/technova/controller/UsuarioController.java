@@ -48,7 +48,7 @@ public class UsuarioController {
                ,usuarioRepository.obtenerPedidosDeUsuario(usuario.getId_usuario())
         );
     }
-    @PostMapping("/sing_up")
+    @PostMapping("/sign up")
     public ResponseEntity<String> registrarUsuario(@RequestBody Usuario usuario) {
         try {
             // Llamamos al método que hashea la contraseña y guarda en BD
