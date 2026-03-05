@@ -1,0 +1,40 @@
+/* Fondo del navbar */
+.navbar-background {
+  background-color: #fe041d;
+}
+
+/* Color enlaces */
+.navbar-background .nav-link,
+.navbar-background .nav-link.active {
+  color: #fff700 !important;
+  transition: color 0.25s;
+}
+
+/* Hover enlaces */
+.navbar-background .nav-link:hover {
+  color: #dcca00 !important;
+}
+
+/* Botón login */
+.navbar-background .btn {
+  color: #fff700 !important;
+  border-color: #fff700 !important;
+}
+
+/* Hover botón login */
+.navbar-background .btn:hover {
+  background-color: #fff700 !important;
+  color: #ff0019 !important;
+}
+
+/* Color del botón de toggler */
+.navbar-background .navbar-toggler {
+  border-color: #fff700;
+}
+
+.navbar-background .navbar-toggler-icon {
+  filter: invert(90%) sepia(100%) saturate(600%) hue-rotate(10deg);
+}
+.navbar-background .navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgb(255, 247, 0);
+}
