@@ -1,3 +1,4 @@
+/* NAVBAR */
 /* Fondo del navbar */
 .navbar-background {
   background-color: #fe041d;
@@ -26,6 +27,35 @@
   background-color: #fff700 !important;
   color: #ff0019 !important;
 }
+/* CARRITO */
+/* Icono carrito */
+.cart-icon {
+  position: relative;
+  font-size: 1.4rem;
+}
+
+/* Burbuja debajo a la derecha */
+.cart-badge {
+  position: absolute;
+
+  bottom: 4px;
+  right: -2px;
+
+  background-color: #000000;
+  color: rgb(234, 255, 0);
+
+  font-size: 0.65rem;
+  font-weight: 600;
+
+  min-width: 16px;
+  height: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+}
 
 /* Color del botón de toggler */
 .navbar-background .navbar-toggler {
@@ -37,4 +67,80 @@
 }
 .navbar-background .navbar-toggler:focus {
   box-shadow: 0 0 0 0.2rem rgb(255, 247, 0);
+}
+
+/* MODAL LOGIN */
+/* Modal lateral desde la derecha */
+.modal.modal-right.fade .modal-dialog {
+  position: fixed;
+  right: 0;
+  top: 80px;
+  margin: 0;
+  width: 400px;
+  transform: translateX(100%) !important;   /* fuera por la derecha */
+  transition: transform 0.3s ease !important;
+}
+
+.modal.modal-right.show .modal-dialog {
+  transform: translateX(0) !important;      /* entra hacia la izquierda */
+}
+
+/* Tamaño del modal */
+.modal.modal-right .modal-content {
+  height: 50vh;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+}
+/* Color modal */
+#loginModal .modal-header {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+#loginModal .modal-body {
+  background-color: #ffffff;
+}
+
+.modal-backdrop {
+  --bs-backdrop-bg: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+/* Boton modal Entrar */
+#login-submit {
+  background-color: #3eb42a ;
+  border-color: #3eb42a;
+}
+
+/* Boton modal Entrar hover */
+#login-submit:hover {
+  background-color: #339022;
+  border-color: #339022;
+}
+/* Boton modal Cancelar */
+#login-cancel {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+/* Boton modal Cancelar hover */
+#login-cancel:hover {
+  background-color: #5a6268;
+  border-color: #5a6268;
+}
+
+/* Texto registrar */
+.register-text {
+  margin-right: auto;
+  font-size: 0.9rem;
+}
+
+.register-text a {
+  color: #fe041d;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-text a:hover {
+  text-decoration: underline;
 }
