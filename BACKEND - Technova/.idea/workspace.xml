@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddbbb43a-9f73-442e-8485-78cb4f3f3b42" name="Changes" comment="UPDATE: actualizamos POST crear-producto con la verificación de usuario.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/config/CorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/repository/impl/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/grupo3/technova/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/app.js" afterDir="false" />
     </list>
     <list id="afabca47-1a0b-4dde-9252-06d4aa3c85c7" name="aplicattion properties" comment="" />
     <list id="5676eb22-a9ea-4ea5-8e07-63942807fad0" name="Changes by euhoho" comment="" />
@@ -34,7 +38,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/euhoho/TECHNOVA.git&quot;,
-    &quot;accountId&quot;: &quot;31c09cbd-74a1-4ef7-8933-391fba674306&quot;
+    &quot;accountId&quot;: &quot;533dab9c-284d-44ec-a184-6042f75dbbee&quot;
   }
 }</component>
   <component name="HttpClientOnboardingState">{
@@ -50,6 +54,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;HTTP Request.generated-requests | #1.executor&quot;: &quot;Run&quot;,
     &quot;HTTP Request.generated-requests | #101.executor&quot;: &quot;Run&quot;,
     &quot;HTTP Request.generated-requests | #102.executor&quot;: &quot;Run&quot;,
     &quot;HTTP Request.generated-requests | #11.executor&quot;: &quot;Run&quot;,
@@ -58,6 +63,7 @@
     &quot;HTTP Request.generated-requests | #113.executor&quot;: &quot;Run&quot;,
     &quot;HTTP Request.generated-requests | #114.executor&quot;: &quot;Run&quot;,
     &quot;HTTP Request.generated-requests | #12.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #125.executor&quot;: &quot;Run&quot;,
     &quot;HTTP Request.generated-requests | #127.executor&quot;: &quot;Run&quot;,
     &quot;HTTP Request.generated-requests | #128.executor&quot;: &quot;Run&quot;,
     &quot;HTTP Request.generated-requests | #129.executor&quot;: &quot;Run&quot;,
@@ -125,10 +131,10 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.BackendTechnovaApplication">
-    <configuration name="generated-requests | #128" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#128" index="128" runType="Run single request">
+    <configuration name="generated-requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="generated-requests | #129" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#129" index="129" runType="Run single request">
+    <configuration name="generated-requests | #125" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#125" index="125" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="generated-requests | #130" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#130" index="130" runType="Run single request">
@@ -149,19 +155,19 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.generated-requests | #1" />
+        <item itemvalue="HTTP Request.generated-requests | #125" />
         <item itemvalue="HTTP Request.generated-requests | #137" />
         <item itemvalue="HTTP Request.generated-requests | #133" />
         <item itemvalue="HTTP Request.generated-requests | #130" />
-        <item itemvalue="HTTP Request.generated-requests | #129" />
-        <item itemvalue="HTTP Request.generated-requests | #128" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
-        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
+        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-IU-252.25557.131" />
       </set>
     </attachedChunks>
   </component>
@@ -188,6 +194,9 @@
       <workItem from="1772561753857" duration="5014000" />
       <workItem from="1772622431555" duration="1639000" />
       <workItem from="1772624113484" duration="3101000" />
+      <workItem from="1772705704915" duration="4074000" />
+      <workItem from="1772783066834" duration="3330000" />
+      <workItem from="1772786965269" duration="21000" />
     </task>
     <task id="LOCAL-00001" summary="FEAT: CREACIÓN DE LINEA PEDIDO">
       <option name="closed" value="true" />

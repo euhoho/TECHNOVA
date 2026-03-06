@@ -1,4 +1,4 @@
-package org.grupo3.technova.repository.impl;
+package org.grupo3.technova.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
