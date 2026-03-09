@@ -87,10 +87,21 @@
 
 /* Tamaño del modal */
 .modal.modal-right .modal-content {
-  height: 50vh;
+  height: auto;
   border-radius: 10px;
   background-color: rgb(255, 255, 255);
 }
+
+.modal-body{
+padding-bottom: 5px;
+}
+
+.modal-footer{
+border-top: none;
+margin-top: 0;
+padding-top: 5px;
+}
+
 /* Color modal */
 #loginModal .modal-header {
   background-color: #ffffff;
