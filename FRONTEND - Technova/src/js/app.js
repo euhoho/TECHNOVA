@@ -66,33 +66,40 @@ async function login(e) {
 document.addEventListener("DOMContentLoaded", cargarProductos);
 
 async function cargarProductos(){
-
     const response = await fetch("http://localhost:8080/api/productos");
-
     const productos = await response.json();
-
     const container = document.getElementById("catalogo-container");
 
     container.innerHTML = "";
 
     productos.forEach(p => {
+        // 1. Calculamos si no hay stock
+        const sinStock = p.stock <= 0;
+        
+        // 2. Definimos la clase CSS (si no hay stock, ponemos 'producto-agotado')
+        const claseStock = sinStock ? 'producto-agotado' : '';
 
+        // 3. Pintamos la tarjeta usando esa clase
         container.innerHTML += `
-            <div class="col-md-4">
-                <div class="card h-100">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 ${claseStock}"> 
                     <img src="img/${p.imagen}" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">${p.nombre}</h5>
                         <p class="card-text">${p.descripcion}</p>
                         <p class="fw-bold">${p.precio} €</p>
                         <p class="text-muted">Stock: ${p.stock}</p>
+                        
+                        ${sinStock ? '<span class="badge-sin-stock">AGOTADO</span>' : ''}
+                        
+                        <button class="btn btn-primary w-100 mt-2" ${sinStock ? 'disabled' : ''}>
+                            ${sinStock ? 'No disponible' : 'Añadir al carrito'}
+                        </button>
                     </div>
                 </div>
             </div>
         `;
-
     });
-
 }
 const productosDiv = document.getElementById('contenedor-productos');
 

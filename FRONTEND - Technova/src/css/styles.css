@@ -260,3 +260,24 @@ padding-top: 5px;
     border-color: #001535 !important;
     transform: translateY(-1px);
 }
+
+/* BOTÓN CUANDO HAY STOCK (Disponible) */
+#catalogo-container .card .btn-primary {
+    background-color: #3eb42a !important; /* Tu verde */
+    border-color: #3eb42a !important;
+    color: white !important;
+}
+
+#catalogo-container .card .btn-primary:hover {
+    background-color: #339022 !important;
+}
+
+/* BOTÓN CUANDO NO HAY STOCK (Agotado) */
+/* Al estar el botón 'disabled', Bootstrap le aplica estilos grises por defecto */
+#catalogo-container .producto-agotado .btn:disabled {
+    background-color: #6c757d !important; /* Gris oscuro */
+    border-color: #6c757d !important;
+    color: #ffffff !important;
+    opacity: 1; /* Para que no se vea tan transparente si no quieres */
+    cursor: not-allowed;
+}
