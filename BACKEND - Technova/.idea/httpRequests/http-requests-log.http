@@ -1,3 +1,39 @@
+GET http://localhost:8080/api/usuarios/migrar-passwords
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-03-09T112849.200.txt
+
+###
+
+GET http://localhost:8080/api/usuarios/migrar-passwords
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-03-09T112241.200.txt
+
+###
+
+GET http://localhost:8080/api/usuarios/migrar-passwords
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-03-09T112123.500.json
+
+###
+
+GET http://localhost:8080/api/usuarios/migrar-passwords
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-03-09T112115.500.json
+
+###
+
 POST http://localhost:8080/api/pedidos?descontarStock=true&pedidoEstado=4F6Ho8O3&fechaInicio=A7OFDl6B&fechaFin=1SeudeCg
 Content-Type: application/json
 Content-Length: 266
@@ -735,66 +771,6 @@ Accept: */*
 }
 
 <> 2026-03-02T105242.200.json
-
-###
-
-POST http://localhost:8080/api/usuarios/login
-Content-Type: application/json
-Content-Length: 72
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "email": "davidfraile@technova.es",
-  "password": "mdkdjsjk3?R742"
-}
-
-<> 2026-03-02T105142.200.json
-
-###
-
-POST http://localhost:8080/api/usuarios/login
-Content-Type: application/json
-Content-Length: 71
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "email": "shaghyasghari@technova.es",
-  "password": "bccvcc98!D7"
-}
-
-<> 2026-03-02T105001.200.json
-
-###
-
-POST http://localhost:8080/api/usuarios/login
-Content-Type: application/json
-Content-Length: 35
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "email": "",
-  "password": ""
-}
-
-###
-
-POST http://localhost:8080/api/usuarios/login
-Content-Type: application/json
-Content-Length: 58
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "email": "davidfraile@technova.es",
-  "password": ""
-}
 
 ###
 
