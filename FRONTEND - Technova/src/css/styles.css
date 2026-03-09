@@ -144,3 +144,17 @@
 .register-text a:hover {
   text-decoration: underline;
 }
+/* Clase para el contenedor del producto agotado */
+.producto-agotado {
+    filter: grayscale(1); /* Pone la imagen en blanco y negro */
+    opacity: 0.6;         /* Lo hace un poco transparente */
+    border: 2px solid #dc3545 !important; /
+}
+
+/* Opcional: un texto que diga "Sin Stock" */
+.badge-sin-stock {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px;
+    font-weight: bold;
+}

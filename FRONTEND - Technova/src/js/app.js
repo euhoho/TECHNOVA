@@ -47,6 +47,11 @@ async function login(e) {
     if (data.usuario.rol === "ADMINISTRADOR") {
         document.getElementById("nav-admin-zone").classList.remove("d-none");
     }
+   const modalElement = document.getElementById('loginModal');
+    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+    if (modalInstance) {
+        modalInstance.hide();
+    }
 }
 
 
@@ -80,6 +85,7 @@ async function cargarProductos(){
                         <h5 class="card-title">${p.nombre}</h5>
                         <p class="card-text">${p.descripcion}</p>
                         <p class="fw-bold">${p.precio} €</p>
+                        <p class="text-muted">Stock: ${p.stock}</p>
                     </div>
                 </div>
             </div>
@@ -88,3 +94,26 @@ async function cargarProductos(){
     });
 
 }
+const productosDiv = document.getElementById('contenedor-productos');
+
+productos.forEach(producto => {
+    // Comprobamos si no hay stock
+    const sinStock = producto.stock <= 0;
+    
+    // Si sinStock es true, añadimos la clase 'producto-agotado', si no, nada
+    const claseStock = sinStock ? 'producto-agotado' : '';
+
+    productosDiv.innerHTML += `
+        <div class="card ${claseStock}" style="width: 18rem;">
+            <img src="img/${producto.imagen}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">${producto.nombre}</h5>
+                <p class="card-text">Stock: ${producto.stock}</p>
+                ${sinStock ? '<span class="badge-sin-stock">AGOTADO</span>' : ''}
+                <button class="btn btn-primary" ${sinStock ? 'disabled' : ''}>
+                    ${sinStock ? 'No disponible' : 'Comprar'}
+                </button>
+            </div>
+        </div>
+    `;
+});
