@@ -1,13 +1,17 @@
+:root {
+  --color-fondo: #f7cad0;
+}
+
 body {
-  background-color: #f985af8a;
+  background-color: var(--color-fondo);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #000000;
 }
 /* NAVBAR */
 /* Fondo del navbar */
 .navbar-background {
-  background-color: #f84E8C;
-  box-shadow: 0 10px 10px rgba(0,0,0,0.5);
+  background-color: var(--color-fondo);
+  /*box-shadow: 0 10px 10px rgba(0,0,0,0.5);*/
 }
 
 
@@ -259,4 +263,44 @@ padding-top: 5px;
     color: white;
     border-color: #001535 !important;
     transform: translateY(-1px);
+}
+
+
+/* ============================= */
+/* HERO FLOTANTE                 */
+/* ============================= */
+
+.hero-section{
+  background-color: #f84E8C;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  padding: 100px 40px;
+  max-width: 1200px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.hero-section h1{
+  color: white;
+  font-weight: 700;
+}
+
+.hero-section p{
+  color: white;
+}
+
+.hero-section .btn{
+  background-color: #91cbfd;
+  border: none;
+  color: black;
+  font-weight: 600;
+  border-radius: 30px;
+  padding: 10px 25px;
+  transition: all 0.25s ease;
+}
+
+.hero-section .btn:hover{
+  background-color: #0050c9;
+  color: white;
+  transform: translateY(-2px);
 }
