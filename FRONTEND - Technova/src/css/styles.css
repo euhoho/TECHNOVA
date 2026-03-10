@@ -1,5 +1,5 @@
 :root {
-  --color-fondo: #f7cad0;
+  --color-fondo: #dbe7e4;
 }
 
 body {
@@ -12,6 +12,12 @@ body {
 .navbar-background {
   background-color: var(--color-fondo);
   /*box-shadow: 0 10px 10px rgba(0,0,0,0.5);*/
+}
+.nav-divider {
+  width: 1px;
+  height: 25px;
+  background-color: rgba(0,0,0,0.2);
+  margin: 0 15px;
 }
 
 
@@ -271,15 +277,19 @@ padding-top: 5px;
 /* ============================= */
 
 .hero-section{
-  background-color: #f84E8C;
+  background-color: #5e548e;
   border-radius: 20px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.25);
   padding: 100px 40px;
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 40px auto;
   text-align: center;
 }
-
+.hero-section {
+  background: linear-gradient(135deg, #5e548e, #b6bde0);
+  color: white;
+  padding: 120px 0;
+}
 .hero-section h1{
   color: white;
   font-weight: 700;
