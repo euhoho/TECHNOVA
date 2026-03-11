@@ -85,13 +85,10 @@ public class PedidoRepositoryImpl implements PedidoRepository {
         String call = "{CALL sp_crear_pedido(?,?,?)}";
 
         try (Connection con = dataSource.getConnection(); CallableStatement cs = con.prepareCall(call)) {
+            con.setAutoCommit(false);
             //Calcula total.
             double total = 0.0;
-            for (LineaPedidoRequest l : pedidoRequest.getLineas()) {
-                if (l == null) continue;
-                if (l.getCantidad() <= 0) throw new IllegalArgumentException("Cantidad inválida");
-                total += l.getCantidad() * l.getPrecioUnitario();
-            }
+
             //Entrada
             cs.setLong(1, idUsuario);
             cs.setDouble(2, total);
@@ -102,8 +99,28 @@ public class PedidoRepositoryImpl implements PedidoRepository {
 
             Long idPedido = cs.getLong(3);
             //Validamos idPedido generado.
-            if (idPedido <= 0) throw new SQLException("No se pudo obtener id_pedido");
+            if (idPedido <= 0){ throw new SQLException("No se pudo obtener id_pedido");}
+            // ================ CREAR LINEA PEDIDO =============================
+            double totalFinalPedido = 0.0;
+            String sqlLinea = "{CALL sp_crear_linea_pedido(?,?,?,?)}";
+            try (CallableStatement csLinea = con.prepareCall(sqlLinea)) {
+                for (LineaPedidoRequest l : pedidoRequest.getLineas()) {
+                    csLinea.setLong(1, idPedido);
+                    csLinea.setLong(2, l.getIdProducto());
+                    csLinea.setInt(3, l.getCantidad());
+                    csLinea.registerOutParameter(4, java.sql.Types.DECIMAL);
 
+                    csLinea.execute();
+
+                    // Lo guardamos. En cada vuelta del bucle se irá actualizando.
+                   totalFinalPedido = csLinea.getDouble(4);
+                }
+
+            }
+
+
+
+            con.commit();
             return idPedido;
 
         } catch (SQLException e) {

@@ -1,4 +1,4 @@
-	DROP DATABASE IF EXISTS db_technova;
+DROP DATABASE IF EXISTS db_technova;
 CREATE DATABASE db_technova;
 USE db_technova;
 
@@ -69,7 +69,7 @@ INSERT INTO usuario (email, password, rol) VALUES
 INSERT INTO producto (sku, nombre, descripcion, precio, stock, categoria, imagen) VALUES
 ('PER-MG5','Monitor Samsung Odyssey G5','Monitor curvo, 165Hz, 32 pulgadas',199.99,30,'Perifericos','Monitor-Samsung-Odyssey-G5-frontal.avif'),
 ('PER-TNEWSKILL','Teclado NewSkil Pyro pro','Teclado mecanico, 65%, inalambrico',75.00,100,'Perifericos','Teclado-NewSkill-Pyros-pro-frontal.webp'),
-('PER-RLOGITECH','Logitech G G102 LightSync','Ratón Gaming 8000 DPI',17.90,10,'Perifericos','Logitech-G-G102-LightSync-Frontal.webp'),
+('PER-RLOGITECH','Logitech G G102 LightSync','Ratón Gaming 8000 DPI',17.90,0,'Perifericos','Logitech-G-G102-LightSync-Frontal.webp'),
 
 ('COM-MCORSAIR','Memoria Ram Corsair Vengeance','2x16GB DDR5 6000MHz',600.99,9,'Componentes','Memoria-RAM-Corsair-Vengeance-RGB-DDR5-32GB-Frontal.jpg'),
 ('COM-RTX','MSI GeForce RTX 5070 Ti VENTUS','3X OC 16GB GDDR7 Reflex 2 RTX AI DLSS4',1400.90,90,'Componentes','MSI-GeForce-RTX-5070-Ti-VENTUS-Frontal-Caja.jpg'),
@@ -112,8 +112,4 @@ INSERT INTO movimiento_inventario (id_producto, tipo_movimiento, cantidad_movimi
 (7, 'ENTRADA', 20, 'ALTA DE STOCK'),
 (2, 'SALIDA', 1, 'ARTÍCULO DEFECTUOSO');
 
-SELECT *
-FROM producto;
-
-USE db_technova;
-DESCRIBE movimiento_inventario;
+SELECT * FROM producto;
