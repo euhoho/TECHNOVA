@@ -144,23 +144,6 @@
       <recent name="C:\Users\devil ahora si\OneDrive\Escritorio\TECHNOVA\BACKEND - Technova\src\main\resources" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="configurationStatuses">
-      <map>
-        <entry key="HttpClient.HttpRequestRunConfigurationType">
-          <value>
-            <map>
-              <entry key="generated-requests | #2" value="STOPPED" />
-              <entry key="generated-requests | #4" value="STOPPED" />
-              <entry key="generated-requests | #5" value="STOPPED" />
-              <entry key="generated-requests | #6" value="STOPPED" />
-              <entry key="generated-requests | #7" value="STOPPED" />
-            </map>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="RunManager" selected="Spring Boot.BackendTechnovaApplication">
     <configuration name="generated-requests | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#2" index="2" runType="Run single request">
       <method v="2" />
