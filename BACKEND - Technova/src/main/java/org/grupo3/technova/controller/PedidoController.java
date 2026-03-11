@@ -35,27 +35,27 @@ public class PedidoController {
      * POST /api/pedidos
      * Recibe el carrito de la compra y crea el pedido + líneas en BD.
      * Se puede pasar ?descontarStock=true para descontar el stock (opcional).
-     *
-     *
-     * Ejemplo de pedido
-     * {
-     *   "usuario": {
-     *     "email": "javiervs@gmail.com",
-     *     "password": "uyuyuyuy124.S"
-     *   },
-     *   "lineas": [
-     *     {
-     *       "idProducto": 1,
-     *       "cantidad": 2,
-     *       "precioUnitario": 199.99
-     *     },
-     *     {
-     *       "idProducto": 3,
-     *       "cantidad": 1,
-     *       "precioUnitario": 17.90
-     *     }
-     *   ]
-     * }
+
+
+      Ejemplo de pedido
+      {
+        "usuario": {
+          "email": "javiervs@gmail.com",
+          "password": "uyuyuyuy124.S"
+        },
+        "lineas": [
+          {
+            "idProducto": 1,
+            "cantidad": 2,
+            "precioUnitario": 199.99
+          },
+          {
+            "idProducto": 3,
+            "cantidad": 1,
+            "precioUnitario": 17.90
+          }
+        ]
+      }
      */
     @PostMapping
     public ResponseEntity<String> crearPedido(

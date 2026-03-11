@@ -120,24 +120,52 @@ call sp_usuario ('javiervs@gmail.com','uyuyuyuy124.S');
 -- ===========================  CREAR PEDIDOS ================================================= --
 
 DELIMITER $$
-DROP PROCEDURE IF EXISTS sp_crear_pedido;
+
+DROP PROCEDURE IF EXISTS sp_crear_pedido $$
+
 CREATE PROCEDURE sp_crear_pedido(
-    IN p_id_usuario int,
+    IN p_id_usuario INT,
     IN p_total DECIMAL(10,2),
-    OUT p_id_pedido int
+    OUT p_id_pedido INT
 )
 BEGIN
-    -- Inserta en la tabla pedido (id_pedido auto_increment)
-    INSERT INTO pedido (id_usuario, total_pedido, pedido_estado, fecha)
-    VALUES (p_id_usuario, p_total, 'CONFIRMADO', NOW());
-
-    -- Devuelve el id generado
-    SET p_id_pedido = LAST_INSERT_ID();
+        INSERT INTO pedido (id_usuario, total_pedido, pedido_estado, fecha)
+        VALUES (p_id_usuario, p_total, 'CONFIRMADO', NOW());
+        SET p_id_pedido = LAST_INSERT_ID();
 END $$
 
 DELIMITER ;
+-- ==================================CREAR LINEA PEDIDO ============================================ --
+DELIMITER $$
+Drop procedure if exists sp_crear_linea_pedido $$
+create procedure sp_crear_linea_pedido(
+in p_id_pedido INT,
+in p_id_producto INT,
+in p_cantidad int,
+out p_nuevo_total_acumulado DECIMAL(10,2)
+)
+begin
+DECLARE v_precio_real DECIMAL(10,2);
+select precio into v_precio_real
+from producto where id_producto = p_id_producto;
+ insert into linea_pedido(id_pedido, id_producto, cantidad, precio_unitario_momento) values
+ ( p_id_pedido, p_id_producto, p_cantidad,v_precio_real);
+ UPDATE pedido 
+    SET total_pedido = total_pedido + (v_precio_real * p_cantidad)
+    WHERE id_pedido = p_id_pedido;
+    
+    SELECT total_pedido INTO p_nuevo_total_acumulado 
+    FROM pedido 
+    WHERE id_pedido = p_id_pedido;
+    
+ UPDATE producto 
+ SET stock = stock - p_cantidad WHERE id_producto = p_id_producto;
+END $$
+delimiter ;
 
-
+select * from producto;
+select * from pedido;
+select * FROM linea_pedido;
 -- ================================== Crear Producto ================================================ --
 Drop procedure if exists sp_crear_producto;
 Delimiter $$
