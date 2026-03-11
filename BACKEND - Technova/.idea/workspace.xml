@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ddbbb43a-9f73-442e-8485-78cb4f3f3b42" name="Changes" comment="UPDATE: actualizamos POST crear-producto con la verificación de usuario.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/TechNova-Productos/Teclado NewSkill Pyros pro/Teclado-NewSkill-Pyros-pro-frontal.webp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Teclado-NewSkill-Pyros-pro-frontal.webp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/index.html" afterDir="false" />
@@ -35,12 +38,12 @@
     &quot;assignee&quot;: &quot;Rayan-t-t&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/euhoho/TECHNOVA.git&quot;,
-    &quot;accountId&quot;: &quot;21f67fce-201f-4668-9a7a-f146d4bfb8da&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/euhoho/TECHNOVA.git",
+    "accountId": "31c09cbd-74a1-4ef7-8933-391fba674306"
   }
-}</component>
+}]]></component>
   <component name="HttpClientOnboardingState">{
   &quot;isOnboardingCommentShown&quot;: true
 }</component>
@@ -142,23 +145,6 @@
       <recent name="C:\Users\devil ahora si\OneDrive\Escritorio\TECHNOVA\BACKEND - Technova\src\main\resources" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="configurationStatuses">
-      <map>
-        <entry key="HttpClient.HttpRequestRunConfigurationType">
-          <value>
-            <map>
-              <entry key="generated-requests | #2" value="STOPPED" />
-              <entry key="generated-requests | #4" value="STOPPED" />
-              <entry key="generated-requests | #5" value="STOPPED" />
-              <entry key="generated-requests | #6" value="STOPPED" />
-              <entry key="generated-requests | #7" value="STOPPED" />
-            </map>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="RunManager" selected="Spring Boot.BackendTechnovaApplication">
     <configuration name="generated-requests | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#2" index="2" runType="Run single request">
       <method v="2" />
@@ -195,8 +181,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.30387.90" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
+        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
       </set>
     </attachedChunks>
   </component>
@@ -229,6 +215,7 @@
       <workItem from="1772981642823" duration="545000" />
       <workItem from="1773048865755" duration="350000" />
       <workItem from="1773049833630" duration="1479000" />
+      <workItem from="1773183070737" duration="2628000" />
     </task>
     <task id="LOCAL-00001" summary="FEAT: CREACIÓN DE LINEA PEDIDO">
       <option name="closed" value="true" />
