@@ -1,3 +1,7 @@
+
+/* ================================
+   LOGIN & SESIÓN
+================================ */
 document.getElementById("login-form").addEventListener("submit", login);
 async function login(e) {
 
@@ -63,36 +67,46 @@ async function login(e) {
 
     }
 }
+/* ================================
+   PRODUCTOS
+================================ */
 document.addEventListener("DOMContentLoaded", cargarProductos);
 
 async function cargarProductos(){
-
     const response = await fetch("http://localhost:8080/api/productos");
-
     const productos = await response.json();
-
     const container = document.getElementById("catalogo-container");
 
     container.innerHTML = "";
 
     productos.forEach(p => {
+        // 1. Calculamos si no hay stock
+        const sinStock = p.stock <= 0;
+        
+        // 2. Definimos la clase CSS (si no hay stock, ponemos 'producto-agotado')
+        const claseStock = sinStock ? 'producto-agotado' : '';
 
+        // 3. Pintamos la tarjeta usando esa clase
         container.innerHTML += `
-            <div class="col-md-4">
-                <div class="card h-100">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 ${claseStock}"> 
                     <img src="img/${p.imagen}" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">${p.nombre}</h5>
                         <p class="card-text">${p.descripcion}</p>
                         <p class="fw-bold">${p.precio} €</p>
                         <p class="text-muted">Stock: ${p.stock}</p>
+                        
+                        ${sinStock ? '<span class="badge-sin-stock">AGOTADO</span>' : ''}
+                        
+                        <button class="btn btn-primary w-100 mt-2" ${sinStock ? 'disabled' : ''}>
+                            ${sinStock ? 'No disponible' : 'Añadir al carrito'}
+                        </button>
                     </div>
                 </div>
             </div>
         `;
-
     });
-
 }
 const productosDiv = document.getElementById('contenedor-productos');
 
@@ -117,3 +131,65 @@ productos.forEach(producto => {
         </div>
     `;
 });
+
+/* ================================
+   CARRITO
+================================ */
+let carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
+
+function initCarrito() {
+    document.querySelectorAll(".btn-add-cart").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const card = e.target.closest(".card");
+            carrito.push({
+                nombre: card.querySelector(".card-title").textContent,
+                precio: card.querySelector(".fw-bold").textContent
+            });
+            sessionStorage.setItem("carrito", JSON.stringify(carrito));
+            document.getElementById("cart-count").textContent = carrito.length;
+        });
+    });
+}
+
+/* ================================
+   HERO SLIDER
+================================ */
+/* ================================
+   HERO SLIDER CON GRADIENTES POR PRODUCTO
+================================ */
+const heroGradients = [
+  "linear-gradient(135deg, #010424, #669ac8)", // Monitor: Azul tecnológico profundo
+  "linear-gradient(135deg, #b03e85, #e4ec89)", // Teclado: Violeta y azul vibrante (estilo RGB)
+  "linear-gradient(135deg, #468e57, #deea52)"  // Ratón: Verde esmeralda y gris metálico
+];
+
+function initHeroSlider() {
+    const slides = document.querySelectorAll(".hero-slide");
+    const categories = document.querySelectorAll(".hero-category");
+    const container = document.querySelector(".hero-slider");
+    let index = 0;
+
+    if (!container || slides.length === 0) return;
+
+    // Establecer el primer gradiente al cargar
+    container.style.background = heroGradients[0];
+
+    function changeHero() {
+        // Quitar clases activas del elemento actual
+        slides[index].classList.remove("active");
+        categories[index].classList.remove("active");
+
+        // Calcular siguiente índice
+        index = (index + 1) % slides.length;
+
+        // Aplicar nuevas clases y el gradiente correspondiente
+        slides[index].classList.add("active");
+        categories[index].classList.add("active");
+        
+        // Cambio suave de fondo
+        container.style.background = heroGradients[index];
+    }
+
+    // Cambiar cada 4 segundos
+    setInterval(changeHero, 4000);
+}
