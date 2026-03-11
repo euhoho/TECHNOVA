@@ -154,6 +154,33 @@ body {
   position: relative;
 }
 
+.hero-intro{
+  max-width: 1200px;
+  margin: 40px auto 10px auto;
+  padding-left: 20px;
+}
+
+.hero-slogan{
+  font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(3rem, 3vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #111;
+}
+
+.hero-slogan span{
+  color: #5e548e;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem; /* Más pequeño que el eslogan */
+    font-weight: 400;   /* Más ligero */
+    letter-spacing: 1px;
+    opacity: 0.8;      /* Un toque de transparencia para dar jerarquía */
+    margin-top: 10px;
+    color: #2e2c2c;
+}
+
 /* TEXTO HERO */
 .hero-text {
   flex: 1;

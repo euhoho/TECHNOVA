@@ -5,8 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddbbb43a-9f73-442e-8485-78cb4f3f3b42" name="Changes" comment="UPDATE: actualizamos POST crear-producto con la verificación de usuario.">
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/ASUS-PCE-AXE5400-Frontal.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Corsair-MP600-GS-1TB-M.2-Gen4-Frontal.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Licencia-AntiVirus-Kaspersky-Frontal.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Licencia-Windows-11-Pro-OEM-Frontal.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Logitech-G-G102-LightSync-Frontal.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/MSI-GeForce-RTX-5070-Ti-VENTUS-Frontal-Caja.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Memoria-RAM-Corsair-Vengeance-RGB-DDR5-32GB-Frontal.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Monitor-Samsung-Odyssey-G5-frontal.avif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Módem-D-Link-F518M-5G-Wi-Fi 6-dual-band-Trasera.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/TP-Link-UB5A-Caja.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Teclado-NewSkill-Pyros-pro-frontal-removebg-preview.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/index.html" afterDir="false" />
     </list>
     <list id="afabca47-1a0b-4dde-9252-06d4aa3c85c7" name="aplicattion properties" comment="" />
@@ -139,23 +149,6 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\devil ahora si\OneDrive\Escritorio\TECHNOVA\BACKEND - Technova\src\main\resources" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="configurationStatuses">
-      <map>
-        <entry key="HttpClient.HttpRequestRunConfigurationType">
-          <value>
-            <map>
-              <entry key="generated-requests | #2" value="STOPPED" />
-              <entry key="generated-requests | #4" value="STOPPED" />
-              <entry key="generated-requests | #5" value="STOPPED" />
-              <entry key="generated-requests | #6" value="STOPPED" />
-              <entry key="generated-requests | #7" value="STOPPED" />
-            </map>
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="RunManager" selected="Spring Boot.BackendTechnovaApplication">
     <configuration name="generated-requests | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#2" index="2" runType="Run single request">
