@@ -8,6 +8,7 @@ body {
   color: #000000;
 }
 
+/* TITULO CATALOGO */
 .titulo-catalogo {
   font-size: 2.5rem;
   font-weight: 750;
@@ -22,12 +23,13 @@ body {
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 50vw;   /* mitad de pantalla */
+  width: 50vw;
   height: 4.5px;
   border-radius: 999px;
   background: linear-gradient(90deg, #ff0055, #b6bde0);
 }
 
+/* BUSCADOR */
 #buscador-productos {
   width: 260px;
   padding: 10px 16px;
@@ -54,25 +56,9 @@ body {
 }
 
 /* NAVBAR */
-/* Fondo del navbar */
 .navbar-background {
   background-color: var(--color-fondo);
-  /*box-shadow: 0 10px 10px rgba(0,0,0,0.5);*/
 }
-.nav-divider {
-  width: 1px;
-  height: 25px;
-  background-color: rgba(0,0,0,0.2);
-  margin: 0 15px;
-}
-
-#buscador-productos::placeholder {
-  color: #00000066;
-  font-style: italic;
-}
-
-/* NAVBAR */
-.navbar-background { background-color: var(--color-fondo); }
 
 .nav-divider {
   width: 1px;
@@ -81,81 +67,31 @@ body {
   margin: 0 15px;
 }
 
-/* Color enlaces */
 .navbar-background .nav-link,
 .navbar-background .nav-link.active {
   color: #000000 !important;
   transition: color 0.25s;
 }
 
-/* Hover enlaces */
 .navbar-background .nav-link:hover {
   color: #5e548e !important;
   transform: scale(1.10);
 }
 
-/* Botón login */
-.navbar-background { background-color: var(--color-fondo); }
-.navbar-background .nav-link { color: #000 !important; }
 .navbar-background .btn {
   color: #000000 !important;
-  border-color: #000000 !important;
   background-color: #b6bde0 !important;
-  border: 2px solid transparent;
-   border-color: #000000 !important;
-   transition: all 0.25s ease;
+  border: 2px solid #000000 !important;
+  transition: all 0.25s ease;
 }
 
-/* Hover botón login */
 .navbar-background .btn:hover {
   background-color: #5e548e !important;
   color: #ffffff !important;
   transform: scale(1.10);
 }
-/* CARRITO */
-/* Icono carrito */
-.cart-icon {
-  position: relative;
-  font-size: 1.4rem;
-  transition: transform 0.25s ease;
-}
 
-.cart-icon:hover{
-    transform: scale(1.05);
-}
-
-/* Burbuja debajo a la derecha */
-.cart-badge {
-  position: absolute;
-
-  bottom: 4px;
-  right: -2px;
-
-  background-color: #000000;
-  color: #b6bde0;
-
-  font-size: 0.65rem;
-  font-weight: 600;
-
-  min-width: 16px;
-  height: 16px;
-
-  background-color: #91cbfd !important;
-  border: 2px solid #001535 !important;
-  color: #000 !important;
-}
-
-/* HERO SLIDER CORREGIDO */
-/* HERO SLIDER CON SOPORTE PARA GRADIENTES */
-.hero-slider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-}
-
-/* Color del botón de toggler */
+/* TOGGLER */
 .navbar-background .navbar-toggler {
   border-color: #5e548e;
 }
@@ -163,26 +99,36 @@ body {
 .navbar-background .navbar-toggler-icon {
   filter: invert(90%) sepia(100%) saturate(600%) hue-rotate(10deg);
 }
+
 .navbar-background .navbar-toggler:focus {
   box-shadow: 0 0 0 0.2rem #5e548e;
 }
 
-/* Color enlaces */
-.navbar-background .nav-link,
-.navbar-background .nav-link.active {
-  color: #000000 !important;
-  transition: color 0.25s;
+/* CARRITO */
+.cart-icon {
+  position: relative;
+  font-size: 1.4rem;
+  transition: transform 0.25s ease;
 }
 
-/* Hover enlaces */
-.navbar-background .nav-link:hover {
-  color: #5e548e !important;
-  transform: scale(1.10);
+.cart-icon:hover {
+  transform: scale(1.05);
 }
 
+.cart-badge {
+  position: absolute;
+  bottom: 4px;
+  right: -2px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  min-width: 16px;
+  height: 16px;
+  background-color: #91cbfd;
+  border: 2px solid #001535;
+  color: #000;
+}
 
-/* HERO SLIDER CORREGIDO */
-/* HERO SLIDER CON SOPORTE PARA GRADIENTES */
+/* HERO SLIDER */
 .hero-slider {
   display: flex;
   align-items: center;
@@ -194,18 +140,16 @@ body {
   min-height: 500px;
   padding: 40px;
   gap: 30px;
-  
-  /* Esto permite que los gradientes se fundan suavemente */
-  transition: background 1s ease-in-out; 
+  transition: background 1s ease-in-out;
   position: relative;
 }
 
-/* Contenedor de Texto (Izquierda) */
+/* TEXTO HERO */
 .hero-text {
   flex: 1;
   position: relative;
   z-index: 5;
-  height: 300px; /* Altura fija para evitar saltos */
+  height: 300px;
 }
 
 .hero-category {
@@ -214,7 +158,7 @@ body {
   left: 0;
   width: 100%;
   opacity: 0;
-  transform: translateX(-50px); /* Viene desde la izquierda */
+  transform: translateX(-50px);
   transition: all 0.8s ease;
   pointer-events: none;
 }
@@ -225,8 +169,19 @@ body {
   pointer-events: auto;
 }
 
-.hero-category h1 { font-size: 3rem; font-weight: 800; color: #fff; margin-bottom: 20px; }
-.hero-category p { font-size: 1.2rem; color: #eee; margin-bottom: 30px; }
+.hero-category h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.hero-category p {
+  font-size: 1.2rem;
+  color: #eee;
+  margin-bottom: 30px;
+}
+
 .hero-category .btn {
   background-color: #91cbfd;
   color: #000;
@@ -236,7 +191,7 @@ body {
   text-decoration: none;
 }
 
-/* Contenedor de Imágenes (Derecha) */
+/* IMAGEN HERO */
 .hero-images {
   flex: 1;
   position: relative;
@@ -252,8 +207,8 @@ body {
   max-height: 100%;
   object-fit: contain;
   opacity: 0;
-  transform: scale(0.8) translateX(50px); /* Aparece desde la derecha y escala */
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(0.8) translateX(50px);
+  transition: all 0.8s cubic-bezier(0.4,0,0.2,1);
 }
 
 .hero-slide.active {
@@ -261,72 +216,97 @@ body {
   transform: scale(1) translateX(0);
 }
 
-/* PRODUCTOS Y CARDS */
+/* CARDS PRODUCTOS */
 .card {
   border: none;
   border-radius: 20px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0,0,0,0.08);
+  transition: all 0.25s ease;
 }
-.card:hover { transform: translateY(-10px); }
-.card-img-top { height: 200px; object-fit: contain; padding: 20px; }
 
-/* MODAL LOGIN */
-/* Modal lateral desde la derecha */
-.modal.modal-right.fade .modal-dialog {
+.card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 30px rgba(0,0,0,0.55);
+}
+
+.card-img-top {
+  height: 300px;
+  object-fit: contain;
+  padding: 10px;
+  background-color: #ffffff;
+}
+
+.card-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #606060;
+  margin-bottom: 14px;
+}
+
+.card .fw-bold {
+  font-size: 1.4rem;
+  color: #111;
+}
+
+.text-muted {
+  color: #606060;
+  font-size: 0.85rem;
+}
+
+/* SIN STOCK */
+.producto-agotado {
+  filter: grayscale(1);
+  opacity: 0.6;
+  border: 2px solid #dc3545 !important;
+}
+
+.badge-sin-stock {
+  background-color: #dc3545;
+  color: white;
+  padding: 5px;
+  font-weight: bold;
+}
+
+/* BOTON STOCK */
+#catalogo-container .card .btn-primary {
+  background-color: #3eb42a !important;
+  border-color: #3eb42a !important;
+  color: white !important;
+}
+
+#catalogo-container .card .btn-primary:hover {
+  background-color: #339022 !important;
+  transform: scale(1.02);
+}
+
+/* LOGIN MODAL */
+.modal.modal-right .modal-dialog {
   position: fixed;
   right: 0;
   top: 80px;
   margin: 0;
   width: 400px;
-  transform: translateX(100%) !important; /* fuera por la derecha */
-  transition: transform 0.5s ease !important;
-  max-width: 1200px;
-  margin: 40px auto;
-  border-radius: 30px;
-  overflow: hidden;
-  min-height: 500px;
-  padding: 40px;
-  gap: 30px;
-  
-  /* Esto permite que los gradientes se fundan suavemente */
-  transition: background 1s ease-in-out; 
-  position: relative;
-}
-
-/* Contenedor de Texto (Izquierda) */
-.hero-text {
-  flex: 1;
-  position: relative;
-  z-index: 5;
-  height: 300px; /* Altura fija para evitar saltos */
-}
-
-.hero-category {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  opacity: 0;
-  transform: translateX(-50px); /* Viene desde la izquierda */
-  transition: all 0.8s ease;
-  pointer-events: none;
+  transform: translateX(100%);
+  transition: transform 0.5s ease;
 }
 
 .modal.modal-right.show .modal-dialog {
-  transform: translateX(0) !important; /* entra hacia la izquierda */
+  transform: translateX(0);
 }
 
-/* Caja del modal */
 .modal.modal-right .modal-content {
-  height: auto;
   border-radius: 16px;
   border: none;
   overflow: hidden;
   background: linear-gradient(135deg, #5e548e, #b6bde0);
 }
 
-/* Única sección del modal */
 #loginModal .modal-body {
   padding: 24px;
   background: linear-gradient(135deg, #5e548e, #b6bde0);
@@ -344,302 +324,49 @@ body {
   box-shadow: 0 0 0 3px rgba(94,84,142,0.3);
 }
 
-/* Inputs */
-#loginModal .form-control {
-  border-radius: 15px;
-  border: none;
-  padding: 12px 14px;
-  box-shadow: none;
-}
-
-/* Espacio del bloque superior */
-#loginModal .modal-title {
-  margin: 0;
-  font-size: 2rem;
-  font-weight: 600;
-}
-
-/* Botón cerrar */
-#loginModal .btn-close {
-  font-size: 1.2rem;
-}
-
-/* Texto de registrar */
-#loginModal .register-text {
-  font-size: 0.9rem;
-  color: black;
-}
-
-#loginModal .register-text a {
-  color: red;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-#loginModal .register-text a:hover {
-  text-decoration: underline;
-}
-
-/* Botones */
-#login-cancel,
+/* BOTONES MODAL */
 #login-submit {
-  border-radius: 10px;
-  padding: 7px 14px;
-  border: none;
+  background-color: #3eb42a;
+  border-color: #3eb42a;
 }
 
+#login-submit:hover {
+  background-color: #339022;
+  transform: scale(1.05);
 }
 
-/* Espacio del bloque superior */
-#loginModal .modal-title {
-  margin: 0;
-  font-size: 2rem;
-  font-weight: 600;
+#login-cancel {
+  background-color: #6c757d;
 }
 
-/* Botón cerrar */
-#loginModal .btn-close {
-  font-size: 1.2rem;
+#login-cancel:hover {
+  background-color: #5a6268;
+  transform: scale(1.05);
 }
 
-/* Texto de registrar */
-#loginModal .register-text {
-  font-size: 0.9rem;
-  color: black;
-}
-
-#loginModal .register-text a {
-  color: red;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-#loginModal .register-text a:hover {
-  text-decoration: underline;
-}
-
-/* Botones */
-#login-cancel,
-#login-submit {
-  border-radius: 10px;
-  padding: 7px 14px;
-  border: none;
-}
-
-/* Fondo oscuro detrás del modal */
+/* FONDO MODAL */
 .modal-backdrop {
   --bs-backdrop-bg: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
-
-/* Boton modal Entrar */
-#login-submit {
-  background-color: #3eb42a ;
-  border-color: #3eb42a;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Boton modal Entrar hover */
-#login-submit:hover {
-  background-color: #339022;
-  border-color: #339022;
-  transform: scale(1.05);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-}
-/* Boton modal Cancelar */
-#login-cancel {
-  background-color: #6c757d;
-  border-color: #6c757d;
-}
-
-/* Boton modal Cancelar hover */
-#login-cancel:hover {
-  background-color: #5a6268;
-  border-color: #5a6268;
-  transform: scale(1.05);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-
-}
-
-/* Texto registrar */
-.register-text {
-  margin-right: auto;
-  font-size: 0.9rem;
-}
-
-.register-text a {
-  color: #fe041d;
-.hero-category.active {
-  opacity: 1;
-  transform: translateX(0);
-  pointer-events: auto;
-}
-
-.hero-category h1 { font-size: 3rem; font-weight: 800; color: #fff; margin-bottom: 20px; }
-.hero-category p { font-size: 1.2rem; color: #eee; margin-bottom: 30px; }
-.hero-category .btn {
-  background-color: #91cbfd;
-  color: #000;
-  padding: 12px 30px;
-  border-radius: 50px;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.register-text a:hover {
-  text-decoration: underline;
-}
-/* GRID */ 
-/* Clase para el contenedor del producto agotado */
-.producto-agotado {
-    filter: grayscale(1); /* Pone la imagen en blanco y negro */
-    opacity: 0.6;         /* Lo hace un poco transparente */
-    border: 2px solid #dc3545 !important; /
-}
-
-/* Opcional: un texto que diga "Sin Stock" */
-.badge-sin-stock {
-    background-color: #dc3545;
-    color: white;
-    padding: 5px;
-    font-weight: bold;
-}
-/* Imagenes de los cards */
-.card-img-top{
-    height: 300px;
-    object-fit: contain;
-    padding: 10px;
-    background-color: #ffffff;
-}
-.card{
-    border: none;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 0 12px rgba(0,0,0,0.08);
-    transition: all 0.25s ease;
-}
-
-.card:hover{
-    transform: scale(1.01);
-    box-shadow: 0 0 30px rgba(0,0,0,0.55);
-}
-
-.card-title{
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-}
-
-.card-text{
-    font-size: 1rem;
-    color: #606060;
-    margin-bottom: 14px;
-}
-
-.card .fw-bold{
-    font-size: 1.4rem;
-    color: #111;
-}
-
-.text-muted{
-      color: #606060;
-    font-size: 0.85rem;
-}
-#catalogo-container .card{
-    border: 1px solid #eee;
-    border-radius: 20px;
-}
-
+/* SALUDO */
 #nav-saludo {
   color: black !important;
 }
 
+/* BOTONES ADMIN / LOGOUT */
 #btn-logout,
-#nav-admin{
-    background-color: #b6bde0;
-    color: black;
-    border: 2px solid transparent;
-    border-color: #001535 !important;
-    transition: all 0.25s ease;
-/* Contenedor de Imágenes (Derecha) */
-.hero-images {
-  flex: 1;
-  position: relative;
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-slide {
-  position: absolute;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  opacity: 0;
-  transform: scale(0.8) translateX(50px); /* Aparece desde la derecha y escala */
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-#btn-logout:hover,
-#btn-admin:hover,
-#nav-admin:hover {
-    background-color: #5e548e !important;
-    color: white;
-    border-color: #001535 !important;
-    transform: scale(1.05);
-}
-
-.hero-slide.active {
-  opacity: 1;
-  transform: scale(1) translateX(0);
-}
-
-/* PRODUCTOS Y CARDS */
-.card {
-  border: none;
-  border-radius: 20px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s;
-}
-
-.hero-section .btn{
+#nav-admin {
   background-color: #b6bde0;
-  border: none;
   color: black;
-  font-weight: 600;
-  border-radius: 30px;
-  padding: 10px 25px;
+  border: 2px solid #001535;
   transition: all 0.25s ease;
 }
 
-.hero-section .btn:hover{
-  background-color: #4d4576;
+#btn-logout:hover,
+#nav-admin:hover {
+  background-color: #5e548e;
   color: white;
   transform: scale(1.05);
-}
-
-/* BOTÓN CUANDO HAY STOCK (Disponible) */
-#catalogo-container .card .btn-primary {
-    background-color: #3eb42a !important; /* Tu verde */
-    border-color: #3eb42a !important;
-    color: white !important;
-}
-
-#catalogo-container .card .btn-primary:hover {
-    background-color: #339022 !important;
-    transform: scale(1.02);
-}
-.card:hover { transform: translateY(-10px); }
-.card-img-top { height: 200px; object-fit: contain; padding: 20px; }
-
-/* MODAL RIGHT */
-.modal.modal-right .modal-dialog {
-  position: fixed;
-  margin: auto;
-  width: 400px;
-  height: 100%;
-  right: 0;
 }
