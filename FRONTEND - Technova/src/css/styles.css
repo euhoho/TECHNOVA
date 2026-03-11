@@ -66,6 +66,20 @@ body {
   margin: 0 15px;
 }
 
+#buscador-productos::placeholder {
+  color: #00000066;
+  font-style: italic;
+}
+
+/* NAVBAR */
+.navbar-background { background-color: var(--color-fondo); }
+
+.nav-divider {
+  width: 1px;
+  height: 25px;
+  background-color: rgba(0,0,0,0.2);
+  margin: 0 15px;
+}
 
 /* Color enlaces */
 .navbar-background .nav-link,
@@ -153,6 +167,110 @@ body {
   box-shadow: 0 0 0 0.2rem #5e548e;
 }
 
+/* Color enlaces */
+.navbar-background .nav-link,
+.navbar-background .nav-link.active {
+  color: #000000 !important;
+  transition: color 0.25s;
+}
+
+/* Hover enlaces */
+.navbar-background .nav-link:hover {
+  color: #5e548e !important;
+  transform: scale(1.10);
+}
+
+
+/* HERO SLIDER CORREGIDO */
+/* HERO SLIDER CON SOPORTE PARA GRADIENTES */
+.hero-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 40px auto;
+  border-radius: 30px;
+  overflow: hidden;
+  min-height: 500px;
+  padding: 40px;
+  gap: 30px;
+  
+  /* Esto permite que los gradientes se fundan suavemente */
+  transition: background 1s ease-in-out; 
+  position: relative;
+}
+
+/* Contenedor de Texto (Izquierda) */
+.hero-text {
+  flex: 1;
+  position: relative;
+  z-index: 5;
+  height: 300px; /* Altura fija para evitar saltos */
+}
+
+.hero-category {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translateX(-50px); /* Viene desde la izquierda */
+  transition: all 0.8s ease;
+  pointer-events: none;
+}
+
+.hero-category.active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.hero-category h1 { font-size: 3rem; font-weight: 800; color: #fff; margin-bottom: 20px; }
+.hero-category p { font-size: 1.2rem; color: #eee; margin-bottom: 30px; }
+.hero-category .btn {
+  background-color: #91cbfd;
+  color: #000;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Contenedor de Imágenes (Derecha) */
+.hero-images {
+  flex: 1;
+  position: relative;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-slide {
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.8) translateX(50px); /* Aparece desde la derecha y escala */
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-slide.active {
+  opacity: 1;
+  transform: scale(1) translateX(0);
+}
+
+/* PRODUCTOS Y CARDS */
+.card {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+.card:hover { transform: translateY(-10px); }
+.card-img-top { height: 200px; object-fit: contain; padding: 20px; }
+
 /* MODAL LOGIN */
 /* Modal lateral desde la derecha */
 .modal.modal-right.fade .modal-dialog {
@@ -232,6 +350,44 @@ body {
   border: none;
   padding: 12px 14px;
   box-shadow: none;
+}
+
+/* Espacio del bloque superior */
+#loginModal .modal-title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+/* Botón cerrar */
+#loginModal .btn-close {
+  font-size: 1.2rem;
+}
+
+/* Texto de registrar */
+#loginModal .register-text {
+  font-size: 0.9rem;
+  color: black;
+}
+
+#loginModal .register-text a {
+  color: red;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+#loginModal .register-text a:hover {
+  text-decoration: underline;
+}
+
+/* Botones */
+#login-cancel,
+#login-submit {
+  border-radius: 10px;
+  padding: 7px 14px;
+  border: none;
+}
+
 }
 
 /* Espacio del bloque superior */
@@ -434,6 +590,8 @@ body {
     color: white;
     border-color: #001535 !important;
     transform: scale(1.05);
+}
+
 .hero-slide.active {
   opacity: 1;
   transform: scale(1) translateX(0);
