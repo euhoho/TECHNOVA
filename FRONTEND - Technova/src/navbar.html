@@ -1,0 +1,49 @@
+<!-- NAVBAR -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-background">
+            <div class="container-fluid">
+
+                <a class="navbar-brand" href="index.html">
+                    <img src="img/logo-technova.png" alt="Logo Technova" height="60" class="ms-2">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTechNova">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarTechNova">
+
+                    <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="catalogo.html" id="nav-inicio">Catálogo</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="btn btn-outline-light btn-sm" id="btn-open-login" data-bs-toggle="modal"
+                                data-bs-target="#loginModal">
+                                Login
+                            </button>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link cart-icon" href="carrito.html" id="nav-carrito">
+                                <i class="bi bi-cart"></i>
+                                <span class="cart-badge" id="cart-count">0</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item d-none" id="nav-user-zone">
+                            <span class="navbar-text text-light me-2" id="nav-saludo">Hola, Usuario</span>
+                            <button class="btn btn-warning btn-sm" id="btn-logout">Salir</button>
+                        </li>
+
+                        <li class="nav-item d-none" id="nav-admin-zone">
+                            <a class="btn btn-danger btn-sm" href="#" id="nav-admin">Panel de Gestión</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>

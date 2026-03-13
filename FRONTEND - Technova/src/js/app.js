@@ -1,7 +1,37 @@
 /* ================================
    LOGIN & SESIÓN
 ================================ */
-document.getElementById("login-form").addEventListener("submit", login);
+//document.getElementById("login-form").addEventListener("submit", login);
+const loginForm = document.getElementById("login-form");
+if (loginForm) {
+    loginForm.addEventListener("submit", login);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const navbarContainer = document.getElementById("navbar-container");
+
+    if (navbarContainer) {
+        fetch("navbar.html")
+            .then(res => res.text())
+            .then(data => {
+                navbarContainer.innerHTML = data;
+
+                const btnLogout = document.getElementById("btn-logout");
+                if (btnLogout) {
+                    btnLogout.addEventListener("click", () => {
+                        sessionStorage.clear();
+                        location.reload();
+                    });
+                }
+
+                const email = sessionStorage.getItem("email");
+                const rol = sessionStorage.getItem("rol");
+                if (email) {
+                    actualizarUIUsuario(email, rol);
+                }
+            });
+    }
+});
 
 async function login(e) {
     e.preventDefault();
@@ -43,63 +73,14 @@ function actualizarUIUsuario(email, rol) {
         document.getElementById("nav-admin-zone").classList.remove("d-none");
     }
 }
-
+/*
 document.getElementById("btn-logout").addEventListener("click", () => {
     sessionStorage.clear();
     location.reload();
 });
+*/
 
 
-/* ================================
-   PRODUCTOS
-================================ */
-document.addEventListener("DOMContentLoaded", () => {
-    cargarProductos();
-
-    const email = sessionStorage.getItem("email");
-    if (email) actualizarUIUsuario(email, sessionStorage.getItem("rol"));
-});
-
-async function cargarProductos() {
-    try {
-        const response = await fetch("http://localhost:8080/api/productos");
-        const productos = await response.json();
-
-        const container = document.getElementById("catalogo-container");
-        container.innerHTML = "";
-
-        productos.forEach(p => {
-            const card = document.createElement("div");
-            card.className = "col-md-4 mb-4";
-
-            card.innerHTML = `
-                <div class="card h-100 ${p.stock <= 0 ? 'producto-agotado' : ''}">
-                    <img src="img/${p.imagen}" class="card-img-top" alt="${p.nombre}">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">${p.nombre}</h5>
-                        <p class="card-text">${p.descripcion}</p>
-                        <p class="fw-bold">${p.precio} €</p>
-                        <p class="text-muted">Stock: ${p.stock}</p>
-
-                        ${p.stock <= 0 ? '<span class="badge-sin-stock">AGOTADO</span>' : ''}
-
-                        <button class="btn btn-primary mt-auto btn-add-cart" ${p.stock <= 0 ? 'disabled' : ''}>
-                            ${p.stock <= 0 ? 'Agotado' : 'Añadir al carrito'}
-                        </button>
-                    </div>
-                </div>
-            `;
-
-            container.appendChild(card);
-        });
-
-        initCarrito();
-        initHeroSlider();
-
-    } catch (e) {
-        console.error("Error productos", e);
-    }
-}
 
 
 /* ================================
