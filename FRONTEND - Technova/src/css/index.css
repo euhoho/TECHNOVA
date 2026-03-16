@@ -1,141 +1,16 @@
 :root {
   --color-fondo: #dbe7e4;
+  --accent-purple: #5e548e;
+  --accent-soft: #b6bde0;
+  --accent-red: #ff0055;
 }
 
 body {
   background-color: var(--color-fondo);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #000000;
-}
-
-/* TITULO CATALOGO */
-.titulo-catalogo {
-  font-size: 2.5rem;
-  font-weight: 750;
-  color: #111;
-  position: relative;
-  display: block;
-  padding-bottom: 14px;
-}
-
-.titulo-catalogo::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 50vw;
-  height: 4.5px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #ff0055, #b6bde0);
-}
-
-/* BUSCADOR */
-#buscador-productos {
-  width: 260px;
-  padding: 10px 16px;
-  border-radius: 25px;
-  border-color: #5e548e;
-  background-color: #c2c9ef;
-  transition: all 0.25s ease;
-}
-
-#buscador-productos:hover {
-  background-color: #b6bde0;
-}
-
-#buscador-productos:focus {
-  background-color: white;
-  box-shadow: 0 0 0 3px #5e548e;
-  outline: none;
-  transform: scale(1.03);
-}
-
-#buscador-productos::placeholder {
-  color: #00000066;
-  font-style: italic;
-}
-
-/* NAVBAR */
-.navbar-background {
-  background-color: var(--color-fondo);
-}
-
-.nav-divider {
-  width: 1px;
-  height: 25px;
-  background-color: rgba(0,0,0,0.2);
-  margin: 0 15px;
-}
-
-.navbar-background .nav-link,
-.navbar-background .nav-link.active {
-  color: #000000 !important;
-  transition: color 0.25s;
-}
-
-.navbar-background .nav-link:hover {
-  color: #5e548e !important;
-  transform: scale(1.10);
-}
-
-.navbar-background .btn {
-  color: #000000 !important;
-  background-color: #b6bde0 !important;
-  border: 2px solid #000000 !important;
-  transition: all 0.25s ease;
-}
-
-.navbar-background .btn:hover {
-  background-color: #5e548e !important;
-  color: #ffffff !important;
-  transform: scale(1.10);
-}
-
-/* TOGGLER */
-.navbar-background .navbar-toggler {
-  border-color: #5e548e;
-}
-
-.navbar-background .navbar-toggler-icon {
-  color: #000000;
-}
-
-.navbar-background .navbar-toggler:focus {
-  box-shadow: 0 0 0 0.2rem #5e548e;
-}
-
-/* CARRITO */
-.cart-icon {
-  position: relative;
-  font-size: 1.4rem;
-  transition: transform 0.25s ease;
-}
-
-.cart-icon:hover {
-  transform: scale(1.05);
-}
-
-/* Burbuja debajo a la derecha */
-.cart-badge {
-  position: absolute;
-
-  bottom: 4px;
-  right: -2px;
-
-  background-color: #000000;
-  color: #b6bde0;
-
-  font-size: 0.65rem;
-  font-weight: 600;
-
-  min-width: 16px;
-  height: 16px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
+  /* Ajuste para que el contenido no empiece debajo del nav fijo */
+  padding-top: 120px; 
 }
 
 /* HERO SLIDER */
@@ -154,31 +29,27 @@ body {
   position: relative;
 }
 
-.hero-intro{
+.hero-intro {
   max-width: 1200px;
   margin: 40px auto 10px auto;
   padding-left: 20px;
 }
 
-.hero-slogan{
+.hero-slogan {
   font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(3rem, 3vw, 3.5rem);
+  font-size: clamp(3rem, 3vw, 3.5rem);
   font-weight: 700;
   letter-spacing: 1px;
   color: #111;
 }
 
-.hero-slogan span{
-  color: #5e548e;
-}
-
 .hero-subtitle {
-    font-size: 1.2rem; /* Más pequeño que el eslogan */
-    font-weight: 400;   /* Más ligero */
-    letter-spacing: 1px;
-    opacity: 0.8;      /* Un toque de transparencia para dar jerarquía */
-    margin-top: 10px;
-    color: #2e2c2c;
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  margin-top: 10px;
+  color: #2e2c2c;
 }
 
 /* TEXTO HERO */
@@ -245,7 +116,7 @@ body {
   object-fit: contain;
   opacity: 0;
   transform: scale(0.8) translateX(50px);
-  transition: all 0.8s cubic-bezier(0.4,0,0.2,1);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hero-slide.active {
@@ -253,17 +124,85 @@ body {
   transform: scale(1) translateX(0);
 }
 
+/* CARDS PRODUCTOS */
+.card {
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0,0,0,0.08);
+  transition: all 0.25s ease;
+}
 
+.card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 30px rgba(0,0,0,0.55);
+}
 
-/* LOGIN MODAL */
+.card-img-top {
+  height: 300px;
+  object-fit: contain;
+  padding: 10px;
+  background-color: #ffffff;
+}
+
+.card-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #606060;
+  margin-bottom: 14px;
+}
+
+.card .fw-bold {
+  font-size: 1.4rem;
+  color: #111;
+}
+
+.text-muted {
+  color: #606060;
+  font-size: 0.85rem;
+}
+
+/* SIN STOCK */
+.producto-agotado {
+  filter: grayscale(1);
+  opacity: 0.6;
+  border: 2px solid #dc3545 !important;
+}
+
+.badge-sin-stock {
+  background-color: #dc3545;
+  color: white;
+  padding: 5px;
+  font-weight: bold;
+}
+
+/* BOTON STOCK */
+#catalogo-container .card .btn-primary {
+  background-color: #3eb42a !important;
+  border-color: #3eb42a !important;
+  color: white !important;
+}
+
+#catalogo-container .card .btn-primary:hover {
+  background-color: #339022 !important;
+  transform: scale(1.02);
+}
+
+/* --- LOGIN MODAL NEO-MINIMALISTA --- */
 .modal.modal-right .modal-dialog {
   position: fixed;
   right: 0;
-  top: 80px;
+  top: 0;
   margin: 0;
-  width: 400px;
+  width: 420px;
+  height: 100vh;
   transform: translateX(100%);
-  transition: transform 0.5s ease;
+  transition: transform 0.5s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
 .modal.modal-right.show .modal-dialog {
@@ -271,138 +210,135 @@ body {
 }
 
 .modal.modal-right .modal-content {
-  height: auto;
-  border-radius: 16px;
+  height: 100%;
   border: none;
-  overflow: hidden;
-  background: linear-gradient(135deg, #5e548e, #b6bde0);
+  border-radius: 0; /* Estilo panel lateral completo */
+  background: #ffffff; /* Blanco puro para máxima limpieza */
+  box-shadow: -10px 0 50px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cabecera del Modal */
+#loginModal .modal-header {
+  border: none;
+  padding: 60px 40px 20px 40px;
 }
 
 #loginModal .modal-title {
-  margin: 0;
-  font-size: 2rem;
-  font-weight: 600;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1;
 }
 
+#loginModal .modal-title::after {
+  content: '.';
+  color: var(--accent-red); /* Punto decorativo tecnológico */
+}
+
+/* Cuerpo del Modal */
 #loginModal .modal-body {
-  padding: 24px;
-  background: linear-gradient(135deg, #5e548e, #b6bde0);
-  color: #ffffff;
+  padding: 20px 40px;
+  background: #ffffff;
+}
+
+/* Inputs con Estilo Moderno Lineal */
+#loginModal .form-group {
+  margin-bottom: 25px;
+}
+
+#loginModal .form-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+  display: block;
 }
 
 #loginModal .form-control {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
-  background-color: #dbe7e4;
   border: none;
-  border-radius: 15px;
+  border-bottom: 2px solid #eee; /* Solo línea inferior */
+  border-radius: 0;
+  padding: 12px 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  background: transparent;
+  transition: all 0.3s ease;
 }
 
 #loginModal .form-control:focus {
-  background-color: white;
-  box-shadow: 0 0 0 3px rgba(94,84,142,0.3);
+  box-shadow: none;
+  border-bottom-color: var(--accent-purple);
+  background: transparent;
 }
 
-#login-error {
-  background: rgba(255, 0, 0, 0.234);
-  border: 1px solid rgba(255, 0, 0, 0.622);
-  color: #700101;
-  border-radius: 15px;
-  padding: 12px;
-  font-weight: 500;
-  animation: aparecer 0.8s ease;
-}
-
-@keyframes aparecer {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* BOTONES MODAL */
-#login-cancel,
+/* --- BOTONES DE ACCIÓN --- */
 #login-submit {
-  border-radius: 10px;
-  padding: 7px 14px;
+  width: 100%;
+  padding: 18px;
+  border-radius: 4px; /* Bordes casi rectos, más serios */
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: #1a1a1a; /* Negro profundo */
+  color: #fff;
   border: none;
-}
-
-/* Fondo oscuro detrás del modal */
-.modal-backdrop {
-  --bs-backdrop-bg: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-/* Botones modal entrar */
-#login-submit {
-  background-color: #3eb42a;
-  border-color: #3eb42a;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 30px;
+  transition: all 0.3s ease;
 }
 
 #login-submit:hover {
-  background-color: #339022;
-  border-color: #339022;
-  transform: scale(1.05);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  background: var(--accent-purple);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(94, 84, 142, 0.2);
 }
-/* Botones modal cancelar */
+
 #login-cancel {
-  background-color: #6c757d;
-  border-color: #6c757d;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  background: transparent;
+  color: #999;
+  border: none;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  margin-top: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-#login-cancel:hover {
-  background-color: #5a6268;
-  border-color: #5a6268;
-  transform: scale(1.05);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-}
-
-/* Texto de registrar */
+/* Texto de Registro */
 #loginModal .register-text {
+  margin-top: auto;
+  padding: 40px;
+  border-top: 1px solid #f5f5f5;
+  text-align: center;
   font-size: 0.9rem;
-  color: rgb(0, 0, 0);
+  color: #666;
 }
 
 #loginModal .register-text a {
-  color: red;
-  font-weight: 500;
+  color: #1a1a1a;
+  font-weight: 700;
   text-decoration: none;
+  margin-left: 5px;
 }
 
-#loginModal .register-text a:hover {
-  text-decoration: underline;
+/* Ajuste para el modo oscuro del modal */
+[data-theme="dark"] .modal-content,
+[data-theme="dark"] #loginModal .modal-body {
+    background: #121212 !important;
+    color: white;
 }
 
-/* FONDO MODAL */
-.modal-backdrop {
-  --bs-backdrop-bg: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(10px);
+[data-theme="dark"] #loginModal .modal-title {
+    color: white;
 }
 
-/* SALUDO */
-#nav-saludo {
-  color: black !important;
-}
-
-/* BOTONES ADMIN / LOGOUT */
-#btn-logout,
-#nav-admin {
-  background-color: #b6bde0;
-  color: black;
-  border: 2px solid #001535;
-  transition: all 0.25s ease;
-}
-
-#btn-logout:hover,
-#nav-admin:hover {
-  background-color: #5e548e;
-  color: white;
-  transform: scale(1.05);
+[data-theme="dark"] #loginModal .form-control {
+    border-bottom-color: #333;
+    color: white;
 }

@@ -1,0 +1,270 @@
+/* --- NAVBAR MEJORADO Y FLOTANTE --- */
+header {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0;
+}
+
+.navbar {
+  background: rgba(224, 224, 230, 0.56) !important; 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  /* CAMBIO: De 50px a 15px para forma rectangular con esquinas suaves */
+  border-radius: 15px; 
+  border: 1px solid rgba(62, 30, 244, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1.5rem; /* Un poco más de aire vertical */
+  transition: all 0.3s ease;
+  max-width: 1240px;
+  margin: 0 auto;
+  width: 95%;
+}
+
+/* --- LINKS DEL NAVBAR --- */
+.navbar-nav .nav-link {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  color: #111 !important;
+  padding: 0.5rem 1.2rem !important;
+  transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--accent-purple) !important;
+  transform: translateY(-2px);
+}
+
+/* --- BOTONES DE ACCIÓN (MODERNIZADOS) --- */
+.navbar .btn-sm {
+  border-radius: 15px !important;
+  padding: 8px 22px !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  border: none !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Botón Entrar (Login) */
+#btn-open-login {
+  background-color: var(--accent-purple) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(94, 84, 142, 0.3);
+}
+
+#btn-open-login:hover {
+  background-color: #4a4270 !important;
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(94, 84, 142, 0.4);
+}
+
+/* Botón Salir (Logout) */
+#btn-logout {
+  background-color: #ff4d4d !important;
+  color: white !important;
+  border: none !important;
+}
+
+/* Botón Panel Gestión (Admin) */
+#nav-admin {
+  background: linear-gradient(90deg, var(--accent-red), var(--accent-purple)) !important;
+  color: white !important;
+  border: none !important;
+}
+
+#theme-toggle {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+#theme-toggle:focus {
+  outline: none;
+}
+
+/* Ajuste para el buscador dentro del navbar */
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+/* --- BUSCADOR MINIMALISTA --- */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* El input como una cápsula traslúcida */
+#buscador-productos {
+    width: 220px;
+    padding: 8px 15px 8px 35px; /* Espacio a la izquierda para el icono */
+    border-radius: 12px;
+    border: 1px solid rgba(94, 84, 142, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+    color: #111;
+    font-size: 0.85rem;
+    outline: none;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Efecto al hacer clic (Focus) */
+#buscador-productos:focus {
+    width: 280px; /* Se expande suavemente */
+    background: rgba(249, 183, 226, 0.07);
+    border-color: var(--accent-purple);
+    box-shadow: 0 4px 15px rgba(94, 84, 142, 0.15);
+}
+
+/* El icono de la lupa dentro del input */
+.search-container::before {
+    content: '\f52a'; /* Código de icono de lupa en Bootstrap Icons */
+    font-family: "bootstrap-icons";
+    position: absolute;
+    left: 12px;
+    color: var(--accent-purple);
+    font-size: 0.9rem;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+#buscador-productos::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+    font-weight: 500;
+}
+
+/* El botón de modo oscuro moderno */
+.btn-theme {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    width: 36px;
+    height: 36px;
+    border-radius: 10px; /* Estilo cuadrado redondeado moderno */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-purple);
+    transition: all 0.3s ease;
+}
+
+.btn-theme:hover {
+    background: var(--accent-purple);
+    color: white;
+    transform: rotate(15deg);
+}
+
+/* Asegurar que el corazón y carrito estén juntos visualmente */
+.fav-icon, .cart-icon {
+    padding: 0 8px !important;
+}
+
+/* Estilo para el icono del botón en modo claro */
+.light-icon {
+  fill: #ffb400; /* Color amarillo para el sol */
+}
+
+/* Estilo para el icono del botón en modo oscuro */
+.dark-icon {
+  fill: #5a5a5a; /* Color gris oscuro para la luna */
+}
+
+/* --- NUEVO DISEÑO DEL CORAZÓN (AÑADIR AL FINAL DE TU CSS) --- */
+.fav-icon {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2) !important; /* Efecto cristal */
+    border-radius: 12px; /* Cuadrado redondeado moderno */
+    color: #ff0055 !important; /* Rojo vibrante */
+    font-size: 1.2rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    margin-left: 5px;
+    padding: 0 !important; /* Quita el padding de nav-link para centrar el icono */
+}
+
+/* Efecto al pasar el ratón */
+.fav-icon:hover {
+    background: #ff0055 !important;
+    color: white !important;
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(255, 0, 85, 0.4);
+}
+
+/* Animación de latido */
+.fav-icon:hover i {
+    animation: heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.15); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+/* --- CARRITO --- */
+.cart-icon {
+  position: relative;
+  font-size: 1.4rem;
+  transition: transform 0.25s ease;
+  background: rgba(255, 255, 255, 0.4);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  color: var(--accent-purple) !important;
+}
+
+.cart-icon:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background-color: var(--accent-red) !important;
+  color: white !important;
+  font-size: 0.65rem;
+  font-weight: 600;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid #b6bde0;
+}
+
+/* TITULO CATALOGO */
+.titulo-catalogo {
+  font-size: 2.5rem;
+  font-weight: 750;
+  color: #111;
+  position: relative;
+  display: block;
+  padding-bottom: 14px;
+}
+
+.titulo-catalogo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50vw;
+  height: 4.5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent-red), var(--accent-soft));
+}
