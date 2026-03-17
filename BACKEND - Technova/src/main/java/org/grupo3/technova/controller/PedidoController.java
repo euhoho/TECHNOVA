@@ -57,7 +57,7 @@ public class PedidoController {
         ]
       }
      */
-    @PostMapping
+    @PostMapping("/crear")
     public ResponseEntity<String> crearPedido(
             @RequestBody PedidoRequest request,
             @RequestParam(defaultValue = "false") boolean descontarStock) {

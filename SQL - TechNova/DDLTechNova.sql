@@ -67,21 +67,21 @@ INSERT INTO usuario (email, password, rol) VALUES
 
 
 INSERT INTO producto (sku, nombre, descripcion, precio, stock, categoria, imagen) VALUES
-('PER-MG5','Monitor Samsung Odyssey G5','Monitor curvo, 165Hz, 32 pulgadas',199.99,30,'Perifericos','Monitor-Samsung-Odyssey-G5-frontal.avif'),
-('PER-TNEWSKILL','Teclado NewSkil Pyro pro','Teclado mecanico, 65%, inalambrico',75.00,100,'Perifericos','Teclado-NewSkill-Pyros-pro-frontal.webp'),
-('PER-RLOGITECH','Logitech G G102 LightSync','Ratón Gaming 8000 DPI',17.90,0,'Perifericos','Logitech-G-G102-LightSync-Frontal.webp'),
+('PER-MG5','Monitor Samsung Odyssey G5','Monitor curvo, 165Hz, 32 pulgadas',199.99,30,'Perifericos','Monitor-Samsung-Odyssey-G5-frontal.png'),
+('PER-TNEWSKILL','Teclado NewSkil Pyro pro','Teclado mecanico, 65%, inalambrico',75.00,100,'Perifericos','Teclado-NewSkill-Pyros-pro-frontal.png'),
+('PER-RLOGITECH','Logitech G G102 LightSync','Ratón Gaming 8000 DPI',17.90,0,'Perifericos','Logitech-G-G102-LightSync-Frontal.png'),
 
-('COM-MCORSAIR','Memoria Ram Corsair Vengeance','2x16GB DDR5 6000MHz',600.99,9,'Componentes','Memoria-RAM-Corsair-Vengeance-RGB-DDR5-32GB-Frontal.jpg'),
-('COM-RTX','MSI GeForce RTX 5070 Ti VENTUS','3X OC 16GB GDDR7 Reflex 2 RTX AI DLSS4',1400.90,90,'Componentes','MSI-GeForce-RTX-5070-Ti-VENTUS-Frontal-Caja.jpg'),
-('COM-MP600','Corsair MP600 GS 1TB M.2 Gen4','Velocidad lectura secuencial hasta 4800 MB/s',112.22,78,'Componentes','Corsair-MP600-GS-1TB-M.2-Gen4-Frontal.jpg'),
+('COM-MCORSAIR','Memoria Ram Corsair Vengeance','2x16GB DDR5 6000MHz',600.99,9,'Componentes','Memoria-RAM-Corsair-Vengeance-RGB-DDR5-32GB-Frontal.png'),
+('COM-RTX','MSI GeForce RTX 5070 Ti VENTUS','3X OC 16GB GDDR7 Reflex 2 RTX AI DLSS4',1400.90,90,'Componentes','MSI-GeForce-RTX-5070-Ti-VENTUS-Frontal-Caja.png'),
+('COM-MP600','Corsair MP600 GS 1TB M.2 Gen4','Velocidad lectura secuencial hasta 4800 MB/s',112.22,78,'Componentes','Corsair-MP600-GS-1TB-M.2-Gen4-Frontal.png'),
 
-('SOF-WINDOWS','Windows 11 Pro','Licencia OEM 64 bits Español',200.99,3,'Software','Licencia-Windows-11-Pro-OEM-Frontal.webp'),
-('SOF-KASPERSKY','Kaspersky Pro','Licencia AntiVirus Kaspersky 1 año',29.95,3,'Software','Licencia-AntiVirus-Kaspersky-Frontal.webp'),
+('SOF-WINDOWS','Windows 11 Pro','Licencia OEM 64 bits Español',200.99,3,'Software','Licencia-Windows-11-Pro-OEM-Frontal.png'),
+('SOF-KASPERSKY','Kaspersky Pro','Licencia AntiVirus Kaspersky 1 año',29.95,3,'Software','Licencia-AntiVirus-Kaspersky-Frontal.png'),
 ('SOF-OFFICE','Microsoft Office Professional Plus','Descarga digital Microsoft Office Professional Plus ',149.99,3,'Software','Microsoft-Office-Professional-Plus-2024-Caja.png'),
 
-('RED-DLINK','Módem D-Link F518/M 5G','Wi-Fi 6 dual band hasta 1800 Mbps',295.87,3,'Redes','Módem-D-Link-F518M-5G-Wi-Fi 6-dual-band-Trasera.jpg'),
-('RED-USB','TP-Link UB5A','Adaptador Nano USB Bluetooth 5.0',9.99,1,'Redes','TP-Link-UB5A-Caja.webp'),
-('RED-TARJETA','ASUS PCE-AXE5400','Tarjeta de Red WiFi AXE5400 con Bluetooth',32.95,4,'Redes','ASUS-PCE-AXE5400-Frontal.jpg');
+('RED-DLINK','Módem D-Link F518/M 5G','Wi-Fi 6 dual band hasta 1800 Mbps',295.87,3,'Redes','Módem-D-Link-F518M-5G-Wi-Fi 6-dual-band-Trasera.png'),
+('RED-USB','TP-Link UB5A','Adaptador Nano USB Bluetooth 5.0',9.99,1,'Redes','TP-Link-UB5A-Caja.png'),
+('RED-TARJETA','ASUS PCE-AXE5400','Tarjeta de Red WiFi AXE5400 con Bluetooth',32.95,4,'Redes','ASUS-PCE-AXE5400-Frontal.png');
 
 
 INSERT INTO pedido (id_usuario, total_pedido, pedido_estado) VALUES
@@ -113,3 +113,7 @@ INSERT INTO movimiento_inventario (id_producto, tipo_movimiento, cantidad_movimi
 (2, 'SALIDA', 1, 'ARTÍCULO DEFECTUOSO');
 
 SELECT * FROM producto;
+select * from usuario;
+SELECT *FROM linea_pedido;
+SELECT *FROM pedido;
+delete from producto where id_producto = 13;
