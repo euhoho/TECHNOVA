@@ -45,6 +45,111 @@
   font-style: italic;
 }
 
+/* FILTROS */
+/* Ordenar */
+.filtros-superiores {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.select-ordenar {
+  width: 170px;
+  height: 46px;
+  flex-shrink: 0;
+  background: linear-gradient(90deg, #5e548e, #b6bde0);
+  align-items: center;
+  }
+
+.select-ordenar:hover {
+  transform: scale(1.01);
+}
+
+/*Rango de precio */
+.filtro-precio-box {
+  min-width: 320px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 46px; /* misma referencia visual que el select */
+  display: flex;
+  align-items: center;
+}
+
+.slider-track,
+.slider-range {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 5px;
+  border-radius: 999px;
+}
+
+.slider-track {
+  width: 100%;
+  background: #e4e7f5;
+  z-index: 1;
+}
+
+.slider-range {
+  background: linear-gradient(90deg, #5e548e, #b6bde0);
+  z-index: 2;
+}
+
+.slider-wrapper input[type="range"] {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.slider-wrapper input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ff0055;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.slider-wrapper input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ff0055;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.precio-valores {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.1rem;
+  font-weight: 700;
+  color: #5e548e;
+  font-size: 0.95rem;
+}
+
 /* GRID DE CATEGORÍAS */
 .categorias-grid {
   display: grid;

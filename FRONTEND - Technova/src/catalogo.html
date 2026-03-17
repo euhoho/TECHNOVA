@@ -18,44 +18,69 @@
 
     <!-- CONTENIDO -->
     <main class="container my-4">
+        <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-3">
+            <h2 class="m-0 titulo-catalogo">Catálogo</h2>
+            <input type="text" id="buscador-productos" class="form-control buscador-catalogo"
+                placeholder="Buscar producto...">
+        </div>
 
-    <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-3">
-        <h2 class="m-0 titulo-catalogo">Catálogo</h2>
-        <input type="text" id="buscador-productos" class="form-control buscador-catalogo" placeholder="Buscar producto...">
-    </div>
+        <div class="filtros-superiores mb-4">
+            <select id="ordenar-productos" class="form-select select-ordenar">
+                <option value="default">Ordenar</option>
+                <option value="nombre-asc">Nombre A-Z</option>
+                <option value="nombre-desc">Nombre Z-A</option>
+                <option value="precio-asc">Precio menor</option>
+                <option value="precio-desc">Precio mayor</option>
+            </select>
 
-    <div class="categorias-grid mb-5">
-        <button class="categoria-card active" data-categoria="todos">
-            <i class="bi bi-grid-3x3-gap-fill"></i>
-            <span>Ver todo</span>
-        </button>
+            <div class="filtro-precio-box">
+                <div class="slider-wrapper">
+                    <div class="slider-track"></div>
+                    <div class="slider-range" id="slider-range"></div>
 
-        <button class="categoria-card" data-categoria="componentes">
-            <i class="bi bi-cpu-fill"></i>
-            <span>Componentes</span>
-        </button>
+                    <input type="range" id="precio-min" step="1">
+                    <input type="range" id="precio-max" step="1">
+                </div>
 
-        <button class="categoria-card" data-categoria="perifericos">
-            <i class="bi bi-keyboard-fill"></i>
-            <span>Periféricos</span>
-        </button>
+                <div class="precio-valores">
+                    <span id="precio-min-valor">0.00 €</span>
+                    <span id="precio-max-valor">1000.00 €</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="categorias-grid mb-5">
+            <button class="categoria-card active" data-categoria="todos">
+                <i class="bi bi-grid-3x3-gap-fill"></i>
+                <span>Ver todo</span>
+            </button>
 
-        <button class="categoria-card" data-categoria="redes">
-            <i class="bi bi-diagram-3-fill"></i>
-            <span>Redes</span>
-        </button>
+            <button class="categoria-card" data-categoria="componentes">
+                <i class="bi bi-cpu-fill"></i>
+                <span>Componentes</span>
+            </button>
 
-        <button class="categoria-card" data-categoria="software">
-            <i class="bi bi-code-slash"></i>
-            <span>Software</span>
-        </button>
-    </div>
+            <button class="categoria-card" data-categoria="perifericos">
+                <i class="bi bi-keyboard-fill"></i>
+                <span>Periféricos</span>
+            </button>
 
-    <div class="catalogo-zona-productos">
-    <div id="catalogo-container" class="row g-4"></div>
-</div>
-</main>
-<!-- MODAL LOGIN -->
+            <button class="categoria-card" data-categoria="redes">
+                <i class="bi bi-diagram-3-fill"></i>
+                <span>Redes</span>
+            </button>
+
+            <button class="categoria-card" data-categoria="software">
+                <i class="bi bi-code-slash"></i>
+                <span>Software</span>
+            </button>
+        </div>
+
+        <div class="catalogo-zona-productos">
+            <div id="catalogo-container" class="row g-4"></div>
+        </div>
+    </main>
+    <!-- MODAL LOGIN -->
 
     <div class="modal fade modal-right" id="loginModal" tabindex="-1">
 

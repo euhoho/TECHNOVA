@@ -7,10 +7,8 @@
     <list default="true" id="ddbbb43a-9f73-442e-8485-78cb4f3f3b42" name="Changes" comment="UPDATE: actualizamos POST crear-producto con la verificación de usuario.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/catalogo.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/catalogo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/catalogo.css" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/catalogo.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/catalogo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/catalogo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SQL - TechNova/DDLTechNova.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../SQL - TechNova/DDLTechNova.sql" afterDir="false" />
     </list>
     <list id="afabca47-1a0b-4dde-9252-06d4aa3c85c7" name="aplicattion properties" comment="" />
     <list id="5676eb22-a9ea-4ea5-8e07-63942807fad0" name="Changes by euhoho" comment="" />
@@ -116,7 +114,7 @@
     &quot;SHELLCHECK.PATH&quot;: &quot;C:\\Users\\sakurabish\\AppData\\Roaming\\JetBrains\\IntelliJIdea2025.2\\plugins\\Shell Script\\shellcheck.exe&quot;,
     &quot;Spring Boot.BackendTechnovaApplication.executor&quot;: &quot;Run&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/catalogo&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/devil ahora si/OneDrive/Escritorio/TECHNOVA/BACKEND - Technova&quot;,
@@ -217,7 +215,9 @@
       <workItem from="1773237336976" duration="179000" />
       <workItem from="1773258456260" duration="538000" />
       <workItem from="1773308151787" duration="3065000" />
-      <workItem from="1773390017459" duration="1623000" />
+      <workItem from="1773390017459" duration="2221000" />
+      <workItem from="1773659288752" duration="612000" />
+      <workItem from="1773740583878" duration="2194000" />
     </task>
     <task id="LOCAL-00001" summary="FEAT: CREACIÓN DE LINEA PEDIDO">
       <option name="closed" value="true" />
