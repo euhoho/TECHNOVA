@@ -5,19 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddbbb43a-9f73-442e-8485-78cb4f3f3b42" name="Changes" comment="UPDATE: actualizamos POST crear-producto con la verificación de usuario.">
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/ASUS-PCE-AXE5400-Frontal.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Corsair-MP600-GS-1TB-M.2-Gen4-Frontal.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Licencia-AntiVirus-Kaspersky-Frontal.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Licencia-Windows-11-Pro-OEM-Frontal.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Logitech-G-G102-LightSync-Frontal.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/MSI-GeForce-RTX-5070-Ti-VENTUS-Frontal-Caja.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Memoria-RAM-Corsair-Vengeance-RGB-DDR5-32GB-Frontal.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Monitor-Samsung-Odyssey-G5-frontal.avif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Módem-D-Link-F518M-5G-Wi-Fi 6-dual-band-Trasera.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/TP-Link-UB5A-Caja.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Teclado-NewSkill-Pyros-pro-frontal-removebg-preview.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <list id="afabca47-1a0b-4dde-9252-06d4aa3c85c7" name="aplicattion properties" comment="" />
     <list id="5676eb22-a9ea-4ea5-8e07-63942807fad0" name="Changes by euhoho" comment="" />
@@ -46,12 +34,16 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/euhoho/TECHNOVA.git&quot;,
-    &quot;accountId&quot;: &quot;31c09cbd-74a1-4ef7-8933-391fba674306&quot;
+    &quot;accountId&quot;: &quot;21f67fce-201f-4668-9a7a-f146d4bfb8da&quot;
   }
 }</component>
   <component name="HttpClientOnboardingState">{
   &quot;isOnboardingCommentShown&quot;: true
 }</component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
@@ -186,8 +178,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
-        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.30387.90" />
       </set>
     </attachedChunks>
   </component>
@@ -221,6 +213,10 @@
       <workItem from="1773048865755" duration="350000" />
       <workItem from="1773049833630" duration="1479000" />
       <workItem from="1773183070737" duration="2628000" />
+      <workItem from="1773237336976" duration="179000" />
+      <workItem from="1773258456260" duration="538000" />
+      <workItem from="1773308151787" duration="3065000" />
+      <workItem from="1773390017459" duration="1623000" />
     </task>
     <task id="LOCAL-00001" summary="FEAT: CREACIÓN DE LINEA PEDIDO">
       <option name="closed" value="true" />

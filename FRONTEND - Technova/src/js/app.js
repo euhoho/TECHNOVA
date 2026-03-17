@@ -248,6 +248,7 @@ async function finalizarCompra() {
 /* ================================
    HERO SLIDER CON GRADIENTES
 ================================ */
+
 const heroGradients = [
   "linear-gradient(135deg, #010424, #669ac8)",
   "linear-gradient(135deg, #b03e85, #e4ec89)",
@@ -260,24 +261,40 @@ function initHeroSlider() {
     const categories = document.querySelectorAll(".hero-category");
     const container = document.querySelector(".hero-slider");
 
-    let index = 0;
-
+    // seguridad para evitar errores
     if (!container || slides.length === 0) return;
 
+    let index = 0;
+
+    // fondo inicial
     container.style.background = heroGradients[0];
 
     function changeHero() {
 
         slides[index].classList.remove("active");
-        categories[index].classList.remove("active");
+
+        if (categories[index]) {
+            categories[index].classList.remove("active");
+        }
 
         index = (index + 1) % slides.length;
 
         slides[index].classList.add("active");
-        categories[index].classList.add("active");
+
+        if (categories[index]) {
+            categories[index].classList.add("active");
+        }
 
         container.style.background = heroGradients[index];
     }
 
     setInterval(changeHero, 4000);
 }
+
+/* ================================
+   INICIALIZAR CUANDO CARGA EL DOM
+================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+    initHeroSlider();
+});
