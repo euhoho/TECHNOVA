@@ -10,4 +10,4 @@ public class BackendTechnovaApplication {
         SpringApplication.run(BackendTechnovaApplication.class, args);
     }
 
-}
+} 

@@ -1,3 +1,6 @@
+import { finalizarCompra } from "./carrito.js";
+
+window.finalizarCompra = finalizarCompra;
 /* ================================
    LOGIN & SESIÓN
 ================================ */
@@ -19,9 +22,10 @@ async function login(e) {
         if (data.status !== "ok") throw new Error(data.mensaje);
 
         sessionStorage.setItem("email", data.usuario.email);
+        sessionStorage.setItem("password", password);// no recomendado en producción
         sessionStorage.setItem("rol", data.usuario.rol);
 
-        actualizarUIUsuario(data.usuario.email, data.usuario.rol);
+        actualizarUIUsuario(data.usuario.email, data.usuario.rol, data.usuario.password);
 
         const modalElement = document.getElementById('loginModal');
         const modalInstance = bootstrap.Modal.getInstance(modalElement);
@@ -34,7 +38,7 @@ async function login(e) {
     }
 }
 
-function actualizarUIUsuario(email, rol) {
+function actualizarUIUsuario(email, rol,password) {
     document.getElementById("btn-open-login").classList.add("d-none");
     document.getElementById("nav-user-zone").classList.remove("d-none");
     document.getElementById("nav-saludo").textContent = "Hola, " + email;
@@ -48,81 +52,20 @@ document.getElementById("btn-logout").addEventListener("click", () => {
     sessionStorage.clear();
     location.reload();
 });
+document.addEventListener("DOMContentLoaded", () => {
 
+    const email = sessionStorage.getItem("email");
+
+    if (email) {
+        actualizarUIUsuario(email, sessionStorage.getItem("rol"));
+    }
+
+});
 
 /* ================================
    PRODUCTOS
 ================================ */
-document.addEventListener("DOMContentLoaded", () => {
-    cargarProductos();
 
-    const email = sessionStorage.getItem("email");
-    if (email) actualizarUIUsuario(email, sessionStorage.getItem("rol"));
-});
-
-async function cargarProductos() {
-    try {
-        const response = await fetch("http://localhost:8080/api/productos");
-        const productos = await response.json();
-
-        const container = document.getElementById("catalogo-container");
-        container.innerHTML = "";
-
-        productos.forEach(p => {
-            const card = document.createElement("div");
-            card.className = "col-md-4 mb-4";
-
-            card.innerHTML = `
-                <div class="card h-100 ${p.stock <= 0 ? 'producto-agotado' : ''}">
-                    <img src="img/${p.imagen}" class="card-img-top" alt="${p.nombre}">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">${p.nombre}</h5>
-                        <p class="card-text">${p.descripcion}</p>
-                        <p class="fw-bold">${p.precio} €</p>
-                        <p class="text-muted">Stock: ${p.stock}</p>
-
-                        ${p.stock <= 0 ? '<span class="badge-sin-stock">AGOTADO</span>' : ''}
-
-                        <button class="btn btn-primary mt-auto btn-add-cart" ${p.stock <= 0 ? 'disabled' : ''}>
-                            ${p.stock <= 0 ? 'Agotado' : 'Añadir al carrito'}
-                        </button>
-                    </div>
-                </div>
-            `;
-
-            container.appendChild(card);
-        });
-
-        initCarrito();
-        initHeroSlider();
-
-    } catch (e) {
-        console.error("Error productos", e);
-    }
-}
-
-
-/* ================================
-   CARRITO
-================================ */
-let carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
-
-function initCarrito() {
-    document.querySelectorAll(".btn-add-cart").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-
-            const card = e.target.closest(".card");
-
-            carrito.push({
-                nombre: card.querySelector(".card-title").textContent,
-                precio: card.querySelector(".fw-bold").textContent
-            });
-
-            sessionStorage.setItem("carrito", JSON.stringify(carrito));
-            document.getElementById("cart-count").textContent = carrito.length;
-        });
-    });
-}
 
 
 /* ================================
@@ -178,3 +121,13 @@ function initHeroSlider() {
 document.addEventListener("DOMContentLoaded", () => {
     initHeroSlider();
 });
+
+import { renderizarCarrito } from "./carrito.js";
+
+const carritoOffcanvas = document.getElementById("carritoOffcanvas");
+
+if (carritoOffcanvas) {
+    carritoOffcanvas.addEventListener("show.bs.offcanvas", () => {
+        renderizarCarrito();
+    });
+}

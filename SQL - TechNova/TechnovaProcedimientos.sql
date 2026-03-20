@@ -163,6 +163,12 @@ from producto where id_producto = p_id_producto;
 END $$
 delimiter ;
 
+-- pruebas --
+CALL sp_crear_pedido(1,0,@id);
+SELECT @id;
+CALL sp_crear_linea_pedido(1,1,2,@total);
+SELECT @total;
+
 select * from producto;
 select * from pedido;
 select * FROM linea_pedido;
@@ -309,65 +315,6 @@ DELIMITER ;
 CALL sp_movimiento_inventario_listar_id_producto (2);
 
 
--- crear linea pedido --
-DROP PROCEDURE IF EXISTS sp_crear_linea_pedido;
-DELIMITER $$
-
-CREATE PROCEDURE sp_crear_linea_pedido(
-    IN p_id_producto INT,
-    IN p_cantidad INT,
-    IN p_precio_unitario_momento DECIMAL(10,2)
-)
-BEGIN
-
-    DECLARE v_stock INT;
-
-    START TRANSACTION;
-
-    -- Bloqueamos la fila para evitar condiciones de carrera
-    SELECT stock 
-    INTO v_stock
-    FROM producto
-    WHERE id_producto = p_id_producto
-    FOR UPDATE;
-
-    IF v_stock IS NULL THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Producto no existe';
-    END IF;
-
-    IF v_stock < p_cantidad THEN
-        SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Stock insuficiente para este movimiento';
-    END IF;
-
-    -- Insertamos línea
-    INSERT INTO linea_pedido (
-        id_producto,
-        cantidad,
-        precio_unitario_momento
-    )
-    VALUES (
-        p_id_producto,
-        p_cantidad,
-        p_precio_unitario_momento
-    );
-
-    -- Actualizamos stock
-    UPDATE producto
-    SET stock = stock - p_cantidad
-    WHERE id_producto = p_id_producto;
-
-    COMMIT;
-
-END $$
-
-DELIMITER ;
-select * from linea_pedido;
-call sp_crear_linea_pedido(1,2,10.4);
-
-
-
 -- ======================= Crear Usuario ============== --
 DROP PROCEDURE IF EXISTS sp_crear_usuario;
 DELIMITER $$
@@ -389,3 +336,5 @@ BEGIN
     WHERE id_usuario = p_id_usuario;
 END $$
 DELIMITER ;
+
+select * from pedido;
