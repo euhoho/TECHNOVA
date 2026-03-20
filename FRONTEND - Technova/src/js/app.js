@@ -1,3 +1,6 @@
+import { finalizarCompra } from "./carrito.js";
+
+window.finalizarCompra = finalizarCompra;
 /* ================================
    LOGIN & SESIÓN
 ================================ */
@@ -49,150 +52,20 @@ document.getElementById("btn-logout").addEventListener("click", () => {
     sessionStorage.clear();
     location.reload();
 });
+document.addEventListener("DOMContentLoaded", () => {
 
+    const email = sessionStorage.getItem("email");
+
+    if (email) {
+        actualizarUIUsuario(email, sessionStorage.getItem("rol"));
+    }
+
+});
 
 /* ================================
    PRODUCTOS
 ================================ */
 
-
-
-/* ================================
-   CARRITO
-================================ */
-function initCarrito() {
-
-    document.querySelectorAll(".btn-add-cart").forEach(btn => {
-
-        btn.addEventListener("click", (e) => {
-
-            const card = e.target.closest(".card");
-
-            const producto = {
-                nombre: card.querySelector(".card-title").textContent,
-                idProducto: parseInt(e.target.getAttribute("data-id")),
-                precio: parseFloat(card.querySelector(".fw-bold").textContent),
-                imagen: card.querySelector("img").getAttribute("src"),
-                cantidad: 1
-            };
-
-            let carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
-
-            const existente = carrito.find(p => p.nombre === producto.nombre);
-
-            if (existente) {
-                existente.cantidad++;
-            } else {
-                carrito.push(producto);
-            }
-
-            sessionStorage.setItem("carrito", JSON.stringify(carrito));
-
-            actualizarContadorCarrito();
-        });
-
-    });
-
-}
-function actualizarContadorCarrito() {
-
-    const carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
-
-    const totalItems = carrito.reduce((acc, p) => acc + p.cantidad, 0);
-
-    document.getElementById("cart-count").textContent = totalItems;
-}
-document.addEventListener("DOMContentLoaded", () => {
-
-    cargarProductos();
-
-    actualizarContadorCarrito();
-
-    const email = sessionStorage.getItem("email");
-    const password = sessionStorage.getItem("password"); // no recomendado en producción
-    if (email) actualizarUIUsuario(email, sessionStorage.getItem("rol"));
-
-});
-function renderizarCarrito() {
-
-    const carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
-
-    const contenedor = document.getElementById("carrito-contenido");
-
-    contenedor.innerHTML = "";
-
-    let total = 0;
-
-    carrito.forEach(p => {
-
-        total += p.precio * p.cantidad;
-
-        contenedor.innerHTML += `
-            <div class="d-flex align-items-center mb-3">
-
-                <img src="${p.imagen}" width="60" class="me-3">
-
-                <div class="flex-grow-1">
-                    <div>${p.nombre}</div>
-                    <small>${p.cantidad} x ${p.precio}€</small>
-                </div>
-
-                <div class="fw-bold">
-                    ${(p.precio * p.cantidad).toFixed(2)}€
-                </div>
-
-            </div>
-        `;
-
-    });
-
-    document.getElementById("carrito-total").textContent = total.toFixed(2);
-
-}
-async function finalizarCompra() {
-
-    const carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
-
-    const email = sessionStorage.getItem("email");
-    const password = sessionStorage.getItem("password"); // si lo guardas
-
-    const pedido = {
-        usuario: {
-            email: email,
-            password: password
-        },
-        lineas: carrito.map(p => ({
-            idProducto: p.idProducto,
-            cantidad: p.cantidad,
-            precioUnitario: p.precio
-        }))
-    };
-
-    try {
-        const response = await fetch("http://localhost:8080/api/pedidos/crear?descontarStock=true", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(pedido)
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-        
-            
-            // 1. Limpiamos el carrito para que no se quede guardado
-            sessionStorage.removeItem("carrito");
-            
-            // 2. Recargamos la página para que cargarProductos() 
-            // vuelva a ejecutarse y traiga el stock actualizado
-            location.reload(); 
-        } else {
-            const errorData = await response.json();
-            alert("Error al realizar el pedido: " + errorData.mensaje);
-        }
-    } catch (error) {
-        console.error("Error:", error);
-    }
-}
 
 
 /* ================================
@@ -248,3 +121,13 @@ function initHeroSlider() {
 document.addEventListener("DOMContentLoaded", () => {
     initHeroSlider();
 });
+
+import { renderizarCarrito } from "./carrito.js";
+
+const carritoOffcanvas = document.getElementById("carritoOffcanvas");
+
+if (carritoOffcanvas) {
+    carritoOffcanvas.addEventListener("show.bs.offcanvas", () => {
+        renderizarCarrito();
+    });
+}

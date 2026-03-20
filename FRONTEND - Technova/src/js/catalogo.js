@@ -1,6 +1,10 @@
-    let todosLosProductos = [];
+import {
+    agregarProducto,
+    actualizarContadorCarrito
+} from "./carrito.js";
 
- 
+
+let todosLosProductos = [];
     async function cargarProductos() {
         try {
             const response = await fetch("http://localhost:8080/api/productos");
@@ -100,13 +104,11 @@
         });
     }
 
-    function activarBotonesAgregar() {
+   function activarBotonesAgregar() {
     const botones = document.querySelectorAll(".btn-add-cart");
 
     botones.forEach(btn => {
         btn.addEventListener("click", () => {
-
-            let carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
 
             const producto = {
                 idProducto: parseInt(btn.dataset.id),
@@ -116,16 +118,7 @@
                 cantidad: 1
             };
 
-            const existente = carrito.find(p => p.idProducto === producto.idProducto);
-
-            if (existente) {
-                existente.cantidad++;
-            } else {
-                carrito.push(producto);
-            }
-
-            sessionStorage.setItem("carrito", JSON.stringify(carrito));
-
+            agregarProducto(producto);
             actualizarContadorCarrito();
         });
     });
@@ -140,101 +133,8 @@
 
     if (carritoOffcanvas) {
         carritoOffcanvas.addEventListener("show.bs.offcanvas", () => {
-            renderizarCarrito();
+        
         });
     }
 
 });
- function actualizarContadorCarrito() {
-
-    const carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
-
-    const totalItems = carrito.reduce((acc, p) => acc + p.cantidad, 0);
-
-    const contador = document.getElementById("cart-count");
-
-    if (!contador) return;
-
-    contador.textContent = totalItems;
-}
-    
-    function renderizarCarrito() {
-
-        const carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
-
-        const contenedor = document.getElementById("carrito-contenido");
-
-        contenedor.innerHTML = "";
-
-        let total = 0;
-
-        carrito.forEach(p => {
-
-            total += p.precio * p.cantidad;
-
-            contenedor.innerHTML += `
-                <div class="d-flex align-items-center mb-3">
-
-                    <img src="${p.imagen}" width="60" class="me-3">
-
-                    <div class="flex-grow-1">
-                        <div>${p.nombre}</div>
-                        <small>${p.cantidad} x ${p.precio}€</small>
-                    </div>
-
-                    <div class="fw-bold">
-                        ${(p.precio * p.cantidad).toFixed(2)}€
-                    </div>
-
-                </div>
-            `;
-
-        });
-
-        document.getElementById("carrito-total").textContent = total.toFixed(2);
-
-    }
-    async function finalizarCompra() {
-
-        const carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
-
-        const email = sessionStorage.getItem("email");
-        const password = sessionStorage.getItem("password"); // si lo guardas
-
-        const pedido = {
-            usuario: {
-                email: email,
-                password: password
-            },
-            lineas: carrito.map(p => ({
-                idProducto: p.idProducto,
-                cantidad: p.cantidad,
-                precioUnitario: p.precio
-            }))
-        };
-
-        try {
-            const response = await fetch("http://localhost:8080/api/pedidos/crear?descontarStock=true", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(pedido)
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-            
-                
-                // 1. Limpiamos el carrito para que no se quede guardado
-                sessionStorage.removeItem("carrito");
-                
-                // 2. Recargamos la página para que cargarProductos() 
-                // vuelva a ejecutarse y traiga el stock actualizado
-                location.reload(); 
-            } else {
-                const errorData = await response.json();
-                alert("Error al realizar el pedido: " + errorData.mensaje);
-            }
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    }

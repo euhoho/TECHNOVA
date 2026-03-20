@@ -336,3 +336,5 @@ BEGIN
     WHERE id_usuario = p_id_usuario;
 END $$
 DELIMITER ;
+
+select * from pedido;
