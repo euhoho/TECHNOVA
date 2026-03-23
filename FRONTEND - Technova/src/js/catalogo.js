@@ -120,6 +120,15 @@ let todosLosProductos = [];
 
             agregarProducto(producto);
             actualizarContadorCarrito();
+
+            // Feedback visual en el botón
+            const textoOriginal = btn.innerHTML;
+            btn.innerHTML = '<i class="bi bi-check2 me-1"></i> ¡Añadido!';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.innerHTML = textoOriginal;
+                btn.disabled = false;
+            }, 1200);
         });
     });
 }
@@ -129,12 +138,29 @@ let todosLosProductos = [];
     actualizarContadorCarrito();
     activarBuscador();
 
-    const carritoOffcanvas = document.getElementById("carritoOffcanvas");
+    // Leer ?categoria= de la URL y preseleccionar el filtro al cargar
+    const params = new URLSearchParams(window.location.search);
+    const categoriaURL = params.get("categoria");
 
-    if (carritoOffcanvas) {
-        carritoOffcanvas.addEventListener("show.bs.offcanvas", () => {
-        
-        });
+    if (categoriaURL) {
+        // Esperar a que los productos carguen antes de filtrar
+        const intervalo = setInterval(() => {
+            if (todosLosProductos.length > 0) {
+                clearInterval(intervalo);
+
+                // Activar visualmente la categoria-card correcta
+                const categorias = document.querySelectorAll(".categoria-card");
+                categorias.forEach(c => c.classList.remove("active"));
+                const cardActiva = document.querySelector(`.categoria-card[data-categoria="${categoriaURL}"]`);
+                if (cardActiva) cardActiva.classList.add("active");
+
+                // Filtrar productos
+                const filtrados = todosLosProductos.filter(p =>
+                    p.categoria.toLowerCase() === categoriaURL.toLowerCase()
+                );
+                pintarProductos(filtrados);
+            }
+        }, 100);
     }
 
 });
