@@ -1,10 +1,16 @@
-import { finalizarCompra } from "./carrito.js";
-
-window.finalizarCompra = finalizarCompra;
 /* ================================
    LOGIN & SESIÓN
 ================================ */
-document.getElementById("login-form").addEventListener("submit", login);
+document.addEventListener("DOMContentLoaded", () => {
+
+    document.getElementById("login-form").addEventListener("submit", login);
+
+    const email = sessionStorage.getItem("email");
+    if (email) {
+        actualizarUIUsuario(email, sessionStorage.getItem("rol"));
+    }
+
+});
 
 async function login(e) {
     e.preventDefault();
@@ -61,10 +67,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+document.addEventListener("DOMContentLoaded", () => {
 
-/* ================================
-   PRODUCTOS
-================================ */
+    const form = document.getElementById("login-form");
+    if (form) {
+        form.addEventListener("submit", login);
+    }
+
+    const email = sessionStorage.getItem("email");
+    if (email) {
+        actualizarUIUsuario(email, sessionStorage.getItem("rol"));
+    }
+});
 
 
 
@@ -120,10 +134,7 @@ function initHeroSlider() {
 
 document.addEventListener("DOMContentLoaded", () => {
     initHeroSlider();
-});
-
-import { renderizarCarrito } from "./carrito.js";
-
+    
 const carritoOffcanvas = document.getElementById("carritoOffcanvas");
 
 if (carritoOffcanvas) {
@@ -131,3 +142,6 @@ if (carritoOffcanvas) {
         renderizarCarrito();
     });
 }
+});
+
+

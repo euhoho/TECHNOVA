@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddbbb43a-9f73-442e-8485-78cb4f3f3b42" name="Changes" comment="UPDATE: actualizamos POST crear-producto con la verificación de usuario.">
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/carrito.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/carrito.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/catalogo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/catalogo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SQL - TechNova/TechnovaProcedimientos.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../SQL - TechNova/TechnovaProcedimientos.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/catalogo.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/catalogo.html" afterDir="false" />
     </list>
     <list id="afabca47-1a0b-4dde-9252-06d4aa3c85c7" name="aplicattion properties" comment="" />
     <list id="5676eb22-a9ea-4ea5-8e07-63942807fad0" name="Changes by euhoho" comment="" />
@@ -120,7 +117,7 @@
     "SHELLCHECK.PATH": "C:\\Users\\sakurabish\\AppData\\Roaming\\JetBrains\\IntelliJIdea2025.2\\plugins\\Shell Script\\shellcheck.exe",
     "Spring Boot.BackendTechnovaApplication.executor": "Run",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "Carrito",
+    "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/devil ahora si/OneDrive/Escritorio/TECHNOVA/BACKEND - Technova",
@@ -146,19 +143,6 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\devil ahora si\OneDrive\Escritorio\TECHNOVA\BACKEND - Technova\src\main\resources" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="configurationStatuses">
-      <map>
-        <entry key="HttpClient.HttpRequestRunConfigurationType">
-          <value>
-            <map>
-              <entry key="generated-requests | #17" value="STOPPED" />
-            </map>
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="RunManager" selected="Spring Boot.BackendTechnovaApplication">
     <configuration name="generated-requests | #17" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#17" index="17" runType="Run single request">
