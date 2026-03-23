@@ -1,214 +1,187 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TechNova Store</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/index.css" />
-        <link rel="stylesheet" href="css/navbar.css" />
-
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TechNova — Tecnología que ilumina el futuro</title>
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 </head>
-
 <body>
 
-<header>
-    <nav class="navbar navbar-expand-lg navbar-background">
-        <div class="container-fluid">
+<!-- NAVBAR -->
+<div id="navbar-container"></div>
 
-            <a class="navbar-brand" href="#">
-                <img src="img/LOGO3-TECHNOVA.png" alt="Logo Technova" height="25" class="ms-2">
-            </a>
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg-img" id="heroBgImg"></div>
+  <div class="hero-overlay"></div>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTechNova">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+  <div class="hero-content">
+    <div class="hero-badge">Proyecto 2026</div>
+    <h1 class="hero-title">
+      <span class="line-1">Tecnología</span>
+      <span class="line-2">diseñada para <span class="gradient-text">brillar</span></span>
+    </h1>
+    <p class="hero-desc">
+      Innovación que se siente en cada interacción.
+    </p>
+    <div class="hero-actions">
+      <a href="#productos" class="btn-neon btn-lg">Explora TechNova</a>
+    </div>
+  </div>
 
-            <div class="collapse navbar-collapse" id="navbarTechNova">
-                
-                <ul class="navbar-nav me-auto align-items-lg-center gap-lg-3">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="nav-productos" role="button" data-bs-toggle="dropdown">
-                            <i class="bi bi-grid-fill me-1"></i> Catálogo
-                        </a>
-                        <ul class="dropdown-menu border-0 shadow-lg">
-                            <li><a class="dropdown-item" href="#">Monitores</a></li>
-                            <li><a class="dropdown-item" href="#">Teclados</a></li>
-                            <li><a class="dropdown-item" href="#">Ratones</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Ver Todo</a></li>
-                        </ul>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <div class="search-container">
-                            <input type="text" id="buscador-productos" placeholder="Buscar tecnología...">
-                        </div>
-                    </li>
-                </ul>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
 
-                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
-                    
-                    <li class="nav-item">
-                        <button class="btn-theme" id="theme-toggle" title="Cambiar modo">
-                            <i class="bi bi-moon-stars-fill" id="theme-icon"></i>
-                        </button>
-                    </li>
+<!-- PRODUCTS -->
+<section class="products" id="productos">
+  <div class="section-header">
+    <span class="section-tag">Destacados</span>
+    <h2 class="section-title">Productos <span class="gradient-text">Estelares</span></h2>
+    <p class="section-sub">Selección premium de la temporada</p>
+  </div>
 
-                    <li class="nav-item" id="login-item">
-                        <button class="btn btn-outline-light btn-sm" id="btn-open-login" data-bs-toggle="modal" data-bs-target="#loginModal">
-                            Login
-                        </button>
-                    </li>
+  <div class="products-grid">
 
-                    <li class="nav-item">
-<a class="nav-link fav-icon" href="#" title="Favoritos">
-    <i class="bi bi-heart-fill"></i>
-</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link cart-icon" href="#" id="nav-carrito">
-                            <i class="bi bi-cart"></i>
-                            <span class="cart-badge" id="cart-count">0</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item d-none" id="nav-user-zone">
-                        <span class="navbar-text me-2" id="nav-saludo">Hola, Usuario</span>
-                        <button class="btn btn-sm" id="btn-logout">Salir</button>
-                    </li>
-                    <li class="nav-item d-none" id="nav-admin-zone">
-                        <a class="btn btn-sm" href="#" id="nav-admin">Panel</a>
-                    </li>
-
-                </ul>
-            </div>
+    <div class="product-card" data-delay="0">
+      <div class="card-glow"></div>
+      <div class="card-badge">NUEVO</div>
+      <div class="card-img">
+        <div class="product-emoji"></div>
+        <div class="card-img-glow"></div>
+      </div>
+      <div class="card-body">
+        <span class="card-cat">Audio Premium</span>
+        <h3>NovaSound Pro X</h3>
+        <p>Auriculares inalámbricos con cancelación de ruido activa de 40dB y audio espacial 3D.</p>
+        <div class="card-footer">
+          <span class="price">€249<small>.99</small></span>
+          <button class="btn-add">+ Añadir</button>
         </div>
-    </nav>
-</header>
-<div class="hero-intro">
-    <p class="hero-slogan">TECHNOVA, TECNOLOGÍA DISEÑADA PARA BRILLAR</p>
-    <p class="hero-subtitle">Innovación que se siente en cada interacción.</p>
-</div>
-
-    <!-- HERO -->
-    <section class="hero-slider">
-
-        <div class="hero-text">
-
-            <div class="hero-category active">
-                <h1>Monitores de Alta Precisión</h1>
-                <p>Colores vibrantes, máxima resolución y fluidez para trabajo y gaming.</p>
-                <a class="btn" href="#catalogo-container">Ver monitores</a>
-            </div>
-
-            <div class="hero-category">
-                <h1>Teclados Mecánicos</h1>
-                <p>Precisión, velocidad y una experiencia de escritura superior.</p>
-                <a class="btn" href="#catalogo-container">Ver teclados</a>
-            </div>
-
-            <div class="hero-category">
-                <h1>Ratones de Alto Rendimiento</h1>
-                <p>Control absoluto y precisión milimétrica para cada movimiento.</p>
-                <a class="btn" href="#catalogo-container">Ver ratones</a>
-            </div>
-
-        </div>
-
-        <div class="hero-images">
-
-            <img src="img/Monitor-Samsung-Odyssey-G5-frontal.png" class="hero-slide active" alt="Monitor">
-           <img src="img/Teclado-NewSkill-Pyros-pro-frontal.png" class="hero-slide" alt="Teclado">
-            <img src="img/Logitech-G-G102-LightSync-Frontal.png" class="hero-slide" alt="Ratón">
-        </div>
-
-    </section>
-
-    <!-- CONTENIDO -->
-    <main class="container-fluid my-4">
-
-        <div class="d-flex align-items-center justify-content-between mb-3">
-
-            <h2 class="m-0 titulo-catalogo">Catálogo</h2>
-
-            <input type="text" id="buscador-productos" class="form-control w-auto" placeholder="Buscar producto...">
-
-        </div>
-
-        <div id="catalogo-container" class="row g-3"></div>
-        <div id="status-message" class="mt-3"></div>
-
-    </main>
-
-    <!-- MODAL LOGIN -->
-
-    <div class="modal fade modal-right" id="loginModal" tabindex="-1">
-
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <form id="login-form">
-
-                    <div class="modal-body p-4">
-
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <h5 class="modal-title">Login</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" id="login-email" placeholder="email@correo.com"
-                                required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="login-password" placeholder="********"
-                                required>
-                        </div>
-
-                        <div class="alert alert-danger d-none" id="login-error">
-                            Email o contraseña incorrectos.
-                        </div>
-
-                        <div class="d-flex justify-content-between align-items-center mt-4">
-
-                            <span class="register-text">
-                                ¿No tiene cuenta? <a href="#" id="register-link">Registrar</a>
-                            </span>
-
-                            <div>
-
-                                <button type="button" class="btn btn-secondary" id="login-cancel"
-                                    data-bs-dismiss="modal">
-                                    Cancelar
-                                </button>
-
-                                <button type="submit" class="btn btn-primary" id="login-submit">
-                                    Entrar
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </form>
-
-            </div>
-        </div>
+      </div>
     </div>
 
-    <!-- SCRIPTS -->
+    <div class="product-card featured" data-delay="100">
+      <div class="card-glow"></div>
+      <div class="card-badge badge-hot">HOT</div>
+      <div class="card-img">
+        <div class="product-emoji"></div>
+        <div class="card-img-glow"></div>
+      </div>
+      <div class="card-body">
+        <span class="card-cat">Wearable</span>
+        <h3>NovaPulse Watch</h3>
+        <p>Smartwatch con monitor de salud avanzado, GPS integrado y pantalla AMOLED de 2".</p>
+        <div class="card-footer">
+          <span class="price">€399<small>.00</small></span>
+          <button class="btn-add">+ Añadir</button>
+        </div>
+      </div>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/app.js"></script>
+    <div class="product-card" data-delay="200">
+      <div class="card-glow"></div>
+      <div class="card-badge badge-sale">-30%</div>
+      <div class="card-img">
+        <div class="product-emoji"></div>
+        <div class="card-img-glow"></div>
+      </div>
+      <div class="card-body">
+        <span class="card-cat">Gaming</span>
+        <h3>NovaCtrl Elite</h3>
+        <p>Mando gaming con respuesta háptica de 4K, gatillos adaptativos y RGB personalizable.</p>
+        <div class="card-footer">
+          <span class="price">€129<small>.99</small></span>
+          <button class="btn-add">+ Añadir</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="view-all">
+    <a href="catalogo.html" class="btn-outline-lg">Ver Catálogo Completo →</a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="nosotros">
+  <div class="features-inner">
+
+    <!-- VISUAL -->
+    <div class="features-visual">
+      <div class="terminal" id="terminalBox">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="t-dot dot-red"></span>
+            <span class="t-dot dot-yellow"></span>
+            <span class="t-dot dot-green"></span>
+          </div>
+          <span class="terminal-title">technova.exe</span>
+        </div>
+
+        <div class="terminal-body" id="terminalBody">
+          <div class="terminal-line">
+            <span class="t-prompt">→</span>
+            <span class="t-text" id="terminalText"></span>
+            <span class="t-cursor">█</span>
+          </div>
+        </div>
+
+<canvas id="networkCanvas" class="network-canvas" style="width:100%; height:260px;"></canvas>      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="features-content">
+      <span class="section-tag">¿Por qué TechNova?</span>
+      <h2 class="section-title">Más allá de lo <span class="gradient-text">ordinario</span></h2>
+      <p class="features-desc">
+        Como una nova que ilumina el universo, TechNova reúne los productos 
+        tecnológicos más brillantes del mercado en un solo lugar.
+      </p>
+
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feat-icon">✦</div>
+          <div>
+            <h4>Constelación de Productos</h4>
+            <p>Un catálogo cuidadosamente seleccionado donde cada producto brilla por su propia calidad.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feat-icon">✦</div>
+          <div>
+            <h4>Órbita Constante</h4>
+            <p>Siempre en movimiento, actualizamos nuestra oferta con las últimas novedades tecnológicas.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feat-icon">✦</div>
+          <div>
+            <h4>Gravedad Zero</h4>
+            <p>Una experiencia de compra sin fricciones, diseñada para que llegues a tu destino sin obstáculos.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="features-actions">
+        <a href="catalogo.html" class="btn-neon">Explorar el universo</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SCRIPTS -->
+<script src="js/app.js"></script>
+<script src="js/navbar.js"></script>
+
 </body>
+</html>
