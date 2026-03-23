@@ -48,7 +48,7 @@ export function renderizarCarrito() {
 
         contenedor.innerHTML += `
             <div class="d-flex align-items-center mb-3">
-                <img src="${p.imagen}" width="60" class="me-3">
+                <img src="img/${p.imagen}" width="60" class="me-3">
                 <div class="flex-grow-1">
                     <div>${p.nombre}</div>
                     <small>${p.cantidad} x ${p.precio}€</small>
@@ -122,4 +122,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
-

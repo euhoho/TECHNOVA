@@ -114,7 +114,7 @@ let todosLosProductos = [];
                 idProducto: parseInt(btn.dataset.id),
                 nombre: btn.dataset.nombre,
                 precio: parseFloat(btn.dataset.precio),
-                imagen: "img/" + btn.dataset.imagen,
+                imagen: btn.dataset.imagen,
                 cantidad: 1
             };
 
