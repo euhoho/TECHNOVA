@@ -100,6 +100,31 @@
         <h2 class="m-0 titulo-catalogo">Catálogo</h2>
         <input type="text" id="buscador-productos" class="form-control buscador-catalogo" placeholder="Buscar producto...">
     </div>
+    <div class="filtros-superiores mb-4">
+
+    <select id="ordenar-productos" class="form-select select-ordenar">
+        <option value="default">Ordenar</option>
+        <option value="nombre-asc">Nombre A-Z</option>
+        <option value="nombre-desc">Nombre Z-A</option>
+        <option value="precio-asc">Precio menor</option>
+        <option value="precio-desc">Precio mayor</option>
+    </select>
+
+    <div class="filtro-precio-box">
+        <div class="slider-wrapper">
+            <div class="slider-track"></div>
+            <div class="slider-range" id="slider-range"></div>
+
+            <input type="range" id="precio-min" step="1">
+            <input type="range" id="precio-max" step="1">
+        </div>
+
+        <div class="precio-valores">
+            <span id="precio-min-valor">0.00 €</span>
+            <span id="precio-max-valor">1000.00 €</span>
+        </div>
+    </div>
+</div>
 
     <div class="categorias-grid mb-5">
         <button class="categoria-card active" data-categoria="todos">
