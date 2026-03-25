@@ -248,6 +248,33 @@
   justify-content: center;
 }
 .cart-count.bump { animation: cartBump 0.3s ease; }
+
+/* ── User zone ── */
+.user-zone {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+#nav-saludo { font-weight: 500; }
+
+/* ── Admin zone ── */
+.admin-zone { margin-left: 8px; }
+.btn-admin {
+  background: var(--rosa);
+  color: var(--bg);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--t);
+}
+.btn-admin:hover {
+  background: var(--magenta);
+  transform: translateY(-1px);
+}
 @keyframes cartBump {
   0%   { transform: scale(1); }
   50%  { transform: scale(1.4); }

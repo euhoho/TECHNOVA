@@ -1,29 +1,24 @@
-/* ════════════════════════════════════════════
-   TECHNOVA — carrito.js
-   Carpeta: /js/carrito.js
-════════════════════════════════════════════ */
+// carrito.js
 
 export function getCarrito() {
-    return JSON.parse(sessionStorage.getItem('carrito')) || [];
+    return JSON.parse(sessionStorage.getItem("carrito")) || [];
 }
 
 export function guardarCarrito(carrito) {
-    sessionStorage.setItem('carrito', JSON.stringify(carrito));
+    sessionStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
 export function agregarProducto(producto) {
-    const carrito = getCarrito();
+    let carrito = getCarrito();
+
     const existente = carrito.find(p => p.idProducto === producto.idProducto);
+
     if (existente) {
         existente.cantidad++;
     } else {
-        carrito.push({ ...producto, cantidad: 1 });
+        carrito.push(producto);
     }
-    guardarCarrito(carrito);
-}
 
-export function eliminarProductoCarrito(idProducto) {
-    const carrito = getCarrito().filter(p => p.idProducto !== idProducto);
     guardarCarrito(carrito);
 }
 
@@ -32,86 +27,98 @@ export function contarItems() {
 }
 
 export function actualizarContadorCarrito() {
-    const contador = document.getElementById('cart-count');
-    if (contador) contador.textContent = contarItems();
+    const contador = document.getElementById("cart-count");
+    if (!contador) return;
 
-    // También actualiza el contador del navbar compartido
-    const cartCount = document.getElementById('cartCount');
-    if (cartCount) cartCount.textContent = contarItems();
+    contador.textContent = contarItems();
 }
 
 export function renderizarCarrito() {
-    const carrito    = getCarrito();
-    const contenedor = document.getElementById('carrito-contenido');
+    const carrito = getCarrito();
+    const contenedor = document.getElementById("carrito-contenido");
+
     if (!contenedor) return;
 
-    contenedor.innerHTML = '';
+    contenedor.innerHTML = "";
+
     let total = 0;
 
     carrito.forEach(p => {
         total += p.precio * p.cantidad;
+
         contenedor.innerHTML += `
             <div class="d-flex align-items-center mb-3">
-                <img src="${p.imagen}" width="60" class="me-3"
-                     onerror="this.style.display='none'">
+                <img src="img/${p.imagen}" width="60" class="me-3">
                 <div class="flex-grow-1">
                     <div>${p.nombre}</div>
-                    <small>${p.cantidad} x ${p.precio.toFixed(2)} €</small>
+                    <small>${p.cantidad} x ${p.precio}€</small>
                 </div>
-                <div class="fw-bold">${(p.precio * p.cantidad).toFixed(2)} €</div>
-            </div>`;
+                <div class="fw-bold">
+                    ${(p.precio * p.cantidad).toFixed(2)}€
+                </div>
+            </div>
+        `;
     });
 
-    const totalEl = document.getElementById('carrito-total');
-    if (totalEl) totalEl.textContent = total.toFixed(2);
+    document.getElementById("carrito-total").textContent = total.toFixed(2);
 }
 
-export async function finalizarCompra() {
-    const carrito  = getCarrito();
-    const email    = sessionStorage.getItem('email');
-    const password = sessionStorage.getItem('password');
+    export async function finalizarCompra() {
 
-    if (!email || !password) {
-        alert('Debes iniciar sesión para realizar un pedido');
-        return;
-    }
+        const carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
 
-    if (carrito.length === 0) {
-        alert('El carrito está vacío');
-        return;
-    }
-
-    const pedido = {
-        usuario: { email, password },
-        lineas: carrito.map(p => ({
-            idProducto: p.idProducto,
-            cantidad:   p.cantidad
-        }))
-    };
-
-    const response = await fetch('http://localhost:8080/api/pedidos/crear?descontarStock=true', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(pedido)
-    });
-
-    if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.mensaje || 'Error al realizar el pedido');
-    }
-
-    guardarCarrito([]);
-    actualizarContadorCarrito();
+        const email = sessionStorage.getItem("email");
+        const password = sessionStorage.getItem("password"); // si lo guardas
+        if (!email || !password) {
+    alert("Debes iniciar sesión para realizar un pedido");
+    return;
 }
 
-/* ── Inicialización ── */
-document.addEventListener('DOMContentLoaded', () => {
-    actualizarContadorCarrito();
+        const pedido = {
+            usuario: {
+                email: email,
+                password: password
+            },
+            lineas: carrito.map(p => ({
+                idProducto: p.idProducto,
+                cantidad: p.cantidad
+            }))
+        };
 
-    const carritoOffcanvas = document.getElementById('carritoOffcanvas');
+        try {
+            const response = await fetch("http://localhost:8080/api/pedidos/crear?descontarStock=true", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(pedido)
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+            
+                
+                // 1. Limpiamos el carrito para que no se quede guardado
+                sessionStorage.removeItem("carrito");
+                
+                // 2. Recargamos la página para que cargarProductos() 
+                // vuelva a ejecutarse y traiga el stock actualizado
+                location.reload(); 
+            } else {
+                const errorData = await response.json();
+                alert("Error al realizar el pedido: " + errorData.mensaje);
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const carritoOffcanvas = document.getElementById("carritoOffcanvas");
+
     if (carritoOffcanvas) {
-        carritoOffcanvas.addEventListener('show.bs.offcanvas', () => {
+        carritoOffcanvas.addEventListener("show.bs.offcanvas", () => {
             renderizarCarrito();
         });
     }
+
 });

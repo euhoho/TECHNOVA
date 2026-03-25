@@ -30,6 +30,40 @@ async function cargarNavbar() {
   const total   = carrito.reduce((acc, p) => acc + p.cantidad, 0);
   const count   = document.getElementById('cartCount');
   if (count) count.textContent = total;
+
+  // Actualizar UI si hay sesión
+  const email = sessionStorage.getItem("email");
+  const rol = sessionStorage.getItem("rol");
+  if (email) {
+    actualizarUIUsuario(email, rol);
+  }
+
+  // Event listener para logout
+  const btnLogout = document.getElementById("btnLogout");
+  if (btnLogout) {
+    btnLogout.addEventListener("click", (e) => {
+      e.preventDefault();
+      sessionStorage.clear();
+      location.reload();
+    });
+  }
 }
+
+function actualizarUIUsuario(email, rol) {
+  const authGroup = document.querySelector(".auth-group");
+  const navUserZone = document.getElementById("nav-user-zone");
+  const navSaludo = document.getElementById("nav-saludo");
+  const navAdminZone = document.getElementById("nav-admin-zone");
+  
+  if (authGroup) authGroup.classList.add("d-none");
+  if (navUserZone) navUserZone.classList.remove("d-none");
+  if (navSaludo) navSaludo.textContent = "Hola, " + email;
+  if (navAdminZone && rol === "ADMINISTRADOR") {
+      navAdminZone.classList.remove("d-none");
+  }
+}
+
+// Hacer global para que app.js pueda llamarla
+window.actualizarUIUsuario = actualizarUIUsuario;
 
 cargarNavbar();
