@@ -302,8 +302,34 @@ async function login(e) {
     
     if (!emailInput || !passwordInput) return;
     
-    const email = emailInput.value;
+    const email = emailInput.value.trim();
     const password = passwordInput.value;
+    
+    const errorEl = loginForm.querySelector('.login-error, .cat-login-error');
+
+    // Validar email
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        if (errorEl) {
+            errorEl.textContent = '⚠️ Introduce un email válido (ej: usuario@dominio.com)';
+            errorEl.classList.remove("d-none");
+        }
+        return;
+    }
+
+    // Validar contraseña
+    if (!password) {
+        if (errorEl) {
+            errorEl.textContent = '⚠️ La contraseña es requerida';
+            errorEl.classList.remove("d-none");
+        }
+        return;
+    }
+
+    // Limpiar mensaje de error previo
+    if (errorEl) {
+        errorEl.classList.add("d-none");
+        errorEl.textContent = '';
+    }
 
     try {
         const response = await fetch("http://localhost:8080/api/login", {
@@ -315,16 +341,24 @@ async function login(e) {
         const data = await response.json();
         if (data.status !== "ok") throw new Error(data.mensaje);
 
-        sessionStorage.setItem("email", data.usuario.email);
-        sessionStorage.setItem("password", password);
-        sessionStorage.setItem("rol", data.usuario.rol);
+        localStorage.setItem("email", data.usuario.email);
+        localStorage.setItem("password", password);
+        localStorage.setItem("rol", data.usuario.rol);
+
+        // Disparar evento personalizado para que todas las páginas se actualicen
+        const event = new CustomEvent('loginChanged', {
+            detail: { email: data.usuario.email, rol: data.usuario.rol }
+        });
+        window.dispatchEvent(event);
 
         actualizarUIUsuario(data.usuario.email, data.usuario.rol);
 
         // Si la función global existe (navbar cargado), actualizar inmediatamente
-        if (window.actualizarUIUsuario) {
-            window.actualizarUIUsuario(data.usuario.email, data.usuario.rol);
-        }
+        setTimeout(() => {
+            if (window.actualizarUIUsuario) {
+                window.actualizarUIUsuario(data.usuario.email, data.usuario.rol);
+            }
+        }, 100);
 
         // Cerrar modal según el tipo
         const modalBootstrap = document.getElementById('loginModal');
@@ -345,12 +379,15 @@ async function login(e) {
             loginModal.classList.remove("open");
         }
 
-        console.log("Login correcto:", data);
+        console.log("Login correcto:");
 
     } catch (error) {
         console.error("Error login:", error);
         const errorEl = loginForm.querySelector('.login-error, .cat-login-error');
-        if (errorEl) errorEl.classList.remove("d-none");
+        if (errorEl) {
+            errorEl.textContent = '⚠️ ' + (error.message || 'Error al iniciar sesión. Verifica tu email y contraseña.');
+            errorEl.classList.remove("d-none");
+        }
     }
 }
 

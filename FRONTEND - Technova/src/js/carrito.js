@@ -1,11 +1,11 @@
 // carrito.js
 
 export function getCarrito() {
-    return JSON.parse(sessionStorage.getItem("carrito")) || [];
+    return JSON.parse(localStorage.getItem("carrito")) || [];
 }
 
 export function guardarCarrito(carrito) {
-    sessionStorage.setItem("carrito", JSON.stringify(carrito));
+    localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
 export function agregarProducto(producto) {
@@ -65,10 +65,10 @@ export function renderizarCarrito() {
 
     export async function finalizarCompra() {
 
-        const carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
+        const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-        const email = sessionStorage.getItem("email");
-        const password = sessionStorage.getItem("password"); // si lo guardas
+        const email = localStorage.getItem("email");
+        const password = localStorage.getItem("password"); // si lo guardas
         if (!email || !password) {
     alert("Debes iniciar sesión para realizar un pedido");
     return;
@@ -97,11 +97,12 @@ export function renderizarCarrito() {
             
                 
                 // 1. Limpiamos el carrito para que no se quede guardado
-                sessionStorage.removeItem("carrito");
+                localStorage.removeItem("carrito");
                 
                 // 2. Recargamos la página para que cargarProductos() 
                 // vuelva a ejecutarse y traiga el stock actualizado
                 location.reload(); 
+                alert("Pedido realizado con éxito. ID del pedido: " + data.idPedido);
             } else {
                 const errorData = await response.json();
                 alert("Error al realizar el pedido: " + errorData.mensaje);
@@ -109,16 +110,7 @@ export function renderizarCarrito() {
         } catch (error) {
             console.error("Error:", error);
         }
+        
     }
 
-document.addEventListener("DOMContentLoaded", () => {
 
-    const carritoOffcanvas = document.getElementById("carritoOffcanvas");
-
-    if (carritoOffcanvas) {
-        carritoOffcanvas.addEventListener("show.bs.offcanvas", () => {
-            renderizarCarrito();
-        });
-    }
-
-});

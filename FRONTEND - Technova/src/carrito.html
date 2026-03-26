@@ -122,7 +122,7 @@
         <button class="modal-close" id="modalClose">✕</button>
       </div>
       <div class="modal-body">
-        <form id="loginForm">
+        <form id="loginForm" novalidate>
           <div class="form-group">
             <label>Email</label>
             <input type="email" id="loginEmail" placeholder="tu@email.com" required />
@@ -145,15 +145,40 @@
 
 <script>
 function getCarrito() {
-    return JSON.parse(sessionStorage.getItem("carrito")) || [];
+    return JSON.parse(localStorage.getItem("carrito")) || [];
 }
 
 function guardarCarrito(carrito) {
-    sessionStorage.setItem("carrito", JSON.stringify(carrito));
+    localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
 function fmt(n) {
     return n.toFixed(2) + " €";
+}
+
+/* ========================
+   TOAST NOTIFICATIONS
+======================== */
+function mostrarToast(mensaje, tipo = 'success') {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+
+    // Limpiar clases anteriores
+    toast.className = 'toast';
+    
+    // Agregar tipo
+    toast.classList.add(tipo);
+    
+    // Establecer mensaje
+    toast.textContent = mensaje;
+    
+    // Mostrar toast
+    setTimeout(() => toast.classList.add('show'), 10);
+    
+    // Ocultar después de 4 segundos
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 4000);
 }
 
 /* ========================
@@ -164,28 +189,37 @@ function renderizarCarrito() {
     const contenedor = document.getElementById("carritoItems");
     const vacio = document.getElementById("carritoVacio");
 
-    contenedor.innerHTML = "";
+    if (!contenedor) return; // Si no existe el contenedor, salir
+
+    // Limpiar solo los items del carrito, no el mensaje de vacío
+    const items = contenedor.querySelectorAll('.carrito-item');
+    items.forEach(item => item.remove());
 
     if (carrito.length === 0) {
-        vacio.style.display = "block";
+        if (vacio) vacio.style.display = "block";
         actualizarResumen([]);
         return;
     }
 
-    vacio.style.display = "none";
+    if (vacio) vacio.style.display = "none";
 
     carrito.forEach(p => {
         const div = document.createElement("div");
-        div.className = "d-flex align-items-center mb-3";
+        div.className = "carrito-item";
 
         div.innerHTML = `
-            <img src="${p.imagen}" width="60" class="me-3">
-            <div class="flex-grow-1">
-                <div>${p.nombre}</div>
-                <small>${p.cantidad} x ${fmt(p.precio)}</small>
+            <div class="carrito-item-img">
+                <img src="${p.imagen}" alt="${p.nombre}">
             </div>
-            <div class="fw-bold">${fmt(p.precio * p.cantidad)}</div>
-            <button onclick="eliminarProducto(${p.idProducto})">❌</button>
+            <div class="carrito-item-info">
+                <div class="carrito-item-nombre">${p.nombre}</div>
+                <div class="carrito-item-cantidad">Cantidad: <span>${p.cantidad}</span></div>
+            </div>
+            <div class="carrito-item-precio">
+                <div class="carrito-item-unitario">${fmt(p.precio)} c/u</div>
+                <div class="carrito-item-total">${fmt(p.precio * p.cantidad)}</div>
+            </div>
+            <button class="carrito-item-delete" onclick="eliminarProducto(${p.idProducto})" title="Eliminar producto">❌</button>
         `;
 
         contenedor.appendChild(div);
@@ -198,13 +232,24 @@ function renderizarCarrito() {
    RESUMEN
 ======================== */
 function actualizarResumen(carrito) {
-    const subtotal = carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
-    const iva = subtotal * 0.21;
-    const total = subtotal + iva;
+    const subtotalEl = document.getElementById("resumenSubtotal");
+    const ivaEl = document.getElementById("resumenIva");
+    const totalEl = document.getElementById("resumenTotal");
 
-    document.getElementById("resumenSubtotal").textContent = fmt(subtotal);
-    document.getElementById("resumenIva").textContent = fmt(iva);
-    document.getElementById("resumenTotal").textContent = fmt(total);
+    if (carrito.length === 0) {
+        if (subtotalEl) subtotalEl.textContent = "0.00 €";
+        if (ivaEl) ivaEl.textContent = "0.00 €";
+        if (totalEl) totalEl.textContent = "0.00 €";
+        return;
+    }
+
+    const total = carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
+    const subtotal = total / 1.21;  // Precio base sin IVA
+    const iva = subtotal * 0.21;    // IVA es el 21% del subtotal
+
+    if (subtotalEl) subtotalEl.textContent = fmt(subtotal);
+    if (ivaEl) ivaEl.textContent = fmt(iva);
+    if (totalEl) totalEl.textContent = fmt(total);
 }
 
 /* ========================
@@ -235,17 +280,24 @@ async function login(e) {
         const data = await res.json();
         if (data.status !== "ok") throw new Error();
 
-        sessionStorage.setItem("email", email);
-        sessionStorage.setItem("password", password);
+        localStorage.setItem("email", email);
+        localStorage.setItem("password", password);
+        localStorage.setItem("rol", data.usuario.rol);
+
+        // Disparar evento para que otras páginas se actualicen
+        const event = new CustomEvent('loginChanged', {
+            detail: { email: email, rol: data.usuario.rol }
+        });
+        window.dispatchEvent(event);
 
         actualizarSesionUI();
+        mostrarToast("¡Bienvenido a TechNova!", "success");
 
         const overlay = document.getElementById("modalOverlay");
         if (overlay) overlay.classList.remove("open");
 
     } catch {
-        const errorDiv = document.getElementById("loginError");
-        if (errorDiv) errorDiv.classList.remove("d-none");
+        mostrarToast("Email o contraseña incorrectos", "error");
     }
 }
 
@@ -253,7 +305,7 @@ async function login(e) {
    UI SESIÓN
 ======================== */
 function actualizarSesionUI() {
-    const email = sessionStorage.getItem("email");
+    const email = localStorage.getItem("email");
 
     const loginBox = document.getElementById("resumenLogin");
     const userBox = document.getElementById("resumenLogueado");
@@ -273,8 +325,8 @@ function actualizarSesionUI() {
 ======================== */
 async function finalizarCompra() {
     const carrito = getCarrito();
-    const email = sessionStorage.getItem("email");
-    const password = sessionStorage.getItem("password");
+    const email = localStorage.getItem("email");
+    const password = localStorage.getItem("password");
 
     if (!email) {
         alert("Debes iniciar sesión");
@@ -294,10 +346,10 @@ async function finalizarCompra() {
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify(pedido)
     });
-
-    sessionStorage.removeItem("carrito");
+    localStorage.removeItem("carrito");
     renderizarCarrito();
-    alert("Pedido realizado");
+    mostrarToast("¡Pedido confirmado! Gracias por comprar en TechNova.", "success");
+    location.reload();
 }
 
 /* ========================
@@ -346,7 +398,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnLogout = document.getElementById("btnLogout");
     if (btnLogout) {
         btnLogout.addEventListener("click", () => {
-            sessionStorage.clear();
+            localStorage.clear();
             location.reload();
         });
     }
