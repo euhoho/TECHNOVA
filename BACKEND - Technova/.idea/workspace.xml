@@ -7,8 +7,12 @@
     <list default="true" id="ddbbb43a-9f73-442e-8485-78cb4f3f3b42" name="Changes" comment="UPDATE: actualizamos POST crear-producto con la verificación de usuario.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/navbar.css" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/navbar.js" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/navbar.html" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <list id="afabca47-1a0b-4dde-9252-06d4aa3c85c7" name="aplicattion properties" comment="" />
     <list id="5676eb22-a9ea-4ea5-8e07-63942807fad0" name="Changes by euhoho" comment="" />
