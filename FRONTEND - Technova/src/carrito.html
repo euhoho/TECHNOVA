@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Carrito — TechNova</title>
   <link rel="stylesheet" href="css/carrito.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 </head>
 <body>
@@ -83,7 +84,7 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
               Inicia sesión para confirmar el pedido
             </div>
-            <button class="btn-neon w-full" id="btnAbrirLogin">Iniciar Sesión</button>
+            <button class="btn-neon w-full" id="btnLogin">Iniciar Sesión</button>
           </div>
 
           <div class="resumen-logueado d-none" id="resumenLogueado">
@@ -115,26 +116,32 @@
   </main>
 
   <!-- ════════════════ MODAL LOGIN ════════════════ -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal-card" id="modalCard">
-      <div class="modal-header">
-        <h3>Iniciar Sesión</h3>
-        <button class="modal-close" id="modalClose">✕</button>
+  <div class="nb-modal-overlay" id="nbLoginOverlay">
+    <div class="nb-modal-card">
+      <div class="nb-modal-header">
+        <h5 class="cat-modal-title">Iniciar Sesión</h5>
+        <button class="nb-modal-close" id="nbLoginClose">✕</button>
       </div>
-      <div class="modal-body">
-        <form id="loginForm" novalidate>
-          <div class="form-group">
+      <div class="nb-modal-body">
+        <form id="nbLoginForm" novalidate="">
+          <div class="nb-form-group">
             <label>Email</label>
-            <input type="email" id="loginEmail" placeholder="tu@email.com" required />
+            <input type="email" class="cat-input" id="nbLoginEmail" placeholder="tu@email.com" required="">
           </div>
-          <div class="form-group">
+          <div class="nb-form-group">
             <label>Contraseña</label>
-            <input type="password" id="loginPassword" placeholder="••••••••" required />
+            <input type="password" class="cat-input" id="nbLoginPassword" placeholder="••••••••" required="">
           </div>
-          <div class="login-error d-none" id="loginError">
+          <div class="nb-form-error d-none" id="nbLoginError">
             Email o contraseña incorrectos.
           </div>
-          <button type="submit" class="btn-neon w-full">Entrar</button>
+          <div class="cat-modal-footer-row">
+            <span class="register-text">¿No tienes cuenta? <a href="#">Registrarse</a></span>
+            <div class="cat-modal-btns">
+              <button type="button" class="cat-btn-secondary" id="nbLoginCancel">Cancelar</button>
+              <button type="submit" class="nb-btn-neon">Entrar</button>
+            </div>
+          </div>
         </form>
       </div>
     </div>
@@ -142,6 +149,7 @@
 
   <!-- ════════════════ TOAST ════════════════ -->
   <div class="toast" id="toast"></div>
+  <script src="js/navbar.js"></script>
 
 <script>
 function getCarrito() {
@@ -264,42 +272,7 @@ function eliminarProducto(id) {
 /* ========================
    LOGIN
 ======================== */
-async function login(e) {
-    e.preventDefault();
-
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-
-    try {
-        const res = await fetch("http://localhost:8080/api/login", {
-            method: "POST",
-            headers: {"Content-Type":"application/json"},
-            body: JSON.stringify({ email, password })
-        });
-
-        const data = await res.json();
-        if (data.status !== "ok") throw new Error();
-
-        localStorage.setItem("email", email);
-        localStorage.setItem("password", password);
-        localStorage.setItem("rol", data.usuario.rol);
-
-        // Disparar evento para que otras páginas se actualicen
-        const event = new CustomEvent('loginChanged', {
-            detail: { email: email, rol: data.usuario.rol }
-        });
-        window.dispatchEvent(event);
-
-        actualizarSesionUI();
-        mostrarToast("¡Bienvenido a TechNova!", "success");
-
-        const overlay = document.getElementById("modalOverlay");
-        if (overlay) overlay.classList.remove("open");
-
-    } catch {
-        mostrarToast("Email o contraseña incorrectos", "error");
-    }
-}
+// El login se gestiona desde js/navbar.js con el modal compartido.
 
 /* ========================
    UI SESIÓN
@@ -360,35 +333,45 @@ document.addEventListener("DOMContentLoaded", () => {
     renderizarCarrito();
     actualizarSesionUI();
 
-    const loginForm = document.getElementById("loginForm");
-    if (loginForm) {
-        loginForm.addEventListener("submit", login);
-    }
-
-    const btnAbrirLogin = document.getElementById("btnAbrirLogin");
-    if (btnAbrirLogin) {
-        btnAbrirLogin.addEventListener("click", () => {
-            const overlay = document.getElementById("modalOverlay");
+    /* Abrir login */
+    const btnLogin = document.getElementById("btnLogin");
+    if (btnLogin) {
+        btnLogin.addEventListener("click", e => {
+            e.preventDefault();
+            const overlay = document.getElementById("nbLoginOverlay");
             if (overlay) overlay.classList.add("open");
         });
     }
 
-    const modalClose = document.getElementById("modalClose");
-    if (modalClose) {
-        modalClose.addEventListener("click", () => {
-            const overlay = document.getElementById("modalOverlay");
+    /* Cerrar login */
+    const nbLoginClose = document.getElementById("nbLoginClose");
+    if (nbLoginClose) {
+        nbLoginClose.addEventListener("click", () => {
+            const overlay = document.getElementById("nbLoginOverlay");
             if (overlay) overlay.classList.remove("open");
         });
     }
 
-    const modalOverlay = document.getElementById("modalOverlay");
-    if (modalOverlay) {
-        modalOverlay.addEventListener("click", (event) => {
-            if (event.target === modalOverlay) {
-                modalOverlay.classList.remove("open");
+    /* Cerrar login con botón cancelar */
+    const nbLoginCancel = document.getElementById("nbLoginCancel");
+    if (nbLoginCancel) {
+        nbLoginCancel.addEventListener("click", () => {
+            const overlay = document.getElementById("nbLoginOverlay");
+            if (overlay) overlay.classList.remove("open");
+        });
+    }
+
+    /* Cerrar login al clickear fuera */
+    const nbLoginOverlay = document.getElementById("nbLoginOverlay");
+    if (nbLoginOverlay) {
+        nbLoginOverlay.addEventListener("click", e => {
+            if (e.target === nbLoginOverlay) {
+                nbLoginOverlay.classList.remove("open");
             }
         });
     }
+
+    window.addEventListener('loginChanged', actualizarSesionUI);
 
     const btnConfirmar = document.getElementById("btnConfirmar");
     if (btnConfirmar) {

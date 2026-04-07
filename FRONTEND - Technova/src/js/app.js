@@ -449,8 +449,8 @@ async function login(e) {
         // Cerrar modal según el tipo
         const modalBootstrap = document.getElementById('loginModal');
         if (modalBootstrap && modalBootstrap.classList.contains('modal') && typeof bootstrap !== 'undefined' && bootstrap.Modal) {
-            const modalInstance = bootstrap.Modal.getInstance(modalBootstrap);
-            if (modalInstance) modalInstance.hide();
+            const modal = bootstrap.Modal.getOrCreateInstance(modalBootstrap);
+            modal.hide();
         }
 
         // Cerrar modal overlay si existe (carrito.html)
@@ -503,6 +503,20 @@ function actualizarUIUsuario(email, rol) {
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    // ══ LIMPIAR BACKDROP DE BOOTSTRAP MODAL ══
+    // Asegurar que Bootstrap Modal limpia el backdrop correctamente
+    const loginModalElement = document.getElementById('loginModal');
+    if (loginModalElement && loginModalElement.classList.contains('modal')) {
+        loginModalElement.addEventListener('hidden.bs.modal', () => {
+            // Remover cualquier backdrop que haya quedado
+            const backdrops = document.querySelectorAll('.modal-backdrop');
+            backdrops.forEach(backdrop => backdrop.remove());
+            // Permitir scroll en body
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = 'auto';
+        });
+    }
+
     // ══ INICIALIZAR LOGIN ══
     const loginForm = document.getElementById("login-form") || document.getElementById("loginForm");
     if (loginForm) {
@@ -544,6 +558,12 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Cerrar botón en modal de index.html
         if (e.target.closest("#modal-close-login")) {
+            const modal = document.getElementById("loginModal");
+            if (modal) modal.classList.remove("open");
+        }
+        
+        // Cerrar botón cancelar en modal de index.html
+        if (e.target.closest("#btn-cancel-login")) {
             const modal = document.getElementById("loginModal");
             if (modal) modal.classList.remove("open");
         }

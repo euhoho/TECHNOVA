@@ -97,7 +97,9 @@ async function cargarNavbar() {
     });
   }
 
-  /* ── Auth ── */
+  /* ══════════════════════════════════════
+     AUTH — un solo sistema: localStorage
+  ══════════════════════════════════════ */
   function abrirLogin()    { if (loginOverlay)    loginOverlay.classList.add('open'); }
   function cerrarLogin()   {
     if (loginOverlay) loginOverlay.classList.remove('open');
@@ -115,44 +117,55 @@ async function cargarNavbar() {
     if (frm) frm.reset();
   }
 
+  /* Actualiza la zona de auth segun localStorage */
   function actualizarUIAuth() {
-    const email     = sessionStorage.getItem('email');
-    const authGroup = document.querySelector('.auth-group');
-    if (!authGroup) return;
+    const email = localStorage.getItem('email');
+    const rol   = localStorage.getItem('rol');
+
+    const authGroup    = document.querySelector('.auth-group');
+    const navUserZone  = document.getElementById('nav-user-zone');
+    const navSaludo    = document.getElementById('nav-saludo');
+    const navAdminZone = document.getElementById('nav-admin-zone');
 
     if (email) {
-      authGroup.innerHTML = `
-        <div class="nb-user-zone">
-          <span class="nb-user-email">${email}</span>
-          <button class="nb-btn-logout" id="nbLogout">Salir</button>
-        </div>`;
-      const logoutBtn = document.getElementById('nbLogout');
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-          sessionStorage.clear();
-          actualizarUIAuth();
-        });
-      }
+      if (authGroup)    authGroup.classList.add('d-none');
+      if (navUserZone)  navUserZone.classList.remove('d-none');
+      if (navSaludo)    navSaludo.textContent = 'Hola, ' + email;
+      if (navAdminZone && rol === 'ADMINISTRADOR') navAdminZone.classList.remove('d-none');
     } else {
-      authGroup.innerHTML = `
-        <a href="#" class="btn-outline" id="btnLoginDyn">Iniciar Sesión</a>
-        <a href="#" class="btn-neon" id="btnRegisterDyn">Registrarse</a>`;
-      document.getElementById('btnLoginDyn').addEventListener('click', e => { e.preventDefault(); abrirLogin(); });
-      document.getElementById('btnRegisterDyn').addEventListener('click', e => { e.preventDefault(); abrirRegister(); });
+      if (authGroup)    authGroup.classList.remove('d-none');
+      if (navUserZone)  navUserZone.classList.add('d-none');
+      if (navAdminZone) navAdminZone.classList.add('d-none');
     }
   }
 
   actualizarUIAuth();
+  window.actualizarUIUsuario = actualizarUIAuth;
 
-  /* Cerrar modales al hacer clic fuera */
-  if (loginOverlay) {
-    loginOverlay.addEventListener('click', e => { if (e.target === loginOverlay) cerrarLogin(); });
-  }
-  if (registerOverlay) {
-    registerOverlay.addEventListener('click', e => { if (e.target === registerOverlay) cerrarRegister(); });
-  }
+  /* ── Abrir modales desde botones del navbar ── */
+  document.addEventListener('click', e => {
+    if (e.target.closest('#btnLogin, #btnLoginDyn')) {
+      e.preventDefault();      const pageModal = document.getElementById('loginModal');
+      if (pageModal) {
+        if (pageModal.classList.contains('modal') && typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+          new bootstrap.Modal(pageModal).show();
+        } else {
+          pageModal.classList.add('open');
+        }
+        return;
+      }      abrirLogin();
+    }
+    if (e.target.closest('#btnRegister, #btnRegisterDyn')) {
+      e.preventDefault();
+      abrirRegister();
+    }
+  });
 
-  /* Botones cerrar y switch */
+  /* ── Cerrar modales al clicar fuera ── */
+  if (loginOverlay)    loginOverlay.addEventListener('click',    e => { if (e.target === loginOverlay)    cerrarLogin(); });
+  if (registerOverlay) registerOverlay.addEventListener('click', e => { if (e.target === registerOverlay) cerrarRegister(); });
+
+  /* ── Botones cerrar y switch ── */
   const nbLoginClose    = document.getElementById('nbLoginClose');
   const nbRegisterClose = document.getElementById('nbRegisterClose');
   const nbGoRegister    = document.getElementById('nbGoRegister');
@@ -161,7 +174,7 @@ async function cargarNavbar() {
   if (nbLoginClose)    nbLoginClose.addEventListener('click', cerrarLogin);
   if (nbRegisterClose) nbRegisterClose.addEventListener('click', cerrarRegister);
   if (nbGoRegister)    nbGoRegister.addEventListener('click', e => { e.preventDefault(); cerrarLogin(); abrirRegister(); });
-  if (nbGoLogin)       nbGoLogin.addEventListener('click', e => { e.preventDefault(); cerrarRegister(); abrirLogin(); });
+  if (nbGoLogin)       nbGoLogin.addEventListener('click',    e => { e.preventDefault(); cerrarRegister(); abrirLogin(); });
 
   /* ── Login submit ── */
   const nbLoginForm = document.getElementById('nbLoginForm');
@@ -180,11 +193,14 @@ async function cargarNavbar() {
         });
         const data = await res.json();
         if (data.status !== 'ok') throw new Error();
-        sessionStorage.setItem('email',    data.usuario.email);
-        sessionStorage.setItem('password', password);
-        sessionStorage.setItem('rol',      data.usuario.rol);
+
+        localStorage.setItem('email',    data.usuario.email);
+        localStorage.setItem('password', password);
+        localStorage.setItem('rol',      data.usuario.rol);
+
         cerrarLogin();
         actualizarUIAuth();
+        actualizarContadorCarrito();
       } catch {
         errorEl.classList.remove('d-none');
       }
@@ -203,7 +219,7 @@ async function cargarNavbar() {
       errorEl.classList.add('d-none');
 
       if (password !== confirm) {
-        errorEl.textContent = 'Las contraseñas no coinciden.';
+        errorEl.textContent = 'Las contrasenas no coinciden.';
         errorEl.classList.remove('d-none');
         return;
       }
@@ -222,54 +238,38 @@ async function cargarNavbar() {
         abrirLogin();
         document.getElementById('nbLoginEmail').value = email;
       } catch (err) {
-        errorEl.textContent = err.message || 'Error al registrar. Inténtalo de nuevo.';
+        errorEl.textContent = err.message || 'Error al registrar. Intentalo de nuevo.';
         errorEl.classList.remove('d-none');
       }
     });
   }
 
-  /* ── Contador carrito ── */
-  const carrito = JSON.parse(sessionStorage.getItem('carrito')) || [];
-  const total   = carrito.reduce((acc, p) => acc + p.cantidad, 0);
-  const count   = document.getElementById('cartCount');
-  if (count) count.textContent = total;
-
-  // Actualizar UI si hay sesión
-  const email = localStorage.getItem("email");
-  const rol = localStorage.getItem("rol");
-  if (email && rol) {
-    actualizarUIUsuario(email, rol);
-  }
-
-  // Event listener para logout usando delegation
-  document.addEventListener('click', function(e) {
-    if (e.target && e.target.id === 'btnLogout') {
+  /* ── Logout ── */
+  document.addEventListener('click', e => {
+    if (e.target && (e.target.id === 'btnLogout' || e.target.id === 'nbLogout')) {
       e.preventDefault();
       localStorage.clear();
       location.reload();
     }
   });
+
+  actualizarContadorCarrito();
 }
 
-function actualizarUIUsuario(email, rol) {
-  const authGroup = document.querySelector(".auth-group");
-  const navUserZone = document.getElementById("nav-user-zone");
-  const navSaludo = document.getElementById("nav-saludo");
-  const navAdminZone = document.getElementById("nav-admin-zone");
-  
-  if (authGroup) authGroup.classList.add("d-none");
-  if (navUserZone) navUserZone.classList.remove("d-none");
-  if (navSaludo) navSaludo.textContent = "Hola, " + email;
-  if (navAdminZone && rol === "ADMINISTRADOR") {
-    navAdminZone.classList.remove("d-none");
-  }
+/* ── Actualizar contador del carrito ── */
+function actualizarContadorCarrito() {
+  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  const total   = carrito.reduce((acc, p) => acc + p.cantidad, 0);
+  const count   = document.getElementById('cartCount');
+  if (count) count.textContent = total;
 }
 
+/* ── Navbar local (carrito.html tiene navbar en su propio HTML) ── */
 function inicializarNavbarLocal() {
-  const navbar = document.getElementById('navbar');
+  const navbar    = document.getElementById('navbar');
   const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-  
+  const navLinks  = document.getElementById('navLinks');
+
   if (!navbar || !hamburger || !navLinks) return;
 
   window.addEventListener('scroll', () => {
@@ -281,7 +281,7 @@ function inicializarNavbarLocal() {
     const spans = hamburger.querySelectorAll('span');
     if (navLinks.classList.contains('open')) {
       spans[0].style.transform = 'rotate(45deg) translateY(7px)';
-      spans[1].style.opacity = '0';
+      spans[1].style.opacity   = '0';
       spans[2].style.transform = 'rotate(-45deg) translateY(-7px)';
     } else {
       spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
@@ -289,61 +289,52 @@ function inicializarNavbarLocal() {
   });
 }
 
-// Hacer global para que app.js pueda llamarla
-window.actualizarUIUsuario = actualizarUIUsuario;
+/* Exponer globalmente */
+window.actualizarUIUsuario = function(email, rol) {
+  const authGroup    = document.querySelector('.auth-group');
+  const navUserZone  = document.getElementById('nav-user-zone');
+  const navSaludo    = document.getElementById('nav-saludo');
+  const navAdminZone = document.getElementById('nav-admin-zone');
 
-// Esperar a DOMContentLoaded
+  if (authGroup)    authGroup.classList.add('d-none');
+  if (navUserZone)  navUserZone.classList.remove('d-none');
+  if (navSaludo)    navSaludo.textContent = 'Hola, ' + email;
+  if (navAdminZone && rol === 'ADMINISTRADOR') navAdminZone.classList.remove('d-none');
+};
+
+/* ══════════════════════════════
+   INIT
+══════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
-  // Si existe contenedor navbar, cargar dinámicamente (index, catalogo)
+
   if (document.getElementById('navbar-container')) {
     cargarNavbar();
   } else {
-    // Si no, navbar ya está en HTML (carrito.html) - solo inicializar
     inicializarNavbarLocal();
   }
 
-  // Actualizar UI si hay sesión
-  const email = localStorage.getItem("email");
-  const rol = localStorage.getItem("rol");
-  if (email && rol) {
-    setTimeout(() => {
-      actualizarUIUsuario(email, rol);
-    }, 200);
-  }
-
-  // Actualizar contador carrito
-  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-  const total = carrito.reduce((acc, p) => acc + p.cantidad, 0);
-  const count = document.getElementById('cartCount');
-  if (count) count.textContent = total;
-
-  // Event listener para logout usando delegation
-  document.addEventListener('click', function(e) {
-    if (e.target && e.target.id === 'btnLogout') {
-      e.preventDefault();
-      localStorage.clear();
-      location.reload();
+  setTimeout(() => {
+    const email = localStorage.getItem('email');
+    const rol   = localStorage.getItem('rol');
+    if (email && rol && window.actualizarUIUsuario) {
+      window.actualizarUIUsuario(email, rol);
     }
-  });
+    actualizarContadorCarrito();
+  }, 150);
 
-  // Escuchar evento personalizado de login desde otras páginas
-  window.addEventListener('loginChanged', (e) => {
-    const email = e.detail.email;
-    const rol = e.detail.rol;
-    actualizarUIUsuario(email, rol);
-  });
-
-  // Escuchar cambios de localStorage desde otras pestañas
-  window.addEventListener('storage', (e) => {
+  window.addEventListener('storage', e => {
     if (e.key === 'email' || e.key === 'rol' || e.key === null) {
-      const email = localStorage.getItem("email");
-      const rol = localStorage.getItem("rol");
+      const email = localStorage.getItem('email');
+      const rol   = localStorage.getItem('rol');
       if (email && rol) {
-        actualizarUIUsuario(email, rol);
+        window.actualizarUIUsuario && window.actualizarUIUsuario(email, rol);
       } else {
-        // Si se limpió localStorage (logout), recargar
         location.reload();
       }
     }
+  });
+
+  window.addEventListener('loginChanged', e => {
+    window.actualizarUIUsuario && window.actualizarUIUsuario(e.detail.email, e.detail.rol);
   });
 });
