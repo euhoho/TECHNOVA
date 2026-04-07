@@ -371,5 +371,215 @@ if (terminalBody && networkCanvas) {
     }
   }, { threshold: 0.3 });
 
-  termObserver.observe(terminalBody);
+  if (terminalBody) {
+    termObserver.observe(terminalBody);
+  }
 }
+/* ================================
+   LOGIN & SESIÓN
+================================ */
+
+async function login(e) {
+    e.preventDefault();
+    
+    const loginForm = e.target;
+    const emailInput = loginForm.querySelector('input[type="email"]');
+    const passwordInput = loginForm.querySelector('input[type="password"]');
+    
+    if (!emailInput || !passwordInput) return;
+    
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+    
+    const errorEl = loginForm.querySelector('.login-error, .cat-login-error');
+
+    // Validar email
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        if (errorEl) {
+            errorEl.textContent = '⚠️ Introduce un email válido (ej: usuario@dominio.com)';
+            errorEl.classList.remove("d-none");
+        }
+        return;
+    }
+
+    // Validar contraseña
+    if (!password) {
+        if (errorEl) {
+            errorEl.textContent = '⚠️ La contraseña es requerida';
+            errorEl.classList.remove("d-none");
+        }
+        return;
+    }
+
+    // Limpiar mensaje de error previo
+    if (errorEl) {
+        errorEl.classList.add("d-none");
+        errorEl.textContent = '';
+    }
+
+    try {
+        const response = await fetch("http://localhost:8080/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+        if (data.status !== "ok") throw new Error(data.mensaje);
+
+        localStorage.setItem("email", data.usuario.email);
+        localStorage.setItem("password", password);
+        localStorage.setItem("rol", data.usuario.rol);
+
+        // Disparar evento personalizado para que todas las páginas se actualicen
+        const event = new CustomEvent('loginChanged', {
+            detail: { email: data.usuario.email, rol: data.usuario.rol }
+        });
+        window.dispatchEvent(event);
+
+        actualizarUIUsuario(data.usuario.email, data.usuario.rol);
+
+        // Si la función global existe (navbar cargado), actualizar inmediatamente
+        setTimeout(() => {
+            if (window.actualizarUIUsuario) {
+                window.actualizarUIUsuario(data.usuario.email, data.usuario.rol);
+            }
+        }, 100);
+
+        // Cerrar modal según el tipo
+        const modalBootstrap = document.getElementById('loginModal');
+        if (modalBootstrap && modalBootstrap.classList.contains('modal') && typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+            const modalInstance = bootstrap.Modal.getInstance(modalBootstrap);
+            if (modalInstance) modalInstance.hide();
+        }
+
+        // Cerrar modal overlay si existe (carrito.html)
+        const modalOverlay = document.getElementById('modalOverlay');
+        if (modalOverlay) {
+            modalOverlay.classList.remove("open");
+        }
+
+        // Cerrar modal custom en index.html
+        const loginModal = document.getElementById('loginModal');
+        if (loginModal && !loginModal.classList.contains('modal')) {
+            loginModal.classList.remove("open");
+        }
+
+        console.log("Login correcto:");
+
+    } catch (error) {
+        console.error("Error login:", error);
+        const errorEl = loginForm.querySelector('.login-error, .cat-login-error');
+        if (errorEl) {
+            errorEl.textContent = '⚠️ ' + (error.message || 'Error al iniciar sesión. Verifica tu email y contraseña.');
+            errorEl.classList.remove("d-none");
+        }
+    }
+}
+
+function actualizarUIUsuario(email, rol) {
+    // Actualizar navbar si existe
+    const btnLogin = document.getElementById("btnLogin");
+    const navUserZone = document.getElementById("nav-user-zone");
+    const navSaludo = document.getElementById("nav-saludo");
+    const navAdminZone = document.getElementById("nav-admin-zone");
+    
+    if (btnLogin) btnLogin.classList.add("d-none");
+    if (navUserZone) navUserZone.classList.remove("d-none");
+    if (navSaludo) navSaludo.textContent = "Hola, " + email;
+    if (navAdminZone && rol === "ADMINISTRADOR") {
+        navAdminZone.classList.remove("d-none");
+    }
+    
+    // Actualizar carrito si existe
+    const resumenLogin = document.getElementById("resumenLogin");
+    const resumenLogueado = document.getElementById("resumenLogueado");
+    const usuarioEmail = document.getElementById("usuarioEmail");
+    
+    if (resumenLogin) resumenLogin.classList.add("d-none");
+    if (resumenLogueado) resumenLogueado.classList.remove("d-none");
+    if (usuarioEmail) usuarioEmail.textContent = email;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    // ══ INICIALIZAR LOGIN ══
+    const loginForm = document.getElementById("login-form") || document.getElementById("loginForm");
+    if (loginForm) {
+        loginForm.addEventListener("submit", login);
+    }
+
+    // ══ BOTONES ABRIR MODAL (delegación de eventos) ══
+    document.addEventListener("click", (e) => {
+        // Botón de login en navbar
+        if (e.target.closest("#btnLogin")) {
+            e.preventDefault();
+            
+            // Intentar Bootstrap modal (catalogo)
+            const modalElement = document.getElementById('loginModal');
+            if (modalElement && modalElement.classList.contains('modal') && typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+                new bootstrap.Modal(modalElement).show();
+            }
+            // Intentar custom overlay modal (index.html)
+            else if (modalElement) {
+                modalElement.classList.add("open");
+            }
+        }
+        
+        // Botón abrir login en carrito
+        if (e.target.closest("#btnAbrirLogin")) {
+            e.preventDefault();
+            const overlay = document.getElementById("modalOverlay");
+            if (overlay) overlay.classList.add("open");
+        }
+    });
+
+    // ══ CERRAR MODAL ══
+    document.addEventListener("click", (e) => {
+        // Cerrar botón en custom overlay (carrito)
+        if (e.target.closest("#modalClose")) {
+            const overlay = document.getElementById("modalOverlay");
+            if (overlay) overlay.classList.remove("open");
+        }
+        
+        // Cerrar botón en modal de index.html
+        if (e.target.closest("#modal-close-login")) {
+            const modal = document.getElementById("loginModal");
+            if (modal) modal.classList.remove("open");
+        }
+        
+        // Cerrar al clickear fuera del modal (custom overlay)
+        const modalOverlay = e.target;
+        if (modalOverlay.id === "modalOverlay" && modalOverlay.classList.contains("modal-overlay")) {
+            modalOverlay.classList.remove("open");
+        }
+        
+        // Cerrar al clickear fuera del modal (index login)
+        const loginModal = e.target;
+        if (loginModal.id === "loginModal" && !loginModal.classList.contains('modal') && loginModal.classList.contains("modal-overlay")) {
+            loginModal.classList.remove("open");
+        }
+    });
+
+    // ══ LOGOUT ══
+    const btnLogout = document.getElementById("btnLogout") || document.getElementById("btn-logout");
+    if (btnLogout) {
+        btnLogout.addEventListener("click", () => {
+            sessionStorage.clear();
+            location.reload();
+        });
+    }
+
+    // ══ CONFIRMAR COMPRA ══
+    const btnConfirmar = document.getElementById("btnConfirmar");
+    if (btnConfirmar) {
+        btnConfirmar.addEventListener("click", finalizarCompra);
+    }
+
+    // ══ VERIFICAR SESIÓN EXISTENTE ══
+    const email = sessionStorage.getItem("email");
+    if (email) {
+        actualizarUIUsuario(email, sessionStorage.getItem("rol"));
+    }
+
+});
