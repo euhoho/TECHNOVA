@@ -1,4 +1,5 @@
   <!-- ════════════════ NAVBAR ════════════════ -->
+   <div>
 <nav class="navbar" id="navbar">
   <div class="nav-logo">
     <span class="logo-icon"></span>
@@ -6,20 +7,9 @@
   </div>
 
   <ul class="nav-links" id="navLinks">
-    <li><a href="#inicio">Inicio</a></li>
-<li class="dropdown">
-  <a href="catalogo.html">Catálogo <span class="arrow">▾</span></a>
-  <ul class="dropdown-menu">
-    <li><a href="catalogo.html">Audio</a></li>
-    <li><a href="catalogo.html">Gaming</a></li>
-    <li><a href="catalogo.html">Wearables</a></li>
-    <li><a href="catalogo.html">Smart Home</a></li>
-    <li><a href="catalogo.html">Portátiles</a></li>
-    <li><a href="catalogo.html">Conectividad</a></li>
-  </ul>
-</li>
-    <li><a href="#nosotros">Nosotros</a></li>
-  </ul>
+    <li><a href="index.html#inicio">Inicio</a></li>
+<li><a href="catalogo.html">Catálogo</a></li>
+<li><a href="nosotros.html">Nosotros</a></li>  </ul>
 
   <div class="nav-search" id="navSearch">
     <input type="text" placeholder="Buscar productos…" id="searchInput" autocomplete="off" />
@@ -49,3 +39,54 @@
     <span></span><span></span><span></span>
   </button>
 </nav>
+
+<!-- MODAL LOGIN -->
+<div class="nb-modal-overlay" id="nbLoginOverlay">
+  <div class="nb-modal-card">
+    <div class="nb-modal-header">
+      <h3>Iniciar Sesión</h3>
+      <button class="nb-modal-close" id="nbLoginClose">✕</button>
+    </div>
+    <form id="nbLoginForm">
+      <div class="nb-form-group">
+        <label>Email</label>
+        <input type="email" id="nbLoginEmail" placeholder="tu@email.com" required/>
+      </div>
+      <div class="nb-form-group">
+        <label>Contraseña</label>
+        <input type="password" id="nbLoginPassword" placeholder="••••••••" required/>
+      </div>
+      <div class="nb-form-error d-none" id="nbLoginError">Email o contraseña incorrectos.</div>
+      <button type="submit" class="nb-btn-neon w-full">Entrar</button>
+      <p class="nb-modal-switch">¿No tienes cuenta? <a href="#" id="nbGoRegister">Registrarse</a></p>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL REGISTRO -->
+<div class="nb-modal-overlay" id="nbRegisterOverlay">
+  <div class="nb-modal-card">
+    <div class="nb-modal-header">
+      <h3>Registrarse</h3>
+      <button class="nb-modal-close" id="nbRegisterClose">✕</button>
+    </div>
+    <form id="nbRegisterForm">
+      <div class="nb-form-group">
+        <label>Email</label>
+        <input type="email" id="nbRegisterEmail" placeholder="tu@email.com" required/>
+      </div>
+      <div class="nb-form-group">
+        <label>Contraseña</label>
+        <input type="password" id="nbRegisterPassword" placeholder="••••••••" required/>
+      </div>
+      <div class="nb-form-group">
+        <label>Confirmar contraseña</label>
+        <input type="password" id="nbRegisterConfirm" placeholder="••••••••" required/>
+      </div>
+      <div class="nb-form-error d-none" id="nbRegisterError"></div>
+      <button type="submit" class="nb-btn-neon w-full">Crear cuenta</button>
+      <p class="nb-modal-switch">¿Ya tienes cuenta? <a href="#" id="nbGoLogin">Iniciar Sesión</a></p>
+    </form>
+  </div>
+</div>
+</div>  

@@ -6,26 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="ddbbb43a-9f73-442e-8485-78cb4f3f3b42" name="Changes" comment="UPDATE: actualizamos POST crear-producto con la verificación de usuario.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/carrito.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/carrito.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/catalogo.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/catalogo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/carrito.css" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/carrito.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/catalogo.css" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/catalogo.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/navbar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/ASUS-PCE-AXE5400-Frontal.png" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/ASUS-PCE-AXE5400-Frontal.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Corsair-MP600-GS-1TB-M.2-Gen4-Frontal.png" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Corsair-MP600-GS-1TB-M.2-Gen4-Frontal.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Licencia-AntiVirus-Kaspersky-Frontal.png" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Licencia-AntiVirus-Kaspersky-Frontal.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Licencia-Windows-11-Pro-OEM-Frontal.png" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Licencia-Windows-11-Pro-OEM-Frontal.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/MSI-GeForce-RTX-5070-Ti-VENTUS-Frontal-Caja.png" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/MSI-GeForce-RTX-5070-Ti-VENTUS-Frontal-Caja.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Memoria-RAM-Corsair-Vengeance-RGB-DDR5-32GB-Frontal.png" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Memoria-RAM-Corsair-Vengeance-RGB-DDR5-32GB-Frontal.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/Módem-D-Link-F518M-5G-Wi-Fi 6-dual-band-Trasera.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/TP-Link-UB5A-Caja.png" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/img/TP-Link-UB5A-Caja.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/carrito.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/carrito.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/catalogo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/catalogo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/navbar.html" afterDir="false" />
     </list>
     <list id="afabca47-1a0b-4dde-9252-06d4aa3c85c7" name="aplicattion properties" comment="" />
     <list id="5676eb22-a9ea-4ea5-8e07-63942807fad0" name="Changes by euhoho" comment="" />
@@ -257,6 +246,9 @@
       <workItem from="1773993417364" duration="1581000" />
       <workItem from="1774005075969" duration="3840000" />
       <workItem from="1774259581132" duration="49000" />
+      <workItem from="1774346210407" duration="1966000" />
+      <workItem from="1774428436756" duration="4990000" />
+      <workItem from="1775547198660" duration="631000" />
     </task>
     <task id="LOCAL-00001" summary="FEAT: CREACIÓN DE LINEA PEDIDO">
       <option name="closed" value="true" />

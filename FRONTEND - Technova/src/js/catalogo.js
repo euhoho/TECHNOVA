@@ -5,6 +5,13 @@ import {
 
 let todosLosProductos = [];
 
+/* ── Normalizar texto (quita tildes y pasa a minúsculas) ── */
+function normalizar(texto) {
+    return (texto || '').toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+}
+
 /* ── Skeletons mientras carga ── */
 function mostrarSkeletons(n = 8) {
     const container = document.getElementById("catalogo-container");
@@ -120,7 +127,7 @@ function activarFiltroCategorias() {
             const filtrados = categoria === "todos"
                 ? todosLosProductos
                 : todosLosProductos.filter(p =>
-                    p.categoria.toLowerCase() === categoria.toLowerCase());
+                    normalizar(p.categoria) === normalizar(categoria));
 
             pintarProductos(filtrados);
         });
@@ -132,17 +139,17 @@ function activarBuscador() {
     if (!buscador) return;
 
     buscador.addEventListener("input", () => {
-        const texto = buscador.value.toLowerCase().trim();
+        const texto = normalizar(buscador.value.trim());
 
-        // Quitar active de categorías al buscar
         if (texto) {
             document.querySelectorAll(".categoria-card").forEach(c => c.classList.remove("active"));
         }
 
         const filtrados = texto
             ? todosLosProductos.filter(p =>
-                p.nombre.toLowerCase().includes(texto) ||
-                p.descripcion.toLowerCase().includes(texto))
+                normalizar(p.nombre).includes(texto)       ||
+                normalizar(p.descripcion).includes(texto)  ||
+                normalizar(p.categoria || '').includes(texto))
             : todosLosProductos;
 
         pintarProductos(filtrados);
@@ -165,7 +172,6 @@ function activarBotonesAgregar() {
             agregarProducto(producto);
             actualizarContadorCarrito();
 
-            // Feedback visual
             const original = btn.textContent;
             btn.textContent = '✓ Añadido';
             btn.style.background = '#22cc66';
@@ -181,8 +187,24 @@ function activarBotonesAgregar() {
     });
 }
 
+/* ── Aplicar búsqueda desde URL ── */
+function aplicarBusquedaURL() {
+    const params      = new URLSearchParams(window.location.search);
+    const buscarParam = params.get('buscar');
+    if (!buscarParam) return;
+
+    const buscador = document.getElementById('buscador-productos');
+    if (buscador) {
+        buscador.value = buscarParam;
+        buscador.dispatchEvent(new Event('input'));
+        buscador.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-    cargarProductos();
+    cargarProductos().then(() => {
+        aplicarBusquedaURL();
+    });
     actualizarContadorCarrito();
     activarBuscador();
 });

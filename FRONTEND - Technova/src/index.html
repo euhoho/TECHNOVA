@@ -46,63 +46,7 @@
     <p class="section-sub">Selección premium de la temporada</p>
   </div>
 
-  <div class="products-grid">
-
-    <div class="product-card" data-delay="0">
-      <div class="card-glow"></div>
-      <div class="card-badge">NUEVO</div>
-      <div class="card-img">
-        <div class="product-emoji"></div>
-        <div class="card-img-glow"></div>
-      </div>
-      <div class="card-body">
-        <span class="card-cat">Audio Premium</span>
-        <h3>NovaSound Pro X</h3>
-        <p>Auriculares inalámbricos con cancelación de ruido activa de 40dB y audio espacial 3D.</p>
-        <div class="card-footer">
-          <span class="price">€249<small>.99</small></span>
-          <button class="btn-add">+ Añadir</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card featured" data-delay="100">
-      <div class="card-glow"></div>
-      <div class="card-badge badge-hot">HOT</div>
-      <div class="card-img">
-        <div class="product-emoji"></div>
-        <div class="card-img-glow"></div>
-      </div>
-      <div class="card-body">
-        <span class="card-cat">Wearable</span>
-        <h3>NovaPulse Watch</h3>
-        <p>Smartwatch con monitor de salud avanzado, GPS integrado y pantalla AMOLED de 2".</p>
-        <div class="card-footer">
-          <span class="price">€399<small>.00</small></span>
-          <button class="btn-add">+ Añadir</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card" data-delay="200">
-      <div class="card-glow"></div>
-      <div class="card-badge badge-sale">-30%</div>
-      <div class="card-img">
-        <div class="product-emoji"></div>
-        <div class="card-img-glow"></div>
-      </div>
-      <div class="card-body">
-        <span class="card-cat">Gaming</span>
-        <h3>NovaCtrl Elite</h3>
-        <p>Mando gaming con respuesta háptica de 4K, gatillos adaptativos y RGB personalizable.</p>
-        <div class="card-footer">
-          <span class="price">€129<small>.99</small></span>
-          <button class="btn-add">+ Añadir</button>
-        </div>
-      </div>
-    </div>
-
-  </div>
+  <div class="products-grid" id="featuredProductsGrid"></div>
 
   <div class="view-all">
     <a href="catalogo.html" class="btn-outline-lg">Ver Catálogo Completo →</a>
@@ -113,35 +57,30 @@
 <section class="features" id="nosotros">
   <div class="features-inner">
 
-    <!-- VISUAL -->
-    <div class="features-visual">
-      <div class="terminal" id="terminalBox">
-        <div class="terminal-header">
-          <div class="terminal-dots">
-            <span class="t-dot dot-red"></span>
-            <span class="t-dot dot-yellow"></span>
-            <span class="t-dot dot-green"></span>
-          </div>
-          <span class="terminal-title">technova.exe</span>
+    <div class="terminal" id="terminalBox">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <span class="t-dot dot-red"></span>
+          <span class="t-dot dot-yellow"></span>
+          <span class="t-dot dot-green"></span>
         </div>
-
-        <div class="terminal-body" id="terminalBody">
-          <div class="terminal-line">
-            <span class="t-prompt">→</span>
-            <span class="t-text" id="terminalText"></span>
-            <span class="t-cursor">█</span>
-          </div>
+        <span class="terminal-title">technova.exe</span>
+      </div>
+      <div class="terminal-body" id="terminalBody">
+        <div class="terminal-line">
+          <span class="t-prompt">→</span>
+          <span class="t-text" id="terminalText"></span>
+          <span class="t-cursor">█</span>
         </div>
-
-<canvas id="networkCanvas" class="network-canvas" style="width:100%; height:260px;"></canvas>      </div>
+      </div>
+      <canvas id="networkCanvas" style="display:none; width:100%;"></canvas>
     </div>
 
-    <!-- CONTENT -->
     <div class="features-content">
       <span class="section-tag">¿Por qué TechNova?</span>
       <h2 class="section-title">Más allá de lo <span class="gradient-text">ordinario</span></h2>
       <p class="features-desc">
-        Como una nova que ilumina el universo, TechNova reúne los productos 
+        Como una nova que ilumina el universo, TechNova reúne los productos
         tecnológicos más brillantes del mercado en un solo lugar.
       </p>
 
@@ -153,7 +92,6 @@
             <p>Un catálogo cuidadosamente seleccionado donde cada producto brilla por su propia calidad.</p>
           </div>
         </div>
-
         <div class="feature-item">
           <div class="feat-icon">✦</div>
           <div>
@@ -161,7 +99,6 @@
             <p>Siempre en movimiento, actualizamos nuestra oferta con las últimas novedades tecnológicas.</p>
           </div>
         </div>
-
         <div class="feature-item">
           <div class="feat-icon">✦</div>
           <div>
@@ -178,6 +115,58 @@
 
   </div>
 </section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">Tech<span class="accent">Nova</span></span>
+      </div>
+      <p>Tecnología del futuro, disponible hoy. Productos premium para quienes exigen lo mejor.</p>
+      <div class="social-links">
+        <a href="#" class="social-btn">𝕏</a>
+        <a href="#" class="social-btn">in</a>
+        <a href="#" class="social-btn">▶</a>
+        <a href="#" class="social-btn">📸</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h5>Productos</h5>
+      <ul>
+        <li><a href="catalogo.html">Componentes</a></li>
+        <li><a href="catalogo.html">Periféricos</a></li>
+        <li><a href="catalogo.html">Redes</a></li>
+        <li><a href="catalogo.html">Software</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Empresa</h5>
+      <ul>
+        <li><a href="nosotros.html">Sobre Nosotros</a></li>
+        <li><a href="nosotros.html">Nuestro Equipo</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="#">Política de Privacidad</a></li>
+        <li><a href="#">Términos de Uso</a></li>
+        <li><a href="#">Cookies</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 TechNova. Todos los derechos reservados.</p>
+    <p>Proyecto de clase — Desarrollo Web</p>
+  </div>
+</footer>
 
 <!-- SCRIPTS -->
 <script src="js/app.js"></script>
