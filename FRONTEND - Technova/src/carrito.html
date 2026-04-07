@@ -405,5 +405,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
+<script type="module">
+import { vaciarCarrito } from "./js/carrito.js";
+
+document.getElementById("btnVaciar").addEventListener("click", vaciarCarrito);
+</script>
 </body>
 </html>
