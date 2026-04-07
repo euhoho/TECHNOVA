@@ -45,15 +45,14 @@ async function cargarNavbar() {
     actualizarUIUsuario(email, rol);
   }
 
-  // Event listener para logout
-  const btnLogout = document.getElementById("btnLogout");
-  if (btnLogout) {
-    btnLogout.addEventListener("click", (e) => {
+  // Event listener para logout usando delegation
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'btnLogout') {
       e.preventDefault();
       localStorage.clear();
       location.reload();
-    });
-  }
+    }
+  });
 }
 
 function actualizarUIUsuario(email, rol) {
@@ -122,15 +121,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const count = document.getElementById('cartCount');
   if (count) count.textContent = total;
 
-  // Event listener para logout
-  const btnLogout = document.getElementById("btnLogout");
-  if (btnLogout) {
-    btnLogout.addEventListener("click", (e) => {
+  // Event listener para logout usando delegation
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'btnLogout') {
       e.preventDefault();
       localStorage.clear();
       location.reload();
-    });
-  }
+    }
+  });
 
   // Escuchar evento personalizado de login desde otras páginas
   window.addEventListener('loginChanged', (e) => {
