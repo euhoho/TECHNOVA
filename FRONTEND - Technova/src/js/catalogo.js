@@ -49,6 +49,21 @@ activarSliderPrecio();
     }
 }
 
+const params = new URLSearchParams(window.location.search);
+const categoriaURL = params.get("categoria");
+
+if (categoriaURL) {
+    const categorias = document.querySelectorAll(".categoria-card");
+    categorias.forEach(c => c.classList.remove("active"));
+
+    const cardActiva = document.querySelector(`.categoria-card[data-categoria="${categoriaURL}"]`);
+    if (cardActiva) {
+        cardActiva.classList.add("active");
+    }
+
+    aplicarFiltrosYOrden();
+}
+
 function pintarError() {
     const container = document.getElementById("catalogo-container");
     if (!container) return;
