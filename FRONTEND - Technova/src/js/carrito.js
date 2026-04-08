@@ -1,13 +1,17 @@
-// carrito.js
-
+// ===============================
+// STORAGE
+// ===============================
 export function getCarrito() {
-    return JSON.parse(sessionStorage.getItem("carrito")) || [];
+    return JSON.parse(localStorage.getItem("carrito")) || [];
 }
 
 export function guardarCarrito(carrito) {
-    sessionStorage.setItem("carrito", JSON.stringify(carrito));
+    localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
+// ===============================
+// CARRITO
+// ===============================
 export function agregarProducto(producto) {
     let carrito = getCarrito();
 
@@ -22,6 +26,15 @@ export function agregarProducto(producto) {
     guardarCarrito(carrito);
 }
 
+export function vaciarCarrito() {
+    localStorage.removeItem("carrito");
+
+    // Esto hace que TODO se actualice correctamente
+    location.reload();
+}
+// ===============================
+// CONTADOR NAVBAR
+// ===============================
 export function contarItems() {
     return getCarrito().reduce((acc, p) => acc + p.cantidad, 0);
 }
@@ -33,9 +46,16 @@ export function actualizarContadorCarrito() {
     contador.textContent = contarItems();
 }
 
+// ===============================
+// RENDER CARRITO (SIMPLE / GLOBAL)
+// ===============================
 export function renderizarCarrito() {
     const carrito = getCarrito();
-    const contenedor = document.getElementById("carrito-contenido");
+
+    // soporta ambas páginas
+    const contenedor =
+        document.getElementById("carritoItems") ||
+        document.getElementById("carrito-contenido");
 
     if (!contenedor) return;
 
@@ -48,10 +68,10 @@ export function renderizarCarrito() {
 
         contenedor.innerHTML += `
             <div class="d-flex align-items-center mb-3">
-                <img src="img/${p.imagen}" width="60" class="me-3">
+                <img src="${p.imagen}" width="60" class="me-3">
                 <div class="flex-grow-1">
                     <div>${p.nombre}</div>
-                    <small>${p.cantidad} x ${p.precio}€</small>
+                    <small>${p.cantidad} x ${p.precio.toFixed(2)}€</small>
                 </div>
                 <div class="fw-bold">
                     ${(p.precio * p.cantidad).toFixed(2)}€
@@ -60,65 +80,58 @@ export function renderizarCarrito() {
         `;
     });
 
-    document.getElementById("carrito-total").textContent = total.toFixed(2);
+    const totalEl =
+        document.getElementById("carrito-total") ||
+        document.getElementById("resumenTotal");
+
+    if (totalEl) {
+        totalEl.textContent = total.toFixed(2) + " €";
+    }
 }
 
-    export async function finalizarCompra() {
+// ===============================
+// FINALIZAR COMPRA
+// ===============================
+export async function finalizarCompra() {
 
-        const carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
+    const carrito = getCarrito();
 
-        const email = sessionStorage.getItem("email");
-        const password = sessionStorage.getItem("password"); // si lo guardas
-        if (!email || !password) {
-    alert("Debes iniciar sesión para realizar un pedido");
-    return;
-}
+    const email = localStorage.getItem("email");
+    const password = localStorage.getItem("password");
 
-        const pedido = {
-            usuario: {
-                email: email,
-                password: password
-            },
-            lineas: carrito.map(p => ({
-                idProducto: p.idProducto,
-                cantidad: p.cantidad
-            }))
-        };
-
-        try {
-            const response = await fetch("http://localhost:8080/api/pedidos/crear?descontarStock=true", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(pedido)
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-            
-                
-                // 1. Limpiamos el carrito para que no se quede guardado
-                sessionStorage.removeItem("carrito");
-                
-                // 2. Recargamos la página para que cargarProductos() 
-                // vuelva a ejecutarse y traiga el stock actualizado
-                location.reload(); 
-            } else {
-                const errorData = await response.json();
-                alert("Error al realizar el pedido: " + errorData.mensaje);
-            }
-        } catch (error) {
-            console.error("Error:", error);
-        }
+    if (!email || !password) {
+        alert("Debes iniciar sesión para realizar un pedido");
+        return;
     }
 
-document.addEventListener("DOMContentLoaded", () => {
+    const pedido = {
+        usuario: { email, password },
+        lineas: carrito.map(p => ({
+            idProducto: p.idProducto,
+            cantidad: p.cantidad
+        }))
+    };
 
-    const carritoOffcanvas = document.getElementById("carritoOffcanvas");
-
-    if (carritoOffcanvas) {
-        carritoOffcanvas.addEventListener("show.bs.offcanvas", () => {
-            renderizarCarrito();
+    try {
+        const response = await fetch("http://localhost:8080/api/pedidos/crear?descontarStock=true", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(pedido)
         });
-    }
 
-});
+        if (response.ok) {
+            const data = await response.json();
+
+            localStorage.removeItem("carrito");
+            alert("Pedido realizado con éxito. ID: " + data.idPedido);
+
+            location.reload();
+        } else {
+            const errorData = await response.json();
+            alert("Error: " + errorData.mensaje);
+        }
+
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}

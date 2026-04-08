@@ -1,0 +1,110 @@
+<div>
+<!-- ════════════════ NAVBAR ════════════════ -->
+<nav class="navbar" id="navbar">
+
+  <a href="index.html" class="nav-logo">
+    <span class="logo-icon">⬡</span>
+    <span class="logo-text">Tech<span class="accent">Nova</span></span>
+  </a>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="catalogo.html">Catálogo</a></li>
+    <li><a href="nosotros.html">Nosotros</a></li>
+  </ul>
+
+  <div class="nav-search" id="navSearch">
+    <input type="text" placeholder="Buscar productos…" id="searchInput" autocomplete="off" />
+    <button class="search-btn" id="searchBtn" aria-label="Buscar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    </button>
+    <div class="search-dropdown" id="searchDropdown"></div>
+  </div>
+
+  <div class="nav-actions">
+    <div class="auth-group">
+      <a href="#" class="btn-outline" id="btnLogin">Iniciar Sesión</a>
+      <a href="#" class="btn-neon" id="btnRegister">Registrarse</a>
+    </div>
+    <div class="user-zone d-none" id="nav-user-zone">
+      <span id="nav-saludo">Hola, usuario</span>
+      <a href="#" class="btn-outline" id="btnLogout">Cerrar Sesión</a>
+    </div>
+    <div class="admin-zone d-none" id="nav-admin-zone">
+      <a href="#" class="btn-admin">Admin</a>
+    </div>
+<a href="carrito.html" class="cart-btn" id="cartBtn" aria-label="Carrito">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+  </svg>
+  <span class="cart-count" id="cartCount">0</span>
+</a>
+    <a href="carrito.html" class="cart-btn" id="cartBtn" aria-label="Carrito">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+      </svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </a>
+  </div>
+
+  <button class="hamburger" id="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+
+</nav>
+
+<!-- MODAL LOGIN -->
+<div class="nb-modal-overlay" id="nbLoginOverlay">
+  <div class="nb-modal-card">
+    <div class="nb-modal-header">
+      <h3>Iniciar Sesión</h3>
+      <button class="nb-modal-close" id="nbLoginClose">✕</button>
+    </div>
+    <form id="nbLoginForm">
+      <div class="nb-form-group">
+        <label>Email</label>
+        <input type="email" id="nbLoginEmail" placeholder="tu@email.com" required/>
+      </div>
+      <div class="nb-form-group">
+        <label>Contraseña</label>
+        <input type="password" id="nbLoginPassword" placeholder="••••••••" required/>
+      </div>
+      <div class="nb-form-error d-none" id="nbLoginError">Email o contraseña incorrectos.</div>
+      <button type="submit" class="nb-btn-neon w-full">Entrar</button>
+      <p class="nb-modal-switch">¿No tienes cuenta? <a href="#" id="nbGoRegister">Registrarse</a></p>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL REGISTRO -->
+<div class="nb-modal-overlay" id="nbRegisterOverlay">
+  <div class="nb-modal-card">
+    <div class="nb-modal-header">
+      <h3>Registrarse</h3>
+      <button class="nb-modal-close" id="nbRegisterClose">✕</button>
+    </div>
+    <form id="nbRegisterForm">
+      <div class="nb-form-group">
+        <label>Email</label>
+        <input type="email" id="nbRegisterEmail" placeholder="tu@email.com" required/>
+      </div>
+      <div class="nb-form-group">
+        <label>Contraseña</label>
+        <input type="password" id="nbRegisterPassword" placeholder="••••••••" required/>
+      </div>
+      <div class="nb-form-group">
+        <label>Confirmar contraseña</label>
+        <input type="password" id="nbRegisterConfirm" placeholder="••••••••" required/>
+      </div>
+      <div class="nb-form-error d-none" id="nbRegisterError"></div>
+      <button type="submit" class="nb-btn-neon w-full">Crear cuenta</button>
+      <p class="nb-modal-switch">¿Ya tienes cuenta? <a href="#" id="nbGoLogin">Iniciar Sesión</a></p>
+    </form>
+  </div>
+</div>
+
+</div>

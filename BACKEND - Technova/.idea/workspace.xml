@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ddbbb43a-9f73-442e-8485-78cb4f3f3b42" name="Changes" comment="UPDATE: actualizamos POST crear-producto con la verificación de usuario.">
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/catalogo.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/catalogo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/catalogo.css" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/catalogo.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/catalogo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/catalogo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/css/navbar.css" afterDir="false" />
+<<<<<<< Updated upstream
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/js/navbar.js" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/../FRONTEND - Technova/src/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/../FRONTEND - Technova/src/navbar.html" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <list id="afabca47-1a0b-4dde-9252-06d4aa3c85c7" name="aplicattion properties" comment="" />
     <list id="5676eb22-a9ea-4ea5-8e07-63942807fad0" name="Changes by euhoho" comment="" />
@@ -33,12 +38,12 @@
     &quot;assignee&quot;: &quot;Rayan-t-t&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/euhoho/TECHNOVA.git",
-    "accountId": "21f67fce-201f-4668-9a7a-f146d4bfb8da"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/euhoho/TECHNOVA.git&quot;,
+    &quot;accountId&quot;: &quot;31c09cbd-74a1-4ef7-8933-391fba674306&quot;
   }
-}]]></component>
+}</component>
   <component name="HttpClientOnboardingState">{
   &quot;isOnboardingCommentShown&quot;: true
 }</component>
@@ -118,7 +123,7 @@
     &quot;SHELLCHECK.PATH&quot;: &quot;C:\\Users\\sakurabish\\AppData\\Roaming\\JetBrains\\IntelliJIdea2025.2\\plugins\\Shell Script\\shellcheck.exe&quot;,
     &quot;Spring Boot.BackendTechnovaApplication.executor&quot;: &quot;Run&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;nuevos-comienzos&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/devil ahora si/OneDrive/Escritorio/TECHNOVA/BACKEND - Technova&quot;,
@@ -144,6 +149,19 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\devil ahora si\OneDrive\Escritorio\TECHNOVA\BACKEND - Technova\src\main\resources" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationStatuses">
+      <map>
+        <entry key="HttpClient.HttpRequestRunConfigurationType">
+          <value>
+            <map>
+              <entry key="generated-requests | #17" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="RunManager" selected="Spring Boot.BackendTechnovaApplication">
     <configuration name="generated-requests | #17" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#17" index="17" runType="Run single request">
@@ -181,8 +199,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.30387.90" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
+        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
       </set>
     </attachedChunks>
   </component>
@@ -224,7 +242,11 @@
       <workItem from="1773912638515" duration="2612000" />
       <workItem from="1773920228931" duration="948000" />
       <workItem from="1773993417364" duration="1581000" />
-      <workItem from="1774269126948" duration="643000" />
+      <workItem from="1774005075969" duration="3840000" />
+      <workItem from="1774259581132" duration="49000" />
+      <workItem from="1774346210407" duration="1966000" />
+      <workItem from="1774428436756" duration="4990000" />
+      <workItem from="1775547198660" duration="631000" />
     </task>
     <task id="LOCAL-00001" summary="FEAT: CREACIÓN DE LINEA PEDIDO">
       <option name="closed" value="true" />

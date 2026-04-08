@@ -1,548 +1,397 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TechNova Store — Mi Carrito</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/navbar.css" />
-    <link rel="stylesheet" href="css/carrito.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carrito — TechNova</title>
+  <link rel="stylesheet" href="css/carrito.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 </head>
-
 <body>
 
-<!-- ========== NAVBAR (mismo que index.html) ========== -->
-<header>
-    <nav class="navbar navbar-expand-lg navbar-background">
-        <div class="container-fluid">
+  <!-- ════════════════ NAVBAR ════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <a href="index.html">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">Tech<span class="accent">Nova</span></span>
+      </a>
+    </div>
+    <div class="nav-back">
+      <a href="catalogo.html" class="btn-back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        Volver al catálogo
+      </a>
+    </div>
+  </nav>
 
-            <a class="navbar-brand" href="index.html">
-                <img src="img/LOGO3-TECHNOVA.png" alt="Logo Technova" height="25" class="ms-2">
-            </a>
+  <!-- ════════════════ MAIN ════════════════ -->
+  <main class="carrito-main">
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTechNova">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarTechNova">
-
-                <ul class="navbar-nav me-auto align-items-lg-center gap-lg-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="catalogo.html">
-                            <i class="bi bi-grid-fill me-1"></i> Catálogo
-                        </a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
-
-                    <li class="nav-item" id="login-item">
-                        <button class="btn btn-outline-light btn-sm" id="btn-open-login" data-bs-toggle="modal" data-bs-target="#loginModal">
-                            Login
-                        </button>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link fav-icon" href="#" title="Favoritos">
-                            <i class="bi bi-heart-fill"></i>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link cart-icon active-cart" href="carrito.html" id="nav-carrito">
-                            <i class="bi bi-cart-fill"></i>
-                            <span class="cart-badge" id="cart-count">0</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item d-none" id="nav-user-zone">
-                        <span class="navbar-text me-2" id="nav-saludo">Hola, Usuario</span>
-                        <button class="btn btn-sm" id="btn-logout">Salir</button>
-                    </li>
-                    <li class="nav-item d-none" id="nav-admin-zone">
-                        <a class="btn btn-sm" href="#" id="nav-admin">Panel</a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<!-- ========== CONTENIDO PRINCIPAL ========== -->
-<main class="carrito-main container-fluid">
-
-    <!-- Encabezado de la página -->
+    <!-- Título -->
     <div class="carrito-header">
-        <div class="d-flex align-items-center gap-3">
-            <a href="index.html" class="btn-volver">
-                <i class="bi bi-arrow-left"></i>
-            </a>
-            <div>
-                <h1 class="carrito-titulo">Mi Carrito</h1>
-                <p class="carrito-subtitulo" id="resumen-items">0 productos seleccionados</p>
-            </div>
-        </div>
+      <div class="carrito-title-wrap">
+        <span class="carrito-tag">Mi pedido</span>
+        <h1 class="carrito-title">Tu <span class="gradient-text">Carrito</span></h1>
+      </div>
+      <button class="btn-vaciar" id="btnVaciar">Vaciar carrito</button>
     </div>
 
-    <!-- Layout de dos columnas -->
     <div class="carrito-layout">
 
-        <!-- Columna izquierda: Lista de productos -->
-        <section class="carrito-productos-col">
-
-            <!-- Estado vacío -->
-            <div id="carrito-vacio" class="carrito-vacio d-none">
-                <div class="carrito-vacio-icono">
-                    <i class="bi bi-cart-x"></i>
-                </div>
-                <h3>Tu carrito está vacío</h3>
-                <p>Explora el catálogo y añade los productos que más te gusten.</p>
-                <a href="index.html" class="btn-ir-catalogo">
-                    <i class="bi bi-arrow-left me-2"></i>Ver catálogo
-                </a>
-            </div>
-
-            <!-- Lista de productos (se rellena dinámicamente) -->
-            <div id="carrito-lista"></div>
-
-        </section>
-
-        <!-- Columna derecha: Resumen del pedido -->
-        <aside class="carrito-resumen-col">
-            <div class="resumen-card">
-                <h2 class="resumen-titulo">Resumen del pedido</h2>
-
-                <div class="resumen-desglose">
-                    <div class="resumen-fila">
-                        <span>Subtotal</span>
-                        <span id="resumen-subtotal">0,00 €</span>
-                    </div>
-                    <div class="resumen-fila">
-                        <span>Envío</span>
-                        <span class="text-success" id="resumen-envio">Gratis</span>
-                    </div>
-                    <div class="resumen-fila resumen-iva">
-                        <span>IVA (21%)</span>
-                        <span id="resumen-iva">0,00 €</span>
-                    </div>
-                </div>
-
-                <div class="resumen-total-row">
-                    <span>Total</span>
-                    <span id="resumen-total">0,00 €</span>
-                </div>
-
-                <!-- Alerta de error (oculta por defecto) -->
-                <div class="alert-error d-none" id="error-checkout">
-                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                    <span id="error-checkout-msg">Hubo un problema con tu pedido, inténtalo de nuevo.</span>
-                </div>
-
-                <!-- Alerta de éxito (oculta por defecto) -->
-                <div class="alert-exito d-none" id="exito-checkout">
-                    <i class="bi bi-check-circle-fill me-2"></i>
-                    <span>¡Pedido realizado con éxito! Te enviamos la confirmación.</span>
-                </div>
-
-                <button class="btn-checkout" id="btn-finalizar" onclick="finalizarCompra()">
-                    <span id="btn-checkout-texto">
-                        <i class="bi bi-lock-fill me-2"></i>Finalizar compra
-                    </span>
-                    <span id="btn-checkout-loading" class="d-none">
-                        <span class="spinner-border spinner-border-sm me-2"></span>Procesando...
-                    </span>
-                </button>
-
-                <p class="resumen-nota">
-                    <i class="bi bi-shield-check me-1"></i>
-                    Pago seguro. El precio se valida en el servidor.
-                </p>
-
-                <div class="metodos-pago">
-                    <span class="metodo-tag"><i class="bi bi-credit-card"></i> Tarjeta</span>
-                    <span class="metodo-tag"><i class="bi bi-paypal"></i> PayPal</span>
-                    <span class="metodo-tag"><i class="bi bi-bank"></i> Transferencia</span>
-                </div>
-            </div>
-
-            <!-- Cupón descuento (decorativo, futuro) -->
-            <div class="cupon-card">
-                <i class="bi bi-tag-fill me-2"></i>
-                <input type="text" placeholder="Código de descuento" class="cupon-input" id="cupon-input">
-                <button class="cupon-btn">Aplicar</button>
-            </div>
-        </aside>
-
-    </div>
-
-</main>
-
-<!-- ========== MODAL LOGIN ========== -->
-<div class="modal fade modal-right" id="loginModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form id="login-form">
-                <div class="modal-body p-4">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h5 class="modal-title">Login</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-control" id="login-email" placeholder="email@correo.com" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="login-password" placeholder="********" required>
-                    </div>
-                    <div class="alert alert-danger d-none" id="login-error">
-                        Email o contraseña incorrectos.
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mt-4">
-                        <span class="register-text">¿No tiene cuenta? <a href="#" id="register-link">Registrar</a></span>
-                        <div>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary" id="login-submit">Entrar</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
+      <!-- ── Lista de productos ── -->
+      <div class="carrito-items" id="carritoItems">
+        <!-- se rellena con JS -->
+        <div class="carrito-vacio" id="carritoVacio">
+          <div class="vacio-icon">🛒</div>
+          <h3>Tu carrito está vacío</h3>
+          <p>Añade productos desde el catálogo para empezar.</p>
+          <a href="catalogo.html" class="btn-neon">Explorar catálogo</a>
         </div>
+      </div>
+
+      <!-- ── Resumen ── -->
+      <aside class="carrito-resumen" id="carritoResumen">
+        <div class="resumen-card">
+          <h3 class="resumen-title">Resumen del pedido</h3>
+
+          <div class="resumen-linea">
+            <span>Subtotal</span>
+            <span id="resumenSubtotal">0.00 €</span>
+          </div>
+          <div class="resumen-linea">
+            <span>IVA (21%)</span>
+            <span id="resumenIva">0.00 €</span>
+          </div>
+          <div class="resumen-linea resumen-envio">
+            <span>Envío</span>
+            <span id="resumenEnvio" class="envio-gratis">Gratis</span>
+          </div>
+
+          <div class="resumen-divider"></div>
+
+          <div class="resumen-total">
+            <span>Total</span>
+            <span id="resumenTotal">0.00 €</span>
+          </div>
+
+          <!-- Estado login -->
+          <div class="resumen-login" id="resumenLogin">
+            <div class="login-aviso">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Inicia sesión para confirmar el pedido
+            </div>
+            <button class="btn-neon w-full" id="btnLogin">Iniciar Sesión</button>
+          </div>
+
+          <div class="resumen-logueado d-none" id="resumenLogueado">
+            <div class="usuario-info">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span id="usuarioEmail">usuario@email.com</span>
+            </div>
+            <button class="btn-confirmar" id="btnConfirmar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Confirmar pedido
+            </button>
+            <button class="btn-logout-mini" id="btnLogout">Cerrar sesión</button>
+          </div>
+
+        </div>
+
+        <!-- Métodos de pago -->
+        <div class="metodos-pago">
+          <span>Pago seguro</span>
+          <div class="metodos-icons">
+            <span class="metodo-icon">VISA</span>
+            <span class="metodo-icon">MC</span>
+            <span class="metodo-icon">PAYPAL</span>
+          </div>
+        </div>
+      </aside>
+
     </div>
-</div>
+  </main>
 
-<!-- ========== SCRIPTS ========== -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script type="module">
+  <!-- ════════════════ MODAL LOGIN ════════════════ -->
+  <div class="nb-modal-overlay" id="nbLoginOverlay">
+    <div class="nb-modal-card">
+      <div class="nb-modal-header">
+        <h5 class="cat-modal-title">Iniciar Sesión</h5>
+        <button class="nb-modal-close" id="nbLoginClose">✕</button>
+      </div>
+      <div class="nb-modal-body">
+        <form id="nbLoginForm" novalidate="">
+          <div class="nb-form-group">
+            <label>Email</label>
+            <input type="email" class="cat-input" id="nbLoginEmail" placeholder="tu@email.com" required="">
+          </div>
+          <div class="nb-form-group">
+            <label>Contraseña</label>
+            <input type="password" class="cat-input" id="nbLoginPassword" placeholder="••••••••" required="">
+          </div>
+          <div class="nb-form-error d-none" id="nbLoginError">
+            Email o contraseña incorrectos.
+          </div>
+          <div class="cat-modal-footer-row">
+            <span class="register-text">¿No tienes cuenta? <a href="#">Registrarse</a></span>
+            <div class="cat-modal-btns">
+              <button type="button" class="cat-btn-secondary" id="nbLoginCancel">Cancelar</button>
+              <button type="submit" class="nb-btn-neon">Entrar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
-/* ================================================
-   MÓDULO CARRITO — carrito.html
-   Implementa: Tarea 6.1, 6.2, 6.3, 6.4 del Entregable 6
-================================================ */
+  <!-- ════════════════ TOAST ════════════════ -->
+  <div class="toast" id="toast"></div>
+  <script src="js/navbar.js"></script>
 
-/* ---------- helpers sessionStorage ---------- */
+<script>
 function getCarrito() {
-    return JSON.parse(sessionStorage.getItem("carrito")) || [];
+    return JSON.parse(localStorage.getItem("carrito")) || [];
 }
+
 function guardarCarrito(carrito) {
-    sessionStorage.setItem("carrito", JSON.stringify(carrito));
-}
-function contarItems() {
-    return getCarrito().reduce((acc, p) => acc + p.cantidad, 0);
-}
-function actualizarContador() {
-    const el = document.getElementById("cart-count");
-    if (el) el.textContent = contarItems();
+    localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
-/* ---------- formatear precio ---------- */
 function fmt(n) {
-    return n.toFixed(2).replace(".", ",") + " €";
+    return n.toFixed(2) + " €";
 }
 
-/* ---------- renderizar lista de productos ---------- */
+/* ========================
+   TOAST NOTIFICATIONS
+======================== */
+function mostrarToast(mensaje, tipo = 'success') {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+
+    // Limpiar clases anteriores
+    toast.className = 'toast';
+    
+    // Agregar tipo
+    toast.classList.add(tipo);
+    
+    // Establecer mensaje
+    toast.textContent = mensaje;
+    
+    // Mostrar toast
+    setTimeout(() => toast.classList.add('show'), 10);
+    
+    // Ocultar después de 4 segundos
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 4000);
+}
+
+/* ========================
+   RENDER CARRITO
+======================== */
 function renderizarCarrito() {
     const carrito = getCarrito();
-    const lista = document.getElementById("carrito-lista");
-    const vacio = document.getElementById("carrito-vacio");
-    const resumenItems = document.getElementById("resumen-items");
+    const contenedor = document.getElementById("carritoItems");
+    const vacio = document.getElementById("carritoVacio");
 
-    lista.innerHTML = "";
+    if (!contenedor) return; // Si no existe el contenedor, salir
+
+    // Limpiar solo los items del carrito, no el mensaje de vacío
+    const items = contenedor.querySelectorAll('.carrito-item');
+    items.forEach(item => item.remove());
 
     if (carrito.length === 0) {
-        vacio.classList.remove("d-none");
+        if (vacio) vacio.style.display = "block";
         actualizarResumen([]);
-        resumenItems.textContent = "0 productos seleccionados";
         return;
     }
 
-    vacio.classList.add("d-none");
+    if (vacio) vacio.style.display = "none";
 
-    const total = carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
-    const nItems = carrito.reduce((acc, p) => acc + p.cantidad, 0);
-    resumenItems.textContent = `${nItems} producto${nItems !== 1 ? "s" : ""} seleccionado${nItems !== 1 ? "s" : ""}`;
+    carrito.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "carrito-item";
 
-    carrito.forEach((p, idx) => {
-        const item = document.createElement("div");
-        item.className = "producto-item";
-        item.style.animationDelay = `${idx * 60}ms`;
-        item.dataset.id = p.idProducto;
-
-        item.innerHTML = `
-            <div class="producto-img-wrap">
-                <img src="img/${p.imagen}" alt="${escapeHTML(p.nombre)}" class="producto-img">
+        div.innerHTML = `
+            <div class="carrito-item-img">
+                <img src="${p.imagen}" alt="${p.nombre}">
             </div>
-            <div class="producto-info">
-                <h3 class="producto-nombre">${escapeHTML(p.nombre)}</h3>
-                <p class="producto-precio-unit">${fmt(p.precio)} / unidad</p>
+            <div class="carrito-item-info">
+                <div class="carrito-item-nombre">${p.nombre}</div>
+                <div class="carrito-item-cantidad">Cantidad: <span>${p.cantidad}</span></div>
             </div>
-            <div class="producto-controles">
-                <div class="cantidad-control">
-                    <button class="qty-btn" data-id="${p.idProducto}" data-accion="restar" aria-label="Restar uno">
-                        <i class="bi bi-dash"></i>
-                    </button>
-                    <span class="qty-valor" id="qty-${p.idProducto}">${p.cantidad}</span>
-                    <button class="qty-btn" data-id="${p.idProducto}" data-accion="sumar" aria-label="Sumar uno">
-                        <i class="bi bi-plus"></i>
-                    </button>
-                </div>
-                <p class="producto-subtotal">${fmt(p.precio * p.cantidad)}</p>
-                <button class="btn-eliminar" data-id="${p.idProducto}" aria-label="Eliminar producto">
-                    <i class="bi bi-trash3"></i>
-                </button>
+            <div class="carrito-item-precio">
+                <div class="carrito-item-unitario">${fmt(p.precio)} c/u</div>
+                <div class="carrito-item-total">${fmt(p.precio * p.cantidad)}</div>
             </div>
+            <button class="carrito-item-delete" onclick="eliminarProducto(${p.idProducto})" title="Eliminar producto">❌</button>
         `;
 
-        lista.appendChild(item);
+        contenedor.appendChild(div);
     });
 
     actualizarResumen(carrito);
-    actualizarContador();
-
-    // eventos de cantidad y eliminación
-    document.querySelectorAll(".qty-btn").forEach(btn => {
-        btn.addEventListener("click", () => cambiarCantidad(btn.dataset.id, btn.dataset.accion));
-    });
-    document.querySelectorAll(".btn-eliminar").forEach(btn => {
-        btn.addEventListener("click", () => eliminarProducto(btn.dataset.id));
-    });
 }
 
-/* ---------- actualizar resumen lateral ---------- */
+/* ========================
+   RESUMEN
+======================== */
 function actualizarResumen(carrito) {
-    const subtotal = carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
-    const iva = subtotal * 0.21;
-    const total = subtotal + iva;
+    const subtotalEl = document.getElementById("resumenSubtotal");
+    const ivaEl = document.getElementById("resumenIva");
+    const totalEl = document.getElementById("resumenTotal");
 
-    document.getElementById("resumen-subtotal").textContent = fmt(subtotal);
-    document.getElementById("resumen-iva").textContent = fmt(iva);
-    document.getElementById("resumen-total").textContent = fmt(total);
-    document.getElementById("resumen-envio").textContent = subtotal > 0 ? "Gratis" : "—";
-}
-
-/* ---------- cambiar cantidad ---------- */
-function cambiarCantidad(idProducto, accion) {
-    // Tarea 6.3 Frontend: min="1" — no permitir cantidad < 1
-    let carrito = getCarrito();
-    const item = carrito.find(p => String(p.idProducto) === String(idProducto));
-    if (!item) return;
-
-    if (accion === "sumar") {
-        item.cantidad++;
-    } else if (accion === "restar") {
-        if (item.cantidad <= 1) {
-            eliminarProducto(idProducto);
-            return;
-        }
-        item.cantidad--;
-    }
-
-    guardarCarrito(carrito);
-    renderizarCarrito();
-}
-
-/* ---------- eliminar producto ---------- */
-function eliminarProducto(idProducto) {
-    let carrito = getCarrito().filter(p => String(p.idProducto) !== String(idProducto));
-    guardarCarrito(carrito);
-    renderizarCarrito();
-}
-
-/* ---------- vaciar carrito ---------- */
-function vaciarCarrito() {
-    guardarCarrito([]);
-    renderizarCarrito();
-}
-
-/* ---------- escapeHTML — evitar XSS (Tarea 6.3) ---------- */
-function escapeHTML(str) {
-    return String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#x27;");
-}
-
-/* =================================================
-   TAREA 6.1 + 6.2 + 6.3 + 6.4 — FINALIZAR COMPRA
-================================================= */
-async function finalizarCompra() {
-    ocultarAlertas();
-
-    /* --- Tarea 6.3 Frontend: verificar sesión --- */
-    const email = sessionStorage.getItem("email");
-    const password = sessionStorage.getItem("password");
-    if (!email || !password) {
-        mostrarError("Debes iniciar sesión para realizar un pedido.");
-        // Abrir modal de login
-        const loginModal = new bootstrap.Modal(document.getElementById("loginModal"));
-        loginModal.show();
-        return;
-    }
-
-    /* --- Tarea 6.3 Frontend: verificar carrito no vacío --- */
-    const carrito = getCarrito();
     if (carrito.length === 0) {
-        mostrarError("Tu carrito está vacío. Añade productos antes de continuar.");
+        if (subtotalEl) subtotalEl.textContent = "0.00 €";
+        if (ivaEl) ivaEl.textContent = "0.00 €";
+        if (totalEl) totalEl.textContent = "0.00 €";
         return;
     }
 
-    /* --- Tarea 6.3 Frontend: verificar cantidades positivas (min="1") --- */
-    const cantidadInvalida = carrito.some(p => !Number.isInteger(p.cantidad) || p.cantidad < 1);
-    if (cantidadInvalida) {
-        mostrarError("Hay cantidades inválidas en el carrito. Revísalas.");
+    const total = carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
+    const subtotal = total / 1.21;  // Precio base sin IVA
+    const iva = subtotal * 0.21;    // IVA es el 21% del subtotal
+
+    if (subtotalEl) subtotalEl.textContent = fmt(subtotal);
+    if (ivaEl) ivaEl.textContent = fmt(iva);
+    if (totalEl) totalEl.textContent = fmt(total);
+}
+
+/* ========================
+   ELIMINAR
+======================== */
+function eliminarProducto(id) {
+    let carrito = getCarrito().filter(p => p.idProducto !== id);
+    guardarCarrito(carrito);
+    renderizarCarrito();
+}
+
+/* ========================
+   LOGIN
+======================== */
+// El login se gestiona desde js/navbar.js con el modal compartido.
+
+/* ========================
+   UI SESIÓN
+======================== */
+function actualizarSesionUI() {
+    const email = localStorage.getItem("email");
+
+    const loginBox = document.getElementById("resumenLogin");
+    const userBox = document.getElementById("resumenLogueado");
+
+    if (email) {
+        loginBox.classList.add("d-none");
+        userBox.classList.remove("d-none");
+        document.getElementById("usuarioEmail").textContent = email;
+    } else {
+        loginBox.classList.remove("d-none");
+        userBox.classList.add("d-none");
+    }
+}
+
+/* ========================
+   FINALIZAR COMPRA
+======================== */
+async function finalizarCompra() {
+    const carrito = getCarrito();
+    const email = localStorage.getItem("email");
+    const password = localStorage.getItem("password");
+
+    if (!email) {
+        alert("Debes iniciar sesión");
         return;
     }
 
-    /* --- Tarea 6.1: Montar JSON SOLO con id_producto y cantidad.
-         NUNCA se envía el precio desde el Frontend (seguridad). --- */
     const pedido = {
-        usuario: {
-            email: email,
-            password: password
-        },
+        usuario: { email, password },
         lineas: carrito.map(p => ({
-            idProducto: p.idProducto,   // solo ID
-            cantidad: p.cantidad        // solo cantidad — NUNCA el precio
+            idProducto: p.idProducto,
+            cantidad: p.cantidad
         }))
     };
 
-    setLoadingCheckout(true);
-
-    try {
-        /* --- Tarea 6.1: POST /pedidos — la API calcula el precio real desde BD --- */
-        const response = await fetch("http://localhost:8080/api/pedidos/crear?descontarStock=true", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(pedido)
-        });
-
-        const data = await response.json();
-
-        /* --- Tarea 6.2 + 6.4: gestión de errores por código HTTP --- */
-        if (response.status === 409) {
-            // Stock insuficiente (Tarea 6.2)
-            mostrarError(data.mensaje || "No hay stock suficiente para uno de los productos.");
-            return;
-        }
-
-        if (response.status === 401) {
-            mostrarError("Sesión caducada. Por favor, vuelve a iniciar sesión.");
-            return;
-        }
-
-        if (response.status === 400) {
-            mostrarError(data.mensaje || "Datos del pedido inválidos.");
-            return;
-        }
-
-        if (!response.ok) {
-            // Tarea 6.4: error genérico (500, etc.)
-            mostrarError("Hubo un problema con tu pedido, inténtalo de nuevo.");
-            return;
-        }
-
-        /* --- Pedido OK: limpiar carrito y mostrar éxito --- */
-        sessionStorage.removeItem("carrito");
-        actualizarContador();
-        mostrarExito();
-
-        // Redirigir tras 2.5 segundos
-        setTimeout(() => { window.location.href = "index.html"; }, 2500);
-
-    } catch (err) {
-        /* --- Tarea 6.4: error de red / fetch falló --- */
-        console.error("Error en finalizar compra:", err);
-        mostrarError("Hubo un problema con tu pedido, inténtalo de nuevo.");
-    } finally {
-        setLoadingCheckout(false);
-    }
-}
-
-/* ---------- UI helpers ---------- */
-function setLoadingCheckout(loading) {
-    document.getElementById("btn-finalizar").disabled = loading;
-    document.getElementById("btn-checkout-texto").classList.toggle("d-none", loading);
-    document.getElementById("btn-checkout-loading").classList.toggle("d-none", !loading);
-}
-
-function mostrarError(msg) {
-    const el = document.getElementById("error-checkout");
-    document.getElementById("error-checkout-msg").textContent = msg;
-    el.classList.remove("d-none");
-    el.scrollIntoView({ behavior: "smooth", block: "nearest" });
-}
-
-function mostrarExito() {
-    document.getElementById("exito-checkout").classList.remove("d-none");
-    document.getElementById("carrito-lista").innerHTML = "";
-    document.getElementById("carrito-vacio").classList.add("d-none");
-    document.getElementById("btn-finalizar").classList.add("d-none");
-}
-
-function ocultarAlertas() {
-    document.getElementById("error-checkout").classList.add("d-none");
-    document.getElementById("exito-checkout").classList.add("d-none");
-}
-
-/* ---------- Exponer al onclick del botón ---------- */
-window.finalizarCompra = finalizarCompra;
-
-/* =================================================
-   SESIÓN (misma lógica que app.js)
-================================================= */
-function actualizarUIUsuario(email, rol) {
-    document.getElementById("btn-open-login")?.classList.add("d-none");
-    document.getElementById("nav-user-zone")?.classList.remove("d-none");
-    document.getElementById("nav-saludo").textContent = "Hola, " + email;
-    if (rol === "ADMINISTRADOR") {
-        document.getElementById("nav-admin-zone")?.classList.remove("d-none");
-    }
-}
-
-document.getElementById("btn-logout")?.addEventListener("click", () => {
-    sessionStorage.clear();
+    await fetch("http://localhost:8080/api/pedidos/crear?descontarStock=true", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(pedido)
+    });
+    localStorage.removeItem("carrito");
+    renderizarCarrito();
+    mostrarToast("¡Pedido confirmado! Gracias por comprar en TechNova.", "success");
     location.reload();
-});
+}
 
-document.getElementById("login-form")?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const email = document.getElementById("login-email").value;
-    const password = document.getElementById("login-password").value;
-    try {
-        const response = await fetch("http://localhost:8080/api/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password })
-        });
-        const data = await response.json();
-        if (data.status !== "ok") throw new Error();
-        sessionStorage.setItem("email", data.usuario.email);
-        sessionStorage.setItem("password", password);
-        sessionStorage.setItem("rol", data.usuario.rol);
-        actualizarUIUsuario(data.usuario.email, data.usuario.rol);
-        bootstrap.Modal.getInstance(document.getElementById("loginModal"))?.hide();
-    } catch {
-        document.getElementById("login-error").classList.remove("d-none");
-    }
-});
-
-/* =================================================
-   INICIO
-================================================= */
+/* ========================
+   EVENTOS
+======================== */
 document.addEventListener("DOMContentLoaded", () => {
-    const email = sessionStorage.getItem("email");
-    if (email) actualizarUIUsuario(email, sessionStorage.getItem("rol"));
 
     renderizarCarrito();
-});
+    actualizarSesionUI();
 
+    /* Abrir login */
+    const btnLogin = document.getElementById("btnLogin");
+    if (btnLogin) {
+        btnLogin.addEventListener("click", e => {
+            e.preventDefault();
+            const overlay = document.getElementById("nbLoginOverlay");
+            if (overlay) overlay.classList.add("open");
+        });
+    }
+
+    /* Cerrar login */
+    const nbLoginClose = document.getElementById("nbLoginClose");
+    if (nbLoginClose) {
+        nbLoginClose.addEventListener("click", () => {
+            const overlay = document.getElementById("nbLoginOverlay");
+            if (overlay) overlay.classList.remove("open");
+        });
+    }
+
+    /* Cerrar login con botón cancelar */
+    const nbLoginCancel = document.getElementById("nbLoginCancel");
+    if (nbLoginCancel) {
+        nbLoginCancel.addEventListener("click", () => {
+            const overlay = document.getElementById("nbLoginOverlay");
+            if (overlay) overlay.classList.remove("open");
+        });
+    }
+
+    /* Cerrar login al clickear fuera */
+    const nbLoginOverlay = document.getElementById("nbLoginOverlay");
+    if (nbLoginOverlay) {
+        nbLoginOverlay.addEventListener("click", e => {
+            if (e.target === nbLoginOverlay) {
+                nbLoginOverlay.classList.remove("open");
+            }
+        });
+    }
+
+    window.addEventListener('loginChanged', actualizarSesionUI);
+
+    const btnConfirmar = document.getElementById("btnConfirmar");
+    if (btnConfirmar) {
+        btnConfirmar.addEventListener("click", finalizarCompra);
+    }
+
+    const btnLogout = document.getElementById("btnLogout");
+    if (btnLogout) {
+        btnLogout.addEventListener("click", () => {
+            localStorage.clear();
+            location.reload();
+        });
+    }
+
+});
+</script>
+<script type="module">
+import { vaciarCarrito } from "./js/carrito.js";
+
+document.getElementById("btnVaciar").addEventListener("click", vaciarCarrito);
 </script>
 </body>
 </html>
