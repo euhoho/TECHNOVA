@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddbbb43a-9f73-442e-8485-78cb4f3f3b42" name="Changes" comment="UPDATE: actualizamos POST crear-producto con la verificación de usuario.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackendTechnova.iml" beforeDir="false" afterPath="$PROJECT_DIR$/BackendTechnova.iml" afterDir="false" />
-    </list>
+    <list default="true" id="ddbbb43a-9f73-442e-8485-78cb4f3f3b42" name="Changes" comment="UPDATE: actualizamos POST crear-producto con la verificación de usuario." />
     <list id="afabca47-1a0b-4dde-9252-06d4aa3c85c7" name="aplicattion properties" comment="" />
     <list id="5676eb22-a9ea-4ea5-8e07-63942807fad0" name="Changes by euhoho" comment="" />
     <list id="c00b9372-c000-4b92-999f-1fcf43964373" name="Changes by sakurabish" comment="" />
@@ -245,7 +242,7 @@
       <workItem from="1775547198660" duration="631000" />
       <workItem from="1775726508039" duration="189000" />
       <workItem from="1775726725438" duration="806000" />
-      <workItem from="1775727563444" duration="320000" />
+      <workItem from="1775727563444" duration="946000" />
     </task>
     <task id="LOCAL-00001" summary="FEAT: CREACIÓN DE LINEA PEDIDO">
       <option name="closed" value="true" />

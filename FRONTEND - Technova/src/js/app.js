@@ -118,7 +118,7 @@ async function cargarDestacados() {
     </div>`).join('');
 
   try {
-    const response = await fetch('http://localhost:8080/api/productos');
+    const response = await fetch(BASE_URL + '/api/productos');
     if (!response.ok) throw new Error('Sin servidor');
     const productos = await response.json();
 
@@ -418,7 +418,7 @@ async function login(e) {
     }
 
     try {
-        const response = await fetch("http://localhost:8080/api/login", {
+        const response = await fetch(BASE_URL + "/api/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })

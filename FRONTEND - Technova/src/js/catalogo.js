@@ -36,7 +36,7 @@ function actualizarContador(n) {
 async function cargarProductos() {
     mostrarSkeletons(8);
     try {
-        const response = await fetch("http://localhost:8080/api/productos");
+        const response = await fetch(BASE_URL + "/api/productos");
         const productos = await response.json();
         todosLosProductos = productos;
 pintarProductos(todosLosProductos);

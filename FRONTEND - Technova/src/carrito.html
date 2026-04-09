@@ -149,7 +149,7 @@
 
   <!-- ════════════════ TOAST ════════════════ -->
   <div class="toast" id="toast"></div>
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/navbar.js"></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/config.js"></script><script src="js/navbar.js"></script>
 
 <script>
 function getCarrito() {
@@ -314,7 +314,7 @@ async function finalizarCompra() {
         }))
     };
 
-    await fetch("http://localhost:8080/api/pedidos/crear?descontarStock=true", {
+    await fetch(BASE_URL + "/api/pedidos/crear?descontarStock=true", {
         method: "POST",
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify(pedido)
@@ -384,7 +384,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (errorEl) errorEl.classList.add("d-none");
 
             try {
-                const res  = await fetch("http://localhost:8080/api/login", {
+                const res  = await fetch(BASE_URL + "/api/login", {
                     method:  "POST",
                     headers: { "Content-Type": "application/json" },
                     body:    JSON.stringify({ email, password })

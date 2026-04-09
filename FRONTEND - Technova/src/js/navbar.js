@@ -46,7 +46,7 @@ async function cargarNavbar() {
         .replace(/[\u0300-\u036f]/g, '');
     }
 
-    fetch('http://localhost:8080/api/productos')
+    fetch(BASE_URL + '/api/productos')
       .then(r => r.json())
       .then(data => {
         PRODUCTS = data.map(p => ({
@@ -186,7 +186,7 @@ async function cargarNavbar() {
       const errorEl  = document.getElementById('nbLoginError');
       errorEl.classList.add('d-none');
       try {
-        const res  = await fetch('http://localhost:8080/api/login', {
+        const res  = await fetch(BASE_URL + '/api/login', {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
           body:    JSON.stringify({ email, password })
@@ -225,7 +225,7 @@ async function cargarNavbar() {
       }
 
       try {
-        const res = await fetch('http://localhost:8080/api/usuarios/registrar', {
+        const res = await fetch(BASE_URL + '/api/usuarios/registrar', {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
           body:    JSON.stringify({ email, password })
