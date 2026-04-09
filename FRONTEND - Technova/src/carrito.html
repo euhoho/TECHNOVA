@@ -90,7 +90,7 @@
           <div class="resumen-logueado d-none" id="resumenLogueado">
             <div class="usuario-info">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <span id="usuarioEmail">usuario@email.com</span>
+              <span id="usuarioEmail"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2c595f594d5e45436c49414d4540024f4341">[email&#160;protected]</a></span>
             </div>
             <button class="btn-confirmar" id="btnConfirmar">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
@@ -149,7 +149,7 @@
 
   <!-- ════════════════ TOAST ════════════════ -->
   <div class="toast" id="toast"></div>
-  <script src="js/navbar.js"></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/navbar.js"></script>
 
 <script>
 function getCarrito() {
@@ -373,25 +373,62 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener('loginChanged', actualizarSesionUI);
 
+    /* ── Login submit en carrito.html ── */
+    const nbLoginForm = document.getElementById("nbLoginForm");
+    if (nbLoginForm) {
+        nbLoginForm.addEventListener("submit", async e => {
+            e.preventDefault();
+            const email    = document.getElementById("nbLoginEmail").value.trim();
+            const password = document.getElementById("nbLoginPassword").value;
+            const errorEl  = document.getElementById("nbLoginError");
+            if (errorEl) errorEl.classList.add("d-none");
+
+            try {
+                const res  = await fetch("http://localhost:8080/api/login", {
+                    method:  "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body:    JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+                if (data.status !== "ok") throw new Error();
+
+                localStorage.setItem("email",    data.usuario.email);
+                localStorage.setItem("password", password);
+                localStorage.setItem("rol",      data.usuario.rol);
+
+                const overlay = document.getElementById("nbLoginOverlay");
+                if (overlay) overlay.classList.remove("open");
+
+                actualizarSesionUI();
+            } catch {
+                if (errorEl) errorEl.classList.remove("d-none");
+            }
+        });
+    }
+
     const btnConfirmar = document.getElementById("btnConfirmar");
     if (btnConfirmar) {
         btnConfirmar.addEventListener("click", finalizarCompra);
     }
 
-    const btnLogout = document.getElementById("btnLogout");
-    if (btnLogout) {
-        btnLogout.addEventListener("click", () => {
-            localStorage.clear();
-            location.reload();
-        });
-    }
-
-});
-</script>
-<script type="module">
-import { vaciarCarrito } from "./js/carrito.js";
-
-document.getElementById("btnVaciar").addEventListener("click", vaciarCarrito);
-</script>
-</body>
-</html>
+        const btnLogout = document.getElementById("btnLogout");
+        if (btnLogout) {
+            btnLogout.addEventListener("click", () => {
+                localStorage.clear();
+                location.reload();
+            });
+        }
+    
+        /* Vaciar carrito */
+        const btnVaciar = document.getElementById("btnVaciar");
+        if (btnVaciar) {
+            btnVaciar.addEventListener("click", () => {
+                localStorage.removeItem("carrito");
+                renderizarCarrito();
+                mostrarToast("Carrito vaciado", "info");
+            });
+        }
+    });
+    </script>
+    </body>
+    </html>
