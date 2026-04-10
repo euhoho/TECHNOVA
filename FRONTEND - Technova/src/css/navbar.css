@@ -45,6 +45,11 @@
   font-weight: 900;
   letter-spacing: 2px;
 }
+.logo-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
 .logo-text .accent { color: var(--rosa); }
 
 .nav-links {
