@@ -46,6 +46,7 @@ async function cargarNavbar() {
         .replace(/[\u0300-\u036f]/g, '');
     }
 
+    fetch('http://localhost:8080/api/productos')
       .then(r => r.json())
       .then(data => {
         PRODUCTS = data.map(p => ({
@@ -99,17 +100,25 @@ async function cargarNavbar() {
   /* ══════════════════════════════════════
      AUTH — un solo sistema: localStorage
   ══════════════════════════════════════ */
-  function abrirLogin()    { if (loginOverlay)    loginOverlay.classList.add('open'); }
+  function abrirLogin()    {
+    const o = document.getElementById('nbLoginOverlay');
+    if (o) o.classList.add('open');
+  }
   function cerrarLogin()   {
-    if (loginOverlay) loginOverlay.classList.remove('open');
+    const o = document.getElementById('nbLoginOverlay');
+    if (o) o.classList.remove('open');
     const err = document.getElementById('nbLoginError');
     const frm = document.getElementById('nbLoginForm');
     if (err) err.classList.add('d-none');
     if (frm) frm.reset();
   }
-  function abrirRegister() { if (registerOverlay) registerOverlay.classList.add('open'); }
+  function abrirRegister() {
+    const o = document.getElementById('nbRegisterOverlay');
+    if (o) o.classList.add('open');
+  }
   function cerrarRegister() {
-    if (registerOverlay) registerOverlay.classList.remove('open');
+    const o = document.getElementById('nbRegisterOverlay');
+    if (o) o.classList.remove('open');
     const err = document.getElementById('nbRegisterError');
     const frm = document.getElementById('nbRegisterForm');
     if (err) err.classList.add('d-none');
@@ -143,8 +152,10 @@ async function cargarNavbar() {
 
   /* ── Abrir modales desde botones del navbar ── */
   document.addEventListener('click', e => {
-    if (e.target.closest('#btnLogin, #btnLoginDyn')) {
-      e.preventDefault();      const pageModal = document.getElementById('loginModal');
+    // Login
+    if (e.target.closest('#btnLogin') || e.target.closest('#btnLoginDyn')) {
+      e.preventDefault();
+      const pageModal = document.getElementById('loginModal');
       if (pageModal) {
         if (pageModal.classList.contains('modal') && typeof bootstrap !== 'undefined' && bootstrap.Modal) {
           new bootstrap.Modal(pageModal).show();
@@ -152,18 +163,22 @@ async function cargarNavbar() {
           pageModal.classList.add('open');
         }
         return;
-      }      abrirLogin();
+      }
+      abrirLogin();
+      return;
     }
-    if (e.target.closest('#btnRegister, #btnRegisterDyn')) {
+    // Registro
+    if (e.target.closest('#btnRegister') || e.target.closest('#btnRegisterDyn')) {
       e.preventDefault();
       abrirRegister();
       return;
     }
+    // Cerrar al clicar fuera
+    const lo = document.getElementById('nbLoginOverlay');
+    const ro = document.getElementById('nbRegisterOverlay');
+    if (lo && lo.classList.contains('open') && e.target === lo) cerrarLogin();
+    if (ro && ro.classList.contains('open') && e.target === ro) cerrarRegister();
   });
-
-  /* ── Cerrar modales al clicar fuera ── */
-  if (loginOverlay)    loginOverlay.addEventListener('click',    e => { if (e.target === loginOverlay)    cerrarLogin(); });
-  if (registerOverlay) registerOverlay.addEventListener('click', e => { if (e.target === registerOverlay) cerrarRegister(); });
 
   /* ── Botones cerrar y switch ── */
   const nbLoginClose    = document.getElementById('nbLoginClose');
@@ -186,6 +201,7 @@ async function cargarNavbar() {
       const errorEl  = document.getElementById('nbLoginError');
       errorEl.classList.add('d-none');
       try {
+        const res  = await fetch('http://localhost:8080/api/login', {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
           body:    JSON.stringify({ email, password })
@@ -224,19 +240,22 @@ async function cargarNavbar() {
       }
 
       try {
+        const res = await fetch('http://localhost:8080/api/usuarios/sign-up', {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
           body:    JSON.stringify({ email, password })
         });
         if (!res.ok) {
-          const data = await res.json();
-          throw new Error(data.mensaje || 'Error al registrar');
+          let mensajeError = 'Error al registrar. Inténtalo de nuevo.';
+          try { const d = await res.json(); mensajeError = d.mensaje || mensajeError; } catch (_) {}
+          throw new Error(mensajeError);
         }
         cerrarRegister();
         abrirLogin();
         document.getElementById('nbLoginEmail').value = email;
+        nbRegisterForm.reset();
       } catch (err) {
-        errorEl.textContent = err.message || 'Error al registrar. Intentalo de nuevo.';
+        errorEl.textContent = err.message || 'Error al registrar. Inténtalo de nuevo.';
         errorEl.classList.remove('d-none');
       }
     });
@@ -286,6 +305,83 @@ function inicializarNavbarLocal() {
     }
   });
 }
+
+/* ══════════════════════════════════════
+   HANDLERS GLOBALES — funcionan aunque cargarNavbar() falle
+══════════════════════════════════════ */
+document.addEventListener('click', function(e) {
+  // Abrir login
+  if (e.target.closest('#btnLogin') || e.target.closest('#btnLoginDyn')) {
+    e.preventDefault();
+    const pageModal = document.getElementById('loginModal');
+    if (pageModal) {
+      if (pageModal.classList.contains('modal') && typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+        new bootstrap.Modal(pageModal).show();
+      } else {
+        pageModal.classList.add('open');
+      }
+      return;
+    }
+    const o = document.getElementById('nbLoginOverlay');
+    if (o) o.classList.add('open');
+    return;
+  }
+  // Abrir registro
+  if (e.target.closest('#btnRegister') || e.target.closest('#btnRegisterDyn')) {
+    e.preventDefault();
+    const o = document.getElementById('nbRegisterOverlay');
+    if (o) o.classList.add('open');
+    return;
+  }
+  // Switch login → registro
+  if (e.target.id === 'nbGoRegister') {
+    e.preventDefault();
+    const lo = document.getElementById('nbLoginOverlay');
+    const ro = document.getElementById('nbRegisterOverlay');
+    if (lo) lo.classList.remove('open');
+    if (ro) ro.classList.add('open');
+    return;
+  }
+  // Switch registro → login
+  if (e.target.id === 'nbGoLogin') {
+    e.preventDefault();
+    const lo = document.getElementById('nbLoginOverlay');
+    const ro = document.getElementById('nbRegisterOverlay');
+    if (ro) ro.classList.remove('open');
+    if (lo) lo.classList.add('open');
+    return;
+  }
+  // Cerrar modal index.html — botón X y Cancelar
+  if (e.target.closest('#modal-close-login') || e.target.closest('#btn-cancel-login')) {
+    e.preventDefault();
+    const m = document.getElementById('loginModal');
+    if (m) m.classList.remove('open');
+    return;
+  }
+  // Cerrar modal index.html al clicar fuera
+  const indexModal = document.getElementById('loginModal');
+  if (indexModal && indexModal.classList.contains('open') && e.target === indexModal) {
+    indexModal.classList.remove('open');
+    return;
+  }
+  // Cerrar modales navbar al clicar fuera
+  const lo = document.getElementById('nbLoginOverlay');
+  const ro = document.getElementById('nbRegisterOverlay');
+  if (lo && lo.classList.contains('open') && e.target === lo) {
+    lo.classList.remove('open');
+    const err = document.getElementById('nbLoginError');
+    const frm = document.getElementById('nbLoginForm');
+    if (err) err.classList.add('d-none');
+    if (frm) frm.reset();
+  }
+  if (ro && ro.classList.contains('open') && e.target === ro) {
+    ro.classList.remove('open');
+    const err = document.getElementById('nbRegisterError');
+    const frm = document.getElementById('nbRegisterForm');
+    if (err) err.classList.add('d-none');
+    if (frm) frm.reset();
+  }
+});
 
 /* Exponer globalmente */
 window.actualizarUIUsuario = function(email, rol) {
