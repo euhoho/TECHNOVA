@@ -153,7 +153,7 @@ async function cargarDestacados() {
         </div>`).join('');
 
     try {
-        const response = await fetch('BASE_URL + \'/api/productos\'');
+        const response = await fetch(BASE_URL + '/api/productos');
         if (!response.ok) throw new Error('Sin servidor');
         const productos = await response.json();
 
@@ -429,7 +429,7 @@ async function login(e) {
     if (errorEl) errorEl.classList.add("d-none");
 
     try {
-        const response = await fetch('BASE_URL + \'/api/login\'', {
+        const response = await fetch(BASE_URL + '/api/login', {
             method:  "POST",
             headers: { "Content-Type": "application/json" },
             body:    JSON.stringify({ email, password })
