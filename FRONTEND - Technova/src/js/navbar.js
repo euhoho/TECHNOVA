@@ -1,3 +1,139 @@
+/* ═══════════════════════════════════════════════════════════
+   MODAL REGISTRO — creado directamente en el DOM, sin depender
+   de cargarNavbar() ni de navbar.html
+═══════════════════════════════════════════════════════════ */
+function crearModalRegistro() {
+  if (document.getElementById('nbRegisterOverlay')) return; // ya existe
+  const el = document.createElement('div');
+  el.id = 'nbRegisterOverlay';
+  el.className = 'nb-modal-overlay';
+  el.innerHTML = `
+    <div class="nb-modal-card">
+      <div class="nb-modal-header">
+        <h3>Crear cuenta</h3>
+        <button class="nb-modal-close" id="nbRegisterClose">&#x2715;</button>
+      </div>
+      <div class="nb-modal-body">
+        <form id="nbRegisterForm" novalidate>
+          <div class="nb-form-group">
+            <label>Email</label>
+            <input type="email" id="nbRegisterEmail" placeholder="tu@email.com" autocomplete="email" required/>
+          </div>
+          <div class="nb-form-group">
+            <label>Contraseña</label>
+            <input type="password" id="nbRegisterPassword" placeholder="••••••••" autocomplete="new-password" required/>
+          </div>
+          <div class="nb-form-group">
+            <label>Confirmar contraseña</label>
+            <input type="password" id="nbRegisterConfirm" placeholder="••••••••" autocomplete="new-password" required/>
+          </div>
+          <div class="nb-form-error d-none" id="nbRegisterError"></div>
+          <button type="submit" class="nb-btn-neon w-full" id="nbRegisterSubmit">Crear cuenta</button>
+          <p class="nb-modal-switch">¿Ya tienes cuenta? <a href="#" id="nbGoLogin">Iniciar Sesión</a></p>
+        </form>
+      </div>
+    </div>`;
+  document.body.appendChild(el);
+  inicializarModalRegistro();
+}
+
+function inicializarModalRegistro() {
+  /* Cerrar con X */
+  document.getElementById('nbRegisterClose')?.addEventListener('click', cerrarRegisterGlobal);
+
+  /* Cerrar al clicar el fondo */
+  document.getElementById('nbRegisterOverlay')?.addEventListener('click', function(e) {
+    if (e.target === this) cerrarRegisterGlobal();
+  });
+
+  /* Switch → login */
+  document.getElementById('nbGoLogin')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    cerrarRegisterGlobal();
+    abrirLoginGlobal();
+  });
+
+  /* Submit */
+  document.getElementById('nbRegisterForm')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const email     = document.getElementById('nbRegisterEmail').value.trim();
+    const password  = document.getElementById('nbRegisterPassword').value;
+    const confirm   = document.getElementById('nbRegisterConfirm').value;
+    const errorEl   = document.getElementById('nbRegisterError');
+    const submitBtn = document.getElementById('nbRegisterSubmit');
+    errorEl.classList.add('d-none');
+
+    /* Validar email */
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errorEl.textContent = 'Introduce un correo electrónico válido.';
+      errorEl.classList.remove('d-none');
+      return;
+    }
+    /* Validar longitud */
+    if (password.length < 6) {
+      errorEl.textContent = 'La contraseña debe tener al menos 6 caracteres.';
+      errorEl.classList.remove('d-none');
+      return;
+    }
+    /* Validar confirmación */
+    if (password !== confirm) {
+      errorEl.textContent = 'Las contraseñas no coinciden.';
+      errorEl.classList.remove('d-none');
+      return;
+    }
+
+    submitBtn.textContent = 'Creando cuenta…';
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch(BASE_URL + '/api/usuarios/sign-up', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ email, password })
+      });
+      if (!res.ok) {
+        let msg = 'Error al registrar. Inténtalo de nuevo.';
+        try { const d = await res.json(); msg = d.mensaje || msg; } catch (_) {}
+        throw new Error(msg);
+      }
+      /* Éxito */
+      cerrarRegisterGlobal();
+      document.getElementById('nbRegisterForm').reset();
+      abrirLoginGlobal();
+      const loginEmail = document.getElementById('nbLoginEmail');
+      if (loginEmail) loginEmail.value = email;
+    } catch (err) {
+      errorEl.textContent = err.message || 'Error al registrar. Inténtalo de nuevo.';
+      errorEl.classList.remove('d-none');
+    } finally {
+      submitBtn.textContent = 'Crear cuenta';
+      submitBtn.disabled = false;
+    }
+  });
+}
+
+function cerrarRegisterGlobal() {
+  const o   = document.getElementById('nbRegisterOverlay');
+  const err = document.getElementById('nbRegisterError');
+  const frm = document.getElementById('nbRegisterForm');
+  if (o)   o.classList.remove('open');
+  if (err) err.classList.add('d-none');
+  if (frm) frm.reset();
+}
+
+function abrirLoginGlobal() {
+  /* Intenta abrir cualquier modal de login disponible en la página */
+  const nbOverlay = document.getElementById('nbLoginOverlay');
+  if (nbOverlay) { nbOverlay.classList.add('open'); return; }
+  const pageModal = document.getElementById('loginModal');
+  if (!pageModal) return;
+  if (pageModal.classList.contains('modal') && typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+    new bootstrap.Modal(pageModal).show();
+  } else {
+    pageModal.classList.add('open');
+  }
+}
+
 async function cargarNavbar() {
   const res        = await fetch('navbar.html');
   const html       = await res.text();
@@ -170,14 +306,14 @@ async function cargarNavbar() {
     // Registro
     if (e.target.closest('#btnRegister') || e.target.closest('#btnRegisterDyn')) {
       e.preventDefault();
-      abrirRegister();
+      cerrarRegisterGlobal(); crearModalRegistro(); document.getElementById('nbRegisterOverlay')?.classList.add('open');
       return;
     }
     // Cerrar al clicar fuera
     const lo = document.getElementById('nbLoginOverlay');
     const ro = document.getElementById('nbRegisterOverlay');
     if (lo && lo.classList.contains('open') && e.target === lo) cerrarLogin();
-    if (ro && ro.classList.contains('open') && e.target === ro) cerrarRegister();
+    if (ro && ro.classList.contains('open') && e.target === ro) cerrarRegisterGlobal();
   });
 
   /* ── Botones cerrar y switch ── */
@@ -187,9 +323,9 @@ async function cargarNavbar() {
   const nbGoLogin       = document.getElementById('nbGoLogin');
 
   if (nbLoginClose)    nbLoginClose.addEventListener('click', cerrarLogin);
-  if (nbRegisterClose) nbRegisterClose.addEventListener('click', cerrarRegister);
-  if (nbGoRegister)    nbGoRegister.addEventListener('click', e => { e.preventDefault(); cerrarLogin(); abrirRegister(); });
-  if (nbGoLogin)       nbGoLogin.addEventListener('click',    e => { e.preventDefault(); cerrarRegister(); abrirLogin(); });
+    if (nbRegisterClose) nbRegisterClose.addEventListener('click', cerrarRegisterGlobal);
+    if (nbGoRegister)    nbGoRegister.addEventListener('click', e => { e.preventDefault(); cerrarLogin(); crearModalRegistro(); document.getElementById('nbRegisterOverlay')?.classList.add('open'); });
+    if (nbGoLogin)       nbGoLogin.addEventListener('click', e => { e.preventDefault(); cerrarRegisterGlobal(); abrirLogin(); });
 
   /* ── Login submit ── */
   const nbLoginForm = document.getElementById('nbLoginForm');
@@ -250,7 +386,7 @@ async function cargarNavbar() {
           try { const d = await res.json(); mensajeError = d.mensaje || mensajeError; } catch (_) {}
           throw new Error(mensajeError);
         }
-        cerrarRegister();
+        cerrarRegisterGlobal();
         abrirLogin();
         document.getElementById('nbLoginEmail').value = email;
         nbRegisterForm.reset();
@@ -400,6 +536,8 @@ window.actualizarUIUsuario = function(email, rol) {
    INIT
 ══════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
+
+  crearModalRegistro();
 
   if (document.getElementById('navbar-container')) {
     cargarNavbar();
