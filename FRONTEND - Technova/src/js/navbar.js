@@ -358,44 +358,8 @@ async function cargarNavbar() {
     });
   }
 
-  /* ── Registro submit ── */
-  const nbRegisterForm = document.getElementById('nbRegisterForm');
-  if (nbRegisterForm) {
-    nbRegisterForm.addEventListener('submit', async e => {
-      e.preventDefault();
-      const email    = document.getElementById('nbRegisterEmail').value.trim();
-      const password = document.getElementById('nbRegisterPassword').value;
-      const confirm  = document.getElementById('nbRegisterConfirm').value;
-      const errorEl  = document.getElementById('nbRegisterError');
-      errorEl.classList.add('d-none');
-
-      if (password !== confirm) {
-        errorEl.textContent = 'Las contrasenas no coinciden.';
-        errorEl.classList.remove('d-none');
-        return;
-      }
-
-      try {
-        const res = await fetch(BASE_URL + '/api/usuarios/sign-up', {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify({ email, password })
-        });
-        if (!res.ok) {
-          let mensajeError = 'Error al registrar. Inténtalo de nuevo.';
-          try { const d = await res.json(); mensajeError = d.mensaje || mensajeError; } catch (_) {}
-          throw new Error(mensajeError);
-        }
-        cerrarRegisterGlobal();
-        abrirLogin();
-        document.getElementById('nbLoginEmail').value = email;
-        nbRegisterForm.reset();
-      } catch (err) {
-        errorEl.textContent = err.message || 'Error al registrar. Inténtalo de nuevo.';
-        errorEl.classList.remove('d-none');
-      }
-    });
-  }
+  /* ── Registro submit (delegado a inicializarModalRegistro) ── */
+  /* El form ya tiene listener asignado por crearModalRegistro() — no duplicar */
 
   /* ── Logout ── */
   document.addEventListener('click', e => {
