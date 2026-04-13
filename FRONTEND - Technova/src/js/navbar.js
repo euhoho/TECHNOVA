@@ -1,4 +1,109 @@
 /* ═══════════════════════════════════════════════════════════
+   MODAL LOGIN — creado directamente en el DOM
+═══════════════════════════════════════════════════════════ */
+function crearModalLogin() {
+  if (document.getElementById('nbLoginOverlay')) return;
+  const el = document.createElement('div');
+  el.id = 'nbLoginOverlay';
+  el.className = 'nb-modal-overlay';
+  el.innerHTML = `
+    <div class="nb-modal-card">
+      <div class="nb-modal-header">
+        <h3>Iniciar Sesión</h3>
+        <button class="nb-modal-close" id="nbLoginClose">&#x2715;</button>
+      </div>
+      <div class="nb-modal-body">
+        <form id="nbLoginForm" novalidate>
+          <div class="nb-form-group">
+            <label>Email</label>
+            <input type="email" id="nbLoginEmail" placeholder="tu@email.com" autocomplete="email" required/>
+          </div>
+          <div class="nb-form-group">
+            <label>Contraseña</label>
+            <input type="password" id="nbLoginPassword" placeholder="••••••••" autocomplete="current-password" required/>
+          </div>
+          <div class="nb-form-error d-none" id="nbLoginError">Email o contraseña incorrectos.</div>
+          <button type="submit" class="nb-btn-neon w-full" id="nbLoginSubmit">Entrar</button>
+          <p class="nb-modal-switch">¿No tienes cuenta? <a href="#" id="nbGoRegister">Registrarse</a></p>
+        </form>
+      </div>
+    </div>`;
+  document.body.appendChild(el);
+  inicializarModalLogin();
+}
+
+function inicializarModalLogin() {
+  document.getElementById('nbLoginClose')?.addEventListener('click', cerrarLoginGlobal);
+
+  document.getElementById('nbLoginOverlay')?.addEventListener('click', function(e) {
+    if (e.target === this) cerrarLoginGlobal();
+  });
+
+  document.getElementById('nbGoRegister')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    cerrarLoginGlobal();
+    crearModalRegistro();
+    document.getElementById('nbRegisterOverlay')?.classList.add('open');
+  });
+
+  document.getElementById('nbLoginForm')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const email     = document.getElementById('nbLoginEmail').value.trim();
+    const password  = document.getElementById('nbLoginPassword').value;
+    const errorEl   = document.getElementById('nbLoginError');
+    const submitBtn = document.getElementById('nbLoginSubmit');
+    errorEl.classList.add('d-none');
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errorEl.textContent = 'Introduce un correo electrónico válido.';
+      errorEl.classList.remove('d-none');
+      return;
+    }
+    if (!password) {
+      errorEl.textContent = 'La contraseña es requerida.';
+      errorEl.classList.remove('d-none');
+      return;
+    }
+
+    submitBtn.textContent = 'Entrando…';
+    submitBtn.disabled = true;
+
+    try {
+      const res  = await fetch(BASE_URL + '/api/login', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (data.status !== 'ok') throw new Error(data.mensaje);
+
+      localStorage.setItem('email',    data.usuario.email);
+      localStorage.setItem('password', password);
+      localStorage.setItem('rol',      data.usuario.rol);
+
+      cerrarLoginGlobal();
+      if (window.actualizarUIUsuario) window.actualizarUIUsuario(data.usuario.email, data.usuario.rol);
+      actualizarContadorCarrito();
+    } catch {
+      errorEl.textContent = 'Email o contraseña incorrectos.';
+      errorEl.classList.remove('d-none');
+    } finally {
+      submitBtn.textContent = 'Entrar';
+      submitBtn.disabled = false;
+    }
+  });
+}
+
+function cerrarLoginGlobal() {
+  const o   = document.getElementById('nbLoginOverlay');
+  const err = document.getElementById('nbLoginError');
+  const frm = document.getElementById('nbLoginForm');
+  if (o)   o.classList.remove('open');
+  if (err) err.classList.add('d-none');
+  if (frm) frm.reset();
+}
+
+/* ═══════════════════════════════════════════════════════════
    MODAL REGISTRO — creado directamente en el DOM, sin depender
    de cargarNavbar() ni de navbar.html
 ═══════════════════════════════════════════════════════════ */
@@ -122,16 +227,8 @@ function cerrarRegisterGlobal() {
 }
 
 function abrirLoginGlobal() {
-  /* Intenta abrir cualquier modal de login disponible en la página */
-  const nbOverlay = document.getElementById('nbLoginOverlay');
-  if (nbOverlay) { nbOverlay.classList.add('open'); return; }
-  const pageModal = document.getElementById('loginModal');
-  if (!pageModal) return;
-  if (pageModal.classList.contains('modal') && typeof bootstrap !== 'undefined' && bootstrap.Modal) {
-    new bootstrap.Modal(pageModal).show();
-  } else {
-    pageModal.classList.add('open');
-  }
+  crearModalLogin();
+  document.getElementById('nbLoginOverlay')?.classList.add('open');
 }
 
 async function cargarNavbar() {
@@ -140,6 +237,10 @@ async function cargarNavbar() {
   const contenedor = document.getElementById('navbar-container');
   if (!contenedor) return;
   contenedor.innerHTML = html;
+
+  /* ── Eliminar modales del HTML inyectado (los crea crearModalLogin/Register por JS) ── */
+  contenedor.querySelector('#nbLoginOverlay')?.remove();
+  contenedor.querySelector('#nbRegisterOverlay')?.remove();
 
   const navbar         = document.getElementById('navbar');
   const hamburger      = document.getElementById('hamburger');
@@ -327,36 +428,7 @@ async function cargarNavbar() {
     if (nbGoRegister)    nbGoRegister.addEventListener('click', e => { e.preventDefault(); cerrarLogin(); crearModalRegistro(); document.getElementById('nbRegisterOverlay')?.classList.add('open'); });
     if (nbGoLogin)       nbGoLogin.addEventListener('click', e => { e.preventDefault(); cerrarRegisterGlobal(); abrirLogin(); });
 
-  /* ── Login submit ── */
-  const nbLoginForm = document.getElementById('nbLoginForm');
-  if (nbLoginForm) {
-    nbLoginForm.addEventListener('submit', async e => {
-      e.preventDefault();
-      const email    = document.getElementById('nbLoginEmail').value.trim();
-      const password = document.getElementById('nbLoginPassword').value;
-      const errorEl  = document.getElementById('nbLoginError');
-      errorEl.classList.add('d-none');
-      try {
-        const res  = await fetch(BASE_URL + '/api/login', {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify({ email, password })
-        });
-        const data = await res.json();
-        if (data.status !== 'ok') throw new Error();
-
-        localStorage.setItem('email',    data.usuario.email);
-        localStorage.setItem('password', password);
-        localStorage.setItem('rol',      data.usuario.rol);
-
-        cerrarLogin();
-        actualizarUIAuth();
-        actualizarContadorCarrito();
-      } catch {
-        errorEl.classList.remove('d-none');
-      }
-    });
-  }
+  /* ── Login submit gestionado por inicializarModalLogin() ── */
 
   /* ── Registro submit (delegado a inicializarModalRegistro) ── */
   /* El form ya tiene listener asignado por crearModalRegistro() — no duplicar */
@@ -501,6 +573,7 @@ window.actualizarUIUsuario = function(email, rol) {
 ══════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
 
+  crearModalLogin();
   crearModalRegistro();
 
   if (document.getElementById('navbar-container')) {
