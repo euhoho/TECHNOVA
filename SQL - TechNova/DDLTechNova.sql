@@ -79,7 +79,7 @@ INSERT INTO producto (sku, nombre, descripcion, precio, stock, categoria, imagen
 ('SOF-KASPERSKY','Kaspersky Pro','Licencia AntiVirus Kaspersky 1 año',29.95,3,'Software','Licencia-AntiVirus-Kaspersky-Frontal.png'),
 ('SOF-OFFICE','Microsoft Office Professional Plus','Descarga digital Microsoft Office Professional Plus ',149.99,3,'Software','Microsoft-Office-Professional-Plus-2024-Caja.png'),
 
-('RED-DLINK','Módem D-Link F518/M 5G','Wi-Fi 6 dual band hasta 1800 Mbps',295.87,3,'Redes','Módem-D-Link-F518M-5G-Wi-Fi 6-dual-band-Trasera.png'),
+('RED-DLINK','Modem D-Link F518/M 5G','Wi-Fi 6 dual band hasta 1800 Mbps',295.87,3,'Redes','Módem-D-Link-F518M-5G-Wi-Fi 6-dual-band-Trasera.png'),
 ('RED-USB','TP-Link UB5A','Adaptador Nano USB Bluetooth 5.0',9.99,1,'Redes','TP-Link-UB5A-Caja.png'),
 ('RED-TARJETA','ASUS PCE-AXE5400','Tarjeta de Red WiFi AXE5400 con Bluetooth',32.95,4,'Redes','ASUS-PCE-AXE5400-Frontal.png');
 
