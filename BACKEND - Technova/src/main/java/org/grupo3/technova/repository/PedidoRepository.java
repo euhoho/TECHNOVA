@@ -8,8 +8,14 @@ import org.grupo3.technova.data.model.Producto;
 
 import java.time.LocalDateTime;
 import java.util.List;
-// Repositorio para manejar operaciones de pedido en la base de datos.
-//Se define los metodso para crear, listar pedidos de la BD
+
+/* Interfaz del repositorio de pedidos.
+   Define los métodos que debe implementar cualquier clase
+   que gestione pedidos en la base de datos.
+
+   En este caso, PedidoRepositoryImpl es la clase que implementa
+   esta interfaz y contiene el código real de cada metodo.
+ */
 public interface PedidoRepository {
     List<Pedido> listarPedidos();
 
