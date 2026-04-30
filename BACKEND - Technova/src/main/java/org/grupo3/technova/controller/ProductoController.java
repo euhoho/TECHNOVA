@@ -35,6 +35,7 @@ public class ProductoController {
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
 
+    // Spring inyecta todas las dependencias automáticamente por constructor.
     public ProductoController(ProductoRepository productoRepository, UsuarioRepositoryImpl usuarioRepositoryImpl, UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
         this.productoRepository = productoRepository;
         this.usuarioRepositoryImpl = usuarioRepositoryImpl;
@@ -51,7 +52,7 @@ public class ProductoController {
         try {
             List<Producto> productos = productoRepository.listar();
 
-            // Construimos el JsonArray con GSON usando el método toJsonObject() de cada producto
+            // Construimos el JsonArray con GSON usando el método toJsonObject() de cada producto.
             JsonArray array = new JsonArray();
             for (Producto p : productos) {
                 array.add(p.toJsonObject());
@@ -63,6 +64,7 @@ public class ProductoController {
                     .body(array.toString());
 
         } catch (Exception e) {
+            // Si algo falla en BD devolvemos un 500 con el mensaje de error.
             JsonObject error = new JsonObject();
             error.addProperty("error", "Error listando productos: " + e.getMessage());
             return ResponseEntity
@@ -80,7 +82,8 @@ public class ProductoController {
     @GetMapping("/{categoria}")
     public ResponseEntity<String> listarPorCategoria(@PathVariable String categoria) {
         try {
-            // Convertimos el String a enum para validarlo
+            // Convertimos el String recibido en la URL a su valor del enum para validarlo.
+            // Si la categoría no existe en el enum, lanza IllegalArgumentException → 400.
             EnumCategoria enumCategoria = EnumCategoria.valueOf(categoria.toUpperCase());
             List<Producto> productos = productoRepository.findByCategoria(enumCategoria);
 
@@ -95,7 +98,7 @@ public class ProductoController {
                     .body(array.toString());
 
         } catch (IllegalArgumentException e) {
-            // Categoría no válida
+            // La categoría que mandó el cliente no existe en nuestro enum → 400 Bad Request.
             JsonObject error = new JsonObject();
             error.addProperty("error", "Categoría no válida: " + categoria);
             return ResponseEntity
@@ -114,13 +117,19 @@ public class ProductoController {
     }
 
     /**
-     * POST /api/productos
+     * POST /api/productos/crear-producto
      * Crea un nuevo producto en la base de datos.
+     * Solo accesible para usuarios con rol ADMINISTRADOR.
+     * Las credenciales se pasan por cabeceras HTTP (email y password).
      */
-
-
     @PostMapping("/crear-producto")
-    public ResponseEntity<String> crear(@RequestBody Producto producto, @RequestHeader (value = "email", required = false)String email, @RequestHeader (value = "password", required = false) String password) {
+    public ResponseEntity<String> crear(
+            @RequestBody Producto producto,
+            @RequestHeader(value = "email", required = false) String email,
+            @RequestHeader(value = "password", required = false) String password) {
+
+        // Comprobamos que el usuario que hace la petición existe y tiene rol de administrador.
+        // Si no, devolvemos 403 Forbidden directamente sin llegar a la BD.
         Usuario usuario = usuarioRepository.login(email, password);
 
         if (usuario == null || usuario.getRol() != EnumRol.ADMINISTRADOR) {
@@ -133,9 +142,10 @@ public class ProductoController {
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(error.toString());
         }
+
+        // Si el usuario es administrador, intentamos guardar el producto.
         try {
             productoRepository.save(producto);
-
 
         } catch (Exception e) {
             JsonObject error = new JsonObject();
@@ -144,8 +154,9 @@ public class ProductoController {
                     .status(500)
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(error.toString());
-            }
+        }
 
+        // Todo fue bien → 201 Created con confirmación.
         JsonObject respuesta = new JsonObject();
         respuesta.addProperty("status", "ok");
         respuesta.addProperty("mensaje", "Producto creado correctamente");

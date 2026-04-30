@@ -31,30 +31,35 @@ public class UsuarioController {
      @param request DTO con credenciales de login (email y password)
      @return LoginResponse con usuario y pedidos si la autenticación es correcta; null si falla
      */
-    @PostMapping(   "/login")
-    /**
-     * Realiza  el login y despues te lista todos tus pedidos
-     */
+    @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest request) {
 
+        // Intentamos autenticar con las credenciales recibidas.
         Usuario usuario = usuarioRepository.login(
                 request.getEmail(),
                 request.getPassword()
         );
 
+        // Si el login falla devolvemos null (pendiente de cambiar a un 401 Unauthorized).
         if (usuario == null) {
-            return null; // posteriormente se puede devolver un 401 Unauthorized
+            return null;
         }
 
+        // Si el login fue correcto, devolvemos el usuario junto con todos sus pedidos.
         return new LoginResponse(
-                usuario
-               ,usuarioRepository.obtenerPedidosDeUsuario(usuario.getId_usuario())
+                usuario,
+                usuarioRepository.obtenerPedidosDeUsuario(usuario.getId_usuario())
         );
     }
+
+    /**
+     * POST /api/usuarios/sign-up
+     * Registra un nuevo usuario en la base de datos.
+     * El repositorio se encarga de hashear la contraseña antes de guardarla.
+     */
     @PostMapping("/sign-up")
     public ResponseEntity<String> registrarUsuario(@RequestBody Usuario usuario) {
         try {
-            // Llamamos al método que hashea la contraseña y guarda en BD
             usuarioRepository.save(usuario);
             return ResponseEntity.status(HttpStatus.CREATED).body("Usuario creado con éxito");
         } catch (Exception e) {
@@ -63,7 +68,12 @@ public class UsuarioController {
         }
     }
 
-    // usar únicamente cuando se haya reicinciado la base de datos y necesitemos hashear aquellas contraseñas de los usuarios ya existentes.
+    /**
+     * GET /api/usuarios/migrar-passwords
+     * Endpoint de mantenimiento: hashea con BCrypt las contraseñas que estén en texto plano.
+     * Usar únicamente cuando se haya reiniciado la base de datos y necesitemos
+     * hashear las contraseñas de los usuarios ya existentes. No exponer en producción.
+     */
     @GetMapping("/migrar-passwords")
     public String migrar() {
         usuarioRepository.migrarContrasenas();
