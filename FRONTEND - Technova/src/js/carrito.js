@@ -1,10 +1,14 @@
 // ===============================
 // STORAGE — localStorage (compartido entre todas las páginas)
+// Funciones base para leer y guardar el carrito en el navegador
 // ===============================
+
+// Devuelve el carrito actual desde localStorage (o array vacío si no existe)
 export function getCarrito() {
     return JSON.parse(localStorage.getItem("carrito")) || [];
 }
 
+// Guarda el carrito en localStorage y actualiza el contador del navbar
 export function guardarCarrito(carrito) {
     localStorage.setItem("carrito", JSON.stringify(carrito));
     actualizarContadorCarrito();
@@ -12,7 +16,10 @@ export function guardarCarrito(carrito) {
 
 // ===============================
 // CARRITO
+// Operaciones de añadir y vaciar productos
 // ===============================
+
+// Añade un producto al carrito; si ya existe incrementa su cantidad
 export function agregarProducto(producto) {
     const carrito   = getCarrito();
     const existente = carrito.find(p => p.idProducto === producto.idProducto);
@@ -24,6 +31,7 @@ export function agregarProducto(producto) {
     guardarCarrito(carrito);
 }
 
+// Elimina todo el carrito de localStorage, actualiza el contador y recarga la página
 export function vaciarCarrito() {
     localStorage.removeItem("carrito");
     actualizarContadorCarrito();
@@ -32,30 +40,36 @@ export function vaciarCarrito() {
 
 // ===============================
 // CONTADOR NAVBAR
+// Muestra el número total de unidades en el icono del carrito
 // ===============================
+
+// Suma todas las cantidades del carrito y devuelve el total de unidades
 export function contarItems() {
     return getCarrito().reduce((acc, p) => acc + p.cantidad, 0);
 }
 
+// Actualiza el badge del carrito en el navbar y dispara la animación de rebote
 export function actualizarContadorCarrito() {
     const total = contarItems();
     const count = document.getElementById("cartCount");
     if (count) {
         count.textContent = total;
         count.classList.remove("bump");
-        void count.offsetWidth;
+        void count.offsetWidth; // Fuerza reflow para reiniciar la animación CSS
         count.classList.add("bump");
     }
 }
 
 // ===============================
 // FINALIZAR COMPRA
+// Envía el pedido a la API y limpia el carrito si todo va bien
 // ===============================
 export async function finalizarCompra() {
     const carrito  = getCarrito();
     const email    = localStorage.getItem("email");
     const password = localStorage.getItem("password");
 
+    // Comprueba que el usuario está logueado y el carrito no está vacío
     if (!email || !password) {
         mostrarToast("Debes iniciar sesión para realizar un pedido", "error");
         return;
@@ -65,6 +79,7 @@ export async function finalizarCompra() {
         return;
     }
 
+    // Construye el objeto de pedido con usuario y líneas de productos
     const pedido = {
         usuario: { email, password },
         lineas:  carrito.map(p => ({ idProducto: p.idProducto, cantidad: p.cantidad }))
@@ -78,12 +93,14 @@ export async function finalizarCompra() {
         });
 
         if (response.ok) {
+            // Pedido creado: limpia el carrito y notifica al usuario con el ID del pedido
             const data = await response.json();
             localStorage.removeItem("carrito");
             actualizarContadorCarrito();
             renderizarCarrito();
             mostrarToast("¡Pedido confirmado! ID: " + data.idPedido, "success");
         } else {
+            // La API devolvió un error: muestra el mensaje recibido
             const errorData = await response.json();
             mostrarToast("Error: " + (errorData.mensaje || "inténtalo de nuevo"), "error");
         }
@@ -95,9 +112,14 @@ export async function finalizarCompra() {
 
 // ===============================
 // LÓGICA EXCLUSIVA DE carrito.html
+// Las funciones de abajo solo se usan en la página del carrito
 // ===============================
+
+// Formatea un número como precio con 2 decimales y símbolo €
 function fmt(n) { return n.toFixed(2) + " €"; }
 
+// Muestra una notificación temporal en la esquina de la pantalla (toast)
+// tipo: "success" (verde) o "error" (rojo)
 function mostrarToast(mensaje, tipo = "success") {
     const toast = document.getElementById("toast");
     if (!toast) return;
@@ -107,12 +129,15 @@ function mostrarToast(mensaje, tipo = "success") {
     setTimeout(() => toast.classList.remove("show"), 4000);
 }
 
+// Dibuja todos los productos del carrito en el DOM.
+// Si está vacío muestra el estado vacío; si no, genera una tarjeta por producto.
 function renderizarCarrito() {
     const carrito    = getCarrito();
     const contenedor = document.getElementById("carritoItems");
     const vacio      = document.getElementById("carritoVacio");
     if (!contenedor) return;
 
+    // Elimina los ítems anteriores para redibujar desde cero
     contenedor.querySelectorAll(".carrito-item").forEach(el => el.remove());
 
     if (carrito.length === 0) {
@@ -123,6 +148,7 @@ function renderizarCarrito() {
 
     if (vacio) vacio.style.display = "none";
 
+    // Genera un elemento HTML por cada producto del carrito
     carrito.forEach(p => {
         const div = document.createElement("div");
         div.className = "carrito-item";
@@ -148,9 +174,11 @@ function renderizarCarrito() {
         contenedor.appendChild(div);
     });
 
+    // Asigna el evento de eliminar a cada botón de papelera
     contenedor.querySelectorAll(".carrito-item-delete").forEach(btn => {
         btn.addEventListener("click", () => {
             const id    = parseInt(btn.dataset.id);
+            // Filtra el producto eliminado y guarda el carrito resultante
             const nuevo = getCarrito().filter(p => p.idProducto !== id);
             guardarCarrito(nuevo);
             renderizarCarrito();
@@ -161,10 +189,11 @@ function renderizarCarrito() {
     actualizarResumen(carrito);
 }
 
+// Calcula subtotal, IVA (21%) y total bruto y los muestra en el panel de resumen
 function actualizarResumen(carrito) {
     const totalBruto = carrito.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
-    const subtotal   = totalBruto / 1.21;
-    const iva        = subtotal * 0.21;
+    const subtotal   = totalBruto / 1.21; // Precio sin IVA
+    const iva        = subtotal * 0.21;   // Importe del IVA
 
     const elSub   = document.getElementById("resumenSubtotal");
     const elIva   = document.getElementById("resumenIva");
@@ -175,6 +204,8 @@ function actualizarResumen(carrito) {
     if (elTotal) elTotal.textContent = fmt(totalBruto);
 }
 
+// Muestra u oculta los bloques de "iniciar sesión" o "usuario logueado"
+// en el panel lateral del resumen según el estado de la sesión
 function actualizarSesionUI() {
     const email    = localStorage.getItem("email");
     const loginBox = document.getElementById("resumenLogin");
@@ -191,14 +222,15 @@ function actualizarSesionUI() {
     }
 }
 
-// Solo ejecutar si estamos en carrito.html
+// ── Inicialización exclusiva de carrito.html ──
+// Solo se ejecuta si el elemento principal del carrito existe en el DOM
 if (document.getElementById("carritoItems")) {
     document.addEventListener("DOMContentLoaded", () => {
-        renderizarCarrito();
-        actualizarSesionUI();
-        actualizarContadorCarrito();
+        renderizarCarrito();       // Pinta los productos al cargar la página
+        actualizarSesionUI();      // Muestra el bloque de sesión correcto
+        actualizarContadorCarrito(); // Sincroniza el badge del navbar
 
-        /* Vaciar */
+        /* Vaciar carrito completo */
         document.getElementById("btnVaciar")?.addEventListener("click", () => {
             if (getCarrito().length === 0) return;
             localStorage.removeItem("carrito");
@@ -207,13 +239,14 @@ if (document.getElementById("carritoItems")) {
             mostrarToast("Carrito vaciado", "error");
         });
 
-        /* Abrir login */
+        /* Abrir modal de login desde el resumen */
         document.getElementById("btnLogin")?.addEventListener("click", e => {
             e.preventDefault();
             document.getElementById("nbLoginOverlay")?.classList.add("open");
         });
 
-        /* Cerrar login */
+        /* Cerrar modal de login por los tres métodos posibles:
+           botón X, botón cancelar y clic en el fondo del overlay */
         document.getElementById("nbLoginClose")?.addEventListener("click", () => {
             document.getElementById("nbLoginOverlay")?.classList.remove("open");
         });
@@ -225,7 +258,8 @@ if (document.getElementById("carritoItems")) {
                 document.getElementById("nbLoginOverlay").classList.remove("open");
         });
 
-        /* Login submit */
+        /* Formulario de login embebido en el carrito:
+           llama a la API, guarda la sesión y actualiza la UI si es correcto */
         document.getElementById("nbLoginForm")?.addEventListener("submit", async e => {
             e.preventDefault();
             const email    = document.getElementById("nbLoginEmail").value.trim();
@@ -242,6 +276,7 @@ if (document.getElementById("carritoItems")) {
                 const data = await res.json();
                 if (data.status !== "ok") throw new Error();
 
+                // Guarda la sesión y cierra el modal
                 localStorage.setItem("email",    data.usuario.email);
                 localStorage.setItem("password", password);
                 localStorage.setItem("rol",      data.usuario.rol);
@@ -250,14 +285,14 @@ if (document.getElementById("carritoItems")) {
                 actualizarSesionUI();
                 mostrarToast("¡Bienvenido!", "success");
             } catch {
-                errorEl?.classList.remove("d-none");
+                errorEl?.classList.remove("d-none"); // Muestra el error si el login falla
             }
         });
 
-        /* Confirmar pedido */
+        /* Confirmar y enviar el pedido */
         document.getElementById("btnConfirmar")?.addEventListener("click", finalizarCompra);
 
-        /* Logout */
+        /* Cerrar sesión: elimina los datos del usuario y actualiza el panel lateral */
         document.getElementById("btnLogout")?.addEventListener("click", () => {
             localStorage.removeItem("email");
             localStorage.removeItem("password");
