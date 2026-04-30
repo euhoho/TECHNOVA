@@ -1,26 +1,37 @@
 /* ════════════════════════════════════════════
    TECHNOVA — nosotros.css
+   Hoja de estilos para la página "Nosotros":
+   hero, sección de proyecto, equipo, valores y footer
 ════════════════════════════════════════════ */
 
+/* ── Variables globales de diseño ──
+   Paleta de colores, fuentes, radios y tiempos de transición
+   compartidos con el resto de hojas de estilos del proyecto */
 :root {
-  --bg:        #07070f;
-  --bg-card:   #0f0f1e;
-  --rosa:      #e40085;
-  --rosa-dim:  rgba(228,0,133,0.12);
-  --magenta:   #c940ff;
-  --text:      #e6e6f5;
-  --text-muted:#7878a0;
-  --border:    rgba(255,255,255,0.07);
-  --border-h:  rgba(228,0,133,0.3);
-  --font-head: 'Orbitron', sans-serif;
-  --font-body: 'Rajdhani', sans-serif;
-  --radius:    10px;
-  --radius-lg: 16px;
-  --t:         0.28s ease;
+  --bg:        #07070f;                      /* Fondo principal, negro azulado muy oscuro */
+  --bg-card:   #0f0f1e;                      /* Fondo de tarjetas y paneles */
+  --rosa:      #e40085;                      /* Rosa neón principal, acentos y CTAs */
+  --rosa-dim:  rgba(228,0,133,0.12);         /* Rosa translúcido para fondos suaves */
+  --magenta:   #c940ff;                      /* Magenta para degradados y detalles */
+  --text:      #e6e6f5;                      /* Texto principal, blanco azulado */
+  --text-muted:#7878a0;                      /* Texto secundario/apagado, gris azulado */
+  --border:    rgba(255,255,255,0.07);       /* Borde sutil para separar elementos */
+  --border-h:  rgba(228,0,133,0.3);          /* Borde rosa para estados hover y focus */
+  --font-head: 'Orbitron', sans-serif;       /* Fuente de cabeceras, estilo futurista */
+  --font-body: 'Rajdhani', sans-serif;       /* Fuente de cuerpo, legible y moderna */
+  --radius:    10px;                         /* Radio de esquinas estándar */
+  --radius-lg: 16px;                         /* Radio de esquinas grande para tarjetas */
+  --t:         0.28s ease;                   /* Duración y curva de las transiciones */
 }
 
+/* ── Reset global ──
+   Elimina márgenes y rellenos nativos, box-sizing incluye bordes y padding */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Desplazamiento suave al navegar a anclas internas */
 html { scroll-behavior: smooth; }
+
+/* Estilos base del body: fuente, fondo oscuro, sin scroll horizontal */
 body {
   font-family: var(--font-body);
   background: var(--bg);
@@ -29,20 +40,30 @@ body {
   font-size: 16px;
   line-height: 1.6;
 }
+
+/* Elimina subrayado de enlaces y hereda el color del padre */
 a { text-decoration: none; color: inherit; }
+
+/* Elimina los puntos de las listas */
 ul { list-style: none; }
 
+/* ── Barra de desplazamiento personalizada (solo Webkit/Chrome) ── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--rosa); border-radius: 3px; }
 
-/* ── Common ── */
+/* ── Common ──
+   Componentes de texto reutilizables en todas las secciones de la página */
+
+/* Texto con degradado de rosa a magenta */
 .gradient-text {
   background: linear-gradient(90deg, var(--rosa), var(--magenta));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* Etiqueta pequeña de sección con borde rosa (ej: "SOBRE NOSOTROS") */
 .ns-tag {
   display: inline-block;
   padding: 4px 14px;
@@ -55,66 +76,76 @@ ul { list-style: none; }
   border-radius: 4px;
   margin-bottom: 16px;
 }
+
+/* Título principal de cada sección con tamaño fluido responsive */
 .ns-title {
   font-family: var(--font-head);
-  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem); /* Entre 1.6rem y 2.4rem según el viewport */
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 12px;
 }
 
-/* ── Reveal ── */
+/* ── Reveal ──
+   Animación de aparición al hacer scroll: los elementos bajan desde arriba */
 .ns-reveal {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(24px);   /* Empieza desplazado hacia abajo */
   transition: opacity 0.65s ease, transform 0.65s ease;
 }
+
+/* Cuando JS detecta que el elemento es visible en el viewport, añade esta clase */
 .ns-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* ════ HERO ════ */
+/* ════ HERO ════
+   Sección principal a pantalla completa con imagen de fondo y texto superpuesto */
 .ns-hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 100vh;             /* Ocupa al menos el 100% de la altura de la ventana */
   display: flex;
   align-items: center;
   padding: 0 6%;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
-  background-image: url('../img/fondo-nosotros.webp');
+  background-image: url('../img/fondo-nosotros.webp'); /* Imagen de fondo de la sección */
   background-size: cover;
   background-position: center;
 }
 
+/* Capa de degradado oscuro sobre la imagen para mejorar la legibilidad del texto */
 .ns-hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     105deg,
-    rgba(7,7,15,0.88) 0%,
+    rgba(7,7,15,0.88) 0%,    /* Muy oscuro a la izquierda donde está el texto */
     rgba(7,7,15,0.70) 50%,
-    rgba(7,7,15,0.35) 100%
+    rgba(7,7,15,0.35) 100%   /* Más transparente hacia la derecha */
   );
   z-index: 0;
 }
 
+/* Contenido textual del hero, sobre la capa de overlay */
 .ns-hero-content {
   position: relative;
   z-index: 1;
   max-width: 640px;
 }
 
+/* Efecto de brillo radial rosa decorativo en la esquina superior derecha */
 .ns-hero-glow {
   position: absolute;
   top: -100px; right: -100px;
   width: 600px; height: 500px;
   background: radial-gradient(circle, rgba(228,0,133,0.08) 0%, transparent 65%);
-  pointer-events: none;
+  pointer-events: none;          /* No interfiere con la interacción del usuario */
   z-index: 0;
 }
 
+/* Línea decorativa horizontal rosa en la parte inferior izquierda del hero */
 .ns-hero-line {
   position: absolute;
   bottom: 36px; left: 6%;
@@ -122,14 +153,18 @@ ul { list-style: none; }
   background: linear-gradient(90deg, var(--rosa), transparent);
   z-index: 1;
 }
+
+/* Título principal del hero con tamaño muy grande y responsive */
 .ns-hero-title {
   font-family: var(--font-head);
-  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-size: clamp(2.4rem, 5vw, 4.2rem); /* Entre 2.4rem y 4.2rem según el viewport */
   font-weight: 900;
   line-height: 1.1;
   margin-bottom: 24px;
   letter-spacing: -0.5px;
 }
+
+/* Subtítulo descriptivo del hero con opacidad reducida */
 .ns-hero-sub {
   font-size: 1.05rem;
   color: rgba(230,230,245,0.65);
@@ -137,31 +172,41 @@ ul { list-style: none; }
   line-height: 1.75;
 }
 
-
-/* ════ PROYECTO ════ */
+/* ════ PROYECTO ════
+   Sección de dos columnas: texto del proyecto a la izquierda,
+   lista de características (stack) a la derecha */
 .ns-section {
   padding: 96px 6%;
   border-bottom: 1px solid var(--border);
 }
+
+/* Layout de dos columnas iguales con separación amplia */
 .ns-section-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
-  align-items: start;
+  align-items: start;            /* Los dos bloques se alinean desde la parte superior */
 }
+
+/* Párrafos del bloque de texto descriptivo */
 .ns-text-block p {
   color: var(--text-muted);
   font-size: 1rem;
   line-height: 1.75;
   margin-bottom: 16px;
 }
+
+/* El último párrafo no necesita margen inferior */
 .ns-text-block p:last-child { margin-bottom: 0; }
 
+/* Lista vertical de ítems del stack tecnológico o características */
 .ns-stack {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
+
+/* Ítem individual del stack: icono + título + descripción */
 .ns-stack-item {
   display: flex;
   align-items: flex-start;
@@ -172,10 +217,14 @@ ul { list-style: none; }
   border-radius: var(--radius);
   transition: var(--t);
 }
+
+/* Hover del ítem: borde rosa y fondo ligeramente rosado */
 .ns-stack-item:hover {
   border-color: var(--border-h);
   background: rgba(228,0,133,0.03);
 }
+
+/* Icono cuadrado del ítem del stack */
 .ns-stack-icon {
   width: 40px; height: 40px;
   background: var(--rosa-dim);
@@ -185,8 +234,10 @@ ul { list-style: none; }
   align-items: center;
   justify-content: center;
   color: var(--rosa);
-  flex-shrink: 0;
+  flex-shrink: 0;                /* No se encoge cuando el texto es largo */
 }
+
+/* Título del ítem del stack en fuente tecnológica */
 .ns-stack-item h4 {
   font-family: var(--font-head);
   font-size: 0.78rem;
@@ -194,31 +245,41 @@ ul { list-style: none; }
   margin-bottom: 3px;
   color: var(--text);
 }
+
+/* Descripción del ítem del stack en texto apagado */
 .ns-stack-item p {
   font-size: 0.82rem;
   color: var(--text-muted);
 }
 
-/* ════ EQUIPO ════ */
+/* ════ EQUIPO ════
+   Sección con la cuadrícula de tarjetas de los miembros del equipo */
 .ns-team-section {
   padding: 96px 6%;
   border-bottom: 1px solid var(--border);
 }
+
+/* Cabecera de la sección de equipo con ancho máximo */
 .ns-team-header {
   max-width: 560px;
   margin-bottom: 56px;
 }
+
+/* Subtítulo descriptivo de la sección de equipo */
 .ns-team-sub {
   color: var(--text-muted);
   font-size: 0.98rem;
   margin-top: 8px;
 }
+
+/* Cuadrícula de dos columnas para las tarjetas de miembros */
 .ns-team-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
 
+/* Tarjeta individual de miembro del equipo */
 .ns-member-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -228,22 +289,29 @@ ul { list-style: none; }
   transition: var(--t);
   overflow: hidden;
 }
+
+/* Línea decorativa rosa-magenta en la parte superior de la tarjeta (oculta por defecto) */
 .ns-member-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 2px;
   background: linear-gradient(90deg, var(--rosa), var(--magenta));
-  opacity: 0;
+  opacity: 0;                    /* Invisible hasta el hover */
   transition: var(--t);
 }
+
+/* Hover de la tarjeta: sube, borde rosado, sombra profunda */
 .ns-member-card:hover {
   border-color: rgba(228,0,133,0.2);
   transform: translateY(-4px);
   box-shadow: 0 16px 48px rgba(0,0,0,0.4);
 }
+
+/* Al hacer hover la línea superior se hace visible */
 .ns-member-card:hover::before { opacity: 1; }
 
+/* Número de orden del miembro (ej: "01") en rosa y espaciado */
 .ns-member-number {
   font-family: var(--font-head);
   font-size: 0.6rem;
@@ -251,6 +319,8 @@ ul { list-style: none; }
   color: var(--rosa);
   margin-bottom: 20px;
 }
+
+/* Avatar circular del miembro con borde rosa */
 .ns-member-avatar {
   width: 56px; height: 56px;
   background: var(--rosa-dim);
@@ -262,6 +332,8 @@ ul { list-style: none; }
   color: var(--rosa);
   margin-bottom: 20px;
 }
+
+/* Nombre del miembro */
 .ns-member-info h3 {
   font-family: var(--font-head);
   font-size: 0.88rem;
@@ -269,6 +341,8 @@ ul { list-style: none; }
   margin-bottom: 4px;
   color: var(--text);
 }
+
+/* Rol/cargo del miembro en rosa y mayúsculas */
 .ns-member-role {
   display: block;
   font-family: var(--font-head);
@@ -278,43 +352,58 @@ ul { list-style: none; }
   color: var(--rosa);
   margin-bottom: 14px;
 }
+
+/* Descripción biográfica breve del miembro */
 .ns-member-info p {
   font-size: 0.86rem;
   color: var(--text-muted);
   line-height: 1.6;
   margin-bottom: 20px;
 }
+
+/* Conjunto de etiquetas de habilidades del miembro */
 .ns-member-tags {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap;               /* Las etiquetas pasan a la siguiente línea si no caben */
   gap: 6px;
 }
+
+/* Etiqueta individual de habilidad: píldora con borde sutil */
 .ns-member-tags span {
   padding: 4px 12px;
   background: rgba(255,255,255,0.04);
   border: 1px solid var(--border);
-  border-radius: 50px;
+  border-radius: 50px;           /* Forma completamente redondeada */
   font-family: var(--font-head);
   font-size: 0.58rem;
   letter-spacing: 1px;
   color: var(--text-muted);
 }
 
-/* ════ VALORES ════ */
+/* ════ VALORES ════
+   Sección de tres columnas con los valores del equipo o empresa */
 .ns-values {
   padding: 96px 6%;
 }
+
+/* Cuadrícula de tres columnas iguales para los valores */
 .ns-values-inner {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 48px;
 }
+
+/* Ítem individual de valor con borde superior que cambia de color en hover */
 .ns-value-item {
   padding-top: 24px;
   border-top: 1px solid var(--border);
   transition: var(--t);
 }
+
+/* Hover: el borde superior pasa de gris a rosa */
 .ns-value-item:hover { border-top-color: var(--rosa); }
+
+/* Número de orden del valor (ej: "01") en rosa */
 .ns-value-num {
   font-family: var(--font-head);
   font-size: 0.6rem;
@@ -322,6 +411,8 @@ ul { list-style: none; }
   color: var(--rosa);
   margin-bottom: 14px;
 }
+
+/* Título del valor */
 .ns-value-item h4 {
   font-family: var(--font-head);
   font-size: 0.82rem;
@@ -329,26 +420,37 @@ ul { list-style: none; }
   margin-bottom: 10px;
   color: var(--text);
 }
+
+/* Descripción del valor */
 .ns-value-item p {
   font-size: 0.86rem;
   color: var(--text-muted);
   line-height: 1.65;
 }
 
-/* ════ FOOTER ════ */
+/* ════ FOOTER ════
+   Pie de página con logo, descripción, redes sociales y columnas de enlaces */
 .footer {
   background: var(--bg-card);
   border-top: 1px solid var(--border);
   padding: 56px 6% 28px;
 }
+
+/* Grid superior: columna ancha de marca + 3 columnas de enlaces */
 .footer-top {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 40px;
   margin-bottom: 44px;
 }
+
+/* Párrafo descriptivo de la marca en el footer */
 .footer-brand p { color: var(--text-muted); font-size: 0.86rem; margin: 14px 0 22px; max-width: 250px; }
+
+/* Fila de iconos de redes sociales */
 .social-links { display: flex; gap: 10px; }
+
+/* Botón cuadrado individual de red social */
 .social-btn {
   width: 36px; height: 36px;
   background: rgba(255,255,255,0.04);
@@ -358,9 +460,17 @@ ul { list-style: none; }
   font-size: 0.82rem; transition: var(--t); cursor: pointer;
   color: var(--text-muted);
 }
+
+/* Hover: borde rosa e icono rosa */
 .social-btn:hover { border-color: var(--border-h); color: var(--rosa); }
+
+/* Logo de la marca en el footer */
 .nav-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+
+/* Icono/emoji del logo */
 .logo-icon { font-size: 1.3rem; color: var(--rosa); }
+
+/* Texto del nombre de la marca */
 .logo-text {
   font-family: var(--font-head);
   font-size: 1rem;
@@ -368,7 +478,11 @@ ul { list-style: none; }
   letter-spacing: 2px;
   color: var(--text);
 }
+
+/* Parte del nombre en color rosa (ej: la "A" de "TECHNOVA") */
 .logo-text .accent { color: var(--rosa); }
+
+/* Encabezado de columna de enlaces del footer */
 .footer-col h5 {
   font-family: var(--font-head);
   font-size: 0.68rem;
@@ -378,9 +492,17 @@ ul { list-style: none; }
   color: var(--text);
   margin-bottom: 18px;
 }
+
+/* Lista vertical de enlaces del footer */
 .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+
+/* Enlace individual del footer */
 .footer-col ul a { font-size: 0.86rem; color: var(--text-muted); transition: var(--t); }
+
+/* Hover: el enlace se ilumina en rosa */
 .footer-col ul a:hover { color: var(--rosa); }
+
+/* Barra inferior del footer: copyright y textos legales */
 .footer-bottom {
   border-top: 1px solid var(--border);
   padding-top: 24px;
@@ -391,27 +513,45 @@ ul { list-style: none; }
   color: var(--text-muted);
 }
 
-/* ════ RESPONSIVE ════ */
+/* ════ RESPONSIVE ════
+   Adaptaciones del layout para distintos tamaños de pantalla */
+
+/* Tablets (≤ 900px) */
 @media (max-width: 900px) {
+  /* La sección de proyecto pasa a una sola columna */
   .ns-section-inner { grid-template-columns: 1fr; gap: 48px; }
+  /* El grid del equipo pasa a una sola columna */
   .ns-team-grid { grid-template-columns: 1fr; }
+  /* Los valores se apilan en una sola columna con menos separación */
   .ns-values-inner { grid-template-columns: 1fr; gap: 32px; }
+  /* El footer pasa a dos columnas */
   .footer-top { grid-template-columns: 1fr 1fr; }
 }
+
+/* Móviles (≤ 600px) */
 @media (max-width: 600px) {
+  /* El hero añade padding superior e inferior para compensar el navbar */
   .ns-hero { padding: 120px 5% 80px; }
+  /* Las secciones reducen su padding */
   .ns-section, .ns-team-section, .ns-values { padding: 64px 5%; }
+  /* El footer pasa a una sola columna */
   .footer-top { grid-template-columns: 1fr; }
+  /* El pie del footer se centra y apila verticalmente */
   .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
 }
+
+/* ── Avatar de GitHub ──
+   Foto circular real del miembro cargada desde la API de GitHub */
 .ns-github-avatar {
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  border: 2px solid var(--border-h);
-  object-fit: cover;
+  border: 2px solid var(--border-h);  /* Borde rosa alrededor de la foto */
+  object-fit: cover;                  /* Recorta la imagen manteniendo proporciones */
   margin-bottom: 16px;
 }
+
+/* Enlace al perfil de GitHub del miembro */
 .ns-github-link {
   display: inline-block;
   margin-top: 12px;
@@ -422,10 +562,14 @@ ul { list-style: none; }
   color: var(--rosa);
   transition: var(--t);
 }
+
+/* Hover del enlace de GitHub: texto blanco */
 .ns-github-link:hover {
   color: #fff;
 }
 
+/* ── Redefinición del avatar de GitHub ──
+   Se repite para garantizar consistencia si alguna regla anterior lo sobreescribe */
 .ns-github-avatar {
   width: 72px;
   height: 72px;
@@ -434,6 +578,8 @@ ul { list-style: none; }
   object-fit: cover;
   margin-bottom: 16px;
 }
+
+/* Rol/cargo alternativo del miembro (variante de .ns-member-role) */
 .ns-member-rol {
   display: block;
   font-family: var(--font-head);
@@ -444,12 +590,17 @@ ul { list-style: none; }
   margin-bottom: 10px;
   margin-top: 4px;
 }
+
+/* Descripción breve del miembro (variante de .ns-member-info p) */
 .ns-member-desc {
   font-size: 0.86rem;
   color: var(--text-muted);
   line-height: 1.6;
   margin-bottom: 12px;
 }
+
+/* ── Redefinición del enlace de GitHub ──
+   Se repite para reforzar estilos en caso de conflicto con otras reglas */
 .ns-github-link {
   display: inline-block;
   margin-top: 12px;
@@ -460,4 +611,6 @@ ul { list-style: none; }
   color: var(--rosa);
   transition: var(--t);
 }
+
+/* Hover: texto blanco al pasar el ratón sobre el enlace de GitHub */
 .ns-github-link:hover { color: #fff; }
