@@ -4,14 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Carrito — TechNova</title>
+  <!-- Estilos del carrito y del navbar -->
   <link rel="stylesheet" href="css/carrito.css" />
   <link rel="stylesheet" href="css/navbar.css" />
+  <!-- Fuentes tipográficas del proyecto -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <!-- Favicon -->
   <link rel="icon" href="img/logo-estrella.png" type="image/png">
 </head>
 <body>
 
-  <!-- ════════════════ NAVBAR ════════════════ -->
+  <!-- ════════════════ NAVBAR ════════════════
+       Barra de navegación simplificada: solo logo y botón para volver al catálogo -->
   <nav class="navbar" id="navbar">
     <div class="nav-logo">
       <a href="index.html">
@@ -20,6 +24,7 @@
       </a>
     </div>
     <div class="nav-back">
+      <!-- Botón de vuelta al catálogo con icono de flecha SVG -->
       <a href="catalogo.html" class="btn-back">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="15 18 9 12 15 6"/>
@@ -32,7 +37,7 @@
   <!-- ════════════════ MAIN ════════════════ -->
   <main class="carrito-main">
 
-    <!-- Título -->
+    <!-- Cabecera de la página: título y botón para vaciar el carrito -->
     <div class="carrito-header">
       <div class="carrito-title-wrap">
         <span class="carrito-tag">Mi pedido</span>
@@ -41,9 +46,12 @@
       <button class="btn-vaciar" id="btnVaciar">Vaciar carrito</button>
     </div>
 
+    <!-- Layout de dos columnas: lista de productos y panel de resumen -->
     <div class="carrito-layout">
 
-      <!-- ── Lista de productos ── -->
+      <!-- ── Lista de productos ──
+           JS rellena este contenedor dinámicamente con los ítems del carrito.
+           El bloque carritoVacio se muestra u oculta según el estado del carrito. -->
       <div class="carrito-items" id="carritoItems">
         <!-- se rellena con JS -->
         <div class="carrito-vacio" id="carritoVacio">
@@ -54,11 +62,13 @@
         </div>
       </div>
 
-      <!-- ── Resumen ── -->
+      <!-- ── Resumen ──
+           Panel lateral con el desglose de precios y el estado de sesión del usuario -->
       <aside class="carrito-resumen" id="carritoResumen">
         <div class="resumen-card">
           <h3 class="resumen-title">Resumen del pedido</h3>
 
+          <!-- Desglose: subtotal sin IVA, IVA al 21% y envío gratuito -->
           <div class="resumen-linea">
             <span>Subtotal</span>
             <span id="resumenSubtotal">0.00 €</span>
@@ -74,12 +84,13 @@
 
           <div class="resumen-divider"></div>
 
+          <!-- Total con IVA incluido -->
           <div class="resumen-total">
             <span>Total</span>
             <span id="resumenTotal">0.00 €</span>
           </div>
 
-          <!-- Estado login -->
+          <!-- Estado login: visible cuando el usuario NO ha iniciado sesión -->
           <div class="resumen-login" id="resumenLogin">
             <div class="login-aviso">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -88,6 +99,8 @@
             <button class="btn-neon w-full" id="btnLogin">Iniciar Sesión</button>
           </div>
 
+          <!-- Visible cuando el usuario SÍ ha iniciado sesión (oculto por defecto con d-none).
+               Muestra el email, el botón de confirmar pedido y el de cerrar sesión. -->
           <div class="resumen-logueado d-none" id="resumenLogueado">
             <div class="usuario-info">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -102,7 +115,7 @@
 
         </div>
 
-        <!-- Métodos de pago -->
+        <!-- Iconos decorativos de métodos de pago aceptados -->
         <div class="metodos-pago">
           <span>Pago seguro</span>
           <div class="metodos-icons">
@@ -116,11 +129,14 @@
     </div>
   </main>
 
-  <!-- ════════════════ MODAL LOGIN ════════════════ -->
+  <!-- ════════════════ MODAL LOGIN ════════════════
+       Modal de inicio de sesión. Se abre al pulsar "Iniciar Sesión" en el resumen.
+       Incluye formulario con email, contraseña, mensaje de error y enlace a registro. -->
   <div class="nb-modal-overlay" id="nbLoginOverlay">
     <div class="nb-modal-card">
       <div class="nb-modal-header">
         <h5 class="cat-modal-title">Iniciar Sesión</h5>
+        <!-- Botón X para cerrar el modal -->
         <button class="nb-modal-close" id="nbLoginClose">✕</button>
       </div>
       <div class="nb-modal-body">
@@ -133,12 +149,14 @@
             <label>Contraseña</label>
             <input type="password" class="cat-input" id="nbLoginPassword" placeholder="••••••••" required="">
           </div>
+          <!-- Error de credenciales, oculto por defecto -->
           <div class="nb-form-error d-none" id="nbLoginError">
             Email o contraseña incorrectos.
           </div>
           <div class="cat-modal-footer-row">
             <span class="register-text">¿No tienes cuenta? <a href="#" id="nbGoRegister">Registrarse</a></span>
             <div class="cat-modal-btns">
+              <!-- Cancelar cierra el modal sin hacer nada -->
               <button type="button" class="cat-btn-secondary" id="nbLoginCancel">Cancelar</button>
               <button type="submit" class="nb-btn-neon">Entrar</button>
             </div>
@@ -148,25 +166,33 @@
     </div>
   </div>
 
-  <!-- ════════════════ TOAST ════════════════ -->
+  <!-- ════════════════ TOAST ════════════════
+       Notificación temporal para mensajes de éxito, error o info -->
   <div class="toast" id="toast"></div>
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/config.js"></script><script src="js/navbar.js"></script>
 
 <script>
+// ── Utilidades de localStorage ──
+
+// Lee el carrito del almacenamiento local (o devuelve array vacío si no existe)
 function getCarrito() {
     return JSON.parse(localStorage.getItem("carrito")) || [];
 }
 
+// Guarda el carrito actualizado en localStorage
 function guardarCarrito(carrito) {
     localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
+// Formatea un número como precio con 2 decimales y símbolo €
 function fmt(n) {
     return n.toFixed(2) + " €";
 }
 
 /* ========================
    TOAST NOTIFICATIONS
+   Muestra una notificación temporal durante 4 segundos.
+   tipo: "success" (verde), "error" (rojo), "info" (neutro)
 ======================== */
 function mostrarToast(mensaje, tipo = 'success') {
     const toast = document.getElementById('toast');
@@ -192,6 +218,8 @@ function mostrarToast(mensaje, tipo = 'success') {
 
 /* ========================
    RENDER CARRITO
+   Dibuja los productos del carrito en el DOM.
+   Si está vacío muestra el bloque carritoVacio; si no, genera una fila por producto.
 ======================== */
 function renderizarCarrito() {
     const carrito = getCarrito();
@@ -212,6 +240,7 @@ function renderizarCarrito() {
 
     if (vacio) vacio.style.display = "none";
 
+    // Genera un elemento HTML por cada producto del carrito
     carrito.forEach(p => {
         const div = document.createElement("div");
         div.className = "carrito-item";
@@ -239,6 +268,8 @@ function renderizarCarrito() {
 
 /* ========================
    RESUMEN
+   Calcula subtotal sin IVA, importe del IVA (21%) y total bruto
+   y actualiza los textos del panel lateral de resumen.
 ======================== */
 function actualizarResumen(carrito) {
     const subtotalEl = document.getElementById("resumenSubtotal");
@@ -263,6 +294,7 @@ function actualizarResumen(carrito) {
 
 /* ========================
    ELIMINAR
+   Filtra el producto con el ID dado y guarda el carrito resultante.
 ======================== */
 function eliminarProducto(id) {
     let carrito = getCarrito().filter(p => p.idProducto !== id);
@@ -277,6 +309,7 @@ function eliminarProducto(id) {
 
 /* ========================
    UI SESIÓN
+   Muestra el bloque de login o el de usuario logueado según si hay email en localStorage.
 ======================== */
 function actualizarSesionUI() {
     const email = localStorage.getItem("email");
@@ -296,6 +329,8 @@ function actualizarSesionUI() {
 
 /* ========================
    FINALIZAR COMPRA
+   Envía el pedido a la API con las credenciales del usuario y los productos del carrito.
+   Si tiene éxito limpia el carrito, muestra confirmación y recarga la página.
 ======================== */
 async function finalizarCompra() {
     const carrito = getCarrito();
@@ -328,6 +363,8 @@ async function finalizarCompra() {
 
 /* ========================
    EVENTOS
+   Inicialización principal: renderiza el carrito, sincroniza la UI de sesión
+   y asigna todos los event listeners de la página.
 ======================== */
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -372,9 +409,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Actualiza la UI de sesión si otro módulo dispara el evento loginChanged
     window.addEventListener('loginChanged', actualizarSesionUI);
 
-    /* ── Login submit en carrito.html ── */
+    /* ── Login submit en carrito.html ──
+       Llama a la API, guarda la sesión y actualiza el panel lateral si es correcto */
     const nbLoginForm = document.getElementById("nbLoginForm");
     if (nbLoginForm) {
         nbLoginForm.addEventListener("submit", async e => {
@@ -402,16 +441,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 actualizarSesionUI();
             } catch {
+                // Muestra el error si las credenciales son incorrectas
                 if (errorEl) errorEl.classList.remove("d-none");
             }
         });
     }
 
+    // Confirmar pedido al pulsar el botón
     const btnConfirmar = document.getElementById("btnConfirmar");
     if (btnConfirmar) {
         btnConfirmar.addEventListener("click", finalizarCompra);
     }
 
+        // Cerrar sesión: limpia todo el localStorage y recarga la página
         const btnLogout = document.getElementById("btnLogout");
         if (btnLogout) {
             btnLogout.addEventListener("click", () => {
