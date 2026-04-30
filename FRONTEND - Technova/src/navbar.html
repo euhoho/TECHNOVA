@@ -1,55 +1,80 @@
 <div>
-<!-- ════════════════ NAVBAR ════════════════ -->
+<!-- ════════════════ NAVBAR ════════════════
+     Barra de navegación fija con logo, enlaces, buscador,
+     botones de autenticación, carrito y menú hamburguesa móvil -->
 <nav class="navbar" id="navbar">
 
-<a href="index.html" class="nav-logo">
-  <img src="img/logo-estrella.png" alt="TechNova" class="logo-img"/>
-  <span class="logo-text">Tech<span class="accent">Nova</span></span>
-</a>
+  <!-- Logo: enlace a la home con imagen y nombre de la marca -->
+  <a href="index.html" class="nav-logo">
+    <img src="img/logo-estrella.png" alt="TechNova" class="logo-img"/>
+    <span class="logo-text">Tech<span class="accent">Nova</span></span>
+  </a>
+
+  <!-- Enlaces de navegación principales; en móvil se ocultan y se muestran con el hamburguesa -->
   <ul class="nav-links" id="navLinks">
     <li><a href="index.html">Inicio</a></li>
     <li><a href="catalogo.html">Catálogo</a></li>
     <li><a href="nosotros.html">Nosotros</a></li>
   </ul>
 
+  <!-- Buscador con dropdown de resultados en tiempo real.
+       navbar.js precarga los productos de la API y filtra mientras el usuario escribe. -->
   <div class="nav-search" id="navSearch">
     <input type="text" placeholder="Buscar productos…" id="searchInput" autocomplete="off" />
+    <!-- Botón de lupa: redirige al catálogo con ?buscar=... al hacer clic -->
     <button class="search-btn" id="searchBtn" aria-label="Buscar">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
     </button>
+    <!-- Panel desplegable de resultados; JS lo rellena y le añade/quita la clase 'open' -->
     <div class="search-dropdown" id="searchDropdown"></div>
   </div>
 
+  <!-- Acciones del lado derecho del navbar -->
   <div class="nav-actions">
+
+    <!-- Grupo de botones de autenticación: visible cuando NO hay sesión activa -->
     <div class="auth-group">
       <a href="#" class="btn-outline" id="btnLogin">Iniciar Sesión</a>
       <a href="#" class="btn-neon" id="btnRegister">Registrarse</a>
     </div>
+
+    <!-- Zona de usuario logueado: oculta por defecto (d-none), JS la muestra si hay sesión.
+         Muestra el saludo con el email y el botón de cerrar sesión. -->
     <div class="user-zone d-none" id="nav-user-zone">
       <span id="nav-saludo">Hola, usuario</span>
       <a href="#" class="btn-outline" id="btnLogout">Cerrar Sesión</a>
     </div>
+
+    <!-- Botón de acceso al panel de administración: solo visible si el rol es ADMINISTRADOR -->
     <div class="admin-zone d-none" id="nav-admin-zone">
       <a href="#" class="btn-admin">Admin</a>
     </div>
+
+    <!-- Botón del carrito con badge que muestra el número de artículos -->
     <a href="carrito.html" class="cart-btn" id="cartBtn" aria-label="Carrito">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
         <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
       </svg>
+      <!-- Badge con el total de unidades; navbar.js lo actualiza en cada cambio del carrito -->
       <span class="cart-count" id="cartCount">0</span>
     </a>
   </div>
 
+  <!-- Botón hamburguesa: visible solo en móvil (≤ 860px).
+       navbar.js lo convierte en una X al abrirse y anima el menú a pantalla completa. -->
   <button class="hamburger" id="hamburger" aria-label="Menú">
     <span></span><span></span><span></span>
   </button>
 
 </nav>
 
-<!-- MODAL LOGIN -->
+<!-- MODAL LOGIN
+     Overlay de inicio de sesión inyectado en todas las páginas via navbar.html.
+     Se abre al pulsar "Iniciar Sesión"; se cierra con el botón X o haciendo clic en el fondo.
+     Al enviar el formulario, navbar.js llama a la API y guarda la sesión en localStorage. -->
 <div class="nb-modal-overlay" id="nbLoginOverlay">
   <div class="nb-modal-card">
     <div class="nb-modal-header">
@@ -65,14 +90,19 @@
         <label>Contraseña</label>
         <input type="password" id="nbLoginPassword" placeholder="••••••••" required/>
       </div>
+      <!-- Mensaje de error oculto por defecto; se muestra si las credenciales son incorrectas -->
       <div class="nb-form-error d-none" id="nbLoginError">Email o contraseña incorrectos.</div>
       <button type="submit" class="nb-btn-neon w-full">Entrar</button>
+      <!-- Enlace para cambiar al modal de registro -->
       <p class="nb-modal-switch">¿No tienes cuenta? <a href="#" id="nbGoRegister">Registrarse</a></p>
     </form>
   </div>
 </div>
 
-<!-- MODAL REGISTRO -->
+<!-- MODAL REGISTRO
+     Overlay de creación de cuenta. Valida formato de email, longitud mínima
+     de contraseña (6 caracteres) y que ambas contraseñas coincidan antes de
+     llamar a la API. Si el registro es exitoso abre el modal de login con el email relleno. -->
 <div class="nb-modal-overlay" id="nbRegisterOverlay">
   <div class="nb-modal-card">
     <div class="nb-modal-header">
@@ -92,8 +122,10 @@
         <label>Confirmar contraseña</label>
         <input type="password" id="nbRegisterConfirm" placeholder="••••••••" required/>
       </div>
+      <!-- Mensaje de error oculto por defecto; navbar.js lo rellena con el mensaje concreto -->
       <div class="nb-form-error d-none" id="nbRegisterError"></div>
       <button type="submit" class="nb-btn-neon w-full">Crear cuenta</button>
+      <!-- Enlace para volver al modal de login -->
       <p class="nb-modal-switch">¿Ya tienes cuenta? <a href="#" id="nbGoLogin">Iniciar Sesión</a></p>
     </form>
   </div>
