@@ -1,31 +1,41 @@
 /* ════════════════════════════════════════════
    TECHNOVA — index.css  (Professional Edition)
+   Hoja de estilos principal de la página de inicio
 ════════════════════════════════════════════ */
 
+/* ── Variables globales de diseño ──
+   Define la paleta de colores, fuentes, radios y transiciones
+   reutilizables en toda la hoja de estilos mediante var() */
 :root {
-  --bg:        #07070f;
-  --bg-card:   #0f0f1e;
-  --rosa:      #e40085;
-  --rosa-dim:  rgba(228,0,133,0.15);
-  --glow-rosa: rgba(228,0,133,0.28);
-  --cyan:      #90fef1;
-  --cyan-dim:  rgba(0,212,255,0.18);
-  --magenta:   #c940ff;
-  --blue:      #3d7fff;
-  --text:      #e6e6f5;
-  --text-muted:#7878a0;
-  --border:    rgba(255,255,255,0.08);
-  --border-h:  rgba(0,212,255,0.3);
-  --glow-c:    rgba(0,212,255,0.28);
-  --font-head: 'Orbitron', sans-serif;
-  --font-body: 'Rajdhani', sans-serif;
-  --radius:    10px;
-  --radius-lg: 16px;
-  --t:         0.28s ease;
+  --bg:        #07070f;                      /* Fondo principal, negro azulado muy oscuro */
+  --bg-card:   #0f0f1e;                      /* Fondo de tarjetas y elementos elevados */
+  --rosa:      #e40085;                      /* Color rosa neón principal, acentos y CTAs */
+  --rosa-dim:  rgba(228,0,133,0.15);         /* Rosa translúcido para fondos suaves */
+  --glow-rosa: rgba(228,0,133,0.28);         /* Rosa para efectos de sombra luminosa */
+  --cyan:      #90fef1;                      /* Cian brillante, acentos secundarios */
+  --cyan-dim:  rgba(0,212,255,0.18);         /* Cian translúcido para fondos y brillo */
+  --magenta:   #c940ff;                      /* Magenta para degradados y badges */
+  --blue:      #3d7fff;                      /* Azul complementario para elementos de detalle */
+  --text:      #e6e6f5;                      /* Color de texto principal, blanco azulado */
+  --text-muted:#7878a0;                      /* Texto secundario/apagado, gris azulado */
+  --border:    rgba(255,255,255,0.08);       /* Borde sutil para separar elementos */
+  --border-h:  rgba(0,212,255,0.3);          /* Borde cian en estados hover y activos */
+  --glow-c:    rgba(0,212,255,0.28);         /* Cian para sombras luminosas de botones */
+  --font-head: 'Orbitron', sans-serif;       /* Fuente de cabeceras, estilo futurista */
+  --font-body: 'Rajdhani', sans-serif;       /* Fuente de cuerpo, legible y moderna */
+  --radius:    10px;                         /* Radio de esquinas estándar */
+  --radius-lg: 16px;                         /* Radio de esquinas grande para tarjetas */
+  --t:         0.28s ease;                   /* Duración y curva de las transiciones */
 }
 
+/* ── Reset global ──
+   Elimina márgenes y rellenos nativos, y usa box-sizing: border-box en todos los elementos */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Desplazamiento suave al navegar a anclas internas */
 html { scroll-behavior: smooth; }
+
+/* Estilos base del body: fuente, fondo, color, sin scroll horizontal */
 body {
   font-family: var(--font-body);
   background: var(--bg);
@@ -34,14 +44,22 @@ body {
   font-size: 16px;
   line-height: 1.6;
 }
+
+/* Elimina subrayado de enlaces y hereda el color del padre */
 a { text-decoration: none; color: inherit; }
+
+/* Elimina los puntos de las listas */
 ul { list-style: none; }
 
+/* ── Barra de desplazamiento personalizada (solo Webkit/Chrome) ── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--rosa); border-radius: 3px; }
 
-/* ════ BUTTONS ════ */
+/* ════ BUTTONS ════
+   Sistema de botones reutilizables con variantes de estilo */
+
+/* Botón principal neón: fondo rosa, hover cian */
 .btn-neon {
   display: inline-block;
   padding: 13px 32px;
@@ -57,14 +75,19 @@ ul { list-style: none; }
   cursor: pointer;
   transition: var(--t);
 }
+
+/* Hover del botón neón: cambia a cian con sombra luminosa */
 .btn-neon:hover {
   background: var(--cyan);
   color: var(--bg);
   transform: translateY(-1px);
   box-shadow: 0 6px 24px rgba(0,212,255,0.25);
 }
+
+/* Modificador de tamaño grande para btn-neon */
 .btn-lg { padding: 16px 44px; font-size: 0.78rem; }
 
+/* Botón con borde sutil y fondo transparente */
 .btn-outline {
   display: inline-block;
   padding: 11px 24px;
@@ -79,12 +102,15 @@ ul { list-style: none; }
   transition: var(--t);
   background: transparent;
 }
+
+/* Hover del btn-outline: borde más visible y texto más claro */
 .btn-outline:hover {
   border-color: rgba(255,255,255,0.5);
   color: #fff;
   transform: translateY(-1px);
 }
 
+/* Variante grande del botón outline */
 .btn-outline-lg {
   display: inline-block;
   padding: 14px 38px;
@@ -99,12 +125,15 @@ ul { list-style: none; }
   transition: var(--t);
   background: transparent;
 }
+
+/* Hover del btn-outline-lg: borde blanco completo */
 .btn-outline-lg:hover {
   border-color: #fff;
   color: #fff;
   transform: translateY(-1px);
 }
 
+/* Botón fantasma: sin borde ni fondo, solo texto semitransparente */
 .btn-ghost {
   display: inline-block;
   padding: 16px 20px;
@@ -118,9 +147,14 @@ ul { list-style: none; }
   background: transparent;
   border: none;
 }
+
+/* Hover del btn-ghost: texto completamente visible */
 .btn-ghost:hover { color: var(--text); }
 
-/* ════ COMMON ════ */
+/* ════ COMMON ════
+   Componentes de texto y cabecera reutilizables entre secciones */
+
+/* Pequeña etiqueta de sección (ej: "PRODUCTOS DESTACADOS") */
 .section-tag {
   display: inline-block;
   padding: 4px 14px;
@@ -133,15 +167,23 @@ ul { list-style: none; }
   border-radius: 4px;
   margin-bottom: 14px;
 }
+
+/* Título principal de sección, tamaño fluido según el ancho de pantalla */
 .section-title {
   font-family: var(--font-head);
-  font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+  font-size: clamp(1.7rem, 2.8vw, 2.4rem); /* Entre 1.7rem y 2.4rem según el viewport */
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 10px;
 }
+
+/* Subtítulo descriptivo de sección en color apagado */
 .section-sub { color: var(--text-muted); font-size: 0.98rem; }
+
+/* Cabecera de sección centrada con margen inferior */
 .section-header { text-align: center; margin-bottom: 52px; }
+
+/* Texto con degradado de rosa a magenta */
 .gradient-text {
   background: linear-gradient(90deg, var(--rosa), var(--magenta));
   -webkit-background-clip: text;
@@ -149,15 +191,18 @@ ul { list-style: none; }
   background-clip: text;
 }
 
-/* ════ HERO ════ */
+/* ════ HERO ════
+   Sección principal a pantalla completa con imagen de fondo y contenido superpuesto */
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 100vh;          /* Ocupa al menos el 100% de la altura de la ventana */
   display: flex;
   align-items: center;
   padding: 0 6%;
   overflow: hidden;
 }
+
+/* Imagen de fondo del hero con efecto de zoom de entrada */
 .hero-bg-img {
   position: absolute;
   inset: 0;
@@ -166,39 +211,49 @@ ul { list-style: none; }
   background-position: center 60%;
   background-repeat: no-repeat;
   z-index: 0;
-  transform: scale(1.04);
+  transform: scale(1.04);     /* Arranca ligeramente ampliada para animar el zoom de salida */
   transition: transform 8s ease;
 }
+
+/* Cuando la imagen se ha cargado (clase añadida por JS) vuelve a escala normal */
 .hero-bg-img.loaded { transform: scale(1); }
+
+/* Capa de degradados oscuros sobre la imagen para asegurar la legibilidad del texto */
 .hero-overlay {
   position: absolute;
   inset: 0;
   background:
     linear-gradient(105deg,
-      rgba(7,7,15,0.85) 0%,
+      rgba(7,7,15,0.85) 0%,    /* Muy oscuro en el lado izquierdo donde está el texto */
       rgba(7,7,15,0.65) 42%,
       rgba(7,7,15,0.20) 70%,
-      rgba(7,7,15,0.0) 100%),
-    linear-gradient(180deg, rgba(7,7,15,0.15) 0%, rgba(7,7,15,0.55) 100%);
+      rgba(7,7,15,0.0) 100%),  /* Transparente en el borde derecho */
+    linear-gradient(180deg, rgba(7,7,15,0.15) 0%, rgba(7,7,15,0.55) 100%); /* Oscurece parte inferior */
   z-index: 1;
 }
+
+/* Efecto de brillo magenta/rosa sobre la imagen usando mix-blend-mode */
 .hero-bg-img::after {
   content: '';
   position: absolute;
   inset: 0;
   background: radial-gradient(
     ellipse at 70% 60%,
-    rgba(201, 64, 255, 0.25) 0%,
-    rgba(255, 45, 120, 0.15) 35%,
+    rgba(201, 64, 255, 0.25) 0%,   /* Magenta en el centro del ellipse */
+    rgba(255, 45, 120, 0.15) 35%,  /* Rosa al 35% */
     transparent 70%
   );
-  mix-blend-mode: screen;
+  mix-blend-mode: screen;          /* Mezcla aditiva para efecto de brillo sobre la imagen */
 }
+
+/* Contenido textual del hero: sobre todas las capas */
 .hero-content {
   position: relative;
   z-index: 2;
   max-width: 640px;
 }
+
+/* Badge de estado en la parte superior del hero (ej: "DISPONIBLE AHORA") */
 .hero-badge {
   display: inline-flex;
   align-items: center;
@@ -214,6 +269,8 @@ ul { list-style: none; }
   color: var(--rosa);
   margin-bottom: 28px;
 }
+
+/* Punto indicador parpadeante antes del texto del badge */
 .hero-badge::before {
   content: '';
   width: 6px; height: 6px;
@@ -222,19 +279,27 @@ ul { list-style: none; }
   box-shadow: 0 0 8px var(--rosa);
   animation: blink 2s ease-in-out infinite;
 }
+
+/* Animación de parpadeo del punto indicador */
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.3; }
 }
+
+/* Título principal del hero con tamaño fluido responsive */
 .hero-title {
   font-family: var(--font-head);
-  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-size: clamp(2.4rem, 5vw, 4rem); /* Entre 2.4rem y 4rem según el viewport */
   font-weight: 900;
   line-height: 1.1;
   margin-bottom: 22px;
   letter-spacing: -0.5px;
 }
+
+/* Cada línea del título se muestra como bloque independiente */
 .hero-title span { display: block; }
+
+/* Tercera línea del título: más pequeña, apagada y con más espaciado */
 .line-3 {
   color: var(--text-muted);
   font-size: 0.7em;
@@ -242,6 +307,8 @@ ul { list-style: none; }
   margin-top: 6px;
   letter-spacing: 1px;
 }
+
+/* Párrafo descriptivo del hero con opacidad reducida */
 .hero-desc {
   color: rgba(230,230,245,0.72);
   max-width: 500px;
@@ -249,12 +316,16 @@ ul { list-style: none; }
   font-size: 1.08rem;
   line-height: 1.7;
 }
+
+/* Fila de botones de acción del hero */
 .hero-actions {
   display: flex;
   align-items: center;
   gap: 16px;
-  flex-wrap: wrap;
+  flex-wrap: wrap;           /* Pasan a la siguiente línea si no caben */
 }
+
+/* Bloque de barras de valoración al pie del contenido del hero */
 .hero-rating {
   display: flex;
   flex-direction: column;
@@ -264,19 +335,25 @@ ul { list-style: none; }
   border-top: 1px solid rgba(255,255,255,0.08);
   max-width: 320px;
 }
+
+/* Fila individual: etiqueta + barra de progreso + número */
 .rating-bar {
   display: flex;
   align-items: center;
   gap: 12px;
 }
+
+/* Etiqueta de la barra de valoración (ej: "CALIDAD") */
 .rating-label {
   font-family: var(--font-head);
   font-size: 0.58rem;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--text-muted);
-  min-width: 90px;
+  min-width: 90px;           /* Ancho fijo para alinear todas las barras */
 }
+
+/* Carril de fondo de la barra de progreso */
 .rating-track {
   flex: 1;
   height: 2px;
@@ -284,17 +361,23 @@ ul { list-style: none; }
   border-radius: 2px;
   overflow: hidden;
 }
+
+/* Relleno animado de la barra, anchura definida como variable CSS inline */
 .rating-fill {
   height: 100%;
-  width: var(--w);
+  width: var(--w);           /* Porcentaje definido en el HTML como style="--w: 95%" */
   background: linear-gradient(90deg, var(--rosa), var(--magenta));
   border-radius: 2px;
   animation: fillBar 1.5s ease forwards;
 }
+
+/* Animación de llenado de la barra de valoración */
 @keyframes fillBar {
   from { width: 0; }
   to   { width: var(--w); }
 }
+
+/* Número de puntuación a la derecha de la barra */
 .rating-num {
   font-family: var(--font-head);
   font-size: 0.65rem;
@@ -302,6 +385,8 @@ ul { list-style: none; }
   color: var(--rosa);
   min-width: 20px;
 }
+
+/* Indicador de scroll en la esquina inferior izquierda del hero */
 .scroll-indicator {
   position: absolute;
   bottom: 36px; left: 6%;
@@ -315,27 +400,36 @@ ul { list-style: none; }
   text-transform: uppercase;
   z-index: 2;
 }
+
+/* Línea horizontal animada que acompaña al texto "SCROLL" */
 .scroll-line {
   width: 36px; height: 1px;
   background: linear-gradient(90deg, var(--rosa), transparent);
   animation: scrollAnim 2.5s ease-in-out infinite;
 }
+
+/* Animación de la línea de scroll: se alarga y se acorta continuamente */
 @keyframes scrollAnim {
   0%, 100% { width: 36px; opacity: 0.7; }
   50%       { width: 60px; opacity: 1; }
 }
 
-/* ════ PRODUCTS ════ */
+/* ════ PRODUCTS ════
+   Sección de productos destacados con grid de tarjetas */
 .products {
   padding: 96px 6%;
   background: linear-gradient(180deg, var(--bg) 0%, rgba(15,15,30,0.6) 100%);
 }
+
+/* Grid de 3 columnas iguales para las tarjetas de producto */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin-bottom: 44px;
 }
+
+/* Tarjeta individual de producto */
 .product-card {
   position: relative;
   background: var(--bg-card);
@@ -346,12 +440,18 @@ ul { list-style: none; }
   transition: var(--t);
   cursor: pointer;
 }
+
+/* Hover de la tarjeta: sube, borde cian y sombra profunda */
 .product-card:hover {
   border-color: var(--border-h);
   transform: translateY(-5px);
   box-shadow: 0 16px 48px rgba(0,0,0,0.4);
 }
+
+/* Variante de tarjeta destacada con borde cian más visible */
 .product-card.featured { border-color: rgba(0,212,255,0.2); }
+
+/* Efecto de brillo radial cian en la parte superior de la tarjeta */
 .card-glow {
   position: absolute;
   top: -60px; left: 50%;
@@ -361,10 +461,14 @@ ul { list-style: none; }
   pointer-events: none;
   transition: var(--t);
 }
+
+/* Al hacer hover el brillo se amplía e intensifica */
 .product-card:hover .card-glow {
   background: radial-gradient(circle, rgba(0,212,255,0.12) 0%, transparent 70%);
   width: 260px; height: 260px;
 }
+
+/* Badge en la esquina superior derecha de la tarjeta (ej: "NUEVO") */
 .card-badge {
   position: absolute;
   top: 16px; right: 16px;
@@ -377,8 +481,14 @@ ul { list-style: none; }
   letter-spacing: 2px;
   border-radius: 4px;
 }
+
+/* Variante de badge magenta para productos "HOT" */
 .badge-hot  { background: var(--magenta); color: #fff; }
+
+/* Variante de badge degradada rosa-magenta para productos en oferta */
 .badge-sale { background: linear-gradient(135deg,#ff3a6e,var(--magenta)); color:#fff; }
+
+/* Zona de imagen del producto con altura fija y centrado */
 .card-img {
   height: 160px;
   display: flex;
@@ -387,21 +497,29 @@ ul { list-style: none; }
   margin-bottom: 22px;
   position: relative;
 }
+
+/* Emoji de producto con animación de flotación continua */
 .product-emoji {
   font-size: 4.5rem;
   transition: var(--t);
   animation: float-emoji 5s ease-in-out infinite;
   filter: drop-shadow(0 4px 12px rgba(0,212,255,0.2));
 }
+
+/* Al hacer hover el emoji escala y detiene la animación de flotación */
 .product-card:hover .product-emoji {
   filter: drop-shadow(0 4px 24px rgba(0,212,255,0.4));
   transform: scale(1.06) translateY(-4px);
   animation: none;
 }
+
+/* Animación de flotación vertical suave del emoji */
 @keyframes float-emoji {
   0%,100% { transform: translateY(0); }
   50%     { transform: translateY(-8px); }
 }
+
+/* Sombra elíptica difusa debajo del emoji, simula profundidad */
 .card-img-glow {
   position: absolute;
   bottom: -4px; left: 50%;
@@ -410,6 +528,8 @@ ul { list-style: none; }
   background: radial-gradient(ellipse, rgba(0,212,255,0.2) 0%, transparent 70%);
   filter: blur(6px);
 }
+
+/* Etiqueta de categoría del producto encima del nombre */
 .card-cat {
   display: block;
   font-family: var(--font-head);
@@ -419,29 +539,41 @@ ul { list-style: none; }
   color: var(--rosa);
   margin-bottom: 6px;
 }
+
+/* Nombre del producto */
 .card-body h3 {
   font-family: var(--font-head);
   font-size: 1rem;
   font-weight: 700;
   margin-bottom: 10px;
 }
+
+/* Descripción breve del producto */
 .card-body p {
   color: var(--text-muted);
   font-size: 0.88rem;
   margin-bottom: 20px;
   line-height: 1.5;
 }
+
+/* Pie de tarjeta: precio a la izquierda y botón a la derecha */
 .card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
+/* Precio del producto en negrita y tamaño grande */
 .price {
   font-family: var(--font-head);
   font-size: 1.3rem;
   font-weight: 700;
 }
+
+/* Unidad de precio (ej: "/ ud.") en tamaño menor y apagado */
 .price small { font-size: 0.85rem; color: var(--text-muted); }
+
+/* Botón de añadir al carrito: borde cian, hover rosa */
 .btn-add {
   padding: 8px 20px;
   background: transparent;
@@ -454,21 +586,30 @@ ul { list-style: none; }
   cursor: pointer;
   transition: var(--t);
 }
+
+/* Hover del botón añadir: fondo rosa sólido con sombra cian */
 .btn-add:hover {
   background: var(--rosa);
   color: var(--bg);
   box-shadow: 0 4px 20px var(--glow-c);
 }
+
+/* Contenedor del enlace "Ver todos los productos" centrado */
 .view-all { text-align: center; }
 
-/* ════ FEATURES ════ */
+/* ════ FEATURES ════
+   Sección de características del producto con visual interactivo a la derecha */
 .features { padding: 96px 6%; }
+
+/* Layout de dos columnas: texto a la izquierda, visual (terminal/canvas) a la derecha */
 .features-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
   align-items: center;
 }
+
+/* Contenedor del elemento visual de la sección (terminal o canvas) */
 .features-visual {
   position: relative;
   display: flex;
@@ -477,8 +618,14 @@ ul { list-style: none; }
   height: 380px;
   width: 100%;
 }
+
+/* Texto descriptivo introductorio de la sección de features */
 .features-desc { color: var(--text-muted); margin-bottom: 32px; font-size: 1rem; }
+
+/* Lista vertical de características individuales */
 .feature-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
+
+/* Ítem individual de característica: icono + título + descripción */
 .feature-item {
   display: flex;
   align-items: flex-start;
@@ -489,20 +636,31 @@ ul { list-style: none; }
   border-radius: var(--radius);
   transition: var(--t);
 }
+
+/* Hover del ítem: borde cian y fondo ligeramente azulado */
 .feature-item:hover { border-color: var(--border-h); background: rgba(0,212,255,0.03); }
+
+/* Icono de la característica en color rosa */
 .feat-icon {
   font-size: 1rem;
   color: var(--rosa);
   min-width: 34px;
   line-height: 1.6;
 }
+
+/* Título de la característica */
 .feature-item h4 {
   font-family: var(--font-head); font-size: 0.82rem; font-weight: 600; margin-bottom: 3px;
 }
+
+/* Descripción de la característica en texto apagado */
 .feature-item p { font-size: 0.83rem; color: var(--text-muted); }
+
+/* Fila de botones de acción de la sección features */
 .features-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 
-/* ── Terminal ── */
+/* ── Terminal ──
+   Componente visual de terminal de línea de comandos falsa */
 .terminal {
   width: 100%;
   max-width: 460px;
@@ -515,11 +673,15 @@ ul { list-style: none; }
   z-index: 2;
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
+
+/* Estado oculto del terminal: invisible y ligeramente reducido */
 .terminal.hidden {
   opacity: 0;
   transform: scale(0.95);
-  pointer-events: none;
+  pointer-events: none;      /* No recibe interacciones del ratón cuando está oculto */
 }
+
+/* Barra superior del terminal con los tres puntos de control */
 .terminal-header {
   display: flex;
   align-items: center;
@@ -528,28 +690,40 @@ ul { list-style: none; }
   background: rgba(255,255,255,0.03);
   border-bottom: 1px solid rgba(228,0,133,0.15);
 }
+
+/* Grupo de los tres puntos de colores del terminal */
 .terminal-dots { display: flex; gap: 6px; }
+
+/* Punto individual de los controles del terminal */
 .t-dot { width: 12px; height: 12px; border-radius: 50%; }
+
+/* Colores de los tres puntos estilo macOS */
 .dot-red    { background: #ff5f57; }
 .dot-yellow { background: #febc2e; }
 .dot-green  { background: #28c840; }
+
+/* Título centrado en la barra de título del terminal */
 .terminal-title {
   font-family: var(--font-head);
   font-size: 0.58rem;
   letter-spacing: 2px;
   color: var(--text-muted);
-  margin: 0 auto;
+  margin: 0 auto;            /* Se centra automáticamente entre los puntos y el espacio vacío */
 }
+
+/* Área de contenido del terminal con scroll oculto */
 .terminal-body {
   padding: 24px 20px;
   min-height: 260px;
   max-height: 260px;
-  overflow: hidden;
+  overflow: hidden;          /* Las líneas que superan la altura quedan ocultas */
   display: flex;
   flex-direction: column;
   gap: 8px;
   transition: opacity 0.5s ease;
 }
+
+/* Línea individual de comando: prompt + texto en monospace */
 .terminal-line {
   display: flex;
   align-items: flex-start;
@@ -558,8 +732,14 @@ ul { list-style: none; }
   font-size: 0.82rem;
   line-height: 1.6;
 }
+
+/* Símbolo de prompt del terminal (ej: ">") en color rosa */
 .t-prompt { color: var(--rosa); flex-shrink: 0; }
+
+/* Texto de comando escrito por el usuario */
 .t-text   { color: #e6e6f5; white-space: pre-wrap; }
+
+/* Línea de output/respuesta del terminal con indentación */
 .t-output {
   color: var(--text-muted);
   font-family: 'Courier New', monospace;
@@ -567,32 +747,46 @@ ul { list-style: none; }
   padding-left: 22px;
   line-height: 1.7;
 }
+
+/* Variante de output para mensajes de éxito (verde) */
 .t-output.success   { color: #28c840; }
+
+/* Variante de output para información destacada (rosa) */
 .t-output.highlight { color: var(--rosa); }
+
+/* Cursor parpadeante al final del input activo */
 .t-cursor {
   color: var(--rosa);
-  animation: cursorBlink 1s step-end infinite;
+  animation: cursorBlink 1s step-end infinite; /* step-end para parpadeo brusco, sin suavizado */
 }
+
+/* Animación de parpadeo del cursor de terminal */
 @keyframes cursorBlink {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0; }
 }
 
-/* ── Network Canvas ── */
+/* ── Network Canvas ──
+   Canvas para la visualización de red de nodos (alternativa al terminal) */
 #networkCanvas {
-  display: none;
+  display: none;             /* Oculto por defecto, JS lo muestra cuando toca */
   width: 100%;
   height: 260px;
   transition: opacity 0.8s ease;
 }
 
-/* ════ CATEGORIES ════ */
+/* ════ CATEGORIES ════
+   Sección de navegación por categorías de producto */
 .categories { padding: 96px 6%; background: rgba(15,15,30,0.4); }
+
+/* Grid de 6 columnas iguales para los ítems de categoría */
 .cat-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 18px;
 }
+
+/* Ítem individual de categoría: icono + nombre + cantidad */
 .cat-item {
   text-align: center;
   padding: 26px 14px;
@@ -602,60 +796,100 @@ ul { list-style: none; }
   cursor: pointer;
   transition: var(--t);
 }
+
+/* Hover del ítem de categoría: sube y añade sombra cian */
 .cat-item:hover {
   border-color: var(--border-h);
   transform: translateY(-4px);
   box-shadow: 0 8px 32px rgba(0,212,255,0.08);
 }
+
+/* Emoji/icono de la categoría con escala en hover */
 .cat-icon { font-size: 2rem; margin-bottom: 10px; display: block; transition: var(--t); }
 .cat-item:hover .cat-icon { transform: scale(1.1); }
+
+/* Nombre de la categoría */
 .cat-item span {
   font-family: var(--font-head); font-size: 0.7rem; font-weight: 600;
   letter-spacing: 1px; color: var(--text); display: block; margin-bottom: 4px;
 }
+
+/* Número de productos de la categoría en texto apagado */
 .cat-item p { font-size: 0.7rem; color: var(--text-muted); }
 
-/* ════ NEWSLETTER ════ */
+/* ════ NEWSLETTER ════
+   Sección de suscripción al boletín con efectos de brillo decorativos */
 .newsletter {
   position: relative; padding: 96px 6%; text-align: center; overflow: hidden;
 }
+
+/* Elementos de brillo difuso como decoración de fondo */
 .nl-glow {
   position: absolute; border-radius: 50%; pointer-events: none; filter: blur(100px);
 }
+
+/* Brillo cian en la esquina superior izquierda */
 .nl-glow-1 { width: 400px; height: 300px; top: 0; left: -80px; background: radial-gradient(circle, rgba(0,212,255,0.07) 0%, transparent 70%); }
+
+/* Brillo magenta en la esquina superior derecha */
 .nl-glow-2 { width: 350px; height: 300px; top: 0; right: -80px; background: radial-gradient(circle, rgba(201,64,255,0.07) 0%, transparent 70%); }
+
+/* Contenido de la sección centrado con ancho máximo */
 .nl-content { position: relative; z-index: 1; max-width: 520px; margin: 0 auto; }
+
+/* Título del bloque de newsletter */
 .nl-content h2 {
   font-family: var(--font-head);
   font-size: clamp(1.5rem, 2.8vw, 2.2rem);
   font-weight: 700; margin-bottom: 10px;
 }
+
+/* Subtítulo descriptivo del newsletter */
 .nl-content p { color: var(--text-muted); margin-bottom: 28px; }
+
+/* Formulario horizontal: input de email + botón de suscripción */
 .nl-form {
   display: flex; gap: 10px; max-width: 460px; margin: 0 auto 14px;
 }
+
+/* Input de email del formulario de newsletter */
 .nl-form input {
   flex: 1; padding: 13px 20px;
   background: var(--bg-card); border: 1px solid var(--border);
   border-radius: 6px; color: var(--text);
   font-family: var(--font-body); font-size: 0.95rem; outline: none; transition: var(--t);
 }
+
+/* Al enfocar el input: borde rosa y sombra luminosa */
 .nl-form input:focus { border-color: var(--rosa); box-shadow: 0 0 16px var(--glow-rosa); }
+
+/* Placeholder del campo de email */
 .nl-form input::placeholder { color: var(--text-muted); }
+
+/* Nota de privacidad o confirmación debajo del formulario */
 .nl-note { font-size: 0.8rem; color: var(--rosa); height: 18px; }
 
-/* ════ FOOTER ════ */
+/* ════ FOOTER ════
+   Pie de página con logo, enlaces de navegación y redes sociales */
 .footer {
   background: var(--bg-card);
   border-top: 1px solid var(--border);
   padding: 56px 6% 28px;
 }
+
+/* Grid superior del footer: columna de marca + 3 columnas de enlaces */
 .footer-top {
   display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 40px; margin-bottom: 44px;
 }
+
+/* Descripción breve de la marca en el footer */
 .footer-brand p { color: var(--text-muted); font-size: 0.86rem; margin: 14px 0 22px; max-width: 250px; }
+
+/* Fila de iconos de redes sociales */
 .social-links { display: flex; gap: 10px; }
+
+/* Botón cuadrado individual de red social */
 .social-btn {
   width: 36px; height: 36px;
   background: rgba(255,255,255,0.04);
@@ -663,43 +897,65 @@ ul { list-style: none; }
   display: flex; align-items: center; justify-content: center;
   font-size: 0.82rem; transition: var(--t); cursor: pointer;
 }
+
+/* Hover del botón social: borde cian y fondo rosa tenue */
 .social-btn:hover { border-color: var(--border-h); background: var(--rosa-dim); }
+
+/* Encabezado de columna de enlaces del footer */
 .footer-col h5 {
   font-family: var(--font-head); font-size: 0.68rem; font-weight: 700;
   letter-spacing: 2px; text-transform: uppercase;
   color: var(--text); margin-bottom: 18px;
 }
+
+/* Lista vertical de enlaces del footer */
 .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+
+/* Enlace individual del footer */
 .footer-col ul a { font-size: 0.86rem; color: var(--text-muted); transition: var(--t); }
+
+/* Hover del enlace del footer: se ilumina en rosa */
 .footer-col ul a:hover { color: var(--rosa); }
+
+/* Barra inferior del footer: copyright y textos legales */
 .footer-bottom {
   border-top: 1px solid var(--border); padding-top: 24px;
   display: flex; align-items: center; justify-content: space-between;
   font-size: 0.78rem; color: var(--text-muted);
 }
 
-/* ════ REVEAL ════ */
+/* ════ REVEAL ════
+   Clase base para la animación de aparición de elementos al hacer scroll */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+
+/* Cuando el elemento entra en el viewport (JS añade esta clase) aparece suavemente */
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ════ MODAL LOGIN ════ */
+/* ════ MODAL LOGIN ════
+   Ventana emergente de inicio de sesión con fondo difuminado */
+
+/* Capa de fondo oscura y borrosa detrás del modal */
 .modal-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);   /* Desenfoque del contenido detrás del modal */
   z-index: 500;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  pointer-events: none;
+  pointer-events: none;          /* Desactivado hasta que se abra */
   transition: opacity 0.25s ease;
 }
+
+/* Cuando el modal está abierto (clase añadida por JS): visible e interactivo */
 .modal-overlay.open {
   opacity: 1;
   pointer-events: all;
 }
+
+/* Tarjeta del modal centrada en la pantalla */
 .modal-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -707,13 +963,17 @@ ul { list-style: none; }
   padding: 0;
   width: 100%;
   max-width: 500px;
-  transform: translateY(20px);
+  transform: translateY(20px);   /* Empieza desplazado hacia abajo */
   transition: transform 0.25s ease;
   overflow: hidden;
 }
+
+/* Al abrirse el modal la tarjeta sube a su posición normal */
 .modal-overlay.open .modal-card {
   transform: translateY(0);
 }
+
+/* Cabecera del modal: título + botón de cierre */
 .modal-header {
   display: flex;
   align-items: center;
@@ -721,12 +981,16 @@ ul { list-style: none; }
   padding: 22px 28px;
   border-bottom: 1px solid var(--border);
 }
+
+/* Título del modal */
 .modal-header h3 {
   font-family: var(--font-head);
   font-size: 1.1rem;
   font-weight: 600;
   margin: 0;
 }
+
+/* Botón de cierre "×" del modal */
 .modal-close {
   background: none;
   border: none;
@@ -741,16 +1005,24 @@ ul { list-style: none; }
   align-items: center;
   justify-content: center;
 }
+
+/* Hover del botón de cierre: cambia a rosa y se agranda levemente */
 .modal-close:hover {
   color: var(--rosa);
   transform: scale(1.2);
 }
+
+/* Cuerpo del modal con el formulario */
 .modal-body {
   padding: 28px;
 }
+
+/* Grupo de campo de formulario: label + input apilados */
 .form-group {
   margin-bottom: 18px;
 }
+
+/* Etiqueta del campo de formulario */
 .form-group label {
   display: block;
   margin-bottom: 8px;
@@ -758,6 +1030,8 @@ ul { list-style: none; }
   font-weight: 500;
   color: var(--text);
 }
+
+/* Input del formulario del modal con borde activo al enfocar */
 .form-group input {
   width: 100%;
   padding: 12px 16px;
@@ -769,15 +1043,21 @@ ul { list-style: none; }
   font-size: 0.95rem;
   transition: var(--t);
 }
+
+/* Al enfocar el input: fondo más claro, borde rosa y sombra */
 .form-group input:focus {
   outline: none;
   background: rgba(255,255,255,0.08);
   border-color: var(--rosa);
   box-shadow: 0 0 16px rgba(228,0,133,0.15);
 }
+
+/* Placeholder del input del modal */
 .form-group input::placeholder {
   color: var(--text-muted);
 }
+
+/* Mensaje de error de login (credenciales incorrectas) */
 .login-error {
   background: rgba(255,68,68,0.15);
   border: 1px solid rgba(255,68,68,0.3);
@@ -787,28 +1067,50 @@ ul { list-style: none; }
   font-size: 0.85rem;
   margin-bottom: 18px;
 }
+
+/* Oculta el mensaje de error cuando no hay error activo */
 .login-error.d-none {
   display: none !important;
 }
+
+/* Clase utilitaria para que un elemento ocupe el 100% del ancho disponible */
 .w-full {
   width: 100%;
 }
+
+/* Clase utilitaria para ocultar cualquier elemento */
 .d-none {
   display: none !important;
 }
 
-/* ════ RESPONSIVE ════ */
+/* ════ RESPONSIVE ════
+   Adaptaciones del layout para distintos anchos de pantalla */
+
+/* Pantallas medianas (≤ 1100px): la cuadrícula de categorías pasa a 3 columnas */
 @media (max-width: 1100px) { .cat-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* Tablets (≤ 900px) */
 @media (max-width: 900px) {
+  /* El grid de productos pasa a 1 columna centrada */
   .products-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto 44px; }
+  /* Las features se apilan verticalmente */
   .features-inner { grid-template-columns: 1fr; }
+  /* El visual de features ajusta su altura */
   .features-visual { height: 360px; }
+  /* El footer pasa a dos columnas */
   .footer-top { grid-template-columns: 1fr 1fr; }
+  /* El indicador de scroll se oculta en tablets */
   .scroll-indicator { display: none; }
 }
+
+/* Móviles (≤ 768px) */
 @media (max-width: 768px) {
+  /* Los enlaces de navegación y el botón outline del nav se ocultan */
   .nav-links, .nav-actions .btn-outline { display: none; }
+  /* El botón hamburguesa se muestra */
   .hamburger { display: flex; }
+  
+  /* El menú desplegable móvil: se abre como panel fijo desde el nav */
   .nav-links.open {
     display: flex; flex-direction: column;
     position: fixed; top: 68px; left: 0; right: 0;
@@ -816,8 +1118,12 @@ ul { list-style: none; }
     padding: 28px 6%; border-bottom: 1px solid var(--border);
     gap: 22px; z-index: 999;
   }
+  /* La cuadrícula de categorías pasa a 2 columnas en móvil */
   .cat-grid { grid-template-columns: repeat(2, 1fr); }
+  /* El footer se apila en una sola columna */
   .footer-top { grid-template-columns: 1fr; }
+  /* El pie del footer se centra y apila verticalmente */
   .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
+  /* El formulario del newsletter también se apila verticalmente */
   .nl-form { flex-direction: column; }
 }
