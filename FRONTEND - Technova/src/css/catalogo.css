@@ -1,28 +1,38 @@
 /* ════════════════════════════════════════════
    TECHNOVA — catalogo.css
+   Hoja de estilos principal para la página de catálogo de productos
 ════════════════════════════════════════════ */
 
+/* ── Variables globales de diseño ──
+   Aquí se definen todos los colores, fuentes, radios y tiempos de transición
+   que se reutilizan en toda la hoja de estilos mediante var() */
 :root {
-  --bg:        #07070f;
-  --bg-card:   #0f0f1e;
-  --bg-card-h: #141428;
-  --rosa:      #e40085;
-  --rosa-dim:  rgba(228,0,133,0.1);
-  --magenta:   #c940ff;
-  --cyan:      #90fef1;        /* ← falta, lo usan el buscador y otros elementos */
-  --text:      #e6e6f5;
-  --text-muted:#7878a0;
-  --border:    rgba(255,255,255,0.07);
-  --border-h:  rgba(228,0,133,0.3);
-  --t:         0.25s ease;
-  --font-head: 'Orbitron', sans-serif;
-  --font-body: 'Rajdhani', sans-serif;
-  --radius:    10px;
-  --radius-lg: 16px;
+  --bg:        #07070f;                      /* Color de fondo principal, negro azulado muy oscuro */
+  --bg-card:   #0f0f1e;                      /* Fondo de las tarjetas, ligeramente más claro que el fondo base */
+  --bg-card-h: #141428;                      /* Fondo de tarjetas al hacer hover, un tono más claro */
+  --rosa:      #e40085;                      /* Color rosa neón principal, usado en botones y acentos */
+  --rosa-dim:  rgba(228,0,133,0.1);          /* Versión translúcida del rosa para fondos suaves */
+  --magenta:   #c940ff;                      /* Color magenta para degradados y acentos secundarios */
+  --cyan:      #90fef1;                      /* Color cian claro, usado en el buscador y otros elementos */
+  --text:      #e6e6f5;                      /* Color de texto principal, blanco azulado */
+  --text-muted:#7878a0;                      /* Color de texto secundario/apagado, gris azulado */
+  --border:    rgba(255,255,255,0.07);       /* Borde sutil casi invisible para separar elementos */
+  --border-h:  rgba(228,0,133,0.3);          /* Borde rosa translúcido para estados hover y activos */
+  --t:         0.25s ease;                   /* Duración y curva estándar de las transiciones CSS */
+  --font-head: 'Orbitron', sans-serif;       /* Fuente de cabeceras, estilo tecnológico/futurista */
+  --font-body: 'Rajdhani', sans-serif;       /* Fuente de cuerpo de texto, legible y moderna */
+  --radius:    10px;                         /* Radio de esquinas estándar para inputs y botones */
+  --radius-lg: 16px;                         /* Radio de esquinas grande para tarjetas y modales */
 }
 
+/* ── Reset básico de márgenes, rellenos y box-sizing ──
+   Garantiza que todos los elementos calculen su tamaño incluyendo bordes y padding */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Desplazamiento suave al navegar a anclas internas de la página */
 html { scroll-behavior: smooth; }
+
+/* Estilos base del body: fuente, fondo oscuro, color de texto y sin desbordamiento horizontal */
 body {
   font-family: var(--font-body);
   background: var(--bg);
@@ -30,52 +40,69 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
+
+/* Elimina el subrayado de los enlaces y hereda el color del padre */
 a { text-decoration: none; color: inherit; }
+
+/* Elimina los puntos de las listas no ordenadas */
 ul { list-style: none; }
+
+/* Clase utilitaria para ocultar elementos completamente */
 .d-none { display: none !important; }
 
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--rosa); border-radius: 3px; }
+/* ── Personalización de la barra de desplazamiento (solo Webkit/Chrome) ── */
+::-webkit-scrollbar { width: 5px; }                                  /* Ancho de la barra */
+::-webkit-scrollbar-track { background: var(--bg); }                 /* Fondo del carril */
+::-webkit-scrollbar-thumb { background: var(--rosa); border-radius: 3px; } /* Botón deslizante rosa */
 
-/* ════ HERO STRIP ════ */
+/* ════ HERO STRIP ════
+   Banda superior decorativa con imagen de fondo y texto introductorio del catálogo */
 .cat-hero-strip {
   position: relative;
-  margin-top: 68px;
+  margin-top: 68px;          /* Deja espacio para el navbar fijo superior */
   padding: 56px 6% 48px;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
-  background-image: url('../img/hero-cat-lineas.webp');
+  background-image: url('../img/hero-cat-lineas.webp'); /* Imagen de fondo con líneas decorativas */
   background-size: cover;
   background-position: center;
 }
+
+/* Capa de opacidad degradada sobre la imagen de fondo para mejorar la legibilidad del texto */
 .cat-hero-overlay {
   position: absolute;
-  inset: 0;
+  inset: 0;                  /* Ocupa todo el contenedor padre */
   background: linear-gradient(
     105deg,
-    rgba(7,7,15,0.85) 0%,
-    rgba(7,7,15,0.65) 50%,
-    rgba(7,7,15,0.40) 100%
+    rgba(7,7,15,0.85) 0%,   /* Muy oscuro a la izquierda */
+    rgba(7,7,15,0.65) 50%,  /* Semi-transparente en el centro */
+    rgba(7,7,15,0.40) 100%  /* Más transparente a la derecha */
   );
   z-index: 0;
 }
 
+/* Contenedor del contenido del hero, sobre la capa de overlay */
 .cat-hero-content {
   position: relative;
   z-index: 1;
 }
+
+/* Efecto de brillo radial rosa decorativo en la esquina superior derecha */
 .cat-hero-glow {
   position: absolute;
   top: -80px; right: -80px;
   width: 500px; height: 400px;
   background: radial-gradient(circle, rgba(228,0,133,0.1) 0%, transparent 65%);
-  pointer-events: none;
+  pointer-events: none;      /* No interfiere con la interacción del usuario */
 }
+
+/* Limita el ancho del contenido del hero y lo centra horizontalmente */
 .cat-hero-content {
   max-width: 1300px;
   margin: 0 auto;
 }
+
+/* Pequeña etiqueta de categoría sobre el título principal del hero */
 .cat-hero-tag {
   display: inline-block;
   padding: 4px 14px;
@@ -88,56 +115,68 @@ ul { list-style: none; }
   border-radius: 4px;
   margin-bottom: 14px;
 }
+
+/* Título principal del hero, tamaño fluido según el ancho de ventana */
 .cat-hero-title {
   font-family: var(--font-head);
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem); /* Tamaño responsive entre 1.8rem y 2.8rem */
   font-weight: 900;
   line-height: 1.15;
   margin-bottom: 10px;
 }
+
+/* Subtítulo descriptivo debajo del título principal */
 .cat-hero-sub {
   font-size: 1rem;
   color: var(--text-muted);
 }
+
+/* Clase utilitaria para aplicar texto con degradado de rosa a magenta */
 .gradient-text {
   background: linear-gradient(90deg, var(--rosa), var(--magenta));
-  -webkit-background-clip: text;
+  -webkit-background-clip: text;    /* Necesario para que el degradado afecte solo al texto */
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* ════ MAIN ════ */
+/* ════ MAIN ════
+   Contenedor principal del catálogo con ancho máximo y espaciado interno */
 .cat-main {
   max-width: 1300px;
   margin: 0 auto;
   padding: 40px 6% 80px;
 }
 
-/* ════ TOOLBAR ════ */
+/* ════ TOOLBAR ════
+   Barra de herramientas con categorías, buscador, ordenar y filtro de precio */
 .cat-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  flex-wrap: wrap;
+  flex-wrap: wrap;           /* Permite que los elementos pasen a la siguiente línea en pantallas pequeñas */
   margin-bottom: 36px;
   padding-bottom: 28px;
   border-bottom: 1px solid var(--border);
 }
 
+/* Grupo derecho de la toolbar: contiene el buscador y controles de orden */
 .cat-toolbar-right {
   display: flex;
   align-items: center;
   gap: 16px;
-  flex-shrink: 0;
+  flex-shrink: 0;            /* Evita que este grupo se encoja cuando hay poco espacio */
 }
 
-/* ════ CATEGORÍAS ════ */
+/* ════ CATEGORÍAS ════
+   Conjunto de píldoras/botones de filtrado por categoría de producto */
 .categorias-grid {
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
+  flex-wrap: wrap;           /* Las categorías se reorganizan en varias filas si es necesario */
 }
+
+/* Tarjeta/botón individual de categoría en formato píldora */
 .categoria-card {
   display: inline-flex;
   align-items: center;
@@ -145,7 +184,7 @@ ul { list-style: none; }
   padding: 9px 18px;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 50px;
+  border-radius: 50px;       /* Borde completamente redondeado (forma de píldora) */
   color: var(--text-muted);
   font-family: var(--font-head);
   font-size: 0.6rem;
@@ -153,14 +192,20 @@ ul { list-style: none; }
   text-transform: uppercase;
   cursor: pointer;
   transition: var(--t);
-  white-space: nowrap;
+  white-space: nowrap;       /* Evita que el texto se parta en múltiples líneas */
 }
+
+/* Tamaño del emoji dentro de la tarjeta de categoría */
 .categoria-card .cat-emoji { font-size: 0.95rem; line-height: 1; }
+
+/* Estado hover de la categoría: borde rosa y fondo ligeramente rosado */
 .categoria-card:hover {
   border-color: rgba(228,0,133,0.3);
   color: var(--text);
   background: rgba(228,0,133,0.06);
 }
+
+/* Estado activo (categoría seleccionada): fondo rosa sólido con sombra */
 .categoria-card.active {
   background: var(--rosa);
   border-color: var(--rosa);
@@ -168,12 +213,15 @@ ul { list-style: none; }
   box-shadow: 0 4px 18px rgba(228,0,133,0.35);
 }
 
-/* ════ SEARCH ════ */
+/* ════ SEARCH ════
+   Barra de búsqueda con icono SVG superpuesto a la izquierda del input */
 .cat-search-bar {
   position: relative;
   display: flex;
   align-items: center;
 }
+
+/* Icono de lupa posicionado dentro del input, no interfiere con clics */
 .cat-search-bar svg {
   position: absolute;
   left: 12px;
@@ -181,9 +229,11 @@ ul { list-style: none; }
   pointer-events: none;
   flex-shrink: 0;
 }
+
+/* Campo de texto del buscador con animación de expansión al enfocar */
 .cat-search-bar input {
   width: 220px;
-  padding: 9px 16px 9px 34px;
+  padding: 9px 16px 9px 34px; /* Padding izquierdo mayor para no solapar el icono */
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -193,14 +243,19 @@ ul { list-style: none; }
   outline: none;
   transition: var(--t);
 }
+
+/* Al enfocar el input se expande, cambia de borde y añade sombra rosa */
 .cat-search-bar input:focus {
   border-color: var(--border-h);
   background: rgba(228,0,133,0.04);
-  width: 260px;
+  width: 260px;              /* El campo se ensancha al recibir el foco */
   box-shadow: 0 0 16px rgba(228,0,133,0.12);
 }
+
+/* Estilo del placeholder del campo de búsqueda */
 .cat-search-bar input::placeholder { color: var(--text-muted); }
 
+/* Contador de resultados mostrado en la toolbar (ej: "24 PRODUCTOS") */
 .cat-results-count {
   font-family: var(--font-head);
   font-size: 0.58rem;
@@ -210,7 +265,8 @@ ul { list-style: none; }
   white-space: nowrap;
 }
 
-/* ════ FILTERS INLINE (ordenar + precio) ════ */
+/* ════ FILTERS INLINE (ordenar + precio) ════
+   Contenedor horizontal para los controles de ordenación y rango de precio */
 .cat-filters-inline {
   display: flex;
   align-items: center;
@@ -218,12 +274,14 @@ ul { list-style: none; }
   flex-wrap: wrap;
 }
 
-/* ════ SORT SELECT ════ */
+/* ════ SORT SELECT ════
+   Selector desplegable personalizado para ordenar los productos */
 .cat-sort-select {
-  appearance: none;
-  -webkit-appearance: none;
+  appearance: none;           /* Elimina el estilo nativo del navegador */
+  -webkit-appearance: none;   /* Prefijo para compatibilidad en Webkit */
   height: 38px;
-  padding: 0 36px 0 16px;
+  padding: 0 36px 0 16px;    /* Espacio derecho para el icono de flecha SVG inline */
+  /* Flecha personalizada inyectada como SVG en data URI dentro de background */
   background: var(--bg-card)
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237878a0'/%3E%3C/svg%3E")
     no-repeat right 13px center;
@@ -239,24 +297,32 @@ ul { list-style: none; }
   transition: var(--t);
   white-space: nowrap;
 }
+
+/* Hover del selector: borde rosado y fondo tintado */
 .cat-sort-select:hover {
   border-color: rgba(228,0,133,0.3);
   color: var(--text);
   background-color: rgba(228,0,133,0.06);
 }
+
+/* Focus del selector: borde rosa fuerte con sombra */
 .cat-sort-select:focus {
   border-color: var(--border-h);
   background-color: rgba(228,0,133,0.04);
   box-shadow: 0 0 16px rgba(228,0,133,0.12);
   color: var(--text);
 }
+
+/* Estilos de las opciones dentro del desplegable */
 .cat-sort-select option {
   background: var(--bg-card);
   color: var(--text);
   font-family: var(--font-head);
 }
 
-/* ════ PRICE RANGE FILTER — CONSTELLATION ════ */
+/* ════ PRICE RANGE FILTER — CONSTELLATION ════
+   Filtro de rango de precio con un canvas personalizado ("constelación") en lugar
+   de los inputs range nativos del navegador */
 .cat-price-filter {
   display: flex;
   flex-direction: row;
@@ -268,16 +334,20 @@ ul { list-style: none; }
   padding: 0 14px;
   height: 38px;
   min-width: 420px;
-  flex: 1;
+  flex: 1;                   /* Ocupa el espacio disponible en la fila */
   max-width: 620px;
   transition: border-color var(--t);
 }
+
+/* Resalta el borde del filtro al pasar el ratón por encima */
 .cat-price-filter:hover {
   border-color: rgba(228,0,133,0.3);
 }
 
+/* Parte superior del filtro de precio (oculta, el canvas lo sustituye visualmente) */
 .cat-price-top { display: none; }
 
+/* Etiqueta de texto "PRECIO" dentro del filtro */
 .cat-price-label {
   font-family: var(--font-head);
   font-size: 0.58rem;
@@ -288,7 +358,7 @@ ul { list-style: none; }
   flex-shrink: 0;
 }
 
-/* Hide the real inputs — constellation canvas takes over visually */
+/* Contenedor del canvas de constelación y los inputs range ocultos */
 .cat-price-slider-wrap {
   position: relative;
   flex: 1;
@@ -297,32 +367,36 @@ ul { list-style: none; }
   align-items: center;
 }
 
+/* Track e input range nativos ocultados: el canvas los reemplaza visualmente */
 .cat-price-track  { display: none; }
 .cat-price-range  { display: none; }
 
+/* Los inputs range permanecen invisibles pero accesibles para JS */
 .cat-price-slider-wrap input[type="range"] {
   position: absolute;
   width: 100%;
   opacity: 0;
-  pointer-events: none;
+  pointer-events: none;      /* El canvas gestiona la interacción en su lugar */
   height: 0;
 }
 
-/* Constellation canvas */
+/* Canvas que dibuja la visualización estilo "constelación" del rango de precio */
 #constellation-price {
   display: block;
   width: 100%;
   height: 38px;
-  cursor: ew-resize;
+  cursor: ew-resize;         /* Cursor de redimensión horizontal para indicar que es arrastrable */
 }
 
-/* Values */
+/* Contenedor de los valores numéricos del rango seleccionado (mín y máx) */
 .cat-price-values {
   display: flex;
   gap: 4px;
   align-items: center;
   flex-shrink: 0;
 }
+
+/* Valores numéricos del precio mostrados en rosa */
 .cat-price-values span {
   font-family: var(--font-head);
   font-size: 0.55rem;
@@ -330,20 +404,24 @@ ul { list-style: none; }
   color: var(--rosa);
   white-space: nowrap;
 }
+
+/* Separador "–" entre el valor mínimo y máximo usando pseudo-elemento */
 .cat-price-values span + span::before {
   content: '–';
   margin-right: 4px;
   color: var(--text-muted);
 }
 
-/* ════ GRID PRODUCTOS ════ */
+/* ════ GRID PRODUCTOS ════
+   Cuadrícula responsive de tarjetas de producto con columnas automáticas */
 .productos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); /* Mínimo 230px por columna */
   gap: 20px;
 }
 
-/* ════ CARD PRODUCTO ════ */
+/* ════ CARD PRODUCTO ════
+   Tarjeta individual de producto con animación de entrada y efecto hover */
 .product-card-cat {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -352,22 +430,29 @@ ul { list-style: none; }
   display: flex;
   flex-direction: column;
   transition: border-color var(--t), transform var(--t), box-shadow var(--t);
-  animation: fadeUp 0.4s ease both;
+  animation: fadeUp 0.4s ease both; /* Animación de aparición desde abajo al cargar */
   cursor: pointer;
 }
+
+/* Animación de entrada: la tarjeta sube desde abajo con fade in */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* Hover de la tarjeta: sube ligeramente, borde rosado y sombra profunda */
 .product-card-cat:hover {
   border-color: rgba(228,0,133,0.28);
   transform: translateY(-5px);
   box-shadow: 0 20px 48px rgba(0,0,0,0.45);
   background: var(--bg-card-h);
 }
+
+/* Tarjetas de productos agotados: semi-transparentes e inactivas */
 .product-card-cat.agotado { opacity: 0.5; pointer-events: none; }
 
-/* Imagen */
+/* ── Imagen del producto ──
+   Contenedor cuadrado de imagen con centrado flex y fondo muy sutil */
 .card-img-wrap {
   position: relative;
   height: 190px;
@@ -378,22 +463,29 @@ ul { list-style: none; }
   overflow: hidden;
   border-bottom: 1px solid var(--border);
 }
+
+/* Imagen del producto con padding interno y transición de zoom en hover */
 .card-img-wrap img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: contain;       /* Mantiene proporciones sin recortar */
   padding: 18px;
   transition: transform 0.4s ease;
 }
+
+/* Zoom suave de la imagen al hacer hover sobre la tarjeta */
 .product-card-cat:hover .card-img-wrap img {
   transform: scale(1.06);
 }
+
+/* Emoji o ícono de sustitución cuando no hay imagen disponible */
 .card-img-placeholder {
   font-size: 3.5rem;
   opacity: 0.15;
 }
 
-/* Badge stock */
+/* ── Badge de stock ──
+   Etiqueta pequeña en la esquina superior izquierda de la imagen */
 .card-stock-badge {
   position: absolute;
   top: 10px; left: 10px;
@@ -405,25 +497,32 @@ ul { list-style: none; }
   text-transform: uppercase;
   border-radius: 4px;
 }
+
+/* Badge verde para productos disponibles */
 .badge-disponible {
   background: rgba(34,204,102,0.12);
   color: #22cc66;
   border: 1px solid rgba(34,204,102,0.25);
 }
+
+/* Badge rojo para productos agotados */
 .badge-agotado {
   background: rgba(255,68,102,0.12);
   color: #ff4466;
   border: 1px solid rgba(255,68,102,0.25);
 }
 
-/* Body */
+/* ── Cuerpo de la tarjeta ──
+   Sección de texto con nombre, descripción y stock disponible */
 .card-body-cat {
   padding: 18px 20px 20px;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 1;                   /* Ocupa todo el espacio vertical disponible */
   gap: 5px;
 }
+
+/* Nombre del producto en fuente tecnológica */
 .card-nombre {
   font-family: var(--font-head);
   font-size: 0.8rem;
@@ -431,16 +530,20 @@ ul { list-style: none; }
   color: var(--text);
   line-height: 1.35;
 }
+
+/* Descripción breve del producto limitada a 2 líneas con ellipsis */
 .card-desc {
   font-size: 0.82rem;
   color: var(--text-muted);
   line-height: 1.45;
   flex: 1;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 2;             /* Máximo 2 líneas visibles */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* Texto pequeño que indica las unidades en stock */
 .card-stock-text {
   font-family: var(--font-head);
   font-size: 0.55rem;
@@ -449,7 +552,8 @@ ul { list-style: none; }
   margin-top: 2px;
 }
 
-/* Footer card */
+/* ── Footer de la tarjeta ──
+   Fila inferior con precio y botón de añadir al carrito */
 .card-footer-cat {
   display: flex;
   align-items: center;
@@ -458,18 +562,23 @@ ul { list-style: none; }
   padding-top: 14px;
   border-top: 1px solid var(--border);
 }
+
+/* Precio del producto en negrita y tamaño destacado */
 .card-precio {
   font-family: var(--font-head);
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--text);
 }
+
+/* Texto de unidad (ej: "/ ud.") en tamaño menor y apagado */
 .card-precio small {
   font-size: 0.72rem;
   color: var(--text-muted);
   font-weight: 400;
 }
 
+/* Botón base de "añadir al carrito" */
 .btn-add-cart {
   padding: 8px 16px;
   font-family: var(--font-head);
@@ -482,16 +591,22 @@ ul { list-style: none; }
   border: none;
   white-space: nowrap;
 }
+
+/* Variante rosa activa para productos disponibles */
 .btn-disponible {
   background: var(--rosa);
   color: #fff;
 }
+
+/* Hover del botón disponible: se vuelve blanco con texto oscuro */
 .btn-disponible:hover {
   background: #fff;
   color: var(--bg);
   box-shadow: 0 4px 16px rgba(228,0,133,0.35);
   transform: translateY(-1px);
 }
+
+/* Variante gris inactiva para productos agotados (no es clickable) */
 .btn-agotado {
   background: rgba(255,255,255,0.04);
   color: var(--text-muted);
@@ -499,9 +614,10 @@ ul { list-style: none; }
   cursor: not-allowed;
 }
 
-/* ════ EMPTY STATE ════ */
+/* ════ EMPTY STATE ════
+   Estado vacío mostrado cuando no hay productos que coincidan con el filtro */
 .cat-empty {
-  grid-column: 1 / -1;
+  grid-column: 1 / -1;      /* Ocupa todas las columnas del grid */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -509,7 +625,11 @@ ul { list-style: none; }
   gap: 12px;
   color: var(--text-muted);
 }
+
+/* Icono grande y tenue en el estado vacío */
 .cat-empty-icon { font-size: 3rem; opacity: 0.2; }
+
+/* Mensaje de texto en el estado vacío */
 .cat-empty p {
   font-family: var(--font-head);
   font-size: 0.72rem;
@@ -517,7 +637,8 @@ ul { list-style: none; }
   text-transform: uppercase;
 }
 
-/* ════ SKELETON LOADER ════ */
+/* ════ SKELETON LOADER ════
+   Tarjetas de carga animadas que se muestran mientras los productos se cargan */
 .skeleton-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -525,13 +646,19 @@ ul { list-style: none; }
   overflow: hidden;
   height: 340px;
 }
+
+/* Zona de imagen del skeleton con animación de brillo deslizante */
 .skeleton-img {
   height: 190px;
   background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
+
+/* Cuerpo del skeleton con varias líneas simuladas */
 .skeleton-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; }
+
+/* Línea genérica del skeleton con animación de brillo */
 .skeleton-line {
   height: 10px;
   border-radius: 4px;
@@ -539,20 +666,29 @@ ul { list-style: none; }
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
+
+/* Variantes de ancho para las líneas del skeleton */
 .skeleton-line.short { width: 60%; }
 .skeleton-line.xshort { width: 40%; }
+
+/* Animación shimmer: el destello se mueve de derecha a izquierda */
 @keyframes shimmer {
   0%   { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
 
-/* ════ MODAL ════ */
+/* ════ MODAL ════
+   Ventana emergente para login u otras acciones del catálogo */
+
+/* Contenedor principal del modal con fondo oscuro y borde sutil */
 .cat-modal-content {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg) !important;
   color: var(--text);
 }
+
+/* Cabecera del modal con título y botón de cierre */
 .cat-modal-header {
   display: flex;
   align-items: center;
@@ -560,6 +696,8 @@ ul { list-style: none; }
   padding: 22px 28px;
   border-bottom: 1px solid var(--border);
 }
+
+/* Título del modal en fuente tecnológica y mayúsculas */
 .cat-modal-title {
   font-family: var(--font-head);
   font-size: 0.82rem;
@@ -568,6 +706,8 @@ ul { list-style: none; }
   text-transform: uppercase;
   margin: 0;
 }
+
+/* Botón "X" de cierre del modal */
 .cat-modal-close {
   background: none;
   border: none;
@@ -578,15 +718,23 @@ ul { list-style: none; }
   padding: 4px 8px;
   line-height: 1;
 }
+
+/* El botón de cierre se ilumina al pasar el ratón */
 .cat-modal-close:hover { color: var(--text); }
+
+/* Cuerpo del modal con padding interno generoso */
 .cat-modal-body { padding: 28px; }
 
+/* ── Grupos de formulario ──
+   Combinación de label + input apilados verticalmente */
 .cat-form-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
   margin-bottom: 16px;
 }
+
+/* Etiqueta del campo de formulario en mayúsculas y pequeña */
 .cat-form-group label {
   font-family: var(--font-head);
   font-size: 0.56rem;
@@ -594,6 +742,8 @@ ul { list-style: none; }
   text-transform: uppercase;
   color: var(--text-muted);
 }
+
+/* Input reutilizable del modal con borde activo al enfocar */
 .cat-input {
   padding: 11px 16px;
   background: rgba(255,255,255,0.04);
@@ -606,12 +756,17 @@ ul { list-style: none; }
   transition: var(--t);
   width: 100%;
 }
+
+/* Al enfocar el input cambia el borde a rosa */
 .cat-input:focus {
   border-color: var(--border-h);
   background: rgba(228,0,133,0.04);
 }
+
+/* Placeholder de los inputs del modal */
 .cat-input::placeholder { color: var(--text-muted); }
 
+/* Mensaje de error de login (credenciales incorrectas, etc.) */
 .cat-login-error {
   padding: 10px 14px;
   background: rgba(255,68,102,0.1);
@@ -621,6 +776,8 @@ ul { list-style: none; }
   color: #ff4466;
   margin-bottom: 14px;
 }
+
+/* Fila inferior del modal: enlace de registro y botones de acción */
 .cat-modal-footer-row {
   display: flex;
   align-items: center;
@@ -629,11 +786,18 @@ ul { list-style: none; }
   gap: 12px;
   margin-top: 20px;
 }
+
+/* Texto de invitación al registro */
 .register-text { font-size: 0.82rem; color: var(--text-muted); }
+
+/* Enlace dentro del texto de registro */
 .register-text a { color: var(--rosa); }
 .register-text a:hover { text-decoration: underline; }
+
+/* Grupo de botones del footer del modal */
 .cat-modal-btns { display: flex; gap: 8px; }
 
+/* Botón principal neón del modal (rosa con hover blanco) */
 .cat-btn-neon {
   display: inline-flex;
   align-items: center;
@@ -651,11 +815,15 @@ ul { list-style: none; }
   cursor: pointer;
   transition: var(--t);
 }
+
+/* Hover del botón neón: fondo blanco con texto oscuro */
 .cat-btn-neon:hover {
   background: #fff;
   color: var(--bg);
   box-shadow: 0 4px 20px rgba(228,0,133,0.3);
 }
+
+/* Botón secundario transparente con borde sutil */
 .cat-btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -672,28 +840,44 @@ ul { list-style: none; }
   cursor: pointer;
   transition: var(--t);
 }
+
+/* Hover del botón secundario: texto más claro y borde más visible */
 .cat-btn-secondary:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
 
-/* ════ RESPONSIVE ════ */
+/* ════ RESPONSIVE ════
+   Adaptaciones del layout para pantallas más pequeñas */
+
+/* Tablets y pantallas medianas (≤ 900px) */
 @media (max-width: 900px) {
+  /* La toolbar se apila verticalmente */
   .cat-toolbar { flex-direction: column; align-items: flex-start; }
+  /* El grupo derecho ocupa todo el ancho y distribuye su espacio */
   .cat-toolbar-right { width: 100%; justify-content: space-between; }
 }
+
+/* Móviles (≤ 600px) */
 @media (max-width: 600px) {
   .cat-hero-strip { padding: 40px 5% 32px; }
+  /* El grid de productos pasa a 2 columnas */
   .productos-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  /* El campo de búsqueda se estrecha */
   .cat-search-bar input { width: 160px; }
   .cat-search-bar input:focus { width: 180px; }
 }
+
+/* Móviles muy pequeños (≤ 400px) */
 @media (max-width: 400px) {
+  /* El grid pasa a una sola columna */
   .productos-grid { grid-template-columns: 1fr; }
 }
 
-/* ── Fix grid vacío ── */
+/* ── Fix: altura mínima del grid para evitar colapso visual ── */
 .productos-grid {
   min-height: 400px;
 }
 
+/* ── Repetición de estilos del skeleton loader (refuerzo) ──
+   Se redefinen para garantizar que los estilos no sean sobreescritos */
 .skeleton-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -701,21 +885,24 @@ ul { list-style: none; }
   overflow: hidden;
   height: 340px;
 }
+
 .skeleton-img {
   height: 190px;
   background: linear-gradient(90deg,
     rgba(255,255,255,0.03) 25%,
-    rgba(255,255,255,0.07) 50%,
+    rgba(255,255,255,0.07) 50%,   /* Pico del destello ligeramente más brillante que la primera definición */
     rgba(255,255,255,0.03) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
+
 .skeleton-body {
   padding: 18px 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+
 .skeleton-line {
   height: 10px;
   border-radius: 4px;
@@ -726,8 +913,12 @@ ul { list-style: none; }
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
+
+/* Variantes de ancho de línea skeleton (redefinidas para consistencia) */
 .skeleton-line.short  { width: 60%; }
 .skeleton-line.xshort { width: 40%; }
+
+/* Redefinición de la animación shimmer (coincide con la primera declaración) */
 @keyframes shimmer {
   0%   { background-position: 200% 0; }
   100% { background-position: -200% 0; }
