@@ -4,22 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TechNova — Tecnología que ilumina el futuro</title>
+  <!-- Estilos de la página de inicio y del navbar -->
   <link rel="stylesheet" href="css/index.css" />
   <link rel="stylesheet" href="css/navbar.css" />
+  <!-- Fuentes tipográficas del proyecto -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <!-- Favicon -->
   <link rel="icon" href="img/logo-estrella.png" type="image/png">
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- NAVBAR
+     El navbar se carga dinámicamente desde navbar.html mediante navbar.js -->
 <div id="navbar-container"></div>
 
-<!-- HERO -->
+<!-- HERO
+     Sección principal a pantalla completa con imagen de fondo, título y CTA -->
 <section class="hero" id="inicio">
+  <!-- Imagen de fondo del hero; JS añade la clase 'loaded' cuando termina de cargar
+       para activar la animación de zoom de entrada -->
   <div class="hero-bg-img" id="heroBgImg"></div>
+  <!-- Capa de degradados oscuros para mejorar la legibilidad del texto sobre la imagen -->
   <div class="hero-overlay"></div>
 
   <div class="hero-content">
+    <!-- Badge de estado con punto parpadeante animado -->
     <div class="hero-badge">Proyecto 2026</div>
     <h1 class="hero-title">
       <span class="line-1">Tecnología</span>
@@ -28,18 +37,22 @@
     <p class="hero-desc">
       Innovación que se siente en cada interacción.
     </p>
+    <!-- CTA principal: ancla que desplaza suavemente a la sección de productos -->
     <div class="hero-actions">
       <a href="#productos" class="btn-neon btn-lg">Explora TechNova</a>
     </div>
   </div>
 
+  <!-- Indicador de scroll animado en la esquina inferior izquierda -->
   <div class="scroll-indicator">
     <span>Scroll</span>
     <div class="scroll-line"></div>
   </div>
 </section>
 
-<!-- PRODUCTS -->
+<!-- PRODUCTS
+     Sección de productos destacados cargados desde la API.
+     El grid se rellena dinámicamente mediante app.js (función cargarDestacados). -->
 <section class="products" id="productos">
   <div class="section-header">
     <span class="section-tag">Destacados</span>
@@ -47,6 +60,7 @@
     <p class="section-sub">Selección premium de la temporada</p>
   </div>
 
+  <!-- Contenedor vacío que JS rellena con las tarjetas de los 3 productos destacados -->
   <div class="products-grid" id="featuredProductsGrid"></div>
 
   <div class="view-all">
@@ -54,12 +68,17 @@
   </div>
 </section>
 
-<!-- FEATURES -->
+<!-- FEATURES
+     Sección de características con terminal animada a la izquierda
+     y lista de puntos destacados a la derecha -->
 <section class="features" id="nosotros">
   <div class="features-inner">
 
+    <!-- Terminal falsa que reproduce una secuencia de comandos letra a letra.
+         Al terminar transiciona al canvas de red de nodos y vuelve a empezar. -->
     <div class="terminal" id="terminalBox">
       <div class="terminal-header">
+        <!-- Tres puntos de color estilo macOS (rojo, amarillo, verde) -->
         <div class="terminal-dots">
           <span class="t-dot dot-red"></span>
           <span class="t-dot dot-yellow"></span>
@@ -67,16 +86,22 @@
         </div>
         <span class="terminal-title">technova.exe</span>
       </div>
+      <!-- Área de contenido del terminal; JS añade líneas aquí dinámicamente -->
       <div class="terminal-body" id="terminalBody">
         <div class="terminal-line">
           <span class="t-prompt">→</span>
+          <!-- Elemento donde se escribe el texto del comando actual letra a letra -->
           <span class="t-text" id="terminalText"></span>
+          <!-- Cursor parpadeante al final de la línea activa -->
           <span class="t-cursor">█</span>
         </div>
       </div>
+      <!-- Canvas oculto por defecto; JS lo muestra cuando activa la visualización
+           de red de nodos animados como alternativa al terminal -->
       <canvas id="networkCanvas" style="display:none; width:100%;"></canvas>
     </div>
 
+    <!-- Bloque de texto con los puntos de venta de TechNova -->
     <div class="features-content">
       <span class="section-tag">¿Por qué TechNova?</span>
       <h2 class="section-title">Más allá de lo <span class="gradient-text">ordinario</span></h2>
@@ -85,6 +110,7 @@
         tecnológicos más brillantes del mercado en un solo lugar.
       </p>
 
+      <!-- Lista de tres características principales -->
       <div class="feature-list">
         <div class="feature-item">
           <div class="feat-icon">✦</div>
@@ -117,9 +143,11 @@
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- FOOTER
+     Pie de página con logo, descripción, redes sociales y columnas de enlaces -->
 <footer class="footer">
   <div class="footer-top">
+    <!-- Columna de marca: logo, descripción y botones de redes sociales -->
     <div class="footer-brand">
       <div class="nav-logo">
         <img src="img/logo-estrella.png" alt="TechNova" class="logo-img"/>
@@ -134,6 +162,7 @@
       </div>
     </div>
 
+    <!-- Columna de enlaces al catálogo por categoría -->
     <div class="footer-col">
       <h5>Productos</h5>
       <ul>
@@ -144,6 +173,7 @@
       </ul>
     </div>
 
+    <!-- Columna de enlaces a páginas internas de la empresa -->
     <div class="footer-col">
       <h5>Empresa</h5>
       <ul>
@@ -153,6 +183,7 @@
       </ul>
     </div>
 
+    <!-- Columna de enlaces legales (placeholder, sin página real aún) -->
     <div class="footer-col">
       <h5>Legal</h5>
       <ul>
@@ -163,17 +194,22 @@
     </div>
   </div>
 
+  <!-- Barra inferior del footer: copyright y crédito del proyecto -->
   <div class="footer-bottom">
     <p>© 2026 TechNova. Todos los derechos reservados.</p>
     <p>Proyecto de clase — Desarrollo Web</p>
   </div>
 </footer>
 
-<!-- MODAL LOGIN -->
+<!-- MODAL LOGIN
+     Modal personalizado (sin Bootstrap) para iniciar sesión desde la home.
+     Se abre al pulsar el botón de login del navbar; se cierra con el botón X,
+     el botón Cancelar o haciendo clic en el fondo del overlay. -->
 <div class="modal-overlay" id="loginModal">
   <div class="modal-card cat-modal-content">
     <div class="modal-header cat-modal-header">
       <h5 class="cat-modal-title">Iniciar Sesión</h5>
+      <!-- Botón X: navbar.js escucha el clic en #modal-close-login para cerrar -->
       <button class="modal-close cat-modal-close" id="modal-close-login">✕</button>
     </div>
     <div class="modal-body cat-modal-body">
@@ -186,12 +222,14 @@
           <label>Contraseña</label>
           <input type="password" class="cat-input" placeholder="••••••••" required />
         </div>
+        <!-- Mensaje de error oculto por defecto; app.js lo muestra si el login falla -->
         <div class="cat-login-error d-none">
           Email o contraseña incorrectos.
         </div>
         <div class="cat-modal-footer-row">
           <span class="register-text">¿No tienes cuenta? <a href="#" id="nbGoRegister">Registrarse</a></span>
           <div class="cat-modal-btns">
+            <!-- Cancelar: navbar.js escucha #btn-cancel-login para cerrar el modal -->
             <button type="button" class="cat-btn-secondary" id="btn-cancel-login">Cancelar</button>
             <button type="submit" class="cat-btn-neon">Entrar</button>
           </div>
@@ -202,7 +240,11 @@
 </div>
 
 
-<!-- SCRIPTS -->
+<!-- SCRIPTS
+     Orden importante:
+     1. config.js  → define BASE_URL antes que nada
+     2. app.js     → productos destacados, terminal, login y scroll reveal
+     3. navbar.js  → carga el navbar y gestiona modales globales -->
 <script src="js/config.js"></script>
 <script src="js/app.js"></script>
 <script src="js/navbar.js"></script>
