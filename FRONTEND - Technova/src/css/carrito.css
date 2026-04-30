@@ -1,71 +1,133 @@
 /* ════════════════════════════════════════════
    TECHNOVA — carrito.css
+   Hoja de estilos principal para la página del carrito de compra
 ════════════════════════════════════════════ */
 
+
+/* ════════════════════════════════════════════
+   VARIABLES GLOBALES (Tokens de diseño)
+   Se definen en :root para que sean accesibles
+   desde cualquier parte del CSS usando var(--nombre)
+════════════════════════════════════════════ */
 :root {
-  --bg:        #07070f;
-  --bg-card:   #0f0f1e;
-  --rosa:      #e40085;
-  --rosa-dim:  rgba(228,0,133,0.12);
-  --magenta:   #c940ff;
-  --cyan:      #00d4ff;
-  --cyan-dim:  rgba(0,212,255,0.1);
-  --text:      #e6e6f5;
-  --text-muted:#7878a0;
-  --border:    rgba(255,255,255,0.07);
-  --border-h:  rgba(228,0,133,0.3);
-  --t:         0.25s ease;
-  --font-head: 'Orbitron', sans-serif;
-  --font-body: 'Rajdhani', sans-serif;
-  --radius:    10px;
-  --radius-lg: 16px;
+  /* Colores de fondo */
+  --bg:        #07070f;           /* Fondo principal, casi negro azulado */
+  --bg-card:   #0f0f1e;           /* Fondo de las tarjetas, un poco más claro */
+
+  /* Colores de acento / marca */
+  --rosa:      #e40085;           /* Color principal de marca (rosa neón) */
+  --rosa-dim:  rgba(228,0,133,0.12); /* Rosa muy transparente, para fondos sutiles */
+  --magenta:   #c940ff;           /* Magenta para degradados secundarios */
+  --cyan:      #00d4ff;           /* Cian para detalles adicionales */
+  --cyan-dim:  rgba(0,212,255,0.1);  /* Cian muy transparente */
+
+  /* Colores de texto */
+  --text:      #e6e6f5;           /* Texto principal, blanco suave */
+  --text-muted:#7878a0;           /* Texto secundario / atenuado, gris violáceo */
+
+  /* Bordes */
+  --border:    rgba(255,255,255,0.07);  /* Borde sutil casi invisible */
+  --border-h:  rgba(228,0,133,0.3);    /* Borde con acento rosa (hover / activo) */
+
+  /* Transición reutilizable */
+  --t:         0.25s ease;        /* Duración y curva de animación estándar */
+
+  /* Tipografías */
+  --font-head: 'Orbitron', sans-serif;  /* Fuente para títulos, estilo tech/futurista */
+  --font-body: 'Rajdhani', sans-serif;  /* Fuente para texto corriente, moderna */
+
+  /* Bordes redondeados */
+  --radius:    10px;              /* Radio estándar para elementos pequeños */
+  --radius-lg: 16px;             /* Radio mayor para tarjetas y contenedores grandes */
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+
+/* ════════════════════════════════════════════
+   RESET Y ESTILOS BASE
+   Eliminamos márgenes/paddings por defecto del navegador
+   y establecemos comportamientos globales
+════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box; /* El padding y border se incluyen dentro del ancho/alto */
+  margin: 0;              /* Sin margen exterior por defecto */
+  padding: 0;             /* Sin relleno interior por defecto */
+}
+
+html {
+  scroll-behavior: smooth; /* El scroll entre anclas es suave en vez de instantáneo */
+}
+
 body {
-  font-family: var(--font-body);
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
+  font-family: var(--font-body);  /* Fuente base para todo el documento */
+  background: var(--bg);          /* Fondo oscuro principal */
+  color: var(--text);             /* Color de texto base */
+  min-height: 100vh;              /* La página ocupa al menos toda la altura de la ventana */
+  overflow-x: hidden;             /* Evita scroll horizontal indeseado */
 }
-a { text-decoration: none; color: inherit; }
-ul { list-style: none; }
-.d-none { display: none !important; }
-.w-full { width: 100%; }
 
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--rosa); border-radius: 3px; }
+a {
+  text-decoration: none; /* Quitamos el subrayado de los enlaces */
+  color: inherit;        /* Los enlaces heredan el color del padre en vez de azul por defecto */
+}
 
-/* ════ NAVBAR ════ */
+ul {
+  list-style: none; /* Quitamos los puntos/viñetas de las listas */
+}
+
+/* Clases utilitarias rápidas */
+.d-none  { display: none !important; } /* Oculta completamente un elemento */
+.w-full  { width: 100%; }              /* Hace que el elemento ocupe todo el ancho disponible */
+
+
+/* ════════════════════════════════════════════
+   BARRA DE SCROLL PERSONALIZADA (solo Webkit/Chrome/Safari)
+════════════════════════════════════════════ */
+::-webkit-scrollbar       { width: 5px; }                              /* Grosor de la barra */
+::-webkit-scrollbar-track { background: var(--bg); }                   /* Fondo del carril */
+::-webkit-scrollbar-thumb { background: var(--rosa); border-radius: 3px; } /* El "pulgar" que se arrastra */
+
+
+/* ════════════════════════════════════════════
+   BARRA DE NAVEGACIÓN (NAVBAR)
+   Fija en la parte superior, siempre visible
+════════════════════════════════════════════ */
 .navbar {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
+  position: fixed;              /* Se mantiene fija al hacer scroll */
+  top: 0; left: 0; right: 0;   /* Pegada al borde superior, ocupa todo el ancho */
+  z-index: 100;                 /* Siempre por encima del resto del contenido */
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 18px 6%;
-  background: rgba(7,7,15,0.85);
-  backdrop-filter: blur(24px);
-  border-bottom: 1px solid var(--border);
+  justify-content: space-between; /* Logo a la izquierda, botón a la derecha */
+  padding: 18px 6%;             /* Espaciado vertical y horizontal */
+  background: rgba(7,7,15,0.85); /* Fondo semi-transparente */
+  backdrop-filter: blur(24px);  /* Efecto de desenfoque del contenido detrás */
+  border-bottom: 1px solid var(--border); /* Línea inferior sutil */
 }
+
+/* Contenedor del logo con enlace */
 .nav-logo a {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 8px; /* Separación entre ícono y texto */
 }
-.logo-icon { font-size: 1.3rem; color: var(--rosa); }
+
+.logo-icon {
+  font-size: 1.3rem;
+  color: var(--rosa); /* El ícono del logo en rosa neón */
+}
+
 .logo-text {
-  font-family: var(--font-head);
+  font-family: var(--font-head); /* Fuente Orbitron, estilo futurista */
   font-size: 1rem;
   font-weight: 900;
-  letter-spacing: 2px;
+  letter-spacing: 2px; /* Letras muy separadas, efecto tecnológico */
 }
-.logo-text .accent { color: var(--rosa); }
 
+.logo-text .accent {
+  color: var(--rosa); /* La parte del nombre en rosa, resaltando la marca */
+}
+
+/* Botón para volver atrás */
 .btn-back {
   display: flex;
   align-items: center;
@@ -73,32 +135,45 @@ ul { list-style: none; }
   font-family: var(--font-head);
   font-size: 0.65rem;
   letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--text-muted);
+  text-transform: uppercase;    /* Todo en mayúsculas */
+  color: var(--text-muted);     /* Color gris apagado por defecto */
   transition: var(--t);
 }
-.btn-back:hover { color: var(--text); }
+.btn-back:hover {
+  color: var(--text); /* Al pasar el ratón se vuelve texto blanco completo */
+}
 .btn-back svg { transition: var(--t); }
-.btn-back:hover svg { transform: translateX(-3px); }
-
-/* ════ MAIN ════ */
-.carrito-main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 120px 6% 80px;
+.btn-back:hover svg {
+  transform: translateX(-3px); /* La flecha se mueve ligeramente a la izquierda al hacer hover */
 }
 
-/* ── Header ── */
+
+/* ════════════════════════════════════════════
+   CONTENIDO PRINCIPAL
+════════════════════════════════════════════ */
+.carrito-main {
+  max-width: 1200px;           /* Ancho máximo del contenido */
+  margin: 0 auto;              /* Centrado horizontalmente */
+  padding: 120px 6% 80px;     /* 120px arriba para no quedar bajo la navbar fija */
+}
+
+
+/* ────────────────────────────────────────────
+   CABECERA DEL CARRITO
+   Título y botón de vaciar en la misma línea
+──────────────────────────────────────────── */
 .carrito-header {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: 48px;
+  align-items: flex-end;          /* Alinea los hijos al borde inferior */
+  justify-content: space-between; /* Título a la izquierda, botón a la derecha */
+  margin-bottom: 48px;            /* Espacio debajo antes de los productos */
 }
+
+/* Etiqueta pequeña sobre el título ("MI CARRITO", etc.) */
 .carrito-tag {
   display: inline-block;
   padding: 4px 14px;
-  border: 1px solid var(--border-h);
+  border: 1px solid var(--border-h); /* Borde rosa */
   color: var(--rosa);
   font-family: var(--font-head);
   font-size: 0.58rem;
@@ -107,18 +182,24 @@ ul { list-style: none; }
   border-radius: 4px;
   margin-bottom: 10px;
 }
+
+/* Título principal ("Carrito de Compra") */
 .carrito-title {
   font-family: var(--font-head);
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-size: clamp(1.8rem, 3vw, 2.8rem); /* Tamaño fluido: mínimo 1.8rem, máximo 2.8rem */
   font-weight: 900;
-  line-height: 1.1;
+  line-height: 1.1; /* Interlineado apretado para títulos grandes */
 }
+
+/* Texto con degradado de rosa a magenta */
 .gradient-text {
   background: linear-gradient(90deg, var(--rosa), var(--magenta));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;       /* El degradado se aplica solo al texto */
+  -webkit-text-fill-color: transparent; /* Hace el texto "transparente" para ver el fondo */
   background-clip: text;
 }
+
+/* Botón para vaciar el carrito */
 .btn-vaciar {
   padding: 9px 20px;
   background: transparent;
@@ -133,58 +214,76 @@ ul { list-style: none; }
   transition: var(--t);
 }
 .btn-vaciar:hover {
-  border-color: #ff4466;
+  border-color: #ff4466; /* Al pasar el ratón el borde y texto se vuelven rojo-rosa */
   color: #ff4466;
 }
 
-/* ── Layout ── */
+
+/* ────────────────────────────────────────────
+   LAYOUT DE DOS COLUMNAS
+   Columna izquierda (productos) + columna derecha (resumen)
+──────────────────────────────────────────── */
 .carrito-layout {
   display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: 32px;
-  align-items: start;
+  grid-template-columns: 1fr 360px; /* La izquierda crece, la derecha mide fijo 360px */
+  gap: 32px;           /* Espacio entre las dos columnas */
+  align-items: start;  /* Las columnas arrancan desde arriba, no se estiran */
 }
 
-/* ── Items ── */
+
+/* ────────────────────────────────────────────
+   LISTA DE PRODUCTOS EN EL CARRITO
+──────────────────────────────────────────── */
 .carrito-items {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  flex-direction: column; /* Los productos apilados verticalmente */
+  gap: 16px;              /* Separación entre cada producto */
 }
 
-/* Vacío */
+
+/* ────────────────────────────────────────────
+   ESTADO VACÍO
+   Se muestra cuando no hay productos en el carrito
+──────────────────────────────────────────── */
 .carrito-vacio {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 80px 40px;
-  border: 1px dashed rgba(255,255,255,0.1);
+  border: 1px dashed rgba(255,255,255,0.1); /* Borde discontinuo para indicar "zona vacía" */
   border-radius: var(--radius-lg);
   text-align: center;
   gap: 12px;
 }
+
 .vacio-icon {
-  font-size: 3.5rem;
+  font-size: 3.5rem;   /* Ícono grande (emoji de carrito vacío) */
   margin-bottom: 8px;
-  opacity: 0.4;
+  opacity: 0.4;        /* Ligeramente transparente para no ser muy dominante */
 }
+
 .carrito-vacio h3 {
   font-family: var(--font-head);
   font-size: 1rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--text-muted); /* Texto apagado porque el carrito está vacío */
 }
+
 .carrito-vacio p {
   font-size: 0.88rem;
   color: var(--text-muted);
   margin-bottom: 16px;
 }
 
-/* ── Carrito Items (mejorados) ── */
+
+/* ════════════════════════════════════════════
+   TARJETA DE PRODUCTO EN EL CARRITO (versión mejorada)
+   Diseño en cuatro columnas: imagen | info | precio | borrar
+════════════════════════════════════════════ */
 .carrito-item {
   display: grid;
-  grid-template-columns: 100px 1fr auto auto;
+  grid-template-columns: 100px 1fr auto auto; /* imagen fija | info flexible | precio | botón */
   align-items: center;
   gap: 20px;
   padding: 18px 24px;
@@ -192,21 +291,24 @@ ul { list-style: none; }
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   transition: all var(--t);
-  animation: slideIn 0.3s ease forwards;
+  animation: slideIn 0.3s ease forwards; /* Aparece con animación al cargarse */
 }
 
+/* Animación de entrada: sube desde abajo y aparece */
 @keyframes slideIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(12px); } /* Empieza invisible y desplazado */
+  to   { opacity: 1; transform: translateY(0); }    /* Termina visible en su posición normal */
 }
 
+/* Efecto al pasar el ratón por encima del producto */
 .carrito-item:hover {
-  border-color: rgba(228, 0, 133, 0.25);
-  background: rgba(228, 0, 133, 0.03);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(228, 0, 133, 0.1);
+  border-color: rgba(228, 0, 133, 0.25); /* Borde rosa tenue */
+  background: rgba(228, 0, 133, 0.03);  /* Fondo con leve tinte rosa */
+  transform: translateY(-2px);           /* Sube 2px para efecto de "elevación" */
+  box-shadow: 0 8px 24px rgba(228, 0, 133, 0.1); /* Sombra rosa suave debajo */
 }
 
+/* Contenedor cuadrado de la imagen del producto */
 .carrito-item-img {
   width: 100px;
   height: 100px;
@@ -216,21 +318,23 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: hidden; /* La imagen no se sale del cuadrado */
 }
 
 .carrito-item-img img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  padding: 8px;
+  object-fit: contain; /* La imagen se ajusta sin recortarse ni deformarse */
+  padding: 8px;        /* Pequeño margen interno para que no toque el borde */
   transition: transform var(--t);
 }
 
+/* Al hacer hover en el producto, la imagen hace un pequeño zoom */
 .carrito-item:hover .carrito-item-img img {
   transform: scale(1.08);
 }
 
+/* Bloque de información textual del producto */
 .carrito-item-info {
   display: flex;
   flex-direction: column;
@@ -247,6 +351,7 @@ ul { list-style: none; }
   letter-spacing: 0.5px;
 }
 
+/* Texto "Cantidad: X unidades" */
 .carrito-item-cantidad {
   font-size: 0.85rem;
   color: var(--text-muted);
@@ -255,9 +360,10 @@ ul { list-style: none; }
 
 .carrito-item-cantidad span {
   font-weight: 700;
-  color: var(--rosa);
+  color: var(--rosa); /* El número de unidades destacado en rosa */
 }
 
+/* Columna de precios (unitario + total) alineada a la derecha */
 .carrito-item-precio {
   display: flex;
   flex-direction: column;
@@ -269,24 +375,25 @@ ul { list-style: none; }
 
 .carrito-item-unitario {
   font-size: 0.82rem;
-  color: var(--text-muted);
+  color: var(--text-muted); /* Precio por unidad en color apagado */
 }
 
 .carrito-item-total {
   font-family: var(--font-head);
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--rosa);
+  color: var(--rosa); /* Total en rosa para destacar */
   letter-spacing: 0.5px;
 }
 
+/* Botón de eliminar el producto */
 .carrito-item-delete {
   width: 44px;
   height: 44px;
-  background: rgba(255, 68, 102, 0.12);
+  background: rgba(255, 68, 102, 0.12); /* Fondo rojo muy tenue */
   border: 1px solid rgba(255, 68, 102, 0.25);
   border-radius: var(--radius);
-  color: #ff4466;
+  color: #ff4466;   /* Ícono de papelera en rojo */
   font-size: 1.2rem;
   cursor: pointer;
   transition: all var(--t);
@@ -295,21 +402,23 @@ ul { list-style: none; }
   justify-content: center;
   padding: 0;
 }
-
 .carrito-item-delete:hover {
-  background: rgba(255, 68, 102, 0.2);
+  background: rgba(255, 68, 102, 0.2); /* Fondo más intenso al hover */
   border-color: #ff4466;
-  transform: scale(1.05);
+  transform: scale(1.05); /* Crece ligeramente */
 }
-
 .carrito-item-delete:active {
-  transform: scale(0.98);
+  transform: scale(0.98); /* Se encoge al hacer clic, feedback táctil */
 }
 
-/* Item card */
+
+/* ════════════════════════════════════════════
+   TARJETA DE PRODUCTO ALTERNATIVA (item-card)
+   Versión con controles de cantidad +/-
+════════════════════════════════════════════ */
 .item-card {
   display: grid;
-  grid-template-columns: 80px 1fr auto;
+  grid-template-columns: 80px 1fr auto; /* imagen | info | precio+botón */
   align-items: center;
   gap: 20px;
   padding: 20px 24px;
@@ -319,22 +428,22 @@ ul { list-style: none; }
   transition: var(--t);
   animation: slideIn 0.3s ease forwards;
 }
-@keyframes slideIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+
 .item-card:hover {
-  border-color: rgba(228,0,133,0.2);
+  border-color: rgba(228,0,133,0.2); /* Borde rosa al pasar el ratón */
 }
 
+/* Imagen del producto */
 .item-img {
   width: 80px;
   height: 80px;
-  object-fit: contain;
+  object-fit: contain;     /* Sin recorte */
   border-radius: var(--radius);
   background: rgba(255,255,255,0.03);
   padding: 8px;
 }
+
+/* Marcador de posición si no hay imagen disponible */
 .item-img-placeholder {
   width: 80px;
   height: 80px;
@@ -343,30 +452,35 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 2rem; /* Muestra un emoji o ícono grande */
 }
 
-.item-info { min-width: 0; }
+.item-info { min-width: 0; } /* Evita que el texto desborde el grid */
+
 .item-nombre {
   font-family: var(--font-head);
   font-size: 0.88rem;
   font-weight: 600;
   margin-bottom: 4px;
-  white-space: nowrap;
+  white-space: nowrap;     /* No parte el texto en múltiples líneas */
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; /* Si el texto es muy largo, pone "..." al final */
 }
+
 .item-precio-unit {
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: var(--text-muted); /* Precio unitario en gris, menos importante */
   margin-bottom: 12px;
 }
 
+/* Controles de cantidad: [ - | N | + ] */
 .item-controles {
   display: flex;
   align-items: center;
-  gap: 0;
+  gap: 0; /* Sin espacio, los botones se pegan al input del medio */
 }
+
+/* Botones de restar y sumar cantidad */
 .ctrl-btn {
   width: 30px; height: 30px;
   background: rgba(255,255,255,0.05);
@@ -379,35 +493,45 @@ ul { list-style: none; }
   align-items: center;
   justify-content: center;
 }
-.ctrl-btn:first-child { border-radius: 6px 0 0 6px; }
-.ctrl-btn:last-child  { border-radius: 0 6px 6px 0; }
-.ctrl-btn:hover { background: var(--rosa-dim); color: var(--rosa); border-color: var(--border-h); }
+.ctrl-btn:first-child { border-radius: 6px 0 0 6px; } /* Borde redondeado solo a la izquierda */
+.ctrl-btn:last-child  { border-radius: 0 6px 6px 0; } /* Borde redondeado solo a la derecha */
+.ctrl-btn:hover {
+  background: var(--rosa-dim);
+  color: var(--rosa);
+  border-color: var(--border-h);
+}
+
+/* Campo numérico central de la cantidad */
 .ctrl-cantidad {
   width: 40px; height: 30px;
   background: rgba(255,255,255,0.03);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  border-left: none;
+  border-left: none;   /* Sin borde a los lados para fundirse con los botones */
   border-right: none;
   color: var(--text);
   font-family: var(--font-head);
   font-size: 0.78rem;
   text-align: center;
-  outline: none;
+  outline: none;       /* Sin borde azul al hacer foco */
 }
 
+/* Columna derecha: precio total + botón de borrar */
 .item-right {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-end; /* Todo alineado a la derecha */
   gap: 12px;
 }
+
 .item-precio-total {
   font-family: var(--font-head);
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text);
 }
+
+/* Botón de eliminar (solo ícono, sin fondo visible) */
 .btn-eliminar {
   background: none;
   border: none;
@@ -418,17 +542,25 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
 }
-.btn-eliminar:hover { color: #ff4466; transform: scale(1.1); }
+.btn-eliminar:hover {
+  color: #ff4466;         /* Se pone rojo al hover */
+  transform: scale(1.1); /* Y crece ligeramente */
+}
 
-/* ════ RESUMEN ════ */
+
+/* ════════════════════════════════════════════
+   PANEL RESUMEN DEL PEDIDO (columna derecha)
+   Se queda fijo mientras se hace scroll en los productos
+════════════════════════════════════════════ */
 .carrito-resumen {
-  position: sticky;
-  top: 100px;
+  position: sticky; /* Fijo en pantalla al hacer scroll */
+  top: 100px;       /* Se para a 100px del borde superior (debajo de la navbar) */
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
+/* Tarjeta del resumen */
 .resumen-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -438,6 +570,7 @@ ul { list-style: none; }
   flex-direction: column;
   gap: 14px;
 }
+
 .resumen-title {
   font-family: var(--font-head);
   font-size: 0.78rem;
@@ -448,21 +581,24 @@ ul { list-style: none; }
   margin-bottom: 4px;
 }
 
+/* Fila de concepto + valor (ej: "Subtotal  €49,99") */
 .resumen-linea {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Concepto a la izquierda, valor a la derecha */
   font-size: 0.88rem;
   color: var(--text-muted);
 }
-.resumen-linea span:last-child { color: var(--text); }
-.envio-gratis { color: #22cc66 !important; }
+.resumen-linea span:last-child { color: var(--text); } /* El valor en color blanco */
+.envio-gratis { color: #22cc66 !important; }           /* "Gratis" en verde */
 
+/* Línea divisoria horizontal */
 .resumen-divider {
   height: 1px;
   background: var(--border);
   margin: 4px 0;
 }
 
+/* Fila del total final, más grande */
 .resumen-total {
   display: flex;
   justify-content: space-between;
@@ -470,15 +606,20 @@ ul { list-style: none; }
   font-size: 1.1rem;
   font-weight: 700;
 }
-.resumen-total span:last-child { color: var(--rosa); }
+.resumen-total span:last-child { color: var(--rosa); } /* El total en rosa neón */
 
-/* Login aviso */
+
+/* ────────────────────────────────────────────
+   BLOQUE CUANDO EL USUARIO NO ESTÁ LOGUEADO
+──────────────────────────────────────────── */
 .resumen-login {
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-top: 4px;
 }
+
+/* Aviso informativo */
 .login-aviso {
   display: flex;
   align-items: center;
@@ -491,13 +632,18 @@ ul { list-style: none; }
   border: 1px solid var(--border);
 }
 
-/* Logueado */
+
+/* ────────────────────────────────────────────
+   BLOQUE CUANDO EL USUARIO SÍ ESTÁ LOGUEADO
+──────────────────────────────────────────── */
 .resumen-logueado {
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-top: 4px;
 }
+
+/* Muestra el nombre / email del usuario activo */
 .usuario-info {
   display: flex;
   align-items: center;
@@ -509,15 +655,16 @@ ul { list-style: none; }
   border-radius: var(--radius);
   border: 1px solid var(--border);
 }
-.usuario-info svg { color: var(--rosa); flex-shrink: 0; }
+.usuario-info svg { color: var(--rosa); flex-shrink: 0; } /* Ícono de perfil en rosa */
 
+/* Botón principal: confirmar / finalizar compra */
 .btn-confirmar {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   padding: 14px 24px;
-  background: var(--rosa);
+  background: var(--rosa); /* Fondo rosa sólido */
   color: #fff;
   font-family: var(--font-head);
   font-size: 0.72rem;
@@ -528,20 +675,21 @@ ul { list-style: none; }
   border-radius: var(--radius);
   cursor: pointer;
   transition: var(--t);
-  width: 100%;
+  width: 100%; /* Ocupa todo el ancho del panel */
 }
 .btn-confirmar:hover {
-  background: #fff;
+  background: #fff;            /* Al hover se invierte: fondo blanco, texto oscuro */
   color: var(--bg);
-  box-shadow: 0 6px 24px rgba(228,0,133,0.3);
-  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(228,0,133,0.3); /* Resplandor rosa debajo */
+  transform: translateY(-1px); /* Leve elevación */
 }
 .btn-confirmar:disabled {
-  opacity: 0.4;
+  opacity: 0.4;       /* Semitransparente cuando está desactivado */
   cursor: not-allowed;
-  transform: none;
+  transform: none;    /* Sin animación cuando está desactivado */
 }
 
+/* Botón pequeño para cerrar sesión */
 .btn-logout-mini {
   background: none;
   border: none;
@@ -554,9 +702,9 @@ ul { list-style: none; }
   transition: var(--t);
   text-align: center;
 }
-.btn-logout-mini:hover { color: #ff4466; }
+.btn-logout-mini:hover { color: #ff4466; } /* Se pone rojo al hover */
 
-/* Métodos pago */
+/* Sección de métodos de pago aceptados */
 .metodos-pago {
   display: flex;
   align-items: center;
@@ -570,7 +718,10 @@ ul { list-style: none; }
   font-family: var(--font-head);
   letter-spacing: 1px;
 }
+
 .metodos-icons { display: flex; gap: 8px; }
+
+/* Cada método (VISA, MC, etc.) tiene su propia pastilla */
 .metodo-icon {
   padding: 3px 8px;
   border: 1px solid var(--border);
@@ -580,7 +731,11 @@ ul { list-style: none; }
   color: var(--text-muted);
 }
 
-/* ════ BOTÓN NEON ════ */
+
+/* ════════════════════════════════════════════
+   BOTÓN NEÓN GENÉRICO (reutilizable)
+   Puede usarse como <a> o <button>
+════════════════════════════════════════════ */
 .btn-neon {
   display: inline-flex;
   align-items: center;
@@ -606,38 +761,50 @@ ul { list-style: none; }
   transform: translateY(-1px);
 }
 
-/* ════ MODAL LOGIN ════ */
+
+/* ════════════════════════════════════════════
+   MODAL DE INICIO DE SESIÓN
+   Ventana emergente centrada con fondo oscurecido
+════════════════════════════════════════════ */
 .modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(8px);
-  z-index: 500;
+  position: fixed;  /* Cubre toda la pantalla */
+  inset: 0;         /* Equivale a top:0; right:0; bottom:0; left:0 */
+  background: rgba(0,0,0,0.7);     /* Fondo negro semitransparente */
+  backdrop-filter: blur(8px);      /* Desenfoca el contenido de fondo */
+  z-index: 500;     /* Por encima de todo, incluyendo la navbar */
   display: flex;
   align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
+  justify-content: center; /* El modal se centra en pantalla */
+  opacity: 0;             /* Invisible por defecto */
+  pointer-events: none;   /* No interactuable cuando está oculto */
   transition: opacity 0.25s ease;
 }
+
+/* Clase que se añade con JS para mostrar el modal */
 .modal-overlay.open {
   opacity: 1;
-  pointer-events: all;
+  pointer-events: all; /* Se puede interactuar cuando está visible */
 }
+
+/* Tarjeta interior del modal */
 .modal-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 0;
   width: 100%;
-  max-width: 500px;
-  transform: translateY(20px);
+  max-width: 500px; /* Ancho máximo del modal */
+  transform: translateY(20px); /* Empieza desplazado hacia abajo */
   transition: transform 0.25s ease;
-  overflow: hidden;
+  overflow: hidden; /* El contenido no se sale del borde redondeado */
 }
+
+/* Al abrir, el modal sube a su posición natural */
 .modal-overlay.open .modal-card {
   transform: translateY(0);
 }
+
+/* Cabecera del modal: título + botón de cerrar */
 .modal-header {
   display: flex;
   align-items: center;
@@ -645,6 +812,7 @@ ul { list-style: none; }
   padding: 22px 28px;
   border-bottom: 1px solid var(--border);
 }
+
 .modal-header h3 {
   font-family: var(--font-head);
   font-size: 0.88rem;
@@ -652,6 +820,8 @@ ul { list-style: none; }
   letter-spacing: 2px;
   text-transform: uppercase;
 }
+
+/* Botón X para cerrar el modal */
 .modal-close {
   background: none;
   border: none;
@@ -663,13 +833,17 @@ ul { list-style: none; }
 }
 .modal-close:hover { color: var(--text); }
 
+/* Zona del formulario dentro del modal */
 .modal-body { padding: 28px; }
+
+/* Grupo de campo: label + input */
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 6px;         /* Espacio entre el label y el input */
   margin-bottom: 16px;
 }
+
 .form-group label {
   font-family: var(--font-head);
   font-size: 0.6rem;
@@ -677,6 +851,7 @@ ul { list-style: none; }
   text-transform: uppercase;
   color: var(--text-muted);
 }
+
 .form-group input {
   padding: 12px 16px;
   background: rgba(255,255,255,0.04);
@@ -685,94 +860,112 @@ ul { list-style: none; }
   color: var(--text);
   font-family: var(--font-body);
   font-size: 0.95rem;
-  outline: none;
+  outline: none;     /* Sin el borde azul por defecto del navegador */
   transition: var(--t);
 }
 .form-group input:focus {
-  border-color: var(--border-h);
-  background: rgba(228,0,133,0.04);
+  border-color: var(--border-h);              /* Borde rosa al escribir */
+  background: rgba(228,0,133,0.04);           /* Tinte rosa muy suave */
 }
-.form-group input::placeholder { color: var(--text-muted); }
+.form-group input::placeholder { color: var(--text-muted); } /* Texto de ejemplo en gris */
 
+/* Mensaje de error de login (credenciales incorrectas, etc.) */
 .login-error {
   padding: 10px 14px;
-  background: rgba(255,68,102,0.1);
+  background: rgba(255,68,102,0.1);     /* Fondo rojo muy tenue */
   border: 1px solid rgba(255,68,102,0.3);
   border-radius: var(--radius);
   font-size: 0.82rem;
-  color: #ff4466;
+  color: #ff4466;  /* Texto rojo */
   margin-bottom: 14px;
 }
 
-/* ════ TOAST ════ */
+
+/* ════════════════════════════════════════════
+   TOAST / NOTIFICACIÓN EMERGENTE
+   Aparece en la esquina inferior derecha brevemente
+════════════════════════════════════════════ */
 .toast {
   position: fixed;
   bottom: 32px;
-  right: 32px;
+  right: 32px;   /* Esquina inferior derecha */
   padding: 14px 22px;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-left: 3px solid var(--rosa);
+  border-left: 3px solid var(--rosa); /* Franja de color a la izquierda (por defecto rosa) */
   border-radius: var(--radius);
   font-family: var(--font-head);
   font-size: 0.72rem;
   letter-spacing: 1px;
   color: var(--text);
-  z-index: 999;
-  transform: translateY(20px);
-  opacity: 0;
+  z-index: 999;           /* Por encima de todo, incluso del modal */
+  transform: translateY(20px); /* Empieza desplazado hacia abajo */
+  opacity: 0;             /* Invisible por defecto */
   transition: all 0.3s ease;
-  pointer-events: none;
+  pointer-events: none;   /* No interfiere con los clics */
 }
+
+/* El JS añade .show para que aparezca */
 .toast.show {
-  transform: translateY(0);
+  transform: translateY(0); /* Sube a su posición */
   opacity: 1;
 }
-.toast.success { border-left-color: #22cc66; }
-.toast.error   { border-left-color: #ff4466; }
 
-/* ════ RESPONSIVE ════ */
+/* Variantes de color según el tipo de mensaje */
+.toast.success { border-left-color: #22cc66; } /* Verde para confirmaciones */
+.toast.error   { border-left-color: #ff4466; } /* Rojo para errores */
+
+
+/* ════════════════════════════════════════════
+   RESPONSIVE — ADAPTACIÓN A PANTALLAS PEQUEÑAS
+════════════════════════════════════════════ */
+
+/* Tablets y pantallas medianas (menos de 900px) */
 @media (max-width: 900px) {
   .carrito-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Las dos columnas pasan a una sola */
   }
   .carrito-resumen {
-    position: static;
+    position: static; /* El resumen ya no es sticky, fluye con el contenido */
   }
-  
+
   .carrito-item {
-    grid-template-columns: 90px 1fr auto auto;
+    grid-template-columns: 90px 1fr auto auto; /* Imagen algo más pequeña */
   }
 }
+
+/* Móviles (menos de 600px) */
 @media (max-width: 600px) {
   .carrito-header {
-    flex-direction: column;
+    flex-direction: column; /* Título y botón "vaciar" se apilan verticalmente */
     align-items: flex-start;
     gap: 16px;
   }
+
+  /* La tarjeta item-card se reorganiza en dos filas */
   .item-card {
-    grid-template-columns: 60px 1fr;
+    grid-template-columns: 60px 1fr; /* Solo dos columnas */
     grid-template-rows: auto auto;
   }
   .item-right {
-    grid-column: 1 / -1;
-    flex-direction: row;
+    grid-column: 1 / -1;             /* Ocupa toda la fila */
+    flex-direction: row;             /* Precio y borrar en la misma línea */
     justify-content: space-between;
     align-items: center;
   }
-  
-  /* Carrito responsive */
+
+  /* carrito-item también se ajusta para móvil */
   .carrito-item {
-    grid-template-columns: 80px 1fr auto;
+    grid-template-columns: 80px 1fr auto; /* Sin la columna extra de precio */
     gap: 12px;
-    padding: 14px 16px;
+    padding: 14px 16px;            /* Menos padding para aprovechar el espacio */
   }
   .carrito-item-img {
     width: 80px;
-    height: 80px;
+    height: 80px; /* Imagen más pequeña */
   }
   .carrito-item-nombre {
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* Texto ligeramente más pequeño */
   }
   .carrito-item-precio {
     min-width: 80px;
@@ -782,7 +975,7 @@ ul { list-style: none; }
   }
   .carrito-item-delete {
     width: 40px;
-    height: 40px;
+    height: 40px;  /* Botón de borrar más pequeño en móvil */
     font-size: 1rem;
   }
 }
