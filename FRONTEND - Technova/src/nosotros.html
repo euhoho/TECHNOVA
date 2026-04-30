@@ -4,19 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nosotros — TechNova</title>
+  <!-- Estilos del navbar y de la página de nosotros -->
   <link rel="stylesheet" href="css/navbar.css" />
   <link rel="stylesheet" href="css/nosotros.css" />
+  <!-- Fuentes tipográficas del proyecto -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <!-- Favicon -->
   <link rel="icon" href="img/logo-estrella.png" type="image/png">
 </head>
 <body>
 
-  <!-- NAVBAR -->
+  <!-- NAVBAR
+       El navbar se carga dinámicamente desde navbar.html mediante navbar.js -->
   <div id="navbar-container"></div>
 
-  <!-- HERO -->
+  <!-- HERO
+       Sección principal con imagen de fondo, overlay oscuro y texto introductorio -->
   <section class="ns-hero">
+    <!-- Capa de degradado oscuro sobre la imagen de fondo para legibilidad del texto -->
     <div class="ns-hero-overlay"></div>
+    <!-- Efecto de brillo radial rosa decorativo en la esquina superior derecha -->
     <div class="ns-hero-glow"></div>
     <div class="ns-hero-content">
       <span class="ns-tag">Sobre el proyecto</span>
@@ -26,12 +33,17 @@
         Somos cuatro estudiantes que decidimos ir más allá del aula y construir algo real.
       </p>
     </div>
+    <!-- Línea decorativa horizontal rosa en la parte inferior izquierda del hero -->
     <div class="ns-hero-line"></div>
   </section>
 
-  <!-- PROYECTO -->
+  <!-- PROYECTO
+       Sección de dos columnas: descripción del proyecto a la izquierda
+       y stack tecnológico utilizado a la derecha -->
   <section class="ns-section">
     <div class="ns-section-inner">
+
+      <!-- Bloque de texto descriptivo del proyecto -->
       <div class="ns-text-block">
         <span class="ns-tag">El proyecto</span>
         <h2 class="ns-title">De la idea al <span class="gradient-text">producto</span></h2>
@@ -46,9 +58,11 @@
         </p>
       </div>
 
+      <!-- Lista de tecnologías usadas en el proyecto, una por capa del stack -->
       <div class="ns-stack">
         <div class="ns-stack-item">
           <span class="ns-stack-icon">
+            <!-- Icono de código (corchetes angulares) para Frontend -->
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           </span>
           <div>
@@ -58,6 +72,7 @@
         </div>
         <div class="ns-stack-item">
           <span class="ns-stack-icon">
+            <!-- Icono de monitor para Backend -->
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
           </span>
           <div>
@@ -67,6 +82,7 @@
         </div>
         <div class="ns-stack-item">
           <span class="ns-stack-icon">
+            <!-- Icono de base de datos (cilindro) para MySQL -->
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
           </span>
           <div>
@@ -76,6 +92,7 @@
         </div>
         <div class="ns-stack-item">
           <span class="ns-stack-icon">
+            <!-- Icono de reloj para Metodología -->
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
           </span>
           <div>
@@ -84,10 +101,15 @@
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
-  <!-- EQUIPO -->
+  <!-- EQUIPO
+       Grid de tarjetas de los 4 miembros del equipo.
+       Los datos (avatar, nombre, rol, descripción y enlace de GitHub) están vacíos;
+       nosotros.js los rellena llamando a la API pública de GitHub.
+       data-delay escalonado para que las tarjetas aparezcan con animación diferida. -->
   <section class="ns-team-section">
     <div class="ns-team-header">
       <span class="ns-tag">El equipo</span>
@@ -97,8 +119,10 @@
 
     <div class="ns-team-grid">
 
+      <!-- Tarjeta miembro 01: sin delay, aparece primero -->
       <div class="ns-member-card" id="member-01" data-delay="0">
         <div class="ns-member-number">01</div>
+        <!-- Avatar de GitHub: nosotros.js rellena el src con data.avatar_url -->
         <img class="ns-github-avatar" src="" alt="avatar"/>
         <div class="ns-member-info">
           <h3 class="ns-github-name"></h3>
@@ -109,6 +133,7 @@
         </div>
       </div>
 
+      <!-- Tarjeta miembro 02: aparece 100ms después -->
       <div class="ns-member-card" id="member-02" data-delay="100">
         <div class="ns-member-number">02</div>
         <img class="ns-github-avatar" src="" alt="avatar"/>
@@ -121,6 +146,7 @@
         </div>
       </div>
 
+      <!-- Tarjeta miembro 03: aparece 200ms después -->
       <div class="ns-member-card" id="member-03" data-delay="200">
         <div class="ns-member-number">03</div>
         <img class="ns-github-avatar" src="" alt="avatar"/>
@@ -133,6 +159,7 @@
         </div>
       </div>
 
+      <!-- Tarjeta miembro 04: aparece 300ms después -->
       <div class="ns-member-card" id="member-04" data-delay="300">
         <div class="ns-member-number">04</div>
         <img class="ns-github-avatar" src="" alt="avatar"/>
@@ -148,7 +175,8 @@
     </div>
   </section>
 
-  <!-- VALORES -->
+  <!-- VALORES
+       Tres columnas con los valores que guiaron el desarrollo del proyecto -->
   <section class="ns-values">
     <div class="ns-values-inner">
       <div class="ns-value-item">
@@ -169,14 +197,17 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-top">
-    <div class="footer-brand">
-      <div class="nav-logo">
-        <img src="img/logo-estrella.png" alt="TechNova" class="logo-img"/>
-        <span class="logo-text">Tech<span class="accent">Nova</span></span>
-      </div>  
+  <!-- FOOTER
+       Pie de página con logo, descripción, redes sociales y columnas de enlaces.
+       Los enlaces de Productos apuntan al catálogo filtrado por categoría via ?categoria=... -->
+  <footer class="footer">
+    <div class="footer-top">
+      <!-- Columna de marca: logo, descripción y botones de redes sociales -->
+      <div class="footer-brand">
+        <div class="nav-logo">
+          <img src="img/logo-estrella.png" alt="TechNova" class="logo-img"/>
+          <span class="logo-text">Tech<span class="accent">Nova</span></span>
+        </div>
         <p>Tecnología del futuro, disponible hoy. Productos premium para quienes exigen lo mejor.</p>
         <div class="social-links">
           <a href="#" class="social-btn">𝕏</a>
@@ -185,6 +216,8 @@
           <a href="#" class="social-btn">📸</a>
         </div>
       </div>
+
+      <!-- Columna de enlaces al catálogo filtrado por categoría -->
       <div class="footer-col">
         <h5>Productos</h5>
         <ul>
@@ -194,6 +227,8 @@
           <li><a href="catalogo.html?categoria=software">Software</a></li>
         </ul>
       </div>
+
+      <!-- Columna de enlaces internos de la empresa -->
       <div class="footer-col">
         <h5>Empresa</h5>
         <ul>
@@ -202,6 +237,8 @@
           <li><a href="#">Contacto</a></li>
         </ul>
       </div>
+
+      <!-- Columna de enlaces legales (placeholder, sin página real aún) -->
       <div class="footer-col">
         <h5>Legal</h5>
         <ul>
@@ -211,12 +248,20 @@
         </ul>
       </div>
     </div>
+
+    <!-- Barra inferior: copyright y crédito del proyecto -->
     <div class="footer-bottom">
       <p>© 2026 TechNova. Todos los derechos reservados.</p>
       <p>Proyecto de clase — Desarrollo Web</p>
     </div>
   </footer>
 
+  <!--
+    Orden de carga de scripts:
+    1. config.js    → define BASE_URL antes que nada
+    2. navbar.js    → carga el navbar dinámicamente y gestiona modales globales
+    3. nosotros.js  → carga los perfiles de GitHub y activa el scroll reveal
+  -->
   <script src="js/config.js"></script>
   <script src="js/navbar.js"></script>
   <script src="js/nosotros.js"></script>
