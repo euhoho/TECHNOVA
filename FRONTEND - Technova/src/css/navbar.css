@@ -1,64 +1,89 @@
+/* ════════════════════════════════════════════
+   TECHNOVA — navbar.css
+   Hoja de estilos para la barra de navegación global,
+   buscador, carrito, modales de autenticación y menú móvil
+════════════════════════════════════════════ */
+
+/* ── Variables globales de diseño ──
+   Paleta de colores, fuentes, radios y tiempos de transición
+   compartidos con el resto de hojas de estilos del proyecto */
 :root {
-  --bg:        #07070f;
-  --bg-card:   #0f0f1e;
-  --rosa:      #e40085;
-  --rosa-dim:  rgba(228,0,133,0.12);
-  --magenta:   #c940ff;
-  --cyan:      #90fef1;
-  --cyan-dim:  rgba(0,212,255,0.18);
-  --text:      #e6e6f5;
-  --text-muted:#7878a0;
-  --border:    rgba(255,255,255,0.08);
-  --border-h:  rgba(228,0,133,0.3);
-  --glow-rosa: rgba(228,0,133,0.28);
-  --font-head: 'Orbitron', sans-serif;
-  --font-body: 'Rajdhani', sans-serif;
-  --radius:    10px;
-  --radius-lg: 16px;
-  --t:         0.28s ease;
+  --bg:        #07070f;                      /* Fondo principal, negro azulado muy oscuro */
+  --bg-card:   #0f0f1e;                      /* Fondo de tarjetas y paneles */
+  --rosa:      #e40085;                      /* Rosa neón principal, acentos y CTAs */
+  --rosa-dim:  rgba(228,0,133,0.12);         /* Rosa translúcido para fondos suaves */
+  --magenta:   #c940ff;                      /* Magenta para degradados y badges */
+  --cyan:      #90fef1;                      /* Cian brillante, hover de botones */
+  --cyan-dim:  rgba(0,212,255,0.18);         /* Cian translúcido para fondos hover */
+  --text:      #e6e6f5;                      /* Texto principal, blanco azulado */
+  --text-muted:#7878a0;                      /* Texto secundario/apagado, gris azulado */
+  --border:    rgba(255,255,255,0.08);       /* Borde sutil para separar elementos */
+  --border-h:  rgba(228,0,133,0.3);          /* Borde rosa para estados hover y focus */
+  --glow-rosa: rgba(228,0,133,0.28);         /* Rosa para sombras luminosas */
+  --font-head: 'Orbitron', sans-serif;       /* Fuente de cabeceras, estilo futurista */
+  --font-body: 'Rajdhani', sans-serif;       /* Fuente de cuerpo, legible y moderna */
+  --radius:    10px;                         /* Radio de esquinas estándar */
+  --radius-lg: 16px;                         /* Radio de esquinas grande para tarjetas */
+  --t:         0.28s ease;                   /* Duración y curva de las transiciones */
 }
 
-/* ════ NAVBAR ════ */
+/* ════ NAVBAR ════
+   Barra de navegación fija en la parte superior de la página.
+   Comienza transparente y añade fondo glassmorphism al hacer scroll */
 .navbar {
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 1000;
+  z-index: 1000;             /* Por encima del contenido de la página */
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px 6%;
-  background: transparent;
+  background: transparent;   /* Transparente cuando el usuario está en la parte superior */
   transition: all 0.4s ease;
 }
+
+/* Cuando el usuario hace scroll, la navbar adopta fondo oscuro con desenfoque */
 .navbar.scrolled {
   background: rgba(7,7,15,0.60);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  padding: 14px 6%;
+  backdrop-filter: blur(24px);           /* Efecto glassmorphism */
+  -webkit-backdrop-filter: blur(24px);   /* Prefijo para compatibilidad en Safari */
+  padding: 14px 6%;                      /* Reduce el padding para una apariencia más compacta */
 }
 
+/* ── Logo de la marca ──
+   Enlace que agrupa el icono/imagen y el nombre de la empresa */
 a.nav-logo {
   display: flex;
   align-items: center;
   gap: 10px;
   text-decoration: none;
   color: inherit;
-  flex-shrink: 0;
+  flex-shrink: 0;            /* No se encoge cuando hay poco espacio en la fila */
 }
+
+/* Imagen del logo (si existe) */
 .logo-img {
   width: 32px;
   height: 32px;
   object-fit: contain;
 }
+
+/* Icono emoji/SVG alternativo al logo de imagen */
 .logo-icon { font-size: 1.4rem; color: var(--rosa); }
+
+/* Texto del nombre de la marca */
 .logo-text {
   font-family: var(--font-head);
   font-size: 1.1rem;
   font-weight: 900;
   letter-spacing: 2px;
 }
+
+/* Parte del nombre que se muestra en color rosa (ej: la "A" de "TECHNOVA") */
 .logo-text .accent { color: var(--rosa); }
 
+/* ── Menú de enlaces de navegación ──
+   Lista horizontal de secciones de la página */
 .nav-links {
   display: flex;
   align-items: center;
@@ -67,6 +92,8 @@ a.nav-logo {
   margin: 0;
   padding: 0;
 }
+
+/* Enlace individual de navegación con subrayado animado en hover */
 .nav-links a {
   font-family: var(--font-head);
   font-size: 0.65rem;
@@ -74,11 +101,15 @@ a.nav-logo {
   text-transform: uppercase;
   color: #ffffff;
   transition: var(--t);
-  position: relative;
-  text-shadow: 0 0 20px rgba(0,0,0,1), 0 0 40px rgba(0,0,0,0.8);
+  position: relative;        /* Necesario para el pseudo-elemento de subrayado */
+  text-shadow: 0 0 20px rgba(0,0,0,1), 0 0 40px rgba(0,0,0,0.8); /* Sombra para legibilidad sobre fondos claros */
   text-decoration: none;
 }
+
+/* Color blanco puro al pasar el ratón */
 .nav-links a:hover { color: #fff; }
+
+/* Línea rosa animada debajo del enlace (empieza con ancho 0) */
 .nav-links a::after {
   content: '';
   position: absolute;
@@ -87,11 +118,17 @@ a.nav-logo {
   background: var(--rosa);
   transition: var(--t);
 }
+
+/* Al hacer hover la línea rosa se expande al 100% del ancho del enlace */
 .nav-links a:hover::after { width: 100%; }
 
+/* Contenedor de las acciones del lado derecho del navbar */
 .nav-actions { display: flex; align-items: center; gap: 12px; }
+
+/* Grupo que contiene los botones de autenticación (login/registro) */
 .auth-group  { display: flex; align-items: center; gap: 8px; }
 
+/* Zona visible cuando el usuario ha iniciado sesión: saludo + botón de logout */
 .user-zone {
   display: flex;
   align-items: center;
@@ -99,9 +136,14 @@ a.nav-logo {
   color: var(--text);
   font-size: 0.9rem;
 }
+
+/* Texto de saludo personalizado con el nombre del usuario */
 #nav-saludo { font-weight: 500; }
 
+/* Contenedor del botón de acceso al panel de administración */
 .admin-zone { margin-left: 8px; }
+
+/* Botón de acceso al panel admin, rosa con hover magenta */
 .btn-admin {
   background: var(--rosa);
   color: var(--bg);
@@ -112,19 +154,25 @@ a.nav-logo {
   text-decoration: none;
   transition: var(--t);
 }
+
+/* Hover del botón admin: fondo magenta y sube ligeramente */
 .btn-admin:hover { background: var(--magenta); transform: translateY(-1px); }
 
+/* ── Botón hamburguesa ──
+   Visible solo en móvil, abre/cierra el menú de navegación */
 .hamburger {
-  display: none;
+  display: none;             /* Oculto en escritorio */
   flex-direction: column;
   gap: 5px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 4px;
-  z-index: 1001;
+  z-index: 1001;             /* Sobre el menú desplegable para poder cerrarlo */
   flex-shrink: 0;
 }
+
+/* Cada línea del icono hamburguesa */
 .hamburger span {
   display: block;
   width: 24px;
@@ -133,15 +181,18 @@ a.nav-logo {
   transition: var(--t);
 }
 
-/* ── Search bar ── */
+/* ── Search bar ──
+   Campo de búsqueda en la navbar con lupa y resultados desplegables */
 .nav-search {
   position: relative;
   display: flex;
   align-items: center;
 }
+
+/* Input de búsqueda: sin borde superior/lateral, solo borde inferior sutil */
 .nav-search > input {
   width: 220px;
-  padding: 9px 18px 9px 40px;
+  padding: 9px 18px 9px 40px; /* Padding izquierdo para no solapar el icono de lupa */
   background: transparent;
   border: none;
   border-bottom: 1px solid rgba(255,255,255,0.15);
@@ -152,15 +203,21 @@ a.nav-logo {
   outline: none;
   transition: var(--t);
 }
+
+/* Al enfocar: borde inferior rosa y el campo se ensancha */
 .nav-search > input:focus {
   border-bottom-color: var(--rosa);
   width: 260px;
 }
+
+/* Placeholder del buscador con mayor espaciado de letras */
 .nav-search > input::placeholder {
   color: var(--text-muted);
   letter-spacing: 2px;
   font-size: 0.68rem;
 }
+
+/* Botón de lupa superpuesto a la izquierda del input */
 .search-btn {
   position: absolute;
   left: 10px;
@@ -173,23 +230,30 @@ a.nav-logo {
   transition: var(--t);
   padding: 0;
 }
+
+/* La lupa se colorea de rosa cuando el input está enfocado o al hacer hover */
 .nav-search > input:focus ~ .search-btn,
 .search-btn:hover { color: var(--rosa); }
 
+/* Dropdown de resultados de búsqueda, oculto por defecto */
 .search-dropdown {
   position: absolute;
-  top: calc(100% + 16px);
+  top: calc(100% + 16px); /* Aparece justo debajo del input con margen */
   left: -12px;
   right: -12px;
   background: rgba(7,7,15,0.97);
   border: 1px solid rgba(0,212,255,0.12);
-  border-top: 2px solid var(--rosa);
+  border-top: 2px solid var(--rosa); /* Línea rosa en la parte superior del panel */
   backdrop-filter: blur(24px);
   overflow: hidden;
   display: none;
   z-index: 200;
 }
+
+/* Cuando JS añade la clase .open el dropdown se hace visible */
 .search-dropdown.open { display: block; }
+
+/* Encabezado "RESULTADOS" generado con CSS antes del primer resultado */
 .search-dropdown::before {
   content: 'RESULTADOS';
   display: block;
@@ -200,6 +264,8 @@ a.nav-logo {
   color: var(--rosa);
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
+
+/* Ítem individual de resultado de búsqueda */
 .search-result-item {
   padding: 10px 16px;
   font-size: 0.84rem;
@@ -209,14 +275,18 @@ a.nav-logo {
   display: flex;
   align-items: center;
   gap: 12px;
-  border-left: 2px solid transparent;
+  border-left: 2px solid transparent; /* Borde izquierdo invisible por defecto */
 }
+
+/* Hover del resultado: fondo cian muy sutil, borde rosa izquierdo y desplazamiento */
 .search-result-item:hover {
   background: rgba(0,212,255,0.04);
   color: var(--text);
   border-left-color: var(--rosa);
-  padding-left: 20px;
+  padding-left: 20px;        /* El texto se mueve hacia la derecha al hacer hover */
 }
+
+/* Mensaje que aparece cuando no hay resultados para la búsqueda */
 .search-no-result {
   padding: 14px 16px;
   font-family: var(--font-head);
@@ -225,9 +295,10 @@ a.nav-logo {
   color: var(--text-muted);
 }
 
-/* ── Cart button ── */
+/* ── Cart button ──
+   Botón del carrito de compra con contador de artículos */
 .cart-btn {
-  position: relative;
+  position: relative;        /* Necesario para posicionar el badge del contador */
   background: rgba(255,255,255,0.05);
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -240,14 +311,18 @@ a.nav-logo {
   text-decoration: none;
   flex-shrink: 0;
 }
+
+/* Hover del carrito: borde rosa, icono rosa y fondo cian tenue */
 .cart-btn:hover {
   border-color: var(--border-h);
   color: var(--rosa);
   background: var(--cyan-dim);
 }
+
+/* Badge circular con el número de artículos en el carrito */
 .cart-count {
   position: absolute;
-  top: -6px; right: -6px;
+  top: -6px; right: -6px;   /* Esquina superior derecha del botón */
   width: 18px; height: 18px;
   background: var(--rosa);
   color: var(--bg);
@@ -259,15 +334,21 @@ a.nav-logo {
   align-items: center;
   justify-content: center;
 }
+
+/* Clase añadida por JS cuando se agrega un producto: anima el badge */
 .cart-count.bump { animation: cartBump 0.3s ease; }
 
+/* Animación de "rebote" del badge al añadir un artículo al carrito */
 @keyframes cartBump {
   0%   { transform: scale(1); }
-  50%  { transform: scale(1.4); }
+  50%  { transform: scale(1.4); } /* Se hincha brevemente */
   100% { transform: scale(1); }
 }
 
-/* ════ BUTTONS ════ */
+/* ════ BUTTONS ════
+   Sistema de botones globales reutilizables en toda la aplicación */
+
+/* Botón principal rosa con hover cian */
 .btn-neon {
   display: inline-block;
   padding: 13px 32px;
@@ -284,14 +365,19 @@ a.nav-logo {
   transition: var(--t);
   text-decoration: none;
 }
+
+/* Hover: fondo cian con sombra luminosa */
 .btn-neon:hover {
   background: var(--cyan);
   color: var(--bg);
   transform: translateY(-1px);
   box-shadow: 0 6px 24px rgba(0,212,255,0.25);
 }
+
+/* Modificador de tamaño grande */
 .btn-lg { padding: 16px 44px; font-size: 0.78rem; }
 
+/* Botón con borde sutil y fondo transparente */
 .btn-outline {
   display: inline-block;
   padding: 11px 24px;
@@ -307,12 +393,15 @@ a.nav-logo {
   background: transparent;
   text-decoration: none;
 }
+
+/* Hover: borde más visible y texto blanco puro */
 .btn-outline:hover {
   border-color: rgba(255,255,255,0.5);
   color: #fff;
   transform: translateY(-1px);
 }
 
+/* Variante grande del botón outline */
 .btn-outline-lg {
   display: inline-block;
   padding: 14px 38px;
@@ -327,8 +416,11 @@ a.nav-logo {
   transition: var(--t);
   background: transparent;
 }
+
+/* Hover: borde blanco completo */
 .btn-outline-lg:hover { border-color: #fff; color: #fff; transform: translateY(-1px); }
 
+/* Botón fantasma: sin borde ni fondo, solo texto semitransparente */
 .btn-ghost {
   display: inline-block;
   padding: 16px 20px;
@@ -342,9 +434,14 @@ a.nav-logo {
   background: transparent;
   border: none;
 }
+
+/* Hover: texto completamente opaco */
 .btn-ghost:hover { color: var(--text); }
 
-/* ════ COMMON ════ */
+/* ════ COMMON ════
+   Componentes de texto y cabecera reutilizables entre secciones */
+
+/* Etiqueta pequeña de sección con borde rosa */
 .section-tag {
   display: inline-block;
   padding: 4px 14px;
@@ -357,6 +454,8 @@ a.nav-logo {
   border-radius: 4px;
   margin-bottom: 14px;
 }
+
+/* Título principal de sección con tamaño fluido responsive */
 .section-title {
   font-family: var(--font-head);
   font-size: clamp(1.7rem, 2.8vw, 2.4rem);
@@ -364,8 +463,14 @@ a.nav-logo {
   line-height: 1.2;
   margin-bottom: 10px;
 }
+
+/* Subtítulo descriptivo de sección */
 .section-sub { color: var(--text-muted); font-size: 0.98rem; }
+
+/* Cabecera de sección centrada con margen inferior */
 .section-header { text-align: center; margin-bottom: 52px; }
+
+/* Texto con degradado de rosa a magenta */
 .gradient-text {
   background: linear-gradient(90deg, var(--rosa), var(--magenta));
   -webkit-background-clip: text;
@@ -373,48 +478,61 @@ a.nav-logo {
   background-clip: text;
 }
 
-/* ════ MODALES ════ */
+/* ════ MODALES ════
+   Ventanas emergentes de autenticación (login/registro) del navbar */
+
+/* Capa de fondo oscura y difuminada detrás del modal */
 .nb-modal-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(8px);
-  z-index: 2000;
-  display: none;
+  backdrop-filter: blur(8px);   /* Desenfoque del contenido de la página detrás */
+  z-index: 2000;                /* Por encima del navbar y del resto del contenido */
+  display: none;                /* Oculto por defecto */
   align-items: center;
   justify-content: center;
   padding: 20px;
-  pointer-events: none;
+  pointer-events: none;         /* No recibe interacciones hasta que se abra */
   opacity: 0;
   transition: opacity 0.25s ease;
 }
+
+/* Cuando JS añade .open: visible, flex y habilitado para interacción */
 .nb-modal-overlay.open {
   display: flex;
   opacity: 1;
   pointer-events: all;
 }
+
+/* Tarjeta del modal centrada en la pantalla */
 .nb-modal-card {
   background: #0f0f1e;
   border: 1px solid rgba(255,255,255,0.07);
   border-radius: 16px;
   width: 100%;
   max-width: 480px;
-  transform: translateY(20px);
+  transform: translateY(20px);   /* Empieza desplazada hacia abajo */
   transition: transform 0.25s ease;
-  /* Sin overflow:hidden */
+  /* Sin overflow:hidden para que los dropdowns internos no queden recortados */
 }
+
+/* Al abrirse el modal la tarjeta sube a su posición natural */
 .nb-modal-overlay.open .nb-modal-card {
   transform: translateY(0);
 }
+
+/* Cabecera del modal: título + botón de cierre */
 .nb-modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 22px 28px;
   border-bottom: 1px solid rgba(255,255,255,0.07);
-  border-radius: 16px 16px 0 0;
+  border-radius: 16px 16px 0 0;  /* Redondea solo las esquinas superiores */
   background: #0f0f1e;
 }
+
+/* Título del modal en fuente tecnológica y mayúsculas */
 .nb-modal-header h3 {
   font-family: var(--font-head);
   font-size: 0.85rem;
@@ -424,11 +542,15 @@ a.nav-logo {
   color: var(--text);
   margin: 0;
 }
+
+/* Cuerpo del modal con el formulario */
 .nb-modal-body {
   padding: 28px;
-  border-radius: 0 0 16px 16px;
+  border-radius: 0 0 16px 16px;  /* Redondea solo las esquinas inferiores */
   background: #0f0f1e;
 }
+
+/* Botón de cierre "×" del modal */
 .nb-modal-close {
   background: none;
   border: none;
@@ -438,14 +560,19 @@ a.nav-logo {
   transition: var(--t);
   padding: 4px 8px;
 }
+
+/* Hover del botón de cierre: se ilumina en blanco */
 .nb-modal-close:hover { color: var(--text); }
 
+/* Grupo de campo de formulario: label + input apilados */
 .nb-form-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
   margin-bottom: 16px;
 }
+
+/* Etiqueta del campo en mayúsculas y tamaño pequeño */
 .nb-form-group label {
   font-family: var(--font-head);
   font-size: 0.56rem;
@@ -454,6 +581,8 @@ a.nav-logo {
   color: var(--text-muted);
 }
 
+/* Inputs del modal (email, password, text) con estilos forzados con !important
+   para evitar que sean sobrescritos por hojas de estilos de terceros */
 .nb-modal-card input[type="email"],
 .nb-modal-card input[type="password"],
 .nb-modal-card input[type="text"] {
@@ -470,10 +599,12 @@ a.nav-logo {
   transition: border-color 0.28s ease, background 0.28s ease !important;
   display: block !important;
   box-sizing: border-box !important;
-  pointer-events: all !important;
+  pointer-events: all !important;    /* Asegura que los inputs siempre sean clicables */
   cursor: text !important;
-  -webkit-text-fill-color: var(--text) !important;
+  -webkit-text-fill-color: var(--text) !important; /* Fuerza el color en Safari */
 }
+
+/* Estado focus de los inputs del modal: borde rosa y fondo ligeramente rosado */
 .nb-modal-card input[type="email"]:focus,
 .nb-modal-card input[type="password"]:focus,
 .nb-modal-card input[type="text"]:focus {
@@ -481,6 +612,7 @@ a.nav-logo {
   background: rgba(228,0,133,0.04) !important;
 }
 
+/* Mensaje de error dentro del modal (ej: credenciales incorrectas) */
 .nb-form-error {
   padding: 10px 14px;
   background: rgba(255,68,102,0.1);
@@ -490,6 +622,8 @@ a.nav-logo {
   color: #ff4466;
   margin-bottom: 14px;
 }
+
+/* Botón principal del modal: ocupa todo el ancho, rosa con hover blanco */
 .nb-btn-neon {
   display: flex;
   align-items: center;
@@ -509,11 +643,15 @@ a.nav-logo {
   transition: var(--t);
   margin-top: 4px;
 }
+
+/* Hover del botón del modal: fondo blanco, texto oscuro y sombra rosa */
 .nb-btn-neon:hover {
   background: #fff;
   color: #07070f;
   box-shadow: 0 4px 20px rgba(228,0,133,0.3);
 }
+
+/* Texto de cambio entre login y registro al pie del modal */
 .nb-modal-switch {
   text-align: center;
   font-size: 0.82rem;
@@ -521,16 +659,23 @@ a.nav-logo {
   margin-top: 16px;
   margin-bottom: 0;
 }
+
+/* Enlace dentro del texto de cambio de modal */
 .nb-modal-switch a { color: var(--rosa); cursor: pointer; text-decoration: none; }
 .nb-modal-switch a:hover { text-decoration: underline; }
 
-/* ════ CAT MODAL ════ */
+/* ════ CAT MODAL ════
+   Variante alternativa del modal utilizada en la página de catálogo */
+
+/* Contenedor de la tarjeta del modal de catálogo */
 .cat-modal-content {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg) !important;
   color: var(--text);
 }
+
+/* Cabecera del modal de catálogo */
 .cat-modal-header {
   display: flex;
   align-items: center;
@@ -538,6 +683,8 @@ a.nav-logo {
   padding: 22px 28px;
   border-bottom: 1px solid var(--border);
 }
+
+/* Título del modal de catálogo */
 .cat-modal-title {
   font-family: var(--font-head);
   font-size: 0.82rem;
@@ -546,6 +693,8 @@ a.nav-logo {
   text-transform: uppercase;
   margin: 0;
 }
+
+/* Botón de cierre del modal de catálogo */
 .cat-modal-close {
   background: none;
   border: none;
@@ -556,8 +705,14 @@ a.nav-logo {
   padding: 4px 8px;
 }
 .cat-modal-close:hover { color: var(--text); }
+
+/* Cuerpo del modal de catálogo */
 .cat-modal-body { padding: 28px; }
+
+/* Grupo de campo de formulario del modal de catálogo */
 .cat-form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+
+/* Etiqueta del campo del modal de catálogo */
 .cat-form-group label {
   font-family: var(--font-head);
   font-size: 0.56rem;
@@ -565,6 +720,8 @@ a.nav-logo {
   text-transform: uppercase;
   color: var(--text-muted);
 }
+
+/* Input reutilizable del modal de catálogo */
 .cat-input {
   padding: 11px 16px;
   background: rgba(255,255,255,0.04);
@@ -577,8 +734,14 @@ a.nav-logo {
   transition: var(--t);
   width: 100%;
 }
+
+/* Focus del input: borde rosa y fondo rosado muy sutil */
 .cat-input:focus { border-color: var(--border-h); background: rgba(228,0,133,0.04); }
+
+/* Placeholder del input del modal de catálogo */
 .cat-input::placeholder { color: var(--text-muted); }
+
+/* Mensaje de error de login en el modal de catálogo */
 .cat-login-error {
   padding: 10px 14px;
   background: rgba(255,68,102,0.1);
@@ -588,6 +751,8 @@ a.nav-logo {
   color: #ff4466;
   margin-bottom: 14px;
 }
+
+/* Fila inferior del modal de catálogo: enlace de registro + botones */
 .cat-modal-footer-row {
   display: flex;
   align-items: center;
@@ -596,10 +761,16 @@ a.nav-logo {
   gap: 12px;
   margin-top: 20px;
 }
+
+/* Texto con enlace al formulario de registro */
 .register-text { font-size: 0.82rem; color: var(--text-muted); }
 .register-text a { color: var(--rosa); }
 .register-text a:hover { text-decoration: underline; }
+
+/* Grupo de botones en el pie del modal de catálogo */
 .cat-modal-btns { display: flex; gap: 8px; }
+
+/* Botón principal del modal de catálogo */
 .cat-btn-neon {
   display: inline-flex;
   align-items: center;
@@ -617,7 +788,11 @@ a.nav-logo {
   cursor: pointer;
   transition: var(--t);
 }
+
+/* Hover: fondo blanco, texto oscuro y sombra rosa */
 .cat-btn-neon:hover { background: #fff; color: var(--bg); box-shadow: 0 4px 20px rgba(228,0,133,0.3); }
+
+/* Botón secundario del modal de catálogo: transparente con borde sutil */
 .cat-btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -634,10 +809,15 @@ a.nav-logo {
   cursor: pointer;
   transition: var(--t);
 }
+
+/* Hover: texto más visible y borde más claro */
 .cat-btn-secondary:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
 
-/* ── Usuario logueado ── */
+/* ── Usuario logueado ──
+   Zona del navbar que muestra el email y el botón de cerrar sesión */
 .nb-user-zone { display: flex; align-items: center; gap: 10px; }
+
+/* Email del usuario con truncado por ellipsis si es muy largo */
 .nb-user-email {
   font-family: var(--font-head);
   font-size: 0.6rem;
@@ -645,9 +825,11 @@ a.nav-logo {
   color: var(--text-muted);
   max-width: 140px;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis;   /* Añade "…" cuando el email no cabe en el ancho máximo */
   white-space: nowrap;
 }
+
+/* Botón de cerrar sesión: borde sutil, rojo al hacer hover */
 .nb-btn-logout {
   background: none;
   border: 1px solid rgba(255,255,255,0.1);
@@ -661,53 +843,64 @@ a.nav-logo {
   cursor: pointer;
   transition: var(--t);
 }
+
+/* Hover del botón de logout: texto rojo y borde rojo translúcido */
 .nb-btn-logout:hover { color: #ff4466; border-color: rgba(255,68,102,0.4); }
 
-/* Utilidades */
-.d-none { display: none !important; }
-.w-full { width: 100%; }
+/* ── Clases utilitarias ── */
+.d-none { display: none !important; } /* Oculta cualquier elemento */
+.w-full { width: 100%; }              /* Ocupa el 100% del ancho disponible */
 
-/* ════ RESPONSIVE ════ */
+/* ════ RESPONSIVE ════
+   Adaptaciones del navbar para distintos tamaños de pantalla */
+
+/* Pantallas medianas (≤ 1024px): el buscador se estrecha */
 @media (max-width: 1024px) {
   .nav-search > input { width: 160px; }
   .nav-search > input:focus { width: 200px; }
 }
 
+/* Tablets y móviles (≤ 860px): se ocultan los enlaces y controles del navbar,
+   y se muestra el botón hamburguesa */
 @media (max-width: 860px) {
-  .nav-links  { display: none; }
-  .nav-search { display: none; }
-  .auth-group { display: none; }
-  .nb-user-zone { display: none; }
-  .admin-zone { display: none; }
-  .hamburger  { display: flex; }
+  .nav-links  { display: none; }      /* Menú de navegación oculto */
+  .nav-search { display: none; }      /* Buscador oculto */
+  .auth-group { display: none; }      /* Botones de login/registro ocultos */
+  .nb-user-zone { display: none; }    /* Zona de usuario logueado oculta */
+  .admin-zone { display: none; }      /* Botón de admin oculto */
+  .hamburger  { display: flex; }      /* Botón hamburguesa visible */
 
-  /* Carrito visible y junto al hamburger */
+  /* El carrito se alinea a la derecha, junto al botón hamburguesa */
   .nav-actions {
     margin-left: auto;
     margin-right: 12px;
   }
 
-  /* Menú abierto */
-.nav-links.open {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(7,7,15,0.98);
-  backdrop-filter: blur(24px);
-  padding: 80px 8% 40px;
-  gap: 0;
-  z-index: 999;
-  align-items: flex-start;
-  justify-content: flex-start;
-  list-style: none;
-  margin: 0;
-  overflow-y: auto;
-}
+  /* Menú abierto en móvil: panel a pantalla completa con blur de fondo */
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0; /* Ocupa toda la pantalla */
+    background: rgba(7,7,15,0.98);
+    backdrop-filter: blur(24px);
+    padding: 80px 8% 40px;             /* Padding superior para no solapar el navbar */
+    gap: 0;
+    z-index: 999;
+    align-items: flex-start;
+    justify-content: flex-start;
+    list-style: none;
+    margin: 0;
+    overflow-y: auto;                  /* Scroll vertical si hay muchos ítems */
+  }
+
+  /* Cada ítem de la lista ocupa el ancho completo con separador inferior */
   .nav-links.open li {
     width: 100%;
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
+
+  /* Enlace del menú móvil: más grande y sin sombra de texto */
   .nav-links.open li a {
     display: block;
     padding: 20px 0;
@@ -716,10 +909,15 @@ a.nav-logo {
     color: var(--text);
     text-shadow: none;
   }
+
+  /* Hover en menú móvil: texto rosa */
   .nav-links.open li a:hover { color: var(--rosa); }
+
+  /* Oculta el subrayado animado en el menú móvil */
   .nav-links.open li a::after { display: none; }
 }
 
+/* Móviles muy pequeños (≤ 480px): padding reducido y logo más pequeño */
 @media (max-width: 480px) {
   .navbar { padding: 16px 5%; }
   .navbar.scrolled { padding: 12px 5%; }
