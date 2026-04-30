@@ -3,16 +3,17 @@ import {
     actualizarContadorCarrito
 } from "./carrito.js";
 
+// Array global que guarda todos los productos cargados desde la API
 let todosLosProductos = [];
 
-/* ── Normalizar texto (quita tildes y pasa a minúsculas) ── */
+// Elimina tildes y convierte a minúsculas para comparaciones de texto sin diferenciar acentos
 function normalizar(texto) {
     return (texto || '').toLowerCase()
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '');
 }
 
-/* ── Skeletons mientras carga ── */
+// Muestra n tarjetas skeleton animadas mientras se cargan los productos reales
 function mostrarSkeletons(n = 8) {
     const container = document.getElementById("catalogo-container");
     if (!container) return;
@@ -27,28 +28,31 @@ function mostrarSkeletons(n = 8) {
         </div>`).join('');
 }
 
-/* ── Contador de resultados ── */
+// Actualiza el texto del contador de resultados encima del grid (ej: "24 productos")
 function actualizarContador(n) {
     const el = document.getElementById("resultsCount");
     if (el) el.textContent = n + (n === 1 ? ' producto' : ' productos');
 }
 
+// Pide todos los productos a la API, los guarda en el array global
+// y activa los filtros, el ordenador y el slider de precio
 async function cargarProductos() {
     mostrarSkeletons(8);
     try {
         const response = await fetch(BASE_URL + "/api/productos");
         const productos = await response.json();
         todosLosProductos = productos;
-pintarProductos(todosLosProductos);
-activarFiltroCategorias();
-activarOrdenador();
-activarSliderPrecio();
+        pintarProductos(todosLosProductos);
+        activarFiltroCategorias();
+        activarOrdenador();
+        activarSliderPrecio();
     } catch (error) {
         console.error("Error al cargar productos:", error);
         pintarError();
     }
 }
 
+// Si la URL incluye ?categoria=..., activa esa categoría automáticamente al cargar
 const params = new URLSearchParams(window.location.search);
 const categoriaURL = params.get("categoria");
 
@@ -64,6 +68,7 @@ if (categoriaURL) {
     aplicarFiltrosYOrden();
 }
 
+// Muestra un mensaje de error en el grid cuando la API no está disponible
 function pintarError() {
     const container = document.getElementById("catalogo-container");
     if (!container) return;
@@ -75,6 +80,8 @@ function pintarError() {
     actualizarContador(0);
 }
 
+// Renderiza el array de productos recibido en el grid del catálogo.
+// Genera una tarjeta por producto con imagen, nombre, precio, stock y botón de añadir.
 function pintarProductos(productos) {
     const container = document.getElementById("catalogo-container");
     if (!container) return;
@@ -93,7 +100,9 @@ function pintarProductos(productos) {
 
     productos.forEach((p, i) => {
         const card = document.createElement("div");
+        // Añade la clase 'agotado' si el stock es 0 o negativo
         card.className = `product-card-cat ${p.stock <= 0 ? 'agotado' : ''}`;
+        // Escalonado de animación: máximo 400ms para no retrasar demasiado las últimas tarjetas
         card.style.animationDelay = Math.min(i * 35, 400) + 'ms';
 
         const tieneImagen = p.imagen && p.imagen.trim() !== '';
@@ -133,6 +142,8 @@ function pintarProductos(productos) {
     activarBotonesAgregar();
 }
 
+// Asigna el evento click a cada píldora de categoría para filtrar el grid.
+// Al seleccionar una, quita 'active' de las demás y aplica el filtro.
 function activarFiltroCategorias() {
     const categorias = document.querySelectorAll(".categoria-card");
     categorias.forEach(cat => {
@@ -152,6 +163,8 @@ function activarFiltroCategorias() {
     });
 }
 
+// Escucha el input del buscador y filtra los productos por nombre,
+// descripción y categoría. Si hay texto, deselecciona las categorías activas.
 function activarBuscador() {
     const buscador = document.getElementById("buscador-productos");
     if (!buscador) return;
@@ -175,10 +188,12 @@ function activarBuscador() {
     });
 }
 
+// Asigna el evento click a los botones "+ Añadir" del grid.
+// Añade el producto al carrito y muestra feedback visual verde durante 1.4 segundos.
 function activarBotonesAgregar() {
     document.querySelectorAll(".btn-add-cart:not(.btn-agotado)").forEach(btn => {
         btn.addEventListener("click", (e) => {
-            e.stopPropagation();
+            e.stopPropagation(); // Evita propagar el clic a la tarjeta padre
 
             const producto = {
                 idProducto: parseInt(btn.dataset.id),
@@ -191,6 +206,7 @@ function activarBotonesAgregar() {
             agregarProducto(producto);
             actualizarContadorCarrito();
 
+            // Feedback visual temporal en el botón
             const original = btn.textContent;
             btn.textContent = '✓ Añadido';
             btn.style.background = '#22cc66';
@@ -206,19 +222,22 @@ function activarBotonesAgregar() {
     });
 }
 
+// Combina todos los filtros activos (texto, categoría, precio y orden)
+// y vuelve a pintar el grid con los productos resultantes.
 function aplicarFiltrosYOrden() {
-    const buscador = document.getElementById("buscador-productos");
+    const buscador        = document.getElementById("buscador-productos");
     const categoriaActiva = document.querySelector(".categoria-card.active");
-    const ordenar = document.getElementById("ordenar-productos");
-    const sliderMin = document.getElementById("precio-min");
-    const sliderMax = document.getElementById("precio-max");
+    const ordenar         = document.getElementById("ordenar-productos");
+    const sliderMin       = document.getElementById("precio-min");
+    const sliderMax       = document.getElementById("precio-max");
 
-    const texto = buscador ? buscador.value.toLowerCase().trim() : "";
-    const categoria = categoriaActiva ? categoriaActiva.dataset.categoria.toLowerCase() : "todos";
-    const criterioOrden = ordenar ? ordenar.value : "default";
-    const min = sliderMin ? Number(sliderMin.value) : 0;
-    const max = sliderMax ? Number(sliderMax.value) : Infinity;
+    const texto          = buscador ? buscador.value.toLowerCase().trim() : "";
+    const categoria      = categoriaActiva ? categoriaActiva.dataset.categoria.toLowerCase() : "todos";
+    const criterioOrden  = ordenar ? ordenar.value : "default";
+    const min            = sliderMin ? Number(sliderMin.value) : 0;
+    const max            = sliderMax ? Number(sliderMax.value) : Infinity;
 
+    // Filtra por texto, categoría y rango de precio simultáneamente
     let resultado = todosLosProductos.filter(producto => {
         const coincideBusqueda =
             producto.nombre.toLowerCase().includes(texto) ||
@@ -234,6 +253,7 @@ function aplicarFiltrosYOrden() {
         return coincideBusqueda && coincideCategoria && coincidePrecio;
     });
 
+    // Aplica el criterio de ordenación seleccionado en el desplegable
     if (criterioOrden === "nombre-asc") {
         resultado.sort((a, b) => a.nombre.localeCompare(b.nombre));
     } else if (criterioOrden === "nombre-desc") {
@@ -247,15 +267,16 @@ function aplicarFiltrosYOrden() {
     pintarProductos(resultado);
 }
 
+// Escucha cambios en el select de ordenación y aplica todos los filtros
 function activarOrdenador() {
     const select = document.getElementById("ordenar-productos");
     if (!select) return;
-
-    select.addEventListener("change", () => {
-        aplicarFiltrosYOrden();
-    });
+    select.addEventListener("change", () => { aplicarFiltrosYOrden(); });
 }
 
+// Inicializa el filtro de precio con un canvas interactivo estilo "constelación".
+// Dibuja estrellas de fondo, una línea de rango y dos manejadores arrastrables
+// que el usuario puede mover con ratón o touch para definir el rango de precio.
 function activarSliderPrecio() {
     const sliderMin = document.getElementById("precio-min");
     const sliderMax = document.getElementById("precio-max");
@@ -265,15 +286,17 @@ function activarSliderPrecio() {
 
     if (!sliderMin || !sliderMax || !valorMin || !valorMax || !canvas || todosLosProductos.length === 0) return;
 
+    // Calcula el rango real de precios a partir de los productos cargados
     const minReal = Math.floor(Math.min(...todosLosProductos.map(p => Number(p.precio))));
     const maxReal = Math.ceil( Math.max(...todosLosProductos.map(p => Number(p.precio))));
 
+    // Configura los inputs range con los límites reales
     sliderMin.min = sliderMax.min = minReal;
     sliderMin.max = sliderMax.max = maxReal;
     sliderMin.value = minReal;
     sliderMax.value = maxReal;
 
-    /* ── Canvas setup ── */
+    // Ajusta el canvas al tamaño del contenedor respetando el DPR para pantallas Retina
     const DPR = window.devicePixelRatio || 1;
     function resizeCanvas() {
         const rect = canvas.getBoundingClientRect();
@@ -284,9 +307,9 @@ function activarSliderPrecio() {
     window.addEventListener("resize", resizeCanvas);
 
     const ctx = canvas.getContext("2d");
-    const PAD = 10;
+    const PAD = 10; // Margen interno del canvas en píxeles lógicos
 
-    /* Background dim stars with individual twinkle phase */
+    // 22 estrellas de fondo con parpadeo individual aleatorio
     const BG_STARS = Array.from({ length: 22 }, () => ({
         x:     Math.random(),
         y:     Math.random(),
@@ -296,28 +319,32 @@ function activarSliderPrecio() {
         speed: Math.random() * 0.02 + 0.008,
     }));
 
-    /* Floating intermediate nodes */
+    // 3 nodos intermedios flotantes que forman la constelación entre los manejadores
     const FLOAT_NODES = [
         { tx: 0.28, ty: -0.35, phase: 0,              speed: 0.018, amp: 0.18 },
         { tx: 0.50, ty:  0.30, phase: Math.PI * 0.66, speed: 0.013, amp: 0.22 },
         { tx: 0.72, ty: -0.25, phase: Math.PI * 1.33, speed: 0.021, amp: 0.16 },
     ];
 
-    let t = 0;
-    let hoveredStar = null;
-    let dragging    = null;
-    let rafId       = null;
+    let t           = 0;       // Contador de frames para animaciones sinusoidales
+    let hoveredStar = null;    // Indica qué manejador está bajo el cursor ("min"/"max")
+    let dragging    = null;    // Indica qué manejador se está arrastrando
+    let rafId       = null;    // ID del requestAnimationFrame activo
 
+    // Convierte un valor de precio a su posición X en el canvas (en píxeles lógicos)
     function priceToX(val) {
         const W = canvas.width / DPR;
         return PAD + ((val - minReal) / (maxReal - minReal)) * (W - PAD * 2);
     }
+
+    // Convierte una posición X del canvas a su valor de precio correspondiente
     function xToPrice(x) {
         const W = canvas.width / DPR;
         const ratio = (x - PAD) / (W - PAD * 2);
         return Math.round(minReal + ratio * (maxReal - minReal));
     }
 
+    // Dibuja una estrella de 5 puntas en la posición indicada con brillo y rotación
     function drawStar(cx, cy, r, color, glow, rotation = 0) {
         ctx.save();
         ctx.translate(cx * DPR, cy * DPR);
@@ -328,7 +355,7 @@ function activarSliderPrecio() {
         ctx.beginPath();
         for (let i = 0; i < 10; i++) {
             const angle  = (i * Math.PI) / 5 - Math.PI / 2;
-            const radius = i % 2 === 0 ? r * DPR : r * 0.42 * DPR;
+            const radius = i % 2 === 0 ? r * DPR : r * 0.42 * DPR; // Alterna punta y valle
             const px = Math.cos(angle) * radius;
             const py = Math.sin(angle) * radius;
             i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
@@ -338,6 +365,7 @@ function activarSliderPrecio() {
         ctx.restore();
     }
 
+    // Loop principal de animación del canvas: se ejecuta en cada fotograma
     function draw() {
         t += 1;
         const W = canvas.width  / DPR;
@@ -348,9 +376,9 @@ function activarSliderPrecio() {
         const maxVal = Number(sliderMax.value);
         const xMin   = priceToX(minVal);
         const xMax   = priceToX(maxVal);
-        const midY   = H / 2;
+        const midY   = H / 2; // Línea central horizontal del slider
 
-        /* Twinkling background stars */
+        // Dibuja las estrellas de fondo con parpadeo individual
         BG_STARS.forEach(s => {
             s.phase += s.speed;
             const alpha = s.base + Math.sin(s.phase) * s.base * 0.8;
@@ -365,7 +393,7 @@ function activarSliderPrecio() {
             ctx.restore();
         });
 
-        /* Inactive track */
+        // Línea de fondo completa del slider (gris muy sutil)
         ctx.save();
         ctx.strokeStyle = "rgba(255,255,255,0.07)";
         ctx.lineWidth   = 1.5 * DPR;
@@ -375,7 +403,7 @@ function activarSliderPrecio() {
         ctx.stroke();
         ctx.restore();
 
-        /* Active range line */
+        // Línea de rango activo entre los dos manejadores (rosa discontinua con brillo)
         ctx.save();
         ctx.shadowColor = "#e40085";
         ctx.shadowBlur  = 6 * DPR;
@@ -389,9 +417,10 @@ function activarSliderPrecio() {
         ctx.setLineDash([]);
         ctx.restore();
 
-        /* Floating constellation nodes between handles */
+        // Nodos flotantes de constelación entre los dos manejadores
         const spread = xMax - xMin;
         if (spread > 30) {
+            // Calcula la posición actual de cada nodo flotante con movimiento sinusoidal
             const nodes = FLOAT_NODES.map(n => {
                 n.phase += n.speed;
                 return {
@@ -400,7 +429,7 @@ function activarSliderPrecio() {
                 };
             });
 
-            /* Lines: handle → nodes → handle */
+            // Dibuja las líneas de conexión: manejador izquierdo → nodos → manejador derecho
             ctx.save();
             ctx.strokeStyle = "rgba(201,64,255,0.2)";
             ctx.lineWidth   = 1 * DPR;
@@ -413,7 +442,7 @@ function activarSliderPrecio() {
             ctx.stroke();
             ctx.restore();
 
-            /* Cross-links between nodes for extra constellation feel */
+            // Línea cruzada diagonal entre el primer y tercer nodo para efecto constelación
             if (nodes.length >= 2) {
                 ctx.save();
                 ctx.strokeStyle = "rgba(201,64,255,0.09)";
@@ -425,7 +454,7 @@ function activarSliderPrecio() {
                 ctx.restore();
             }
 
-            /* Node dots with twinkle */
+            // Dibuja cada nodo flotante como un punto magenta con pulso de brillo
             nodes.forEach((n, i) => {
                 const pulse = 0.5 + 0.5 * Math.sin(FLOAT_NODES[i].phase * 1.7);
                 ctx.save();
@@ -440,8 +469,9 @@ function activarSliderPrecio() {
             });
         }
 
-        /* Handle stars — slow counter-rotation for life */
-        const rot = t * 0.008;
+        // Dibuja las estrellas manejadoras con rotación lenta continua
+        // Se agrandan al hacer hover sobre ellas
+        const rot  = t * 0.008;
         const rMin  = hoveredStar === "min" ? 8 : 6;
         const rMax  = hoveredStar === "max" ? 8 : 6;
         const glMin = hoveredStar === "min" ? 20 : 10 + 4 * Math.sin(t * 0.04);
@@ -453,13 +483,14 @@ function activarSliderPrecio() {
         rafId = requestAnimationFrame(draw);
     }
 
-    /* ── Drag logic ── */
+    // Obtiene la posición X del cursor o del primer toque dentro del canvas
     function getPos(e) {
         const rect = canvas.getBoundingClientRect();
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
         return clientX - rect.left;
     }
 
+    // Detecta si la posición X está sobre uno de los manejadores (radio de 14px)
     function hitTest(x) {
         const midY = (canvas.height / DPR) / 2;
         const xMin = priceToX(Number(sliderMin.value));
@@ -469,9 +500,11 @@ function activarSliderPrecio() {
         return null;
     }
 
+    // Inicia el arrastre al pulsar sobre un manejador
     canvas.addEventListener("mousedown", e => { dragging = hitTest(getPos(e)); });
     canvas.addEventListener("touchstart", e => { dragging = hitTest(getPos(e)); }, { passive: true });
 
+    // Mueve el manejador activo y actualiza los valores mientras se arrastra
     canvas.addEventListener("mousemove", e => {
         const x = getPos(e);
         hoveredStar = hitTest(x);
@@ -480,9 +513,9 @@ function activarSliderPrecio() {
         canvas.style.cursor = "grabbing";
         let val = Math.max(minReal, Math.min(maxReal, xToPrice(x)));
         if (dragging === "min") {
-            sliderMin.value = Math.min(val, Number(sliderMax.value));
+            sliderMin.value = Math.min(val, Number(sliderMax.value)); // No supera al máximo
         } else {
-            sliderMax.value = Math.max(val, Number(sliderMin.value));
+            sliderMax.value = Math.max(val, Number(sliderMin.value)); // No baja del mínimo
         }
         actualizarValores();
     });
@@ -499,9 +532,11 @@ function activarSliderPrecio() {
         actualizarValores();
     }, { passive: true });
 
+    // Detiene el arrastre al soltar el botón del ratón o el dedo
     window.addEventListener("mouseup",  () => { dragging = null; canvas.style.cursor = "default"; });
     window.addEventListener("touchend", () => { dragging = null; });
 
+    // Actualiza los textos de precio mostrados y vuelve a aplicar los filtros
     function actualizarValores() {
         const min = Number(sliderMin.value);
         const max = Number(sliderMax.value);
@@ -511,10 +546,11 @@ function activarSliderPrecio() {
     }
 
     actualizarValores();
-    draw();
+    draw(); // Arranca el loop de animación del canvas
 }
 
-/* ── Aplicar búsqueda desde URL ── */
+// Si la URL contiene ?buscar=..., rellena el buscador con ese valor
+// y dispara el evento input para filtrar automáticamente
 function aplicarBusquedaURL() {
     const params      = new URLSearchParams(window.location.search);
     const buscarParam = params.get('buscar');
@@ -528,6 +564,8 @@ function aplicarBusquedaURL() {
     }
 }
 
+// Al cargar el DOM: carga los productos, aplica búsqueda por URL si existe,
+// sincroniza el contador del carrito y activa el buscador
 document.addEventListener("DOMContentLoaded", () => {
     cargarProductos().then(() => {
         aplicarBusquedaURL();
